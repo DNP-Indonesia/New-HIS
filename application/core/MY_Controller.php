@@ -20,7 +20,7 @@ class MY_Controller extends CI_Controller{
         * variabel diatas ^ nantinya akan dikirim ke file views/template/login/index.php
         * */
         $data['contentnya'] = $this->load->view($content, $data, TRUE);
-        $this->load->view('template/login/index', $data);
+        $this->load->view('layout/template/index', $data);
     }
     public function render_backend($content, $menu, $data = NULL){
         /*
