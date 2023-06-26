@@ -24,7 +24,6 @@ class MY_Controller extends CI_Controller
         * variabel diatas ^ nantinya akan dikirim ke file views/template/login/index.php
         * */
         $data['contentnya'] = $this->load->view($content, $data, TRUE);
-        // $this->load->view('layout/template/coba', $data);
         $this->load->view('auth/v_login', $data);
     }
     public function render_backend($content, $menu, $data = NULL)
@@ -36,9 +35,9 @@ class MY_Controller extends CI_Controller
 
         $data['menu'] = "$menu";
         // $data['headernya'] = $this->load->view('template/backend/v_dashboard', $data, TRUE);
-        $data['headernya'] = $this->load->view('layout/template/v_body', $data, TRUE);
+        $data['headernya'] = $this->load->view('layout/v_sidebar', $data, TRUE);
         $data['contentnya'] = $this->load->view($content, $data, TRUE);
         // $this->load->view('template/backend/index', $data);
-        $this->load->view('layout/template/v_home', $data);
+        $this->load->view('layout/v_home', $data);
     }
 }
