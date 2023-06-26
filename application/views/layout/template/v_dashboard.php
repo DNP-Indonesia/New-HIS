@@ -40,9 +40,10 @@
             <h5 class="card-title">HIS TK (Training Kaizen)</h5>
             <p class="card-text">Pergi ke halaman HIS TK.</p>
           </div>
-        </div> ̰
+        </div>
       </a>
     </div>
   </div>
 </div>
- ̰ ̰
+
+

@@ -57,3 +57,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['auth'] = 'auth/c_auth';
+$route['home'] = 'auth/c_auth/home';
