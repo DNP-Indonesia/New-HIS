@@ -1,174 +1,213 @@
-<body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <?php /*
-        * Variabel $headernya diambil dari core MY_Controller
-        * (application/core/MY_Controller.php)
-        * */
-        // echo $headernya;
-        ?>
-        <!-- End of Sidebar -->
+<div class="container-fluid">
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
+    <ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                    <!-- Topbar Search -->
-                    <form action="<?php echo site_url('page/search_bynik') ?>" method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input name="nik" type="text" class="form-control bg-light border-0 small" placeholder="Input NIK Karyawan" aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo "<b>" . strtoupper($this->session->userdata('nama')) . "</b> (" . $this->session->userdata('role') . ")"  ?></span>
-                                <img class="img-profile rounded-circle" src="bootstrap/img/user.png">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- konten++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-                    <?php
-                    /*
-                    * Variabel $contentnya diambil dari core MY_Controller
-                    * (application/core/MY_Controller.php)
-                    */
-                    echo $contentnya;
-                    ?>
-                </div>
-                <!-- /.container-fluid -->
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo site_url() ?>">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
             </div>
-            <!-- End of Main Content -->
-            <?php include 'application/views/layout/template/v_footer.php' ?>
-            <!-- Footer -->
+            <div class="sidebar-brand-text mx-3"> DNP - HIS <!--<sup>2</sup> --></div>
+        </a>
 
-            <!-- End of Footer -->
-        </div>
-        <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- ============================== SUPERUSER ============================== -->
+        <!-- Divider -->
+        <?php if ($this->session->userdata('role') == 'super_user') { ?>
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="<?php echo site_url() ?>">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Super User</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item <?php if ($menu == 'user') {
+                                    echo 'active';
+                                } ?>">
+                <a class="nav-link" href="<?php echo site_url("page_his/user") ?>">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Data User Account</span></a>
+            </li>
+
+            <li class="nav-item <?php if ($menu == 'karyawan' or $menu == 'divisi' or $menu == 'departemen' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp') {
+                                    echo 'active';
+                                } ?>">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_personal" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Personal Data</span>
+                </a>
+                <div id="collapsePages_personal" class="collapse <?php if ($menu == 'karyawan' or $menu == 'departemen' or $menu == 'divisi' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp') {
+                                                                        echo 'show';
+                                                                    } ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a class="collapse-item <?php if ($menu == 'karyawan') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/karyawan") ?>">Daftar Karyawan</a>
+                        <a class="collapse-item <?php if ($menu == 'karyawan_out') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/karyawan_out") ?>">Daftar Karyawan Keluar</a>
+                        <a class="collapse-item <?php if ($menu == 'karyawan_temp') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/karyawan_temp") ?>">Karyawan Training & <br>Percobaan</a>
+                        <a class="collapse-item <?php if ($menu == 'karyawan_out_temp') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/karyawan_out_temp") ?>">Karyawan Training & <br>Percobaan Keluar</a>
+                        <a class="collapse-item <?php if ($menu == 'divisi') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/divisi") ?>">Daftar Divisi</a>
+                        <a class="collapse-item <?php if ($menu == 'departemen') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/departemen") ?>">Daftar Departemen</a>
+                        <a class="collapse-item <?php if ($menu == 'section') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/section") ?>">Daftar Section</a>
+                        <a class="collapse-item <?php if ($menu == 'shift') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/shift") ?>">Daftar Shift</a>
+                        <a class="collapse-item <?php if ($menu == 'jabatan') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/jabatan") ?>">Daftar Jabatan</a>
+                        <a class="collapse-item <?php if ($menu == 'golongan') {
+                                                    echo 'active';
+                                                } ?>" href="<?php echo site_url("page_his/golongan") ?>">Daftar Golongan</a>
+
+                    </div>
                 </div>
-                <div class="modal-body">Pilih tombol LOGOUT di bawah untuk keluar dari aplikasi.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<?php echo site_url() ?>/auth/logout">Logout</a>
+            </li>
+
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mastersundriesmenu" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Sundries Master</span>
+                </a>
+                <div id="mastersundriesmenu" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/kategoricontroller/kategoripage") ?>">Kategori</a>
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/jeniscontroller/jenispage") ?>">Jenis</a>
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/barangcontroller/barangpage") ?>">Barang</a>
+
+                    </div>
                 </div>
-            </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Transaksi Sundries</span>
+                </a>
+                <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/estimasicontroller/estimasipage") ?>">Pembuata Estimasi</a>
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/requestsundriescontroller/requestsundriespage") ?>">Request Sundries</a>
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/consumptioncontroller/consumptionpage") ?>">Request Consumption</a>
+                        <a class="collapse-item" href="#">Request Purchase</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-laporan" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Laporan</span>
+                </a>
+                <div id="collapse-laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">Laporan Sundries</a>
+                        <a class="collapse-item" href="#">Laporan Consumption</a>
+                        <a class="collapse-item" href="#">Laporan Purchase</a>
+                    </div>
+                </div>
+            </li>
+        <?php } ?>
+        <!-- ============================== \SUPERUSER ============================== -->
+
+        <?php if ($this->session->userdata('role') == 'admin_medical' or substr($this->session->userdata('role'), 0, -2) == 'medical') { ?>
+            <!-- ============================== ADMIN MEDICAL & USER MEDICAL ============================== -->
+            <?php $this->load->view('medical/side_medical/admin_medical');  ?>
+            <!-- ============================== \ADMIN MEDICAL & USER MEDICAL ============================== -->
+        <?php } ?>
+
+        <?php if (substr($this->session->userdata('role'), 0, -2) == 'tk') { ?>
+            <!-- ============================== TRAINING KAIZEN ============================== -->
+            <?php $this->load->view('tk/side_tk/tk');  ?>
+            <!-- ============================== \TRAINING KAIZEN ============================== -->
+        <?php } ?>
+
+        <!-- ============================== sdr admin bagian ============================== -->
+        <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian') { ?>
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="<?php echo site_url() ?>">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Transaksi Sundries</span>
+                </a>
+                <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <?php if ($this->session->userdata('role') != 'sdr_Admin Gudang' and $this->session->userdata('role') != 'sdr_Kepala Gudang') { ?>
+                            <a class="collapse-item" href="<?= base_url('Sundries/estimasicontroller/estimasipage') ?>">
+                                Pembuatan Estimasi
+                            </a>
+                            <a class="collapse-item" href="<?= base_url('Sundries/consumptioncontroller/consumptionpage') ?>">
+                                Request Consumption
+                            </a>
+                        <?php } ?>
+                        <a class="collapse-item" href="<?= base_url('Sundries/requestsundriescontroller/requestsundriespage') ?>">
+                            Request Sundries
+                        </a>
+                        <?php if ($this->session->userdata('role') != 'sdr_Admin Bagian' and $this->session->userdata('role') != 'sdr_Kepala Bagian') { ?>
+                            <a class="collapse-item" href="<?= base_url('Sundries/purchasecontroller/purchasepage') ?>">
+                                Request Purchase
+                            </a>
+                            <a href="<?= base_url('Sundries/penerimaancontroller/penerimaanpage') ?>" class="collapse-item">
+                                Penerimaan Barang
+                            </a>
+                        <?php } ?>
+                    </div>
+                </div>
+            </li>
+        <?php } ?>
+        <!-- ============================== /sdr admin bagian ============================== -->
+
+
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Log Out</span></a>
+        </li>
+
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="bootstrap/vendor/jquery/jquery.min.js"></script>
-    <script src="bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Sidebar Message -->
+        <!-- <div class="sidebar-card">
+    <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="">
+    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+    <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+</div> -->
 
-    <!-- Core plugin JavaScript-->
-    <script src="bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="bootstrap/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="bootstrap/js/demo/datatables-demo.js"></script>
-
-    <script type="text/javascript" src="bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
-
-    <script type="text/javascript">
-        $(function() {
-            $(".datepicker").datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true,
-            });
-        });
-
-        $(document).ready(function() {
-            $('.tabel-data').DataTable();
-        });
-    </script>
-
-</body>
-
-</html>
+    </ul>
+</div>
+<!-- End of Main Content -->

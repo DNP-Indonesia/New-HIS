@@ -39,6 +39,6 @@ class MY_Controller extends CI_Controller
         $data['headernya'] = $this->load->view('layout/template/v_body', $data, TRUE);
         $data['contentnya'] = $this->load->view($content, $data, TRUE);
         // $this->load->view('template/backend/index', $data);
-        $this->load->view('layout/template/v_template', $data);
+        $this->load->view('layout/template/v_home', $data);
     }
 }

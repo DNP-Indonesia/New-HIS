@@ -57,6 +57,6 @@ class c_auth extends MY_Controller
 
   public function home()
   { // Fungsi register
-    $this->load->view('layout/template/v_template'); // Load view register.php
+    $this->load->view('layout/template/v_home'); // Load view register.php
   }
 }
