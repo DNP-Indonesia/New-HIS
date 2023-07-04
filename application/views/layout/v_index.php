@@ -85,16 +85,14 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
+
         <!-- Sidebar -->
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-        <!--
-        Variabel $headernya diambil dari core MY_Controller
-        (application/core/MY_Controller.php) 
-        -->
+        <!-- Variabel $headernya diambil dari core MY_Controller
+            (application/core/MY_Controller.php) -->
 
         <?php echo $headernya; ?>
-
+        
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -158,14 +156,12 @@
                                     <div class="modal-body">Pilih tombol LOGOUT dibawah untuk keluar aplikasi.</div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                        <a class="btn btn-primary" href="<?php echo site_url() ?>/logout">Logout</a>
+                                        <a class="btn btn-primary" href="<?php echo site_url() ?>logout">Logout</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="topbar-divider d-none d-sm-block"></div>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -187,13 +183,87 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="nav-link" href="logout" data-toggle="modal" data-target="#logoutModal">
+                                <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- konten++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+                    <!-- Variabel $contentnya diambil dari core MY_Controller
+                        (application/core/MY_Controller.php) -->
+                    <?php echo $contentnya; ?>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url() ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url() ?>bootstrap/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="<?php echo base_url() ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url() ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<?php echo base_url() ?>bootstrap/js/demo/datatables-demo.js"></script>
+
+    <script type="text/javascript" src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(function() {
+            $(".datepicker").datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            });
+        });
+
+        $(document).ready(function() {
+            $('table.display').DataTable();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.tabel-data').DataTable();
+        });
+    </script>
+
+</body>
+
+</html>

@@ -11,7 +11,7 @@ class c_auth extends MY_Controller
   public function index()
   { // Login page
     if ($this->session->userdata('authenticated_teamdev')) // Jika user sudah login (Session authenticated ditemukan)
-      redirect('home'); // Redirect ke page home
+      redirect('page_his/home'); // Redirect ke page home
     // function render_login tersebut dari file core/MY_Controller.php
     $this->render_login('auth/v_login'); // Load view login.php
   }
@@ -35,13 +35,13 @@ class c_auth extends MY_Controller
           'id_user' => $user->id_user,  // Buat session username
           'nama' => $user->nama, // Buat session nama
           'role' => $user->role, // Buat session role
-          'section' => $user->id_section
+          'section' => $user->id_section 
         );
         $this->session->set_userdata($session); // Buat session sesuai $session
-        redirect('home'); // Redirect ke halaman home
+        redirect('page_his/home'); // Redirect ke halaman home
       } else {
         $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
-        redirect('home'); // Redirect ke halaman login
+        redirect('auth'); // Redirect ke halaman login
       }
     }
   }
@@ -55,8 +55,8 @@ class c_auth extends MY_Controller
     redirect('auth'); // Redirect ke halaman login
   }
 
-  public function home()
-  { // Fungsi register
-    $this->load->view('layout/v_home'); // Load view register.php
-  }
+  // public function home()
+  // { // Fungsi register
+  //   $this->load->view('layout/v_index'); // Load view register.php
+  // }
 }
