@@ -188,14 +188,6 @@
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
-<<<<<<< Updated upstream:application/views/layout/v_body.php
-    <!-- Nav Item - Tables -->
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Log Out</span></a>
-    </li> -->
-=======
     <!-- Start Nav Item - Tables -->
     <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url('logout') ?>" data-toggle="modal" data-target="#logoutModal">
@@ -203,7 +195,6 @@
             <span>Log Out</span></a>
     </li>
     <!-- End Nav Item - Tables -->
->>>>>>> Stashed changes:application/views/template/role.php
 
     <!-- Start Sidebar Toogle -->
     <div class="text-center d-none d-md-inline">
