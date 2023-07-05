@@ -11,7 +11,7 @@ class c_auth extends MY_Controller
   public function index()
   { // Login page
     if ($this->session->userdata('authenticated_teamdev')) // Jika user sudah login (Session authenticated ditemukan)
-      redirect('coy'); // Redirect ke page home
+      redirect('dashboard'); // Redirect ke page home
     // function render_login tersebut dari file core/MY_Controller.php
     $this->render_login('auth/v_login'); // Load view login.php
   }
@@ -38,7 +38,7 @@ class c_auth extends MY_Controller
           'section' => $user->id_section 
         );
         $this->session->set_userdata($session); // Buat session sesuai $session
-        redirect('coy'); // Redirect ke halaman home
+        redirect('dashboard'); // Redirect ke halaman home
       } else {
         $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
         redirect('auth'); // Redirect ke halaman login
