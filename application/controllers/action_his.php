@@ -211,6 +211,8 @@ class Action_his extends MY_Controller{
 	}
 
 	function do_tbh_karyawan(){
+		
+		$spysiid			= $_POST['spysiid'];
 		$nama       		= $_POST['nama'];
 		$id_section       	= $_POST['id_section'];
 		$nik       			= $_POST['nik'];
@@ -221,6 +223,7 @@ class Action_his extends MY_Controller{
 		$tgl_lahir       	= $_POST['tgl_lahir'];
 		$gender       		= $_POST['gender'];
 		$pendidikan       	= $_POST['pendidikan'];
+		$keterangan			= "Aktif";
 
 		// echo "nama : ".$nama."<br>";
 		// echo "id_section : ".$id_section."<br>";
@@ -235,6 +238,7 @@ class Action_his extends MY_Controller{
 
 		
 		$data = array(
+			'spysiid' 		=> $spysiid,
 			'nama' 			=> $nama,
 			'id_section' 	=> $id_section,
 			'nik' 			=> $nik,
@@ -245,6 +249,7 @@ class Action_his extends MY_Controller{
 			'tgl_lahir' 	=> $tgl_lahir,
 			'gender' 		=> $gender,
 			'pendidikan' 	=> $pendidikan,
+			'keterangan' 	=> $keterangan
 		);
 
 		$this->M_his->input_any($data, 'his_karyawan');
@@ -258,6 +263,7 @@ class Action_his extends MY_Controller{
 
 
 	function do_tbh_karyawan_temp(){
+		$spysiid 			= $_POST['spysiid'];
 		$nama       		= $_POST['nama'];
 		$id_section       	= $_POST['id_section'];
 		$nik_temp   		= $_POST['nik_temp'];
@@ -271,6 +277,7 @@ class Action_his extends MY_Controller{
 		$keterangan       	= $_POST['keterangan'];
 		
 		$data = array(
+			'spysiid'		=> $spysiid,
 			'nik'			=> $nik_temp,
 			'nik_temp' 		=> $nik_temp,
 			'nama' 			=> $nama,
