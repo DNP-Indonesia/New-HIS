@@ -247,6 +247,16 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('error', 'Format nik tidak valid. Harus berupa angka 4 digit.');
 			redirect(site_url("page_his/karyawan"));
 		}
+
+		// Validasi tanggal lahir
+		$birthdate = new DateTime($tgl_lahir);
+		$today = new DateTime();
+		$age = $birthdate->diff($today)->y;
+	
+		if ($age < 18) {
+			$this->session->set_flashdata('error', 'Usia karyawan harus minimal 18 tahun');
+			redirect(site_url("page_his/karyawan"));
+		}
 	
 		// // Periksa apakah spysiid atau nik sudah ada di database
 		// $existingData = $this->M_his->get_karyawan_by_spysiid_nik($spysiid, $nik);
