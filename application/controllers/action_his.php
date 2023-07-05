@@ -211,58 +211,80 @@ class Action_his extends MY_Controller{
 	}
 
 	function do_tbh_karyawan(){
-		
-		$spysiid			= $_POST['spysiid'];
-		$nama       		= $_POST['nama'];
-		$id_section       	= $_POST['id_section'];
-		$nik       			= $_POST['nik'];
-		$id_golongan       	= $_POST['id_golongan'];
-		$id_jabatan       	= $_POST['id_jabatan'];
-		$id_shift       	= $_POST['id_shift'];
-		$tgl_masuk       	= $_POST['tgl_masuk'];
-		$tgl_lahir       	= $_POST['tgl_lahir'];
-		$gender       		= $_POST['gender'];
-		$pendidikan       	= $_POST['pendidikan'];
-		$keterangan			= "Aktif";
-
-		// echo "nama : ".$nama."<br>";
-		// echo "id_section : ".$id_section."<br>";
-		// echo "nik : ".$nik."<br>";
-		// echo "id_golongan : ".$id_golongan."<br>";
-		// echo "id_jabatan : ".$id_jabatan."<br>";
-		// echo "id_shift : ".$id_shift."<br>";
-		// echo "tgl_masuk : ".$tgl_masuk."<br>";
-		// echo "tgl_lahir : ".$tgl_lahir."<br>";
-		// echo "gender : ".$gender."<br>";
-		// echo "pendidikan : ".$pendidikan."<br>";
-
-		
-		$data = array(
-			'spysiid' 		=> $spysiid,
-			'nama' 			=> $nama,
-			'id_section' 	=> $id_section,
-			'nik' 			=> $nik,
-			'id_golongan' 	=> $id_golongan,
-			'id_jabatan' 	=> $id_jabatan,
-			'id_shift' 		=> $id_shift,
-			'tgl_masuk' 	=> $tgl_masuk,
-			'tgl_lahir' 	=> $tgl_lahir,
-			'gender' 		=> $gender,
-			'pendidikan' 	=> $pendidikan,
-			'keterangan' 	=> $keterangan
-		);
-
-		$this->M_his->input_any($data, 'his_karyawan');
-
-		if($this->db->affected_rows() > 0) {
-				$this->session->set_flashdata('success', 'Data Karyawan baru berhasil ditambahkan');
+		$spysiid = $_POST['spysiid'];
+		$nama = $_POST['nama'];
+		$id_section = $_POST['id_section'];
+		$nik = $_POST['nik'];
+		$id_golongan = $_POST['id_golongan'];
+		$id_jabatan = $_POST['id_jabatan'];
+		$id_shift = $_POST['id_shift'];
+		$tgl_masuk = $_POST['tgl_masuk'];
+		$tgl_lahir = $_POST['tgl_lahir'];
+		$gender = $_POST['gender'];
+		$pendidikan = $_POST['pendidikan'];
+		$keterangan = "Aktif";
+	
+		// Validasi 1: spysiid harus angka sepanjang 8 digit dan harus unik
+		if (!preg_match('/^\d{8}$/', $spysiid)) {
+			// Format spysiid tidak valid
+			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
+			$this->session->set_flashdata('error', 'Format spysiid tidak valid. Harus berupa angka 8 digit.');
+			redirect(site_url("page_his/karyawan"));
 		}
-
+	
+		// Validasi 2: nama tidak boleh mengandung karakter spesial atau angka
+		if (!preg_match('/^[a-zA-Z\s]+$/', $nama)) {
+			// Format nama tidak valid
+			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
+			$this->session->set_flashdata('error', 'Format nama tidak valid. Hanya huruf dan spasi yang diperbolehkan.');
+			redirect(site_url("page_his/karyawan"));
+		}
+	
+		// Validasi 3: nik harus angka sepanjang 4 digit dan harus unik
+		if (!preg_match('/^\d{4}$/', $nik)) {
+			// Format nik tidak valid
+			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
+			$this->session->set_flashdata('error', 'Format nik tidak valid. Harus berupa angka 4 digit.');
+			redirect(site_url("page_his/karyawan"));
+		}
+	
+		// // Periksa apakah spysiid atau nik sudah ada di database
+		// $existingData = $this->M_his->get_karyawan_by_spysiid_nik($spysiid, $nik);
+		// if (!empty($existingData)) {
+		// 	// spysiid atau nik sudah ada di database
+		// 	// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
+		// 	$this->session->set_flashdata('error', 'spysiid atau nik sudah ada.');
+		// 	redirect(site_url("page_his/karyawan"));
+		// }
+	
+		$data = array(
+			'spysiid' => $spysiid,
+			'nama' => $nama,
+			'id_section' => $id_section,
+			'nik' => $nik,
+			'id_golongan' => $id_golongan,
+			'id_jabatan' => $id_jabatan,
+			'id_shift' => $id_shift,
+			'tgl_masuk' => $tgl_masuk,
+			'tgl_lahir' => $tgl_lahir,
+			'gender' => $gender,
+			'pendidikan' => $pendidikan,
+			'keterangan' => $keterangan
+		);
+	
+		$this->M_his->input_any($data, 'his_karyawan');
+	
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('success', 'Data Karyawan baru berhasil ditambahkan');
+		}
+	
 		redirect(site_url("page_his/karyawan"));
 	}
+	
 
 
 	function do_tbh_karyawan_temp(){
+
 		$spysiid 			= $_POST['spysiid'];
 		$nama       		= $_POST['nama'];
 		$id_section       	= $_POST['id_section'];
