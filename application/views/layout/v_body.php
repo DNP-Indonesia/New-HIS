@@ -187,11 +187,11 @@
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-fw fa-table"></i>
             <span>Log Out</span></a>
-    </li>
+    </li> -->
 
 
     <!-- Sidebar Toggler (Sidebar) -->
