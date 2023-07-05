@@ -22,7 +22,7 @@ class Page_his extends MY_Controller
     ) {
       redirect('Sundries/requestsundriescontroller/dashboard');
     } else {
-      $this->render_backend('layout/v_dashboard.php', $menu, $data);
+      $this->render_backend('layout/v_dashboard', $menu, $data);
     }
   }
 

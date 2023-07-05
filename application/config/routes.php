@@ -55,7 +55,10 @@ $route['Sundries/Barang'] = 'Sundries/Barang/c_barang/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
+// c_atuh
 $route['auth'] = 'auth/c_auth';
 $route['home'] = 'auth/c_auth/home';
 $route['logout'] = 'auth/c_auth/logout';
+$route['dashboard'] = 'Page_his/home';
+
+
