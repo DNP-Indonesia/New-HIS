@@ -1,19 +1,20 @@
 <ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <!-- Sidebar - Brand -->
+    <!-- Start Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo site_url() ?>">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
         <div class="sidebar-brand-text mx-3"> DNP - HIS <!--<sup>2</sup> --></div>
     </a>
+    <!-- End Sidebar - Brand -->
 
-
-    <!-- ============================== SUPERUSER ============================== -->
-    <!-- Divider -->
+    <!-- Start SUPERUSER -->
     <?php if ($this->session->userdata('role') == 'super_user') { ?>
+        <!-- Divider -->
         <hr class="sidebar-divider my-0">
-        <!-- Nav Item - Dashboard -->
+
+        <!-- Start Nav Item - Dashboard -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo site_url() ?>">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -21,8 +22,9 @@
             </a>
         </li>
         <hr class="sidebar-divider">
+        <!-- End Nav Item - Dashboard -->
 
-        <!-- Nav Item - Tables -->
+        <!-- Start Nav Item - Tables -->
         <li class="nav-item <?php if ($menu == 'user') {
                                 echo 'active';
                             } ?>">
@@ -73,12 +75,9 @@
                     <a class="collapse-item <?php if ($menu == 'golongan') {
                                                 echo 'active';
                                             } ?>" href="<?php echo site_url("page_his/golongan") ?>">Daftar Golongan</a>
-
                 </div>
             </div>
         </li>
-
-
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mastersundriesmenu" aria-expanded="true" aria-controls="collapsePages">
@@ -123,25 +122,29 @@
                 </div>
             </div>
         </li>
-    <?php } ?>
-    <!-- ============================== \SUPERUSER ============================== -->
+        <!-- End Nav Item - Tables -->
 
+    <?php } ?>      
+    <!-- End SUPERUSER -->
+
+    <!-- Start ADMIN & USER MEDICAL -->
     <?php if ($this->session->userdata('role') == 'admin_medical' or substr($this->session->userdata('role'), 0, -2) == 'medical') { ?>
-        <!-- ============================== ADMIN MEDICAL & USER MEDICAL ============================== -->
         <?php $this->load->view('medical/side_medical/admin_medical');  ?>
-        <!-- ============================== \ADMIN MEDICAL & USER MEDICAL ============================== -->
     <?php } ?>
+    <!-- End ADMIN & USER MEDICAL -->
 
+    <!-- Start TRANING KAIZEN -->
     <?php if (substr($this->session->userdata('role'), 0, -2) == 'tk') { ?>
-        <!-- ============================== TRAINING KAIZEN ============================== -->
         <?php $this->load->view('tk/side_tk/tk');  ?>
-        <!-- ============================== \TRAINING KAIZEN ============================== -->
     <?php } ?>
+    <!-- End TRANING KAIZEN -->
 
-    <!-- ============================== sdr admin bagian ============================== -->
+    <!-- Start SDR ADMIN BAGIAN -->
     <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian') { ?>
+        <!-- Divider -->
         <hr class="sidebar-divider my-0">
-        <!-- Nav Item - Dashboard -->
+        
+        <!-- Start Nav Item - Dashboard -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo site_url() ?>">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -177,33 +180,35 @@
                 </div>
             </div>
         </li>
+        <!-- End Nav Item - Dashboard -->
+
     <?php } ?>
-    <!-- ============================== /sdr admin bagian ============================== -->
-
-
-
-
+    <!-- End SDR ADMIN BAGIAN -->
+    
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
+<<<<<<< Updated upstream:application/views/layout/v_body.php
     <!-- Nav Item - Tables -->
     <!-- <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-fw fa-table"></i>
             <span>Log Out</span></a>
     </li> -->
+=======
+    <!-- Start Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="<?php echo site_url('logout') ?>" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Log Out</span></a>
+    </li>
+    <!-- End Nav Item - Tables -->
+>>>>>>> Stashed changes:application/views/template/role.php
 
-
-    <!-- Sidebar Toggler (Sidebar) -->
+    <!-- Start Sidebar Toogle -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
-    <!-- Sidebar Message -->
-    <!-- <div class="sidebar-card">
-    <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="">
-    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-    <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-</div> -->
+    </div>    
+    <!-- End Sidebar Toogle -->
 
 </ul>
