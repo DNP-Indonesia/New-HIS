@@ -4,24 +4,24 @@ class consumptioncontroller extends MY_Controller{
 
     public function __construct(){
         parent::__construct();
-        $this->load->model("Sundries/modeljenis");
-        $this->load->model("Sundries/modelbarang");
-        $this->load->model("Sundries/modelkategori");
-        $this->load->model("Sundries/modelconsumption");
+        $this->load->model("Sundries/Barang/m_jenis");
+        $this->load->model("Sundries/Barang/m_barang");
+        $this->load->model("Sundries/Barang/m_kategori");
+        $this->load->model("Sundries/Transaksi/m_konsumsi");
         $this->load->library('Pdf');
     }
 
     public function consumptionpage(){
-        $data['consumptiondata'] = $this->modelconsumption->find();
-        $data['estimasi'] = $this->modelconsumption->findestimasi();
-        $data['dataconsumkepalabagian'] = $this->modelconsumption->findforkepalabagian();
-        $data['consumall'] = $this->modelconsumption->findall();
+        $data['consumptiondata'] = $this->m_konsumsi->find();
+        $data['estimasi'] = $this->m_konsumsi->findestimasi();
+        $data['dataconsumkepalabagian'] = $this->m_konsumsi->findforkepalabagian();
+        $data['consumall'] = $this->m_konsumsi->findall();
         $this->load->view('sundries/consumption',$data);
     }
 
     public function barangbyfaktur(){
         $faktur = $this->input->post('faktur');
-        $data = $this->modelconsumption->findbarangbyfaktur($faktur);
+        $data = $this->m_konsumsi->findbarangbyfaktur($faktur);
         $output = '<option value="">--Pilih Barang--</option>';
         foreach ($data as $row){
             $output .= '<option value = "'.$row->id_barang.'">'.$row->barang.' Dengan Jumlah Tersisa ('.$row->jumlah.')</option>';
@@ -35,7 +35,7 @@ class consumptioncontroller extends MY_Controller{
         $id_user = $this->input->post('id_user');
         $fakest = $this->input->post('fakest');
 
-        $cekbarang = $this->modelconsumption->cekkeranjang($id_barang, $id_user)->num_rows();
+        $cekbarang = $this->m_konsumsi->cekkeranjang($id_barang, $id_user)->num_rows();
         if ($cekbarang > 0){
             
         }else{
@@ -46,20 +46,20 @@ class consumptioncontroller extends MY_Controller{
                 'fakest'=>$fakest
             );
             
-            $this->modelconsumption->savekeranjang($data);
+            $this->m_konsumsi->savekeranjang($data);
         }
     }
 
     public function showkeranjang(){
         $id_user = $this->input->post('id_user');
-        $data['keranjang'] = $this->modelconsumption->findkeranjang($id_user)->result();
+        $data['keranjang'] = $this->m_konsumsi->findkeranjang($id_user)->result();
         $this->load->view('sundries/keranjangconsumption',$data);
     }
 
     public function hapuskeranjang(){
         $id_user = $this->input->post('iduser');
         $id_barang = $this->input->post('idbarang');
-        $hapus = $this->modelconsumption->deletekeranjang($id_barang, $id_user);
+        $hapus = $this->m_konsumsi->deletekeranjang($id_barang, $id_user);
         echo $hapus;
     }
 
@@ -79,7 +79,7 @@ class consumptioncontroller extends MY_Controller{
             'status'=>$status
         );
 
-        $simpan = $this->modelconsumption->save($data, $iduser, $faktur, $fakest);
+        $simpan = $this->m_konsumsi->save($data, $iduser, $faktur, $fakest);
         $this->session->set_userdata('sukses', 'Yeay, Request Berhasil Dibuat, Masih Menunggu Persetujuan Kepala Bagian Nich....');
         return redirect('Sundries/consumptioncontroller/consumptionpage');
 
@@ -87,22 +87,22 @@ class consumptioncontroller extends MY_Controller{
 
     public function detail(){
         $id     = $this->uri->segment(4);
-        $data['data'] = $this->modelconsumption->findconsumptionbyid($id);
-        $data['detail']   = $this->modelconsumption->findconsumptiondetail($id);
+        $data['data'] = $this->m_konsumsi->findconsumptionbyid($id);
+        $data['detail']   = $this->m_konsumsi->findconsumptiondetail($id);
         $this->load->view('sundries/consumption-detail', $data);
     }
 
     public function printpdf(){
         $id     = $this->uri->segment(4);
-        $data['data'] = $this->modelconsumption->findbyidforpdf($id);
-        $data['detail'] = $this->modelconsumption->finddetailforpdf($id);
+        $data['data'] = $this->m_konsumsi->findbyidforpdf($id);
+        $data['detail'] = $this->m_konsumsi->finddetailforpdf($id);
         $this->load->view('sundries/printconsumption',$data);
         
     }
 
     public function consumptiondelete($faktur){
         $faktur = $this->uri->segment(4);
-        $hapus = $this->modelconsumption->deleteconsumption($faktur);
+        $hapus = $this->m_konsumsi->deleteconsumption($faktur);
     }
 
     public function consumptionaprove(){
@@ -117,7 +117,7 @@ class consumptioncontroller extends MY_Controller{
             'faktur' => $faktur
         );
      
-        $this->modelconsumption->update($where,$data);
+        $this->m_konsumsi->update($where,$data);
         $this->session->set_userdata('setuju', 'Yeay, Request Berhasil Disetujui Nich....');
         return redirect('Sundries/requestsundriescontroller/dashboard');
     }
@@ -134,7 +134,7 @@ class consumptioncontroller extends MY_Controller{
             'faktur' => $faktur
         );
      
-        $this->modelconsumption->update($where,$data);
+        $this->m_konsumsi->update($where,$data);
         $this->session->set_userdata('tolak', 'Yah, Request Ditolak Nich....');
         return redirect('Sundries/requestsundriescontroller/dashboard');
     }

@@ -8,9 +8,7 @@ class Action_his extends MY_Controller{
 	    $this->load->dbforge();
 		$this->load->helper('url');
 		$this->load->library('Pdf');
-	    $this->load->model('M_his');
-
-	    
+	    $this->load->model('Master/m_karyawan');
 	}
 
 
@@ -20,7 +18,7 @@ class Action_his extends MY_Controller{
 		$password       = md5($_POST['password']);
 		$role       	= $_POST['role'];
 
-		$karyawan = $this->M_his->data_karyawan_byspysi($spysiid);
+		$karyawan = $this->m_karyawan->data_karyawan_byspysi($spysiid);
 
 		foreach ($karyawan as $kar){
 			$nama 		= $kar->nama;
@@ -45,7 +43,7 @@ class Action_his extends MY_Controller{
 		// echo "<pre>";
 		// die();
 
-		$this->M_his->input_any($data, 'tbl_user');
+		$this->m_karyawan->input_any($data, 'tbl_user');
 
 
 		if($this->db->affected_rows() > 0) {
@@ -63,7 +61,7 @@ class Action_his extends MY_Controller{
 		$password       = $_POST['password'];
 		$role       	= $_POST['role'];
 
-		$karyawan = $this->M_his->data_karyawan_byspysi($spysiid);
+		$karyawan = $this->m_karyawan->data_karyawan_byspysi($spysiid);
 
 		foreach ($karyawan as $k){
 			$nama 		= $k->nama;
@@ -75,7 +73,7 @@ class Action_his extends MY_Controller{
 		);
 
 		// TENTUKAN MD5 apabila Password ganti
-		$user = $this->M_his->data_any_where($where, 'tbl_user')->result();
+		$user = $this->m_karyawan->data_any_where($where, 'tbl_user')->result();
 		foreach ($user as $us){
 			$pass_db = $us->password;
 		}
@@ -114,7 +112,7 @@ class Action_his extends MY_Controller{
 			'nama_divisi' 	=> $nama_divisi
 		);
 
-		$this->M_his->input_any($data, 'his_divisi');
+		$this->m_karyawan->input_any($data, 'his_divisi');
 
 		if($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Data Divisi baru berhasil ditambahkan');
@@ -132,7 +130,7 @@ class Action_his extends MY_Controller{
 			'id_divisi' 		=> $id_divisi
 		);
 
-		$this->M_his->input_any($data, 'his_departemen');
+		$this->m_karyawan->input_any($data, 'his_departemen');
 
 		if($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Data Departemen baru berhasil ditambahkan');
@@ -150,7 +148,7 @@ class Action_his extends MY_Controller{
 			'id_dep' 				=> $id_dep
 		);
 
-		$this->M_his->input_any($data, 'his_section');
+		$this->m_karyawan->input_any($data, 'his_section');
 
 		if($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Data Section baru berhasil ditambahkan');
@@ -167,7 +165,7 @@ class Action_his extends MY_Controller{
 			'nama_shift' 			=> $nama_shift,
 		);
 
-		$this->M_his->input_any($data, 'his_shift');
+		$this->m_karyawan->input_any($data, 'his_shift');
 
 		if($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Data Shift baru berhasil ditambahkan');
@@ -184,7 +182,7 @@ class Action_his extends MY_Controller{
 			'nama_jabatan' 			=> $nama_jabatan,
 		);
 
-		$this->M_his->input_any($data, 'his_jabatan');
+		$this->m_karyawan->input_any($data, 'his_jabatan');
 
 		if($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Data Jabatan baru berhasil ditambahkan');
@@ -201,7 +199,7 @@ class Action_his extends MY_Controller{
 			'nama_golongan' 			=> $nama_golongan,
 		);
 
-		$this->M_his->input_any($data, 'his_golongan');
+		$this->m_karyawan->input_any($data, 'his_golongan');
 
 		if($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Data Golongan baru berhasil ditambahkan');
@@ -252,7 +250,7 @@ class Action_his extends MY_Controller{
 			'keterangan' 	=> $keterangan
 		);
 
-		$this->M_his->input_any($data, 'his_karyawan');
+		$this->m_karyawan->input_any($data, 'his_karyawan');
 
 		if($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Data Karyawan baru berhasil ditambahkan');
@@ -292,7 +290,7 @@ class Action_his extends MY_Controller{
 			'keterangan' 	=> $keterangan,
 		);
 
-		$this->M_his->input_any($data, 'his_karyawan');
+		$this->m_karyawan->input_any($data, 'his_karyawan');
 
 		if($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Data Karyawan baru berhasil ditambahkan');
@@ -349,7 +347,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_karyawan');
+		$this->m_karyawan->update_any($where, $data, 'his_karyawan');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";
@@ -390,7 +388,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_karyawan');
+		$this->m_karyawan->update_any($where, $data, 'his_karyawan');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";
@@ -418,7 +416,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_divisi');
+		$this->m_karyawan->update_any($where, $data, 'his_divisi');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";
@@ -447,7 +445,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_departemen');
+		$this->m_karyawan->update_any($where, $data, 'his_departemen');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";
@@ -475,7 +473,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_section');
+		$this->m_karyawan->update_any($where, $data, 'his_section');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";
@@ -501,7 +499,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_shift');
+		$this->m_karyawan->update_any($where, $data, 'his_shift');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";
@@ -528,7 +526,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_jabatan');
+		$this->m_karyawan->update_any($where, $data, 'his_jabatan');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";
@@ -555,7 +553,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_golongan');
+		$this->m_karyawan->update_any($where, $data, 'his_golongan');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";
@@ -581,7 +579,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_karyawan');
+		$this->m_karyawan->update_any($where, $data, 'his_karyawan');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";
@@ -607,7 +605,7 @@ class Action_his extends MY_Controller{
 
 		
 		//update status keluarga proporsional pada tbl_st_kel
-		$this->M_his->update_any($where, $data, 'his_karyawan');
+		$this->m_karyawan->update_any($where, $data, 'his_karyawan');
 
 		if($this->db->affected_rows() > 0) {
 			// echo "<script>alert('Data berhasil disimpan');</script>";

@@ -5,7 +5,7 @@ class Page_his extends MY_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('M_his');
+    $this->load->model('Master/m_karyawan');
   }
 
   public function home()
@@ -29,12 +29,12 @@ class Page_his extends MY_Controller
   // tampil role super user
   public function user()
   {
-    $data['user'] = $this->M_his->data_user();
+    $data['user'] = $this->Master/m_karyawan->data_user();
 
     $menu = 'user';
 
     if ($this->session->userdata('role') == 'super_user') {
-      $this->render_backend('application/views/v_user.php', $menu, $data);
+      $this->render_backend('v_user', $menu, $data);
     } else {
       $this->render_backend('v_error', $menu, $data);
     }
@@ -45,7 +45,7 @@ class Page_his extends MY_Controller
   {
     $menu = $this->uri->segment(2);
 
-    $data['karyawan'] = $this->M_his->data_karyawan();
+    $data['karyawan'] = $this->m_karyawan->data_karyawan();
 
     if ($this->session->userdata('role') == 'super_user') {
       $this->render_backend('personalData/v_karyawan.php', $menu, $data);
@@ -58,8 +58,8 @@ class Page_his extends MY_Controller
   {
     $menu = $this->uri->segment(2);
 
-    $data['karyawan_out'] = $this->M_his->data_karyawan_out();
-
+    $data['karyawan_out'] = $this->m_karyawan->data_karyawan_out();
+    
     $this->render_backend('personalData/v_karyawan_keluar.php', $menu, $data);
   }
 
@@ -67,7 +67,7 @@ class Page_his extends MY_Controller
   {
     $menu = $this->uri->segment(2);
 
-    $data['karyawan'] = $this->M_his->data_karyawan_temp();
+    $data['karyawan'] = $this->m_karyawan->data_karyawan_temp();
 
     $this->render_backend('personalData/v_pelatihan_coba.php', $menu, $data);
   }
@@ -76,7 +76,7 @@ class Page_his extends MY_Controller
   {
     $menu = $this->uri->segment(2);
 
-    $data['karyawan'] = $this->M_his->data_karyawan_out_temp();
+    $data['karyawan'] = $this->m_karyawan->data_karyawan_out_temp();
 
     $this->render_backend('personalData/v_pelatihan_keluar', $menu, $data);
   }
@@ -84,7 +84,7 @@ class Page_his extends MY_Controller
   function divisi()
   {
     $menu = $this->uri->segment(2);
-    $data['div'] = $this->M_his->data_divisi();
+    $data['div'] = $this->m_karyawan->data_divisi();
 
     $this->render_backend('personalData/v_divisi', $menu, $data);
   }
@@ -92,8 +92,8 @@ class Page_his extends MY_Controller
   function departemen()
   {
     $menu = $this->uri->segment(2);
-    $data['dep'] = $this->M_his->data_dep();
-    // $data['section'] = $this->M_his->data_section_byId();
+    $data['dep'] = $this->m_karyawan->data_dep();
+    // $data['section'] = $this->Master/m_karyawan->data_section_byId();
 
     $this->render_backend('personalData/v_departemen', $menu, $data);
   }
@@ -101,7 +101,7 @@ class Page_his extends MY_Controller
   function section()
   {
     $menu = $this->uri->segment(2);
-    $data['section'] = $this->M_his->data_section();
+    $data['section'] = $this->m_karyawan->data_section();
 
     $this->render_backend('personalData/v_section', $menu, $data);
   }
@@ -109,7 +109,7 @@ class Page_his extends MY_Controller
   function shift()
   {
     $menu = $this->uri->segment(2);
-    $data['shift'] = $this->M_his->data_shift();
+    $data['shift'] = $this->m_karyawan->data_shift();
 
     $this->render_backend('personalData/v_shift', $menu, $data);
   }
@@ -117,7 +117,7 @@ class Page_his extends MY_Controller
   function jabatan()
   {
     $menu = $this->uri->segment(2);
-    $data['jabatan'] = $this->M_his->data_jabatan();
+    $data['jabatan'] = $this->m_karyawan->data_jabatan();
 
     $this->render_backend('personalData/v_jabatan', $menu, $data);
   }
@@ -125,7 +125,7 @@ class Page_his extends MY_Controller
   function golongan()
   {
     $menu = $this->uri->segment(2);
-    $data['golongan'] = $this->M_his->data_golongan();
+    $data['golongan'] = $this->m_karyawan->data_golongan();
 
     $this->render_backend('personalData/v_golongan', $menu, $data);
   }

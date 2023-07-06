@@ -94,7 +94,7 @@
                             <select class="form-control" id="exampleFormControlSelect1" name="id_dep" required>
                                 <option value="" selected disabled> -- Pilih Departemen -- </option>
                                 <?php
-                                $dep = $this->M_his->data_dep();
+                                $dep = $this->m_karyawan->data_dep();
                                 foreach ($dep as $d) { ?>
                                     ?>
                                     <option value="<?php echo $d->id_dep ?>"><?php echo $d->nama_dep ?></option>
@@ -140,7 +140,7 @@
                                 <select class="form-control" id="exampleFormControlSelect1" name="id_dep" required>
                                     <option value="" selected disabled> -- Pilih Departemen -- </option>
                                     <?php
-                                    $dep = $this->M_his->data_dep();
+                                    $dep = $this->m_karyawan->data_dep();
                                     foreach ($dep as $d) { ?>
                                         ?>
                                         <option value="<?php echo $d->id_dep ?>" <?php if ($d->id_dep == $u->id_dep) {
