@@ -97,7 +97,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url() . 'Master/c_karyawan/do_tbh_departemen'; ?>" method="post">
+            <form action="<?php echo site_url() . 'Master/c_bagian/do_tbh_departemen'; ?>" method="post">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -142,7 +142,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?php echo site_url() . 'Master/c_karyawan/do_edit_departemen' ?>" method="post">
+                <form action="<?php echo site_url() . 'Master/c_bagian/do_edit_departemen' ?>" method="post">
                     <input type="text" name="id_dep" value="<?= $u->id_dep ?>" hidden>
                     <div class="modal-body">
                         <div class="form-row">
@@ -188,7 +188,7 @@
                     <div class="alert alert-primary" role="alert">
                         <h5> Tambah Section Pada Departemen <strong><?php echo $u->nama_dep ?></strong></h5>
                         <hr>
-                        <form action="<?php echo site_url() . 'Master/c_karyawan/do_tbh_section' ?>" method="post">
+                        <form action="<?php echo site_url() . 'Master/c_bagian/do_tbh_section' ?>" method="post">
                             <input type="text" name="id_dep" value="<?= $u->id_dep ?>" hidden>
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
