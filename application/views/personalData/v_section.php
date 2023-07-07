@@ -86,7 +86,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url() . 'action_his/do_tbh_section'; ?>" method="post">
+            <form action="<?php echo site_url() . 'Master/c_karyawan/do_tbh_section'; ?>" method="post">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -131,7 +131,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?php echo site_url() . 'action_his/do_edit_section' ?>" method="post">
+                <form action="<?php echo site_url() . 'Master/c_karyawan/do_edit_section' ?>" method="post">
                     <input type="text" name="id_section" value="<?= $u->id_section ?>" hidden>
                     <div class="modal-body">
                         <div class="form-row">
