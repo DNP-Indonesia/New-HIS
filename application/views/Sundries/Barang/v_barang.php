@@ -90,9 +90,9 @@
                 </a>
                 <div id="collapse-master" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?= base_url('Sundries/kategoricontroller/kategoripage') ?>">Kategori</a>
-                        <a class="collapse-item" href="<?= base_url('Sundries/jeniscontroller/jenispage') ?>">Jenis</a>
-                        <a class="collapse-item text-success" href="<?= base_url('Sundries/barangcontroller/barangpage') ?>">Barang</a>
+                        <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_kategori/kategoripage') ?>">Kategori</a>
+                        <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_jenis/jenispage') ?>">Jenis</a>
+                        <a class="collapse-item text-success" href="<?= base_url('Sundries/Barang/c_barang/barangpage') ?>">Barang</a>
                     </div>
                 </div>
             </li>
@@ -222,7 +222,7 @@
                                                     <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit<?php echo $tempel->id_barang ?>">
                                                         <span class="text">Ubah</span>
                                                     </a>
-                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/barangcontroller/barangdelete/' . $tempel->id_barang) ?>')" href="#" class="btn btn-sm btn-danger">
+                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/Barang/c_barang/delete/' . $tempel->id_barang) ?>')" href="#" class="btn btn-sm btn-danger">
                                                         Hapus
                                                     </a>
                                                 </td>
@@ -292,7 +292,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?= base_url('Sundries/barangcontroller/barangadd') ?>" method="POST">
+                <form action="<?= base_url('Sundries/Barang/c_barang/create') ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
@@ -300,7 +300,7 @@
                                 <select class="form-control" id="exampleFormControlSelect1" name="jenis" required>
                                     <option value="--Pilih Kategori--" selected>--Pilih Jenis--</option>
                                     <?php
-                                    $div = $this->modeljenis->findAll();
+                                    $div = $this->m_jenis->findAll();
                                     foreach ($div as $d) { ?>
                                         ?>
                                         <option value="<?php echo $d->id_jenis ?>">
@@ -362,7 +362,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('Sundries/barangcontroller/barangupdate') ?>" method="POST">
+                    <form action="<?= base_url('Sundries/Barang/c_barang/update') ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
@@ -377,7 +377,7 @@
                                     <select class="form-control" id="exampleFormControlSelect1" name="jenis" required>
                                         <option value="" disabled> -- Pilih Jenis -- </option>
                                         <?php
-                                        $div = $this->modeljenis->findAll();
+                                        $div = $this->m_jenis->findAll();
                                         foreach ($div as $d) { ?>
                                             ?>
                                             <option value="<?php echo $d->id_jenis ?>" <?php if ($d->id_jenis == $tempel->id_jenis) {

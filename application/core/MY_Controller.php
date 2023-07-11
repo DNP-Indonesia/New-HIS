@@ -34,10 +34,8 @@ class MY_Controller extends CI_Controller
         * */
 
         $data['menu'] = "$menu";
-        // $data['headernya'] = $this->load->view('template/backend/v_dashboard', $data, TRUE);
-        $data['headernya'] = $this->load->view('template/role', $data, TRUE);
+        $data['headernya'] = $this->load->view('Sundries/Template/role', $data, TRUE);
         $data['contentnya'] = $this->load->view($content, $data, TRUE);
-        // $this->load->view('template/backend/index', $data);
-        $this->load->view('template/layout', $data);
+        $this->load->view('Sundries/Template/layout', $data);
     }
 }

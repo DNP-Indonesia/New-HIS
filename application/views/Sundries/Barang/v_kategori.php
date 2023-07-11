@@ -102,9 +102,9 @@
                     </a>
                     <div id="collapse-master" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item text-success" href="<?= base_url('Sundries/kategoricontroller/kategoripage') ?>">Kategori</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/jeniscontroller/jenispage') ?>">Jenis</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/barangcontroller/barangpage')?>">Barang</a>
+                            <a class="collapse-item text-success" href="<?= base_url('Sundries/Barang/c_kategori/kategoripage') ?>">Kategori</a>
+                            <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_jenis/jenispage') ?>">Jenis</a>
+                            <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_barang/barangpage')?>">Barang</a>
                         </div>
                     </div>
                 </li>
@@ -222,7 +222,7 @@
                                                     <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit<?php echo $tempel->id_kategori ?>">
                                                         <span class="text">Ubah</span>
                                                     </a>
-                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/kategoricontroller/kategoridelete/'.$tempel->id_kategori) ?>')"
+                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/Barang/c_kategori/kategoridelete/'.$tempel->id_kategori) ?>')"
                                                         href="#" class="btn btn-sm btn-danger">
                                                         Hapus
                                                     </a>
@@ -294,7 +294,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('Sundries/kategoricontroller/kategoriadd') ?>" method="POST">
+                    <form action="<?= base_url('Sundries/Barang/c_kategori/kategoriadd') ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
@@ -322,7 +322,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('Sundries/kategoricontroller/kategoriupdate') ?>" method="POST">
+                    <form action="<?= base_url('Sundries/Barang/c_kategori/kategoriupdate') ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
@@ -352,7 +352,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('Sundries/jeniscontroller/jenisadd') ?>" method="POST">
+                    <form action="<?= base_url('Sundries/Barang/c_jenis/jenisadd') ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
