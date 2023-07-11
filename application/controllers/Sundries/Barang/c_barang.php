@@ -1,14 +1,16 @@
 <?php
-
-class c_barang extends CI_Controller
+defined('BASEPATH') or exit('No direct script access allowed');
+class c_barang extends MY_Controller
 {
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Sundries\Barang\m_kategori');
         $this->load->model('Sundries\Barang\m_barang');
+        $this->load->model('Sundries\Barang\m_jenis');
     }
 
-    public function index()
+    public function barangpage()
     {
         $data['title'] = 'Barang';
         $data['sdr_barang'] = $this->m_barang->getBarangAll();

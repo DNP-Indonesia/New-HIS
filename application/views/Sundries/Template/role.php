@@ -86,14 +86,15 @@
             </a>
             <div id="mastersundriesmenu" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?php echo site_url("Sundries/kategoricontroller/kategoripage") ?>">Kategori</a>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_kategori/kategoripage") ?>">Kategori</a>
 
-                    <a class="collapse-item" href="<?php echo site_url("Sundries/jeniscontroller/jenispage") ?>">Jenis</a>
-                    
-                    <a class="collapse-item" href="<?php echo site_url("Sundries/barangcontroller/barangpage") ?>">Barang</a>
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_jenis/jenispage") ?>">Jenis</a>
 
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_barang/barangpage") ?>">Barang</a>
+
+                    </div>
                 </div>
-            </div>
         </li>
 
         <li class="nav-item">
@@ -126,7 +127,7 @@
         </li>
         <!-- End Nav Item - Tables -->
 
-    <?php } ?>      
+    <?php } ?>
     <!-- End SUPERUSER -->
 
     <!-- Start ADMIN & USER MEDICAL -->
@@ -145,7 +146,7 @@
     <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian') { ?>
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
-        
+
         <!-- Start Nav Item - Dashboard -->
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo site_url() ?>">
@@ -186,7 +187,7 @@
 
     <?php } ?>
     <!-- End SDR ADMIN BAGIAN -->
-    
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
@@ -201,7 +202,7 @@
     <!-- Start Sidebar Toogle -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>    
+    </div>
     <!-- End Sidebar Toogle -->
 
 </ul>

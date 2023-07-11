@@ -43,7 +43,7 @@ class requestsundriescontroller extends MY_Controller{
         $data['forkepalabagianbydiproses'] = $this->m_persetujuan->findforkepalabagianbydiproses();
         $data['forkepalabagianbyselesai'] = $this->m_persetujuan->findforkepalabagianbyselesai();
         $data['barsund'] = $this->m_persetujuan->barangsundries();
-        $data['jesun'] = $this->modeljenis->findbyidsundries();
+        $data['jesun'] = $this->m_jenis->findbyidsundries();
         $data['fakturotomatis']  = $this->m_persetujuan->generatefaktur();
         $this->load->view('sundries/Request Sundries',$data);
     }
