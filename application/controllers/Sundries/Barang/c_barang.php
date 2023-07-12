@@ -5,9 +5,9 @@ class c_barang extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Sundries\Barang\m_kategori');
-        $this->load->model('Sundries\Barang\m_barang');
-        $this->load->model('Sundries\Barang\m_jenis');
+		$this->load->model('Sundries/Barang/m_kategori');
+		$this->load->model('Sundries/Barang/m_jenis');
+        $this->load->model('Sundries/Barang/m_barang');
     }
 
     public function barangpage()
