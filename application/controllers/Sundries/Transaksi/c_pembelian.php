@@ -96,7 +96,7 @@ class c_pembelian extends MY_Controller{
 
     public function showkeranjang(){
         $data['keranjang'] = $this->m_pembelian->findkeranjang();
-        $this->load->view('sundries/keranjangpurchase',$data);
+        $this->load->view('Sundries/Transaksi/v_keranjang_pembelian',$data);
     }
 
     public function hapuskeranjang(){
@@ -144,7 +144,7 @@ class c_pembelian extends MY_Controller{
         $id     = $this->uri->segment(4);
         $data['data'] = $this->m_pembelian->findbyid($id);
         $data['detail']   = $this->m_pembelian->finddetail($id);
-        $this->load->view('sundries/purchase-detail', $data);
+        $this->load->view('Sundries/Transaksi/v_detail_pembelian', $data);
     }
 
     public function printpdf(){

@@ -20,7 +20,7 @@ class c_barang extends MY_Controller
     public function create()
     {
         $data['title'] = 'Barang';
-        $this->load->view('Sundries/Barang/v_barang_create', $data);
+        $this->load->view('Sundries/Barang/v_barang', $data);
     }
 
     public function store()
@@ -38,7 +38,7 @@ class c_barang extends MY_Controller
     {
         $data['title'] = 'Barang';
         $data['ambil'] = $this->m_barang->getBarangById($id);
-        $this->load->view('Sundries/Barang/v_barang_edit', $data);
+        $this->load->view('Sundries/Barang/v_barang', $data);
     }
 
     public function update()

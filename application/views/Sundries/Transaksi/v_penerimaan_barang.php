@@ -78,10 +78,10 @@
                     <div id="collapse-transaksi" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <?php if ($this->session->userdata('role') != 'sdr_Admin Gudang' AND $this->session->userdata('role') != 'sdr_Kepala Gudang') {?>
-                                <a class="collapse-item" href="<?= base_url('Sundries/estimasicontroller/estimasipage') ?>">
+                                <a class="collapse-item" href="<?= base_url('transaksi-sundries/pembuatan-estimasi') ?>">
                                     Pembuatan Estimasi
                                 </a>
-                                <a class="collapse-item" href="<?= base_url('Sundries/consumptioncontroller/consumptionpage') ?>">
+                                <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-consumption') ?>">
                                     Request Consumption
                                 </a>
                             <?php } ?>

@@ -77,9 +77,10 @@
                     <div id="collapse-transaksi" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item text-success" href="<?= base_url('transaksi-sundries/pembuatan-estimasi') ?>">Pembuatan Estimasi</a>
-                            <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-sundries') ?>">Request Sundries</a>
                             <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-consumption') ?>">Request Consumption</a>
+                            <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-sundries') ?>">Request Sundries</a>
                             <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-purchase') ?>">Request Purchase</a>
+                            <a class="collapse-item" href="<?= base_url('') ?>">Penerimaan Barang</a>
                         </div>
                     </div>
                 </li>

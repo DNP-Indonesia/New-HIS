@@ -41,7 +41,7 @@ class c_estimasi extends MY_Controller{
     public function showkeranjang(){
         $id_user = $this->input->post('id_user');
         $data['keranjang'] = $this->m_estimasi->findkeranjang($id_user)->result();
-        $this->load->view('sundries/keranjangestimasi',$data);
+        $this->load->view('Sundries/Transaksi/v_keranjang_estimasi',$data);
     }
 
     public function hapuskeranjang(){
@@ -79,7 +79,7 @@ class c_estimasi extends MY_Controller{
         $id     = $this->uri->segment(4);
         $data['data'] = $this->m_estimasi->findestimasibyid($id);
         $data['detail']   = $this->m_estimasi->findestimasidetail($id);
-        $this->load->view('sundries/estimasi-detail', $data);
+        $this->load->view('Sundries/Transaksi/v_detail_estimasi', $data);
     }
 
     public function printpdf(){

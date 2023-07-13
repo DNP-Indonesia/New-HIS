@@ -53,7 +53,7 @@ class c_konsumsi extends MY_Controller{
     public function showkeranjang(){
         $id_user = $this->input->post('id_user');
         $data['keranjang'] = $this->m_konsumsi->findkeranjang($id_user)->result();
-        $this->load->view('sundries/keranjangconsumption',$data);
+        $this->load->view('Sundries/Transaksi/v_keranjang_konsumsi',$data);
     }
 
     public function hapuskeranjang(){
@@ -89,7 +89,7 @@ class c_konsumsi extends MY_Controller{
         $id     = $this->uri->segment(4);
         $data['data'] = $this->m_konsumsi->findconsumptionbyid($id);
         $data['detail']   = $this->m_konsumsi->findconsumptiondetail($id);
-        $this->load->view('Sundries/Transaksi/v_permintaan_konsumsi-detail', $data);
+        $this->load->view('Sundries/Transaksi/v_detail_konsumsi', $data);
     }
 
     public function printpdf(){

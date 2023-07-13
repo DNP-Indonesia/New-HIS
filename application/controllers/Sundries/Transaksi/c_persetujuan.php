@@ -45,7 +45,7 @@ class c_persetujuan extends MY_Controller{
         $data['barsund'] = $this->m_persetujuan->barangsundries();
         $data['jesund'] = $this->m_jenis->getJenisAll();
         $data['fakturotomatis']  = $this->m_persetujuan->generatefaktur();
-        $this->load->view('Sundries/Transaksi/v_persetujuan_sundries',$data);
+        $this->load->view('Sundries/Transaksi/v_permintaan_persetujuan',$data);
     }
 
     public function detail(){
@@ -54,7 +54,7 @@ class c_persetujuan extends MY_Controller{
         $data['detail']   = $this->m_detail->finddetail($id);
         $data['penolakan']   = $this->m_persetujuan->findpenolakan($id);
         $data['barsund'] = $this->m_persetujuan->barangsundries();
-        $this->load->view('sundries/detail-sundries', $data);
+        $this->load->view('Sundries/Transaksi/v_detail_persetujuan', $data);
     }
 
     public function jumlahupdate(){
@@ -106,7 +106,7 @@ class c_persetujuan extends MY_Controller{
     public function showbarangkeranjang(){
         $id_user = $this->input->post('id_user');
         $data['barangkeranjang'] = $this->m_persetujuan->selectkeranjang($id_user);
-        $this->load->view('sundries/keranjangsundries',$data);
+        $this->load->view('Sundries/Transaksi/v_keranjang_persetujuan',$data);
     }
 
     public function hapuskeranjang(){
