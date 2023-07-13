@@ -13,7 +13,7 @@ class c_barang extends MY_Controller
     public function barangpage()
     {
         $data['title'] = 'Barang';
-        $data['sdr_barang'] = $this->m_barang->getBarangAll();
+        $data['ambil'] = $this->m_barang->getBarangAll();
         $this->load->view('Sundries/Barang/v_barang', $data);
     }
 
@@ -37,7 +37,7 @@ class c_barang extends MY_Controller
     public function edit($id)
     {
         $data['title'] = 'Barang';
-        $data['sdr_barang'] = $this->m_barang->getBarangById($id);
+        $data['ambil'] = $this->m_barang->getBarangById($id);
         $this->load->view('Sundries/Barang/v_barang_edit', $data);
     }
 

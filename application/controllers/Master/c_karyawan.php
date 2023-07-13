@@ -20,20 +20,20 @@ class c_karyawan extends MY_Controller
 		$username       = $_POST['username'];
 		$password       = md5($_POST['password']);
 		$karyawan = $this->m_karyawan->data_karyawan_byspysi($spysiid);
-        $data = array(
-            'spysiid' 	=> $spysiid,
-            'role' 		=> $role
-            'id_section' => $id_section,
-            'username' 	=> $username,
-            'password' 	=> $password,
-            'nama' 		=> $nama,
-        );
+		$data = array(
+			'spysiid' 		=> $spysiid,
+			'role' 			=> $role,
+			'id_section'	=> $id_section,
+			'username' 		=> $username,
+			'password' 		=> $password,
+			'nama' 			=> $nama,
+		);
 
 		foreach ($karyawan as $kar) {
 			$nama 		= $kar->nama;
 			$id_section = $kar->id_section;
 		}
-        $this->m_karyawan->input_any($data, 'tbl_user');
+		$this->m_karyawan->input_any($data, 'tbl_user');
 
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata('success', 'Data User berhasil ditambahkan');
@@ -77,7 +77,7 @@ class c_karyawan extends MY_Controller
 			'id_section' => $id_section,
 			'spysiid' 	=> $spysiid,
 		);
-        $this->M_user->update_any($where, $data, 'tbl_user');
+		$this->M_user->update_any($where, $data, 'tbl_user');
 
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata('success', 'Data berhasil disimpan');
@@ -88,7 +88,7 @@ class c_karyawan extends MY_Controller
 	function do_tbh_karyawan()
 	{
 		$spysiid        = $_POST['spysiid'];
-        $nama           = $_POST['nama'];
+		$nama           = $_POST['nama'];
 		$id_section     = $_POST['id_section'];
 		$nik            = $_POST['nik'];
 		$id_golongan    = $_POST['id_golongan'];
@@ -99,7 +99,7 @@ class c_karyawan extends MY_Controller
 		$gender         = $_POST['gender'];
 		$pendidikan     = $_POST['pendidikan'];
 		$keterangan     = "Aktif";
-        $data = array(
+		$data = array(
 			'spysiid' 		=> $spysiid,
 			'nama' 			=> $nama,
 			'id_section' 	=> $id_section,

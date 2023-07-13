@@ -206,7 +206,7 @@
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        foreach ($sdr_barang as $tempel) {
+                                        foreach ($ambil as $tempel) {
                                         ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
@@ -352,7 +352,7 @@
         </div>
     </div>
 
-    <?php foreach ($sdr_barang as $tempel) { ?>
+    <?php foreach ($ambil as $tempel) { ?>
         <div class="modal fade" id="modal-edit<?php echo $tempel->id_barang; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
