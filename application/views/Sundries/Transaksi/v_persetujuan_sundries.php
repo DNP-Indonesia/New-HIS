@@ -77,10 +77,10 @@
                 <div id="collapse-transaksi" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <?php if ($this->session->userdata('role') != 'sdr_Admin Gudang' and $this->session->userdata('role') != 'sdr_Kepala Gudang') { ?>
-                            <a class="collapse-item" href="<?= base_url('Sundries/estimasicontroller/estimasipage') ?>">
+                            <a class="collapse-item" href="<?= base_url('transaksi-sundries/pembuatan-estimasi') ?>">
                                 Pembuatan Estimasi
                             </a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/consumptioncontroller/consumptionpage') ?>">
+                            <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-consumption') ?>">
                                 Request Consumption
                             </a>
                         <?php } ?>
@@ -89,10 +89,10 @@
                             Request Sundries
                         </a>
                         <?php if ($this->session->userdata('role') != 'sdr_Admin Bagian' and $this->session->userdata('role') != 'sdr_Kepala Bagian') { ?>
-                            <a class="collapse-item" href="<?= base_url('Sundries/purchasecontroller/purchasepage') ?>">
+                            <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-purchase') ?>">
                                 Request Purchase
                             </a>
-                            <a href="<?= base_url('Sundries/penerimaancontroller/penerimaanpage') ?>" class="collapse-item">
+                            <a href="<?= base_url('Sundries/Transaksi/c_penerimaan/penerimaanpage') ?>" class="collapse-item">
                                 Penerimaan Barang
                             </a>
                         <?php } ?>

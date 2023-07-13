@@ -128,64 +128,6 @@
     <?php } ?>
     <!-- End SUPERUSER -->
 
-    <!-- Start ADMIN & USER MEDICAL -->
-    <?php if ($this->session->userdata('role') == 'admin_medical' or substr($this->session->userdata('role'), 0, -2) == 'medical') { ?>
-        <?php $this->load->view('medical/side_medical/admin_medical');  ?>
-    <?php } ?>
-    <!-- End ADMIN & USER MEDICAL -->
-
-    <!-- Start TRANING KAIZEN -->
-    <?php if (substr($this->session->userdata('role'), 0, -2) == 'tk') { ?>
-        <?php $this->load->view('tk/side_tk/tk');  ?>
-    <?php } ?>
-    <!-- End TRANING KAIZEN -->
-
-    <!-- Start SDR ADMIN BAGIAN -->
-    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian') { ?>
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-
-        <!-- Start Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo site_url() ?>">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi" aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Transaksi Sundries</span>
-            </a>
-            <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <?php if ($this->session->userdata('role') != 'sdr_Admin Gudang' and $this->session->userdata('role') != 'sdr_Kepala Gudang') { ?>
-                        <a class="collapse-item" href="<?= base_url('transaksi-sundries/pembuatan-estimasi') ?>">
-                            Pembuatan Estimasi
-                        </a>
-                        <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-consumption') ?>">
-                            Request Consumption
-                        </a>
-                    <?php } ?>
-                    <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-sundries') ?>">
-                        Request Sundries
-                    </a>
-                    <?php if ($this->session->userdata('role') != 'sdr_Admin Bagian' and $this->session->userdata('role') != 'sdr_Kepala Bagian') { ?>
-                        <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-purchase') ?>">
-                            Request Purchase
-                        </a>
-                        <a href="<?= base_url('Sundries/Transaksi/c_penerimaan/penerimaanpage') ?>" class="collapse-item">
-                            Penerimaan Barang
-                        </a>
-                    <?php } ?>
-                </div>
-            </div>
-        </li>
-        <!-- End Nav Item - Dashboard -->
-
-    <?php } ?>
-    <!-- End SDR ADMIN BAGIAN -->
-
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

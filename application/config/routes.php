@@ -84,3 +84,5 @@ $route['Master-Sundries/Kategori'] = 'Sundries/Barang/c_kategori/kategoripage';
 // Transaksi Sundries
 $route['transaksi-sundries/pembuatan-estimasi'] = 'Sundries/Transaksi/c_estimasi/estimasipage';
 $route['transaksi-sundries/request-sundries'] = 'Sundries/Transaksi/c_persetujuan/requestsundriespage';
+$route['transaksi-sundries/request-purchase'] = 'Sundries/Transaksi/c_pembelian/purchasepage';
+$route['transaksi-sundries/request-consumption'] = 'Sundries/Transaksi/c_konsumsi/consumptionpage';

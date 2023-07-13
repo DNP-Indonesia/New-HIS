@@ -78,8 +78,8 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item text-success" href="<?= base_url('transaksi-sundries/pembuatan-estimasi') ?>">Pembuatan Estimasi</a>
                             <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-sundries') ?>">Request Sundries</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/consumptioncontroller/consumptionpage') ?>">Request Consumption</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/purchasecontroller/purchasepage') ?>">Request Purchase</a>
+                            <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-consumption') ?>">Request Consumption</a>
+                            <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-purchase') ?>">Request Purchase</a>
                         </div>
                     </div>
                 </li>

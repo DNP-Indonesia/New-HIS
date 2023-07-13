@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class penerimaancontroller extends MY_Controller{
+class c_penerimaan extends MY_Controller{
 
     
     public function __construct(){
@@ -8,7 +8,7 @@ class penerimaancontroller extends MY_Controller{
         $this->load->model("Sundries/Barang/m_jenis");
         $this->load->model("Sundries/Barang/m_barang");
         $this->load->model("Sundries/Barang/m_kategori");
-        $this->load->model("Sundries/Transasksi/m_persetujuan");
+        $this->load->model("Sundries/Transaksi/m_persetujuan");
         $this->load->model("Sundries/Transaksi/m_detail");
         $this->load->model("Sundries/Transaksi/m_detail_sementara");
         $this->load->model("Sundries/Transaksi/m_estimasi");
@@ -21,7 +21,7 @@ class penerimaancontroller extends MY_Controller{
     public function penerimaanpage(){
         $data['penerimaan'] = $this->m_penerimaan->findall();
         $data['purchase'] = $this->m_pembelian->findpurchase();
-        $this->load->view('sundries/penerimaan',$data);
+        $this->load->view('Sundries/Transaksi/v_penerimaan_barang',$data);
     }
 
     public function penerimaanadd(){
@@ -38,7 +38,7 @@ class penerimaancontroller extends MY_Controller{
 
         $this->m_penerimaan->savepenerimaan($data);
         $this->session->set_userdata('sukses', 'Berhasil, Data Penerimaan Telah Dibuat....');
-        return redirect('Sundries/penerimaancontroller/penerimaanpage');
+        return redirect('Sundries/Transaksi/c_penerimaan/penerimaanpage');
     }
 
     public function formaddbarang(){

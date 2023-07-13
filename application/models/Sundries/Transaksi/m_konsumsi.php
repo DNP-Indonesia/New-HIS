@@ -103,7 +103,7 @@ class m_konsumsi extends CI_Model{
         if ($hapus) {
             $hapusdetail = $this->db->delete('sdr_consumption_detail', array('faktur'=>$faktur));
             if ($hapusdetail) {
-                redirect('Sundries/consumptioncontroller/consumptionpage');
+                redirect('Sundries/Transaksi/c_konsumsi/consumptionpage');
             }
         }
     }

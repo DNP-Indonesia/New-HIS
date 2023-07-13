@@ -107,6 +107,7 @@
                         <a class="collapse-item" href="#">Request Sundries</a>
                         <a class="collapse-item" href="#">Request Consumption</a>
                         <a class="collapse-item" href="#">Request Purchase</a>
+                        <a class="collapse-item" href="#">Penerimaan Barang</a>
                     </div>
                 </div>
             </li>
