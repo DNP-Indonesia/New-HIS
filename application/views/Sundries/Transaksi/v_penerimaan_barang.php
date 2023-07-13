@@ -86,7 +86,7 @@
                                 </a>
                             <?php } ?>
                             
-                            <a class="collapse-item" href="<?= base_url('Sundries/requestsundriescontroller/requestsundriespage') ?>">
+                            <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-sundries') ?>">
                                 Request Sundries
                             </a>
                             <a class="collapse-item" href="<?= base_url('Sundries/Transaksi/c_pembelian/purchasepage') ?>">
