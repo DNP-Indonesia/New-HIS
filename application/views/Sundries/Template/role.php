@@ -89,7 +89,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo site_url("Master-Sundries/Barang") ?>">Barang</a>
                         <a class="collapse-item" href="<?php echo site_url("Master-Sundries/Jenis") ?>">Jenis</a>
-
                         <a class="collapse-item" href="<?php echo site_url("Master-Sundries/Kategori") ?>">Kategori</a>
                     </div>
                 </div>
