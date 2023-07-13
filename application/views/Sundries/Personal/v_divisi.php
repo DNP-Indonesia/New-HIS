@@ -94,7 +94,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url() . '/action_his/do_tbh_divisi'; ?>" method="post">
+            <form action="<?php echo site_url() . '/Master/c_bagian/do_tbh_divisi'; ?>" method="post">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -126,7 +126,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?php echo site_url() . 'action_his/do_edit_divisi' ?>" method="post">
+                <form action="<?php echo site_url() . 'Master/c_bagian/do_edit_divisi' ?>" method="post">
                     <input type="text" name="id_divisi" value="<?= $u->id_divisi ?>" hidden>
                     <div class="modal-body">
                         <div class="form-row">
@@ -161,7 +161,7 @@
                     <div class="alert alert-primary" role="alert">
                         <h5> Tambah Departemen Pada Divisi <strong><?php echo $u->nama_divisi ?></strong></h5>
                         <hr>
-                        <form action="<?php echo site_url() . 'action_his/do_tbh_departemen' ?>" method="post">
+                        <form action="<?php echo site_url() . 'Master/c_bagian/do_tbh_departemen' ?>" method="post">
                             <input type="text" name="id_divisi" value="<?= $u->id_divisi ?>" hidden>
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
@@ -179,7 +179,7 @@
                         <div class="col-md-12 mb-3">
                             <ul class="list-group">
                                 <?php
-                                $dep    = $this->M_his->data_departemen_byId_div($u->id_divisi);
+                                $dep    = $this->m_karyawan->data_departemen_byId_div($u->id_divisi);
                                 foreach ($dep as $o) { ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <?php echo $o->nama_dep ?>
@@ -189,7 +189,7 @@
                                             </button>
                                             <div class="dropdown-menu bg-gradient-dark" aria-labelledby="dropdownMenuButton">
                                                 <?php
-                                                $section    = $this->M_his->data_section_byId_dep($o->id_dep);
+                                                $section    = $this->m_karyawan->data_section_byId_dep($o->id_dep);
                                                 foreach ($section as $i) { ?>
                                                     <p class="dropdown-header">
                                                         <strong class="text-gray-100"><?php echo $i->nama_section ?> </strong>

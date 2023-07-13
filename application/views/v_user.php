@@ -96,7 +96,7 @@
 <span aria-hidden="true">×</span>
 </button>
 </div>
-<form action="<?= site_url(). '/action_his/do_tbh_user'; ?>" method="post">
+<form action="<?= site_url(). '/Master/c_karyawan/do_tbh_user'; ?>" method="post">
 <div class="modal-body">
     <div class="form-row">
         
@@ -106,7 +106,7 @@
                 <option value='' selected disabled> -- Pilih Karyawan -- </option>
 
                 <?php 
-                $karyawan = $this->M_his->data_karyawan();
+                $karyawan = $this->m_karyawan->data_karyawan();
                 foreach ($karyawan as $kar){
                 ?>
 
@@ -170,7 +170,7 @@
 <span aria-hidden="true">×</span>
 </button>
 </div>
-<form action="<?= site_url(). '/action_his/do_edit_user'; ?>" method="post">
+<form action="<?= site_url(). '/Master/c_karyawan/do_edit_user'; ?>" method="post">
 <input type="text" name="id_user" value="<?= $u->id_user ?>" hidden>
 
 <div class="modal-body">
@@ -181,7 +181,7 @@
                 <option value='' selected disabled> -- Pilih Karyawan -- </option>
 
                 <?php 
-                $karyawan = $this->M_his->data_karyawan();
+                $karyawan = $this->m_karyawan->data_karyawan();
                 foreach ($karyawan as $kar){
                     if ($kar->spysiid == $u->spysiid){$sel = 'selected';} else {$sel = '';}
                 ?>
@@ -212,7 +212,7 @@
                 <option value='' disabled> -- Pilih Role -- </option>
 
                 <?php 
-                $role = $this->M_his->data_role_fromUser();
+                $role = $this->m_karyawan->data_role_fromUser();
                 foreach ($role as $rol){
                     if ($rol->role == $u->role) {$sele = "selected"; } else {$sele = '';}
                 ?>

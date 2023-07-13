@@ -14,8 +14,11 @@
 
     <!-- Custom fonts for this template-->
 
-    <link href="<?php echo base_url() ?>bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="<?php echo base_url() ?>bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+        type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url() ?>bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
@@ -67,8 +70,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $("#state").change(function() {
+        $(document).ready(function () {
+            $("#state").change(function () {
                 // foo is the id of the other select box 
                 if ($(this).val() == "TK0") {
                     $("#foo").show();
@@ -81,38 +84,37 @@
 
 </head>
 
-<body id="page-top">
+<body id="page - top">
 
-    <!-- Page Wrapper -->
+    <!-- Start Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-        <!-- Variabel $headernya diambil dari core MY_Controller
-            (application/core/MY_Controller.php) -->
-
+        <!-- Start Sidebar -->
+        <!-- Variabel $headernya diambil dari MY_Controller -->
         <?php echo $headernya; ?>
-        
-        <!-- End of Sidebar -->
+        <!-- End Sidebar -->
 
-        <!-- Content Wrapper -->
+        <!-- Start Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
+            <!-- Start Main Content -->
             <div id="content">
 
-                <!-- Topbar -->
+                <!-- Start Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
+                    <!-- Start Sidebar Toogle -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
+                    <!-- End Sidebar Toogle -->
 
-                    <!-- Topbar Search -->
-                    <form action="<?php echo site_url("page/search_bynik") ?>" method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <!-- Start Topbar Search -->
+                    <form action="<?php echo site_url("") ?>" method="post"
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input name="nik" type="text" class="form-control bg-light border-0 small" placeholder="Input NIK Karyawan" aria-label="Search" aria-describedby="basic-addon2">
+                            <input name="nik" type="text" class="form-control bg-light border-0 small"
+                                placeholder="Input NIK Karyawan" aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fas fa-search fa-sm"></i>
@@ -120,20 +122,26 @@
                             </div>
                         </div>
                     </form>
+                    <!-- End Topbar Search -->
 
-                    <!-- Topbar Navbar -->
+                    <!-- Start Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <!-- Start Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+
+                            <!-- Start Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -142,36 +150,24 @@
                                     </div>
                                 </form>
                             </div>
-                        </li>
-                        <!-- Logout Modal-->
-                        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar?</h5>
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">Pilih tombol LOGOUT dibawah untuk keluar aplikasi.</div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                        <a class="btn btn-primary" href="<?php echo site_url('logout') ?>">Logout</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="topbar-divider d-none d-sm-block"></div>
-                        <!-- Nav Item - User Information -->
+                            <!-- End Dropdown - Messages -->
+
+                            <!-- Start Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo "<b>" . strtoupper($this->session->userdata('nama')) . "</b> (" . $this->session->userdata('role') . ")"  ?></span>
-                                <img class="img-profile rounded-circle" src="<?php echo base_url() ?>bootstrap/img/user.png">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <?php echo "<b>" . strtoupper($this->session->userdata('nama')) . "</b> (" . $this->session->userdata('role') . ")" ?>
+                                </span>
+                                <img class="img-profile rounded-circle"
+                                    src="<?php echo base_url() ?>bootstrap/img/user.png">
                             </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                            <!-- Start Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa- ̰sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
                                 <a class="dropdown-item" href="#">
@@ -188,22 +184,54 @@
                                     Logout
                                 </a>
                             </div>
+                            <!-- End Dropdown - User Information -->
+
+                            <!-- Start Logout Modal-->
+                            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar?</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Pilih tombol LOGOUT dibawah untuk keluar aplikasi.</div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button"
+                                                data-dismiss="modal">Cancel</button>
+                                            <a class="btn btn-primary"
+                                                href="<?php echo site_url('logout') ?> ">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Start Logout Modal-->
+
                         </li>
+                        <!-- End Nav Item - User Information -->
+
+                        </li>
+                        <!-- End Nav Item - Search Dropdown (Visible Only XS) -->
+
                     </ul>
+                    <!-- End Topbar Navbar -->
+
                 </nav>
-                <!-- End of Topbar -->
-                <!-- Begin Page Content -->
+                <!-- End Topbar -->
+
+                <!-- Start Page Content -->
                 <div class="container-fluid">
-                    <!-- konten++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-                    <!-- Variabel $contentnya diambil dari core MY_Controller
-                        (application/core/MY_Controller.php) -->
+                    <!-- Variabel $contentnya diambil dari MY_Controller -->
                     <?php echo $contentnya; ?>
                 </div>
-                <!-- /.container-fluid -->
-            </div>
-            <!-- End of Main Content -->
+                <!-- End Page Content -->
 
-            <!-- Footer -->
+            </div>
+            <!-- End Main Content -->
+
+            <!-- Start Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -211,19 +239,21 @@
                     </div>
                 </div>
             </footer>
-            <!-- End of Footer -->
+            <!-- End Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End Content Wrapper -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
+    <!-- Start Scroll to Top Button -->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+    <!-- End Scroll to Top Button -->
 
+    <!-- Start Script -->
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -241,11 +271,12 @@
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url() ?>bootstrap/js/demo/datatables-demo.js"></script>
 
-    <script type="text/javascript" src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript"
+        src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
 
 
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $(".datepicker").datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true,
@@ -253,16 +284,17 @@
             });
         });
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('table.display').DataTable();
         });
     </script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.tabel-data').DataTable();
         });
     </script>
+    <!-- End Script -->
 
 </body>
 

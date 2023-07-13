@@ -97,7 +97,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url() . 'action_his/do_tbh_departemen'; ?>" method="post">
+            <form action="<?php echo site_url() . 'Master/c_bagian/do_tbh_departemen'; ?>" method="post">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -105,7 +105,7 @@
                             <select class="form-control" id="exampleFormControlSelect1" name="id_divisi" required>
                                 <option value="" selected disabled> -- Pilih Diivisi -- </option>
                                 <?php
-                                $div = $this->M_his->data_divisi();
+                                $div = $this->m_karyawan->data_divisi();
                                 foreach ($div as $d) { ?>
                                     ?>
                                     <option value="<?php echo $d->id_divisi ?>"><?php echo $d->nama_divisi ?></option>
@@ -142,7 +142,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?php echo site_url() . 'action_his/do_edit_departemen' ?>" method="post">
+                <form action="<?php echo site_url() . 'Master/c_bagian/do_edit_departemen' ?>" method="post">
                     <input type="text" name="id_dep" value="<?= $u->id_dep ?>" hidden>
                     <div class="modal-body">
                         <div class="form-row">
@@ -150,7 +150,7 @@
                                 <label for="exampleInputEmail1"><b>Pilih Divisi</b></label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="id_divisi" required>
                                     <option value="" selected disabled> -- Pilih Diivisi -- </option>
-                                    <?php $div = $this->M_his->data_divisi();
+                                    <?php $div = $this->m_karyawan->data_divisi();
                                     foreach ($div as $d) { ?>
                                         <option value="<?php echo $d->id_divisi ?>" <?php if ($d->id_divisi == $u->id_divisi) {
                                                                                         echo "selected";
@@ -188,7 +188,7 @@
                     <div class="alert alert-primary" role="alert">
                         <h5> Tambah Section Pada Departemen <strong><?php echo $u->nama_dep ?></strong></h5>
                         <hr>
-                        <form action="<?php echo site_url() . 'action_his/do_tbh_section' ?>" method="post">
+                        <form action="<?php echo site_url() . 'Master/c_bagian/do_tbh_section' ?>" method="post">
                             <input type="text" name="id_dep" value="<?= $u->id_dep ?>" hidden>
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
@@ -206,7 +206,7 @@
                         <div class="col-md-12 mb-3">
                             <ul class="list-group">
                                 <?php
-                                $section    = $this->M_his->data_section_byId_dep($u->id_dep);
+                                $section    = $this->m_karyawan->data_section_byId_dep($u->id_dep);
                                 foreach ($section as $o) { ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <?php echo $o->nama_section ?>

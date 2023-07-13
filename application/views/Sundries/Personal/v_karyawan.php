@@ -146,7 +146,7 @@
                                                                 <span aria-hidden="true">×</span>
                                                             </button>
                                                         </div>
-                                                        <form action="<?php echo site_url() . 'action_his/do_out_karyawan'; ?>" method="post">
+                                                        <form action="<?php echo site_url() . 'Master/c_karyawan/do_out_karyawan'; ?>" method="post">
                                                             <input type="text" name="nik" value="<?= $u->nik ?>" hidden>
                                                             <div class="modal-body">
                                                                 <div class="form-row">
@@ -183,7 +183,7 @@
                                                                 <span aria-hidden="true">×</span>
                                                             </button>
                                                         </div>
-                                                        <form action="<?php echo site_url("action_his/do_edit_karyawan/" . $u->nik) ?>" method="post">
+                                                        <form action="<?php echo site_url("Master/c_karyawan/do_edit_karyawan/" . $u->nik) ?>" method="post">
                                                             <div class="modal-body">
                                                                 <div class="form-row">
                                                                     <div class="col-md-6 mb-3">
@@ -222,7 +222,7 @@
                                                                             ?>
                                                                             <?php
                                                                             // $q_sec = mysqli_query($conn, "SELECT * FROM his_section");
-                                                                            $q_sec = $this->M_his->data_section();
+                                                                            $q_sec = $this->m_karyawan->data_section();
                                                                             foreach ($q_sec as $sec) {
                                                                                 if ($sec->id_section == $u->id_section) {
                                                                                     $sel = "selected";
@@ -242,7 +242,7 @@
                                                                             <option value="" selected disabled> -- Pilih Golongan -- </option>
                                                                             <?php
                                                                             // $q_class = mysqli_query($conn, "SELECT * FROM his_golongan");
-                                                                            $q_class = $this->M_his->data_golongan();
+                                                                            $q_class = $this->m_karyawan->data_golongan();
                                                                             foreach ($q_class as $class) {
                                                                                 if ($class->id_golongan == $u->id_golongan) {
                                                                                     $sel = "selected";
@@ -261,7 +261,7 @@
                                                                             <option value="" selected disabled> -- Pilih Shift -- </option>
                                                                             <?php
                                                                             // $q_shift = mysqli_query($conn, "SELECT * FROM his_shift");
-                                                                            $q_shift = $this->M_his->data_shift();
+                                                                            $q_shift = $this->m_karyawan->data_shift();
                                                                             foreach ($q_shift as $sh) {
                                                                                 if ($sh->id_shift == $u->id_shift) {
                                                                                     $sel = "selected";
@@ -280,7 +280,7 @@
                                                                         <select class="form-control" id="exampleFormControlSelect1" name="id_jabatan" required>
                                                                             <?php
                                                                             // $q_jab = mysqli_query($conn, "SELECT * FROM his_jabatan");
-                                                                            $q_jab = $this->M_his->data_jabatan();
+                                                                            $q_jab = $this->m_karyawan->data_jabatan();
                                                                             foreach ($q_jab as $jab) {
                                                                                 if ($jab->id_jabatan == $u->id_jabatan) {
                                                                                     $sel = "selected";
@@ -365,7 +365,7 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <form action="<?php echo site_url("action_his/do_tbh_karyawan") ?>" method="post">
+                            <form action="<?php echo site_url("Master/c_karyawan/do_tbh_karyawan") ?>" method="post">
                                 <div class="modal-body">
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
@@ -375,7 +375,6 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                       
                                         <div class="col-md-6 mb-3">
                                             <label for="exampleInputEmail1"><b>Nama Karyawan</b></label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" name="nama" required>
@@ -406,7 +405,7 @@
                                                 ?>
                                                 <?php
                                                 // $q_sec = mysqli_query($conn, "SELECT * FROM his_section");
-                                                $q_sec = $this->M_his->data_section();
+                                                $q_sec = $this->m_karyawan->data_section();
                                                 foreach ($q_sec as $sec) {
                                                 ?>
                                                     <option value="<?php echo $sec->id_section; ?>"><?php echo $sec->nama_section; ?></option>
@@ -422,7 +421,7 @@
                                                 <option value="" selected disabled> -- Pilih Golongan -- </option>
                                                 <?php
                                                 // $q_class = mysqli_query($conn, "SELECT * FROM his_golongan");
-                                                $q_class = $this->M_his->data_golongan();
+                                                $q_class = $this->m_karyawan->data_golongan();
                                                 foreach ($q_class as $class) {
                                                 ?>
                                                     <option value="<?php echo $class->id_golongan; ?>"><?php echo $class->nama_golongan; ?></option>
@@ -436,7 +435,7 @@
                                                 <option value="" selected disabled> -- Pilih Shift -- </option>
                                                 <?php
                                                 // $q_shift = mysqli_query($conn, "SELECT * FROM his_shift");
-                                                $q_shift = $this->M_his->data_shift();
+                                                $q_shift = $this->m_karyawan->data_shift();
                                                 foreach ($q_shift as $sh) {
                                                 ?>
                                                     <option value="<?php echo $sh->id_shift; ?>"><?php echo $sh->nama_shift; ?></option>
@@ -452,7 +451,7 @@
                                                 <option value="" selected disabled> -- Pilih Jabatan -- </option>
                                                 <?php
                                                 // $q_jab = mysqli_query($conn, "SELECT * FROM his_jabatan");
-                                                $q_jab = $this->M_his->data_jabatan();
+                                                $q_jab = $this->m_karyawan->data_jabatan();
                                                 foreach ($q_jab as $jab) {
                                                 ?>
                                                     <option value="<?php echo $jab->id_jabatan; ?>"><?php echo $jab->nama_jabatan; ?></option>
