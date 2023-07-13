@@ -102,9 +102,9 @@
                     </a>
                     <div id="collapse-master" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item text-success" href="<?= base_url('Sundries/Barang/c_kategori/kategoripage') ?>">Kategori</a>
+                            <a class="collapse-item" href="<?= base_url('Master-Sundries/Barang')?>">Barang</a>
                             <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_jenis/jenispage') ?>">Jenis</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_barang/barangpage')?>">Barang</a>
+                            <a class="collapse-item text-success" href="<?= base_url('Sundries/Barang/c_kategori/kategoripage') ?>">Kategori</a>
                         </div>
                     </div>
                 </li>
@@ -116,7 +116,7 @@
                     </a>
                     <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="#">Pembuata Estimasi</a>
+                            <a class="collapse-item" href="#">Pembuatan Estimasi</a>
                             <a class="collapse-item" href="#">Request Sundries</a>
                             <a class="collapse-item" href="#">Request Consumption</a>
                             <a class="collapse-item" href="#">Request Purchase</a>

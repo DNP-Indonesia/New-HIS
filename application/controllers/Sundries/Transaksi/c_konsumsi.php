@@ -119,7 +119,7 @@ class consumptioncontroller extends MY_Controller{
      
         $this->m_konsumsi->update($where,$data);
         $this->session->set_userdata('setuju', 'Yeay, Request Berhasil Disetujui Nich....');
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
 
     public function consumptionreject(){
@@ -136,7 +136,7 @@ class consumptioncontroller extends MY_Controller{
      
         $this->m_konsumsi->update($where,$data);
         $this->session->set_userdata('tolak', 'Yah, Request Ditolak Nich....');
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
     
 }

@@ -63,7 +63,7 @@ $route['logout'] = 'auth/c_auth/logout';
 $route['dashboard'] = 'Page_his/home';
 $route['data-user'] = 'Page_his/user';
 
-// page_his Personal Data
+// Personal Data
 $route['data-karyawan'] = 'Page_his/karyawan';
 $route['data-karyawan-keluar'] = 'Page_his/karyawan_out';
 $route['data-karyawan-training-dan-percobaan'] = 'Page_his/karyawan_temp';
@@ -75,10 +75,12 @@ $route['daftar-shift'] = 'Page_his/shift';
 $route['daftar-jabatan'] = 'Page_his/jabatan';
 $route['daftar-golongan'] = 'Page_his/golongan';
 
-// c_kategori
+
+// Sundries Master
+$route['Master-Sundries/Barang'] = 'Sundries/Barang/c_barang/barangpage';
+$route['Master-Sundries/Jenis'] = 'Sundries/Barang/c_jenis/jenispage';
 $route['Master-Sundries/Kategori'] = 'Sundries/Barang/c_kategori/kategoripage';
 
-// c_jenis
-$route['Master-Sundries/Jenis'] = 'Sundries/Barang/c_jenis/jenispage';
-
-// c_barang
+// Transaksi Sundries
+$route['transaksi-sundries/pembuatan-estimasi'] = 'Sundries/Transaksi/c_estimasi/estimasipage';
+$route['transaksi-sundries/request-sundries'] = 'Sundries/Transaksi/c_persetujuan/requestsundriespage';

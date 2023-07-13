@@ -16,7 +16,7 @@ class c_estimasi extends MY_Controller{
         $data['barcons'] = $this->m_estimasi->findbarcons();
         $data['dataestimasikepalabagian'] = $this->m_estimasi->findforkepalabagian();
         $data['estimasiall'] = $this->m_estimasi->findall();
-        $this->load->view('sundries/Estimasi',$data);
+        $this->load->view('Sundries/Transaksi/v_estimasi',$data);
     }
 
     public function keranjangadd(){
@@ -67,7 +67,7 @@ class c_estimasi extends MY_Controller{
         );
 
         $simpan = $this->m_estimasi->save($data, $iduser, $faktur);
-        return redirect('Sundries/estimasicontroller/estimasipage');
+        return redirect('Sundries/Transaksi/c_estimasi/estimasipage');
     }
 
     public function estimasidelete($faktur){
@@ -104,7 +104,7 @@ class c_estimasi extends MY_Controller{
      
         $this->m_estimasi->update($where,$data);
         $this->session->set_userdata('setuju', 'Yeay, Estimasi Berhasil Disetujui Nich....');
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
 
     public function estimasireject(){
@@ -121,7 +121,7 @@ class c_estimasi extends MY_Controller{
      
         $this->m_estimasi->update($where,$data);
         $this->session->set_userdata('tolak', 'Yah, Estimasi Ditolak Nich....');
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
 
 }
