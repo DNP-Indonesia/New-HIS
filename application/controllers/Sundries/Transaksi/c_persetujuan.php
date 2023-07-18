@@ -22,7 +22,7 @@ class c_persetujuan extends MY_Controller{
         $data['consum'] = $this->m_konsumsi->findforaprove();
         $data['foradmingudang'] = $this->m_persetujuan->findforadmingudang();
         $data['forkplgudang'] = $this->m_persetujuan->findforkplgudang();
-        $this->load->view('sundries/Dashboard',$data);
+        $this->load->view('Sundries/Template/dashboard',$data);
     }
 
     public function requestsundriespage(){
