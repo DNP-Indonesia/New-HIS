@@ -45,6 +45,7 @@
                                             <th>Tanggal Lahir</th>
                                             <th>Gender</th>
                                             <th>Pendidikan</th>
+                                            <th>Keterangan</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -63,6 +64,7 @@
                                             <th>Tanggal Lahir</th>
                                             <th>Gender</th>
                                             <th>Pendidikan</th>
+                                            <th>Keterangan</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -78,7 +80,7 @@
                                             <tr>
                                                 <td><?php echo $i ?></td>
                                                 <td><?php echo $u->nama ?></td>
-                                                <td><?php echo $u->nik_temp ?></td>
+                                                <td><?php echo $u->nik_training ?></td>
                                                 <td><?php echo $u->nama_divisi ?></td>
                                                 <td><?php echo $u->nama_dep ?></td>
                                                 <td><?php echo $u->nama_section ?></td>
@@ -90,6 +92,7 @@
                                                 <td><?php echo $u->tgl_lahir ?></td>
                                                 <td><?php echo $u->gender ?></td>
                                                 <td><?php echo $u->pendidikan ?></td>
+                                                <td><?php echo $u->keterangan ?></td>
                                             </tr>
                                             <!-- KeLUARKAN Modal-->
                                             <div class="modal fade" id="ModalOut<?php echo $u->nik ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
