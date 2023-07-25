@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class consumptioncontroller extends MY_Controller{
+class c_konsumsi extends MY_Controller{
 
     public function __construct(){
         parent::__construct();
@@ -16,7 +16,7 @@ class consumptioncontroller extends MY_Controller{
         $data['estimasi'] = $this->m_konsumsi->findestimasi();
         $data['dataconsumkepalabagian'] = $this->m_konsumsi->findforkepalabagian();
         $data['consumall'] = $this->m_konsumsi->findall();
-        $this->load->view('sundries/consumption',$data);
+        $this->load->view('Sundries/Transaksi/v_permintaan_konsumsi',$data);
     }
 
     public function barangbyfaktur(){
@@ -53,7 +53,7 @@ class consumptioncontroller extends MY_Controller{
     public function showkeranjang(){
         $id_user = $this->input->post('id_user');
         $data['keranjang'] = $this->m_konsumsi->findkeranjang($id_user)->result();
-        $this->load->view('sundries/keranjangconsumption',$data);
+        $this->load->view('Sundries/Transaksi/v_keranjang_konsumsi',$data);
     }
 
     public function hapuskeranjang(){
@@ -81,7 +81,7 @@ class consumptioncontroller extends MY_Controller{
 
         $simpan = $this->m_konsumsi->save($data, $iduser, $faktur, $fakest);
         $this->session->set_userdata('sukses', 'Yeay, Request Berhasil Dibuat, Masih Menunggu Persetujuan Kepala Bagian Nich....');
-        return redirect('Sundries/consumptioncontroller/consumptionpage');
+        return redirect('Sundries/Transaksi/c_konsumsi/consumptionpage');
 
     }
 
@@ -89,7 +89,7 @@ class consumptioncontroller extends MY_Controller{
         $id     = $this->uri->segment(4);
         $data['data'] = $this->m_konsumsi->findconsumptionbyid($id);
         $data['detail']   = $this->m_konsumsi->findconsumptiondetail($id);
-        $this->load->view('sundries/consumption-detail', $data);
+        $this->load->view('Sundries/Transaksi/v_detail_konsumsi', $data);
     }
 
     public function printpdf(){
@@ -119,7 +119,7 @@ class consumptioncontroller extends MY_Controller{
      
         $this->m_konsumsi->update($where,$data);
         $this->session->set_userdata('setuju', 'Yeay, Request Berhasil Disetujui Nich....');
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
 
     public function consumptionreject(){
@@ -136,7 +136,7 @@ class consumptioncontroller extends MY_Controller{
      
         $this->m_konsumsi->update($where,$data);
         $this->session->set_userdata('tolak', 'Yah, Request Ditolak Nich....');
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
     
 }

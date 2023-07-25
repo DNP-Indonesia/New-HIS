@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class purchasecontroller extends MY_Controller{
+class c_pembelian extends MY_Controller{
 
     public function __construct(){
         parent::__construct();
@@ -18,7 +18,7 @@ class purchasecontroller extends MY_Controller{
 
     public function purchasepage(){
         $data['purchase'] = $this->m_pembelian->findpurchase();
-        $this->load->view('sundries/purchase',$data);
+        $this->load->view('Sundries/Transaksi/v_permintaan_pembelian',$data);
     }
 
     public function formpurchase(){
@@ -60,7 +60,7 @@ class purchasecontroller extends MY_Controller{
             $this->m_pembelian->savekeranjang($data);
             $this->m_pembelian->ubahstkeranjang($ubahkeranjang, $where);   
         
-            return redirect('Sundries/purchasecontroller/formpurchase');
+            return redirect('Sundries/Transaksi/c_pembelian/formpurchase');
 
         // if ($cekbarang > 0) {
         //     if ($cekfaktur > 0) {
@@ -96,7 +96,7 @@ class purchasecontroller extends MY_Controller{
 
     public function showkeranjang(){
         $data['keranjang'] = $this->m_pembelian->findkeranjang();
-        $this->load->view('sundries/keranjangpurchase',$data);
+        $this->load->view('Sundries/Transaksi/v_keranjang_pembelian',$data);
     }
 
     public function hapuskeranjang(){
@@ -115,7 +115,7 @@ class purchasecontroller extends MY_Controller{
         $hapus = $this->m_pembelian->deletekeranjang($id_barang);
         echo $ubha;
         echo $hapus;
-        return redirect('Sundries/purchasecontroller/formpurchase');
+        return redirect('Sundries/Transaksi/c_pembelian/formpurchase');
     }
 
     public function purchaseadd(){
@@ -136,7 +136,7 @@ class purchasecontroller extends MY_Controller{
 
         $simpan = $this->m_pembelian->save($data, $iduser, $faktur);
         $this->session->set_userdata('sukses', 'Berhasil, Request Telah Dibuat....');
-        return redirect('Sundries/purchasecontroller/purchasepage');
+        return redirect('Sundries/Transaksi/c_pembelian/purchasepage');
 
     }
 
@@ -144,7 +144,7 @@ class purchasecontroller extends MY_Controller{
         $id     = $this->uri->segment(4);
         $data['data'] = $this->m_pembelian->findbyid($id);
         $data['detail']   = $this->m_pembelian->finddetail($id);
-        $this->load->view('sundries/purchase-detail', $data);
+        $this->load->view('Sundries/Transaksi/v_detail_pembelian', $data);
     }
 
     public function printpdf(){

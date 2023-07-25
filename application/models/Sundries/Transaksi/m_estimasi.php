@@ -86,7 +86,7 @@ class m_estimasi extends CI_Model{
         if ($hapus) {
             $hapusdetail = $this->db->delete('sdr_estimasi_detail', array('faktur'=>$faktur));
             if ($hapusdetail) {
-                redirect('Sundries/estimasicontroller/estimasipage');
+                redirect('Sundries/Transaksi/c_estimasi/estimasipage');
             }
         }
     }

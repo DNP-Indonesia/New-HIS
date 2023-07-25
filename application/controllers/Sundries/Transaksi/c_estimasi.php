@@ -16,7 +16,7 @@ class c_estimasi extends MY_Controller{
         $data['barcons'] = $this->m_estimasi->findbarcons();
         $data['dataestimasikepalabagian'] = $this->m_estimasi->findforkepalabagian();
         $data['estimasiall'] = $this->m_estimasi->findall();
-        $this->load->view('sundries/Estimasi',$data);
+        $this->load->view('Sundries/Transaksi/v_estimasi',$data);
     }
 
     public function keranjangadd(){
@@ -41,7 +41,7 @@ class c_estimasi extends MY_Controller{
     public function showkeranjang(){
         $id_user = $this->input->post('id_user');
         $data['keranjang'] = $this->m_estimasi->findkeranjang($id_user)->result();
-        $this->load->view('sundries/keranjangestimasi',$data);
+        $this->load->view('Sundries/Transaksi/v_keranjang_estimasi',$data);
     }
 
     public function hapuskeranjang(){
@@ -67,7 +67,7 @@ class c_estimasi extends MY_Controller{
         );
 
         $simpan = $this->m_estimasi->save($data, $iduser, $faktur);
-        return redirect('Sundries/estimasicontroller/estimasipage');
+        return redirect('Sundries/Transaksi/c_estimasi/estimasipage');
     }
 
     public function estimasidelete($faktur){
@@ -79,7 +79,7 @@ class c_estimasi extends MY_Controller{
         $id     = $this->uri->segment(4);
         $data['data'] = $this->m_estimasi->findestimasibyid($id);
         $data['detail']   = $this->m_estimasi->findestimasidetail($id);
-        $this->load->view('sundries/estimasi-detail', $data);
+        $this->load->view('Sundries/Transaksi/v_detail_estimasi', $data);
     }
 
     public function printpdf(){
@@ -104,7 +104,7 @@ class c_estimasi extends MY_Controller{
      
         $this->m_estimasi->update($where,$data);
         $this->session->set_userdata('setuju', 'Yeay, Estimasi Berhasil Disetujui Nich....');
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
 
     public function estimasireject(){
@@ -121,7 +121,7 @@ class c_estimasi extends MY_Controller{
      
         $this->m_estimasi->update($where,$data);
         $this->session->set_userdata('tolak', 'Yah, Estimasi Ditolak Nich....');
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
 
 }

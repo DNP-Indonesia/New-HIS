@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class requestsundriescontroller extends MY_Controller{
+class c_persetujuan extends MY_Controller{
 
     public function __construct(){
         parent::__construct();
@@ -10,7 +10,7 @@ class requestsundriescontroller extends MY_Controller{
         $this->load->model("Sundries/Transaksi/m_persetujuan");
         $this->load->model("Sundries/Transaksi/m_detail");
         $this->load->model("Sundries/Transaksi/m_detail_sementara");
-        $this->load->model("Sundries/Transaksi/m_estiasi");
+        $this->load->model("Sundries/Transaksi/m_estimasi");
         $this->load->model("Sundries/Transaksi/m_konsumsi");
         $this->load->library('Pdf');
     }
@@ -22,7 +22,7 @@ class requestsundriescontroller extends MY_Controller{
         $data['consum'] = $this->m_konsumsi->findforaprove();
         $data['foradmingudang'] = $this->m_persetujuan->findforadmingudang();
         $data['forkplgudang'] = $this->m_persetujuan->findforkplgudang();
-        $this->load->view('sundries/Dashboard',$data);
+        $this->load->view('Sundries/Template/dashboard',$data);
     }
 
     public function requestsundriespage(){
@@ -43,9 +43,9 @@ class requestsundriescontroller extends MY_Controller{
         $data['forkepalabagianbydiproses'] = $this->m_persetujuan->findforkepalabagianbydiproses();
         $data['forkepalabagianbyselesai'] = $this->m_persetujuan->findforkepalabagianbyselesai();
         $data['barsund'] = $this->m_persetujuan->barangsundries();
-        $data['jesun'] = $this->m_jenis->findbyidsundries();
+        $data['jesund'] = $this->m_jenis->getJenisAll();
         $data['fakturotomatis']  = $this->m_persetujuan->generatefaktur();
-        $this->load->view('sundries/Request Sundries',$data);
+        $this->load->view('Sundries/Transaksi/v_permintaan_persetujuan',$data);
     }
 
     public function detail(){
@@ -54,7 +54,7 @@ class requestsundriescontroller extends MY_Controller{
         $data['detail']   = $this->m_detail->finddetail($id);
         $data['penolakan']   = $this->m_persetujuan->findpenolakan($id);
         $data['barsund'] = $this->m_persetujuan->barangsundries();
-        $this->load->view('sundries/detail-sundries', $data);
+        $this->load->view('Sundries/Transaksi/v_detail_persetujuan', $data);
     }
 
     public function jumlahupdate(){
@@ -78,7 +78,7 @@ class requestsundriescontroller extends MY_Controller{
      
         $this->m_detail->updatejumlah($where,$data);
         $this->session->set_userdata('update', 'Yeay, Jumlah Atau Catatan Berhasil Diubah, Yuk Lihat Di Detail Request...');
-        return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+        return redirect('Sundries/Transaksi/c_persetujuan/requestsundriespage');
     }
 
     public function cekkeranjang(){
@@ -106,7 +106,7 @@ class requestsundriescontroller extends MY_Controller{
     public function showbarangkeranjang(){
         $id_user = $this->input->post('id_user');
         $data['barangkeranjang'] = $this->m_persetujuan->selectkeranjang($id_user);
-        $this->load->view('sundries/keranjangsundries',$data);
+        $this->load->view('Sundries/Transaksi/v_keranjang_persetujuan',$data);
     }
 
     public function hapuskeranjang(){
@@ -130,7 +130,7 @@ class requestsundriescontroller extends MY_Controller{
         $cekbarang2 = $this->m_persetujuan->cekbarangkeranjang2($iduser)->num_rows();
             if ($cekbarang2 == 0){
                 $this->session->set_userdata('keranjangkosong', 'Hey, Keranjang Masih Kosong, Main Pencet Tombol Request Aja Nich....');
-                return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+                return redirect('Sundries/Transaksi/c_persetujuan/requestsundriespage');
             }else{
             $data = array(
                 'faktur'=>$faktur,
@@ -143,7 +143,7 @@ class requestsundriescontroller extends MY_Controller{
 
             $simpan = $this->m_persetujuan->save($data, $iduser, $faktur, $stkeranjang, $barangready);
             $this->session->set_userdata('sukses', 'Sukses, Request Berhasil Dibuat, Masih Menunggu Persetujuan Kepala Bagian dan Kepala Gudang....');
-            return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+            return redirect('Sundries/Transaksi/c_persetujuan/requestsundriespage');
         }
     }
 
@@ -151,7 +151,7 @@ class requestsundriescontroller extends MY_Controller{
         $faktur = $this->uri->segment(4);
         $hapus = $this->m_persetujuan->deleterequest($faktur);
         $this->session->set_userdata('hapus', 'Berhasil, Request Telah Dihapus ....');
-        return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+        return redirect('Sundries/Transaksi/c_persetujuan/requestsundriespage');
     }
 
     public function printpdf(){
@@ -196,7 +196,7 @@ class requestsundriescontroller extends MY_Controller{
             $this->session->set_userdata('setuju', 'Berhasil, Request Telah Disetujui....');
         }
         
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
 
     public function requestreject(){
@@ -234,7 +234,7 @@ class requestsundriescontroller extends MY_Controller{
         
         if ($this->m_detail->deletebarang($id)) {
             $this->session->set_flashdata('hapus', 'Barang Berhasil Dihapus......');
-            return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+            return redirect('Sundries/Transaksi/c_persetujuan/requestsundriespage');
         }
     }
 
@@ -253,7 +253,7 @@ class requestsundriescontroller extends MY_Controller{
         
         $this->m_detail->addbarang($data);
         $this->session->set_userdata('addbarang', 'Yeay, Berhasil Nambah Barang....');
-        return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+        return redirect('Sundries/Transaksi/c_persetujuan/requestsundriespage');
     }
 
     public function requestulang(){
@@ -278,7 +278,7 @@ class requestsundriescontroller extends MY_Controller{
         $this->m_persetujuan->ulangrequest($data, $where);
         $this->m_persetujuan->ubahstkeranjang($where, $data2);
         $this->session->set_userdata('requlang', 'Yeay Berhasil, Ngajuin Ulang Requestnya, Nunggu Persetujuan Lagi Nich....');
-        return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+        return redirect('Sundries/Transaksi/c_persetujuan/requestsundriespage');
     }
 
     public function requestproses(){
@@ -295,7 +295,7 @@ class requestsundriescontroller extends MY_Controller{
 
         $this->m_persetujuan->prosesrequest($data, $where);
         $this->session->set_userdata('reqproses', 'Berhasil, Request Akan Diproses ....');
-        return redirect('Sundries/requestsundriescontroller/dashboard');
+        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
     }
 
     public function requestfinish(){
@@ -314,7 +314,7 @@ class requestsundriescontroller extends MY_Controller{
 
         $this->m_persetujuan->finishrequest($data, $where);
         $this->session->set_userdata('reqfinish', 'Yeay, Transaksi Udah Selesai....');
-        return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+        return redirect('Sundries/Transaksi/c_persetujuan/requestsundriespage');
     }
 
     public function requestready(){
@@ -338,7 +338,7 @@ class requestsundriescontroller extends MY_Controller{
 
         $this->m_persetujuan->readyrequest($data, $where);
         $this->session->set_userdata('reqready', 'Yeay, Barang Sudah Tiba....');
-        return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+        return redirect('Sundries/Transaksi/c_persetujuan/requestsundriespage');
     }
 
     public function tampildetailbarang(){

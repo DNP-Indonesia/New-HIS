@@ -116,6 +116,14 @@
                                                                 <strong class="text-gray-100">MENU </strong>
                                                             </p>
                                                             <p class="dropdown-item">
+                                                                <a href="" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#ModalAngkatKar<?php echo $u->nik ?>">
+                                                                    <span class="icon text-white-50">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </span>
+                                                                    <span class="text">Angkat menjadi karyawan</span>
+                                                                </a>
+                                                            </p>
+                                                            <p class="dropdown-item">
                                                                 <a href="" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#ModalEditKar<?php echo $u->nik ?>">
                                                                     <span class="icon text-white-50">
                                                                         <i class="fas fa-edit"></i>
@@ -156,7 +164,7 @@
                                                                             <option value="" selected disabled> -- Pilih Alasan -- </option>
                                                                             <option value="Aktif">Aktif</option>
                                                                             <option value="Pensiun">Pensiun</option>
-                                                                            <option value="Menngundurkan Diri">Mengundurkan Diri</option>
+                                                                            <option value="Mengundurkan Diri">Mengundurkan Diri</option>
                                                                             <option value="PHK">PHK</option>
                                                                             <option value="Meninggal Dunia">Meninggal Dunia</option>
                                                                         </select>
@@ -375,6 +383,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
+                                       
                                         <div class="col-md-6 mb-3">
                                             <label for="exampleInputEmail1"><b>Nama Karyawan</b></label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" name="nama" required>
