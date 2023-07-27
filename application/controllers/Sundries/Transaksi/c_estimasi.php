@@ -1,8 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class c_estimasi extends MY_Controller{
 
-    public function __construct(){
+class c_estimasi extends MY_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model("Sundries/Barang/m_jenis");
         $this->load->model("Sundries/Barang/m_barang");
@@ -11,47 +13,53 @@ class c_estimasi extends MY_Controller{
         $this->load->library('Pdf');
     }
 
-    public function estimasipage(){
-        $data['dataestimasi'] = $this->m_estimasi->find();
-        $data['barcons'] = $this->m_estimasi->findbarcons();
-        $data['dataestimasikepalabagian'] = $this->m_estimasi->findforkepalabagian();
-        $data['estimasiall'] = $this->m_estimasi->findall();
-        $this->load->view('Sundries/Transaksi/v_estimasi',$data);
+    public function index()
+    {
+        $data['estimasi'] = $this->m_estimasi->getEstimasi();
+        $data['barcons'] = $this->m_estimasi->getBarang();
+        $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
+        $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
+
+        $this->load->view('Sundries/Transaksi/Estimasi/v_estimasi', $data);
     }
 
-    public function keranjangadd(){
+    public function addKeranjang()
+    {
         $id_barang = $this->input->post('id_barang');
         $qty = $this->input->post('qty');
         $id_user = $this->input->post('id_user');
+        
+        $cek = $this->m_estimasi->cekKeranjang($id_barang, $id_user)->num_rows();
+        if ($cek > 0) {
 
-        $cekbarang = $this->m_estimasi->cekkeranjang($id_barang, $id_user)->num_rows();
-        if ($cekbarang > 0){
-            
-        }else{
+        } else {
             $data = array(
-                'id_barang'=>$id_barang,
-                'jumlah'=>$qty,
-                'id_user'=>$id_user
+                'id_barang' => $id_barang,
+                'jumlah' => $qty,
+                'id_user' => $id_user
             );
-            
-            $this->m_estimasi->savekeranjang($data);
+
+            $this->m_estimasi->saveKeranjang($data);
         }
     }
 
-    public function showkeranjang(){
+    public function showKeranjang()
+    {
         $id_user = $this->input->post('id_user');
-        $data['keranjang'] = $this->m_estimasi->findkeranjang($id_user)->result();
-        $this->load->view('Sundries/Transaksi/v_keranjang_estimasi',$data);
+        $data = $this->m_estimasi->getKeranjang($id_user)->result();
+        $this->load->view('Sundries/Transaksi/Estimasi/v_keranjang', $data);
     }
 
-    public function hapuskeranjang(){
+    public function deleteKeranjang()
+    {
         $id_user = $this->input->post('iduser');
         $id_barang = $this->input->post('idbarang');
-        $hapus = $this->m_estimasi->deletekeranjang($id_barang, $id_user);
+        $hapus = $this->m_estimasi->deleteKeranjang($id_user, $id_barang);
         echo $hapus;
     }
 
-    public function estimasiadd(){
+    public function addEstimasi()
+    {
         $faktur = $this->input->post('faktur');
         $tanggal = $this->input->post('tanggal');
         $iduser = $this->input->post('id_user');
@@ -65,32 +73,35 @@ class c_estimasi extends MY_Controller{
             'tanggal'=>$tanggal,
             'status'=>$status
         );
-
-        $simpan = $this->m_estimasi->save($data, $iduser, $faktur);
-        return redirect('Sundries/Transaksi/c_estimasi/estimasipage');
-    }
-
-    public function estimasidelete($faktur){
-        $faktur = $this->uri->segment(4);
-        $hapus = $this->m_estimasi->deleteestimasi($faktur);
-    }
-
-    public function detail(){
-        $id     = $this->uri->segment(4);
-        $data['data'] = $this->m_estimasi->findestimasibyid($id);
-        $data['detail']   = $this->m_estimasi->findestimasidetail($id);
-        $this->load->view('Sundries/Transaksi/v_detail_estimasi', $data);
-    }
-
-    public function printpdf(){
-        $id     = $this->uri->segment(4);
-        $data['data'] = $this->m_estimasi->findbyidforpdf($id);
-        $data['detail'] = $this->m_estimasi->finddetailforpdf($id);
-        $this->load->view('sundries/printestimasi',$data);
         
+        $simpan = $this->m_estimasi->save($data, $iduser, $faktur);
+        return redirect('Sundries/Transaksi/c_estimasi/index');
     }
 
-    public function estimasiaprove(){
+    public function deleteEstimasi($faktur)
+    {
+        $faktur = $this->uri->segment(4);
+        $hapus = $this->m_estimasi->deleteEstimasi($faktur);
+    }
+
+    public function detailEstimasi()
+    {
+        $id = $this->uri->segment(4);
+        $data['data'] = $this->m_estimasi->getEstimasiById($id);
+        $data['detail'] = $this->m_estimasi->getEstimasiDetail($id);
+        $this->load->view('Sundries/Transaksi/Estimasi/v_detail', $data);
+    }
+
+    public function printEstimasi()
+    {
+        $id = $this->uri->segment(4);
+        $data['data'] = $this->m_estimasi->getIdPdf($id);
+        $data['detail'] = $this->m_estimasi->getDetailIdPdf($id);
+        $this->load->view('Sundries/Transaksi/Estimasi/v_print', $data);
+    }
+
+    public function approveEstimasi()
+    {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
  
@@ -101,13 +112,14 @@ class c_estimasi extends MY_Controller{
         $where = array(
             'faktur' => $faktur
         );
-     
+
         $this->m_estimasi->update($where,$data);
-        $this->session->set_userdata('setuju', 'Yeay, Estimasi Berhasil Disetujui Nich....');
-        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
+        $this->session->set_userdata('setuju', 'Estimasi berhasil disetujui');
+        return redirect('Sundries/Transaksi/c_permintaan/dasboard');
     }
 
-    public function estimasireject(){
+    public function rejectEstimasi()
+    {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
  
@@ -118,10 +130,10 @@ class c_estimasi extends MY_Controller{
         $where = array(
             'faktur' => $faktur
         );
-     
-        $this->m_estimasi->update($where,$data);
-        $this->session->set_userdata('tolak', 'Yah, Estimasi Ditolak Nich....');
-        return redirect('Sundries/Transaksi/c_persetujuan/dashboard');
-    }
 
+        $this->m_estimasi->update($where,$data);
+        $this->session->set_userdata('tolak', 'Estimasi berhasil ditolak');
+        return redirect('Sundries/Transaksi/c_permintaan/dasboard');
+    }
 }
+?>

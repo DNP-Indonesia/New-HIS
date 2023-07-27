@@ -1,44 +1,45 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class c_pembelian extends MY_Controller{
 
-    public function __construct(){
+class c_pembelian extends MY_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        $this->load->model("Sundries/Barang/m_jenis");
-        $this->load->model("Sundries/Barang/m_barang");
-        $this->load->model("Sundries/Barang/m_kategori");
-        $this->load->model("Sundries/Transaksi/m_persetujuan");
-        $this->load->model("Sundries/Transaksi/m_detail");
-        $this->load->model("Sundries/Transaksi/m_detail_sementara");
-        $this->load->model("Sundries/Transaksi/m_estimasi");
-        $this->load->model("Sundries/Transaksi/m_konsumsi");
-        $this->load->model("Sundries/Transaksi/m_pembelian");
+        $this->load->model('Sundries/Barang/m_jenis');
+        $this->load->model('Sundries/Barang/m_barang');
+        $this->load->model('Sundries/Barang/m_kategori');
+        $this->load->model('Sundries/Transaksi/m_permintaan');
+        $this->load->model('Sundries/Transaksi/m_estimasi');
+        $this->load->model('Sundries/Transaksi/m_konsumsi');
+        $this->load->model('Sundries/Transaksi/m_pembelian');
+        $this->load->model('Sundries/m_detail');
+        $this->load->model('Sundries/m_detail_sementara');
         $this->load->library('Pdf');
     }
 
-    public function purchasepage(){
-        $data['purchase'] = $this->m_pembelian->findpurchase();
-        $this->load->view('Sundries/Transaksi/v_permintaan_pembelian',$data);
+    public function index()
+    {
+        $data['pembelian'] = $this->m_pembelian->getPembelian();
+        $this->load->view('Sundries/Transaksi/Pembelian/v_pembelian', $data);
     }
 
-    public function formpurchase(){
-        $data['barangrequest'] = $this->m_pembelian->findbarangrequest();
-        $data['fakturotomatis']  = $this->m_pembelian->generatefaktur();
-        $data['keranjang'] = $this->m_pembelian->findkeranjang();
-        $this->load->view('sundries/formpurchase',$data);
+    public function formPembelian()
+    {
+        $data['permintaanBarang'] = $this->m_pembelian->getPermintaanBarang();
+        $data['fakturotomatis'] = $this->m_pembelian->generateFaktur();
+        $data['kerangan'] = $this->m_pembelian->getKeterangan();
+        $this->load->view('Sundries/Transaksi/Pembelian/v_form', $data);
     }
 
-    public function addkeranjang(){
+    public function addKeranjang()
+    {
         $idbarang = $this->input->post('id_barang');
         $qty = $this->input->post('jumlah');
         $faktur = $this->input->post('faktur');
         $catatan = $this->input->post('catatan');
         $stkeranjang = $this->input->post('stkeranjang');
         $iduser = $this->input->post('id_user');
-
-        //$cekfaktur = $this->m_pembelian->cekkeranjang($faktur)->num_rows();
-        //$cekbarang = $this->m_pembelian->cekkeranjang2($idbarang)->num_rows();
-        //$cekfakbar = $this->m_pembelian->cekkeranjang3($faktur, $idbarang)->num_rows();
     
             $data = array(
                 'id_barang'=>$idbarang,
@@ -56,50 +57,21 @@ class c_pembelian extends MY_Controller{
                 'id_barang'=>$idbarang,
                 'faktur'=>$faktur
             );
-
-            $this->m_pembelian->savekeranjang($data);
-            $this->m_pembelian->ubahstkeranjang($ubahkeranjang, $where);   
-        
-            return redirect('Sundries/Transaksi/c_pembelian/formpurchase');
-
-        // if ($cekbarang > 0) {
-        //     if ($cekfaktur > 0) {
-        //         echo "1";
-        //     }else{
-        //         $cekjumlah = $this->m_pembelian->cekjumlahbarang($idbarang);
-        //         foreach ($cekjumlah as $data) {
-        //             $jumlahkan = $data->jumlah + $qty;
-        //         }
-
-        //         $data = array(
-        //             'id_barang'=>$idbarang,
-        //             'jumlah'=>$qty,
-        //             'faktur'=>$faktur,
-        //             'keterangan'=>$catatan,
-        //             'id_user'=>$iduser
-        //         );
-
-        //         $this->m_pembelian->savekeranjangbarangsama($data);   
-        //     }
-        // } else {
-        //     $data = array(
-        //         'id_barang'=>$idbarang,
-        //         'jumlah'=>$qty,
-        //         'faktur'=>$faktur,
-        //         'keterangan'=>$catatan,
-        //         'id_user'=>$iduser
-        //     );
             
-        //     $this->m_pembelian->savekeranjang($data);
-        // }
+            $this->m_pembelian->saveKeranjang($data);
+            $this->m_pembelian->updateKeranjang($where, $ubahkeranjang);
+
+            return redirect('Sundries/Transaksi/c_pembelian/formPembelian');
     }
 
-    public function showkeranjang(){
-        $data['keranjang'] = $this->m_pembelian->findkeranjang();
-        $this->load->view('Sundries/Transaksi/v_keranjang_pembelian',$data);
+    public function showKeranjang()
+    {
+        $data['keranjang'] = $this->m_pembelian->getKeranjang();
+        $this->load->view('Sundries/Transaksi/Pembelian/v_keranjang', $data);
     }
 
-    public function hapuskeranjang(){
+    public function deleteKeranjang()
+    {
         $id_barang = $this->uri->segment(5);
         $stkeranjang = $this->uri->segment(4);
 
@@ -111,21 +83,21 @@ class c_pembelian extends MY_Controller{
             'id_barang'=>$id_barang
         );
 
-        $ubha = $this->m_pembelian->ubahstkeranjang($data, $where);
-        $hapus = $this->m_pembelian->deletekeranjang($id_barang);
-        echo $ubha;
+        $ubah = $this->m_pembelian->updateKeranjang($where, $data);
+        $hapus = $this->m_pembelian->deleteKeranjang($id_barang);
+        echo $ubah;
         echo $hapus;
-        return redirect('Sundries/Transaksi/c_pembelian/formpurchase');
+        return redirect('Sundries/Transaksi/c_pembelian/formPembelian');
     }
 
-    public function purchaseadd(){
+    public function addPembelian()
+    {
         $faktur = $this->input->post('faktur');
         $tanggal = $this->input->post('tanggal');
         $iduser = $this->input->post('id_user');
         $nama = $this->input->post('nama');
         $jamdibuat = $this->input->post('jam');
-
-
+        
         $data = array(
             'faktur'=>$faktur,
             'nama_peminta'=>$nama,
@@ -134,24 +106,25 @@ class c_pembelian extends MY_Controller{
             'jamdibuat'=>$jamdibuat
         );
 
-        $simpan = $this->m_pembelian->save($data, $iduser, $faktur);
-        $this->session->set_userdata('sukses', 'Berhasil, Request Telah Dibuat....');
-        return redirect('Sundries/Transaksi/c_pembelian/purchasepage');
-
+        $simpan = $this->m_pembelian->save($data);
+        $this->session->set_userdata('sukses', 'Berhasil, Request Pembelian telah dibuat');
+        return redirect('Sundries/Transaksi/c_pembelian/index');
     }
 
-    public function detail(){
-        $id     = $this->uri->segment(4);
-        $data['data'] = $this->m_pembelian->findbyid($id);
-        $data['detail']   = $this->m_pembelian->finddetail($id);
-        $this->load->view('Sundries/Transaksi/v_detail_pembelian', $data);
+    public function detailPembelian()
+    {
+        $id = $this->uri->segment(4);
+        $data['data'] = $this->m_pembelian->getPembelianById($id);
+        $data['detail'] = $this->m_pembelian->getDetailPembelian($id);
+        $this->load->view('Sundries/Transaksi/Pembelian/v_detail', $data);
     }
 
-    public function printpdf(){
-        $id     = $this->uri->segment(4);
-        $data['data'] = $this->m_pembelian->findbyidforpdf($id);
-        $data['detail'] = $this->m_pembelian->finddetailforpdf($id);
-        $this->load->view('sundries/printpurchase',$data);
-        
+    public function printPembelian()
+    {
+        $id = $this->uri->segment(4);
+        $data['data'] = $this->m_pembelian->getIdPdf($id);
+        $data['detail'] = $this->m_pembelian->getDetailIdPdf($id);
+        $this->load->view('Sundries/Transaksi/Pembelian/v_print', $data);
     }
 }
+?>
