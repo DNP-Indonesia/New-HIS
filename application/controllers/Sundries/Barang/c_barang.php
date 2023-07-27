@@ -10,53 +10,70 @@ class c_barang extends MY_Controller
         $this->load->model('Sundries/Barang/m_barang');
     }
 
-    public function barangpage()
+    public function index()
     {
         $data['title'] = 'Barang';
         $data['ambil'] = $this->m_barang->getBarangAll();
         $this->load->view('Sundries/Barang/v_barang', $data);
     }
 
-    public function create()
+    public function addBarang()
     {
-        $data['title'] = 'Barang';
-        $this->load->view('Sundries/Barang/v_barang', $data);
+        $data['barang'] = $this->input->post('barang');
+        $data['brand'] = $this->input->post('brand');
+        $data['type'] = $this->input->post('type');
+        $data['ukuran'] = $this->input->post('ukuran');
+        $data['satuan'] = $this->input->post('satuan');
+        $data['id_jenis'] = $this->input->post('jenis');
+        $data['stok'] = $this->input->post('stok');
+
+        $this->modelbarang->save($data);
+        return redirect('Sundries/Barang/c_barang/index');
     }
 
-    public function store()
+    public function addBarangOther()
     {
-        $data = [
-            'barang' => $this->input->post('barang'),
-            'id_jenis' => $this->input->post('id_jenis'),
-            'stok' => $this->input->post('stok')
-        ];
-        $this->m_barang->storeBarang($data);
-        redirect('Sundries/Barang/c_barang');
+        $data['barang'] = $this->input->post('barang');
+        $data['brand'] = $this->input->post('brand');
+        $data['type'] = $this->input->post('type');
+        $data['ukuran'] = $this->input->post('ukuran');
+        $data['satuan'] = $this->input->post('satuan');
+        $data['id_jenis'] = $this->input->post('jenis');
+        $data['stok'] = $this->input->post('stok');
+
+        $this->m_barang->saveBarang ($data);
+        $this->session->set_userdata('berhasil', 'Barang Baru Berhasil Ditambahkan, Silahkan Lanjutkan Membuat Requestnya...');
+        return redirect('Sundries/Transaksi/c_penerimaan/index');
     }
 
-    public function edit($id)
-    {
-        $data['title'] = 'Barang';
-        $data['ambil'] = $this->m_barang->getBarangById($id);
-        $this->load->view('Sundries/Barang/v_barang', $data);
-    }
-
-    public function update()
+    public function updateBarang()
     {
         $id = $this->input->post('id_barang');
-        $data = [
-            'barang' => $this->input->post('barang'),
-            'id_jenis' => $this->input->post('id_jenis'),
-            'stok' => $this->input->post('stok')
-        ];
-        $this->m_barang->updateBarang($id, $data);
-        redirect('Sundries/Barang/c_barang');
+        $barang= $this->input->post('barang');
+        $jenis = $this->input->post('jenis');
+        $stok = $this->input->post('stok');
+        $data = array(
+            'barang' => $barang,
+            'id_jenis' => $jenis,
+            'stok' => $stok
+        );
+     
+        $where = array(
+            'id_barang' => $id
+        );
+     
+        $this->modelbarang->update($where,$data);
+        return redirect('Sundries/Barang/c_barang/index');
     }
 
-    public function delete($id)
+    public function deleteBarang()
     {
-        $this->m_barang->deleteBarang($id);
-        redirect('Sundries/Barang/c_barang');
+        if (!isset($id)) show_404();
+        
+        if ($this->modelbarang->delete($id)) {
+            $this->session->set_flashdata('hapus', 'Barang Berhasil Dihapus');
+            return redirect('Sundries/Barang/c_barang/index');
+        }
     }
 }
 ?>
