@@ -47,73 +47,7 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo site_url() ?>">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3"> DNP - HIS</div>
-                </a>
-
-                <!-- Divider -->
-                
-                <hr class="sidebar-divider my-0">
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo site_url() ?>">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>        
-
-                <li class="nav-item active">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
-                        aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Transaksi Sundries</span>
-                    </a>
-                    <div id="collapse-transaksi" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <?php if ($this->session->userdata('role') != 'sdr_Admin Gudang' AND $this->session->userdata('role') != 'sdr_Kepala Gudang') {?>
-                                <a class="collapse-item" href="<?= base_url('transaksi-sundries/pembuatan-estimasi') ?>">
-                                    Pembuatan Estimasi
-                                </a>
-                                <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-consumption') ?>">
-                                    Request Consumption
-                                </a>
-                            <?php } ?>
-                            
-                            <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-sundries') ?>">
-                                Request Sundries
-                            </a>
-                            <a class="collapse-item text-success" href="<?= base_url('transaksi-sundries/request-purchase') ?>">
-                                Request Purchase
-                            </a>
-                            <a href="<?= base_url('Sundries/Transaksi/c_penerimaan/penerimaanpage') ?>" class="collapse-item">
-                                    Penerimaan Barang
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Log Out</span>
-                    </a>
-                </li>
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
-
-            </ul>
-            <!-- End of Sidebar -->
+            <?php $this->load->view('Sundries/sdr_sidebar');?>
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -197,7 +131,7 @@
                                     <tbody>
                                         <?php
                                             $no=1;
-                                            foreach($purchase as $tempel){
+                                            foreach($pembelian as $tempel){
                                         ?>
                                         <tr>
                                             <td><?php echo $no ?></td>
@@ -214,7 +148,7 @@
                                                  <?php } ?> 
                                             </td>
                                             <td>
-                                                <a href="<?php echo base_url(); ?>Sundries/Transaksi/c_pembelian/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                <a href="<?php echo base_url(); ?>Sundries/purchasecontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                     Lihat Detail   
                                                 </a> 
                                             </td>
@@ -246,7 +180,7 @@
                                 <?php echo $this->session->set_userdata('sukses', NULL); ?>  
                             </div> 
                         <?php }?>
-                        <a href="<?= base_url('Sundries/Transaksi/c_pembelian/formpurchase') ?>" class="btn btn-sm btn-success mb-3">
+                        <a href="<?= base_url('Sundries/purchasecontroller/formpurchase') ?>" class="btn btn-sm btn-success mb-3">
                             Buat Request Purchase Baru
                         </a>
                         <div class="card shadow mb-4">
@@ -270,7 +204,7 @@
                                         <tbody>
                                             <?php
                                                 $no=1;
-                                                foreach($purchase as $tempel){
+                                                foreach($pembelian as $tempel){
                                             ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
@@ -278,10 +212,10 @@
                                                 <td><?php echo $tempel->tanggal ?></td>
                                                 <td><?php echo $tempel->jamdibuat ?></td>
                                                 <td>
-                                                    <a href="<?php echo base_url(); ?>Sundries/Transaksi/c_pembelian/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                    <a href="<?php echo base_url(); ?>Sundries/purchasecontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                     Cetak PDF
                                                     </a>
-                                                    <a href="<?php echo base_url(); ?>Sundries/Transaksi/c_pembelian/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                    <a href="<?php echo base_url(); ?>Sundries/purchasecontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                         Lihat Detail   
                                                     </a> 
                                                 </td>

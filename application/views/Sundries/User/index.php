@@ -87,9 +87,12 @@
             <div id="mastersundriesmenu" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo site_url("Master-Sundries/Barang") ?>">Barang</a>
-                        <a class="collapse-item" href="<?php echo site_url("Master-Sundries/Jenis") ?>">Jenis</a>
                         <a class="collapse-item" href="<?php echo site_url("Master-Sundries/Kategori") ?>">Kategori</a>
+
+                        <a class="collapse-item" href="<?php echo site_url("Master-Sundries/Jenis") ?>">Jenis</a>
+
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_barang/barangpage") ?>">Barang</a>
+
                     </div>
                 </div>
         </li>
@@ -101,11 +104,10 @@
             </a>
             <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?php echo site_url("transaksi-sundries/pembuatan-estimasi") ?>">Pembuatan Estimasi</a>
-                    <a class="collapse-item" href="<?php echo site_url("transaksi-sundries/request-consumption") ?>">Request Consumption</a>
-                    <a class="collapse-item" href="<?php echo site_url("transaksi-sundries/request-sundries") ?>">Request Sundries</a>
+                    <a class="collapse-item" href="<?php echo site_url("Sundries/estimasicontroller/estimasipage") ?>">Pembuata Estimasi</a>
+                    <a class="collapse-item" href="<?php echo site_url("Sundries/requestsundriescontroller/requestsundriespage") ?>">Request Sundries</a>
+                    <a class="collapse-item" href="<?php echo site_url("Sundries/consumptioncontroller/consumptionpage") ?>">Request Consumption</a>
                     <a class="collapse-item" href="#">Request Purchase</a>
-                    <a class="collapse-item" href="#">Penerimaan Barang</a>
                 </div>
             </div>
         </li>
@@ -160,21 +162,21 @@
             <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <?php if ($this->session->userdata('role') != 'sdr_Admin Gudang' and $this->session->userdata('role') != 'sdr_Kepala Gudang') { ?>
-                        <a class="collapse-item" href="<?= base_url('transaksi-sundries/pembuatan-estimasi') ?>">
+                        <a class="collapse-item" href="<?= base_url('Sundries/estimasicontroller/estimasipage') ?>">
                             Pembuatan Estimasi
                         </a>
-                        <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-consumption') ?>">
+                        <a class="collapse-item" href="<?= base_url('Sundries/consumptioncontroller/consumptionpage') ?>">
                             Request Consumption
                         </a>
                     <?php } ?>
-                    <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-sundries') ?>">
+                    <a class="collapse-item" href="<?= base_url('Sundries/requestsundriescontroller/requestsundriespage') ?>">
                         Request Sundries
                     </a>
                     <?php if ($this->session->userdata('role') != 'sdr_Admin Bagian' and $this->session->userdata('role') != 'sdr_Kepala Bagian') { ?>
-                        <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-purchase') ?>">
+                        <a class="collapse-item" href="<?= base_url('Sundries/purchasecontroller/purchasepage') ?>">
                             Request Purchase
                         </a>
-                        <a href="<?= base_url('Sundries/Transaksi/c_penerimaan/penerimaanpage') ?>" class="collapse-item">
+                        <a href="<?= base_url('Sundries/penerimaancontroller/penerimaanpage') ?>" class="collapse-item">
                             Penerimaan Barang
                         </a>
                     <?php } ?>

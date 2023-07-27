@@ -24,7 +24,9 @@
 
         <link href="<?php echo base_url() ?>bootstrap/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </head>
@@ -44,59 +46,7 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo site_url() ?>">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3"> DNP - HIS</div>
-                </a>
-
-                <!-- Divider -->
-                
-                <hr class="sidebar-divider my-0">
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo site_url() ?>">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>        
-
-                <li class="nav-item active">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
-                        aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Transaksi Sundries</span>
-                    </a>
-                    <div id="collapse-transaksi" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="<?= base_url('Sundries/estimasicontroller/estimasipage') ?>">Pembuata Estimasi</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/requestsundriescontroller/requestsundriespage') ?>">Request Sundries</a>
-                            <a class="collapse-item text-success" href="<?= base_url('Sundries/consumptioncontroller/consumptionpage') ?>">Request Consumption</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/purchasecontroller/purchasepage') ?>">Request Purchase</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Log Out</span>
-                    </a>
-                </li>
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
-
-            </ul>
-            <!-- End of Sidebar -->
+            <?php $this->load->view('Sundries/sdr_sidebar');?>
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -154,12 +104,12 @@
                         ?>
                         <!-- DataTales Example -->
                         <a href="#" class="btn btn-sm btn-success mb-3"data-toggle="modal" data-target="#modal-tambah">
-                            Buat Request Consumption Baru
+                            Buat Estimasi Baru
                         </a>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="font-weight-bold text-success">
-                                    Data Request Consumption Anda
+                                    Data Estimasi Anda
                                 </h6>
                             </div>
                             <div class="card-body">
@@ -169,7 +119,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Faktur</th>
-                                                <th>Direquest Oleh</th>
+                                                <th>Dibuat Oleh</th>
                                                 <th>Untuk Bagian</th>
                                                 <th>Dibuat Tanggal</th>
                                                 <th>Status</th>
@@ -179,57 +129,46 @@
                                         <tbody>
                                             <?php
                                                 $no=1;
-                                                foreach($consumptiondata as $tempel){
+                                                foreach($estimasi as $tempel){
                                             ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
                                                 <td><?php echo $tempel->faktur ?></td>
-                                                <td><?php echo $tempel->nama_peminta ?></td>
+                                                <td><?php echo $tempel->nama_pembuat ?></td>
                                                 <td><?php echo $tempel->nama_section ?></td>
                                                 <td><?php echo $tempel->tanggal ?></td>
                                                 <td>
-                                                    <?php if ($tempel->status =='Request'){?>
+                                                    <?php if ($tempel->status =='Diajukan'){?>
                                                         <div class="alert alert-danger text-center">
                                                             <?php echo $tempel->status ?>       
                                                         </div>
                                                      <?php } ?> 
                                                      <?php if ($tempel->status =='Disetujui'){?>
-                                                        <div class="alert alert-primary text-center">
-                                                            <?php echo $tempel->status ?>       
-                                                        </div>
-                                                     <?php } ?>
-                                                     <?php if ($tempel->status =='Diproses'){?>
-                                                        <div class="alert alert-warning text-center">
-                                                            <?php echo $tempel->status ?>       
-                                                        </div>
-                                                     <?php } ?> 
-                                                     <?php if ($tempel->status =='Selesai'){?>
                                                         <div class="alert alert-success text-center">
                                                             <?php echo $tempel->status ?>       
                                                         </div>
-                                                     <?php } ?> 
-                                                     <?php if ($tempel->status =='Ditolak'){?>
-                                                        <div class="alert alert-secondary text-center">
+                                                     <?php } ?>
+                                                     <?php if ($tempel->status =='Tolak'){?>
+                                                        <div class="alert alert-warning text-center">
                                                             <?php echo $tempel->status ?>       
                                                         </div>
-                                                     <?php } ?>     
+                                                     <?php } ?>   
                                                 </td>
                                                 <td>
-                                                    <?php if ($tempel->status =='Request'){?>
-                                                            <a onclick="deleteConfirm('<?php echo base_url('Sundries/consumptioncontroller/consumptiondelete/'.$tempel->faktur) ?>')"
+                                                    <?php if ($tempel->status =='Diajukan'){?>
+                                                            <a onclick="deleteConfirm('<?php echo base_url('delete/'.$tempel->faktur) ?>')"
                                                                 href="#" class="btn btn-sm btn-danger">
                                                                 Hapus
                                                             </a>
                                                      <?php } ?>
                                                     
-                                                    <a href="<?php echo base_url(); ?>Sundries/consumptioncontroller/detail/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-purple">
+                                                    <a href="<?php echo base_url('detail'); ?>" target="_blank" class="btn btn-sm btn-purple">
                                                         Lihat Detail
                                                     </a>
-                                                    <?php if ($tempel->status != 'Request') { ?>
-                                                        <a href="<?php echo base_url(); ?>Sundries/consumptioncontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
-                                                            Cetak PDF
-                                                        </a>
-                                                    <?php } ?>
+
+                                                    <a href="<?php echo base_url('print'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                                        Cetak PDF
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <?php
@@ -248,7 +187,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="font-weight-bold text-success">
-                                    Data Request Consumption Dibagian Anda
+                                    Data Estimasi Dibagian Anda
                                 </h6>
                             </div>
                             <div class="card-body">
@@ -267,16 +206,16 @@
                                         <tbody>
                                             <?php
                                                 $no=1;
-                                                foreach($dataconsumkepalabagian as $tempel){
+                                                foreach($kepalabagian as $tempel){
                                             ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
                                                 <td><?php echo $tempel->faktur ?></td>
-                                                <td><?php echo $tempel->nama_peminta ?></td>
+                                                <td><?php echo $tempel->nama_pembuat ?></td>
                                                 <td><?php echo $tempel->nama_section ?></td>
                                                 <td><?php echo $tempel->tanggal ?></td>
                                                 <td>
-                                                    <?php if ($tempel->status =='Request'){?>
+                                                    <?php if ($tempel->status =='Diajukan'){?>
                                                         <div class="alert alert-danger text-center">
                                                             <?php echo $tempel->status ?>       
                                                         </div>
@@ -309,7 +248,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="font-weight-bold text-success">
-                                    Data Request Consumption
+                                    Data Estimasi
                                 </h6>
                             </div>
                             <div class="card-body">
@@ -328,16 +267,16 @@
                                         <tbody>
                                             <?php
                                                 $no=1;
-                                                foreach($consumall as $tempel){
+                                                foreach($allestimasi as $tempel){
                                             ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
                                                 <td><?php echo $tempel->faktur ?></td>
-                                                <td><?php echo $tempel->nama_peminta ?></td>
+                                                <td><?php echo $tempel->nama_pembuat ?></td>
                                                 <td><?php echo $tempel->nama_section ?></td>
                                                 <td><?php echo $tempel->tanggal ?></td>
                                                 <td>
-                                                    <?php if ($tempel->status =='Request'){?>
+                                                    <?php if ($tempel->status =='Diajukan'){?>
                                                         <div class="alert alert-danger text-center">
                                                             <?php echo $tempel->status ?>       
                                                         </div>
@@ -347,7 +286,7 @@
                                                             <?php echo $tempel->status ?>       
                                                         </div>
                                                      <?php } ?>
-                                                     <?php if ($tempel->status =='Ditolak'){?>
+                                                     <?php if ($tempel->status =='Tolak'){?>
                                                         <div class="alert alert-warning text-center">
                                                             <?php echo $tempel->status ?>       
                                                         </div>
@@ -415,60 +354,58 @@
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Buat Request Consumption Baru</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Buat Estimasi Baru</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('Sundries/consumptioncontroller/consumptionadd') ?>" method="POST">
+                    <form action="<?= base_url('addestimasi') ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label>Faktur</label>
-                                    <input type="text" class="form-control" value="RC-<?=date('d-m-Y-H-i-s')?>" name="faktur" required readonly>
+                                    <input type="text" class="form-control" value="ES-<?=date('d-m-Y-H-i-s')?>" name="faktur" required readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label>Tanggal</label>
                                     <input type="text" class="form-control" value="<?=date('Y-m-d')?>" name="tanggal" required readonly>
                                 </div>                        
                                 <div class="col-md-4 mb-3">
-                                    <label>Di Request Oleh</label>
+                                    <label>Dibuat Oleh</label>
                                     <input type="text" class="form-control" name="nama" required placeholder="Masukan Nama Pembuat...">
 
                                     <input type="text" id="id_user" name="id_user"
                                         value=" <?php echo $this->session->userdata('id_user') ?>" 
                                     hidden>
 
-                                    <input type="text" class="form-control" value="Request" name="status" hidden>
+                                    <input type="text" class="form-control" value="Diajukan" name="status" hidden>
                                 </div>                        
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <div class="form-row">    
-                                        <div class="col-md-11 mb-3">
-                                            <label>Faktur Estimasi</label>
-                                            <select class="form-control" id="fakturestimasi" name="fakest">
-                                                <option value=" ">--Pilih Estimasi--</option>
-                                                <?php foreach($estimasi as $tempel){ ?>
-                                                    <option value="<?php echo $tempel->faktur ?>">
-                                                        <?php echo $tempel->faktur ?>
-                                                    </option>
-                                                <?php } ?>   
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="form-row">
                                         <div class="col-md-11 mb-3">
-                                            <label>Pilihan Barang dan Jumlah, Sesuai Dengan Estimasi Yang Sudah Dibuat</label>
-                                            <select class="form-control" id="id_barang">
-                                               
+                                            <label>Pilihan Barang Tersedia</label>
+                                            <select class="form-control yoi" id="id_barang">
+                                                <option value="0">--Pilih Barang--</option>
+                                                <?php foreach($barcons as $tempel){ ?>
+                                                    <option value="<?php echo $tempel->id_barang ?>">
+                                                        <?php echo $tempel->barang ?>
+                                                    </option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-row">    
                                         <div class="col-md-11 mb-3">
-                                            <label>Jumlahnya</label>
-                                            <input type="text" class="form-control" id="jumlah" placeholder="Masukan Jumlahnya....">
+                                            <label>Jumlah Untuk Satu Bulan Kedepan</label>
+                                            <input type="number" class="form-control" id="jumlah">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">    
+                                        <div class="col-md-11 mb-3">
+                                            <label>Catatan Detail Barang Atau Lainnya</label>
+                                            <input type="text" class="form-control" id="keterangan" placeholder="Misal, Pulpen Standar Joyko Hitam 75 Mili....">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -543,6 +480,7 @@
 
         <!-- Core plugin JavaScript-->
         <script src="<?php echo base_url() ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <!-- Custom scripts for all pages-->
         <script src="<?php echo base_url() ?>bootstrap/js/sb-admin-2.min.js"></script>
@@ -568,7 +506,7 @@
                 var id_user   = $('#id_user').val();
                 $.ajax({
                     type:'POST',
-                    url: "<?= site_url('Sundries/consumptioncontroller/showkeranjang')?>",
+                    url: "<?= site_url('showkeranjang')?>",
                     data:{id_user:id_user},
                     cache:false,
                     success:function(respond){
@@ -581,7 +519,7 @@
                 var id_barang = $('#id_barang').val();
                 var qty       = $('#jumlah').val();
                 var id_user   = $('#id_user').val();
-                var fakest    = $('#fakturestimasi').val();
+                var catatan   = $('#keterangan').val();
 
                 if (id_barang == 0){
                     Swal.fire("Oops !", "Barang Harus Diisi...", "warning");
@@ -590,12 +528,12 @@
                 }else{
                     $.ajax({
                         type:'POST',
-                        url:"<?= site_url('Sundries/consumptioncontroller/keranjangadd')?>",
+                        url:"<?= site_url('addkeranjangestimasi')?>",
                         data:{
                             id_barang : id_barang,
                             qty : qty,
                             id_user : id_user,
-                            fakest : fakest
+                            catatan : catatan
                         },
                         cache: false,
                         success: function(){
@@ -611,19 +549,9 @@
                 $('#modal-hapus').modal();
             }
 
-            $(document).ready(function(){
-                $('#fakturestimasi').change(function(){
-                    var faktur = $(this).val();
-                    $.ajax({
-                        type:"POST",
-                        url:"<?= site_url('Sundries/consumptioncontroller/barangbyfaktur')?>",
-                        data:{faktur:faktur},
-                        dataType:'JSON',
-                        success:function(response){
-                            $('#id_barang').html(response);
-                            //console.log(response);
-                        }
-                    });
+            $(document).ready(function() {
+                $('.yoi').select2({
+                    theme: 'bootstrap4',
                 });
             });
         </script>

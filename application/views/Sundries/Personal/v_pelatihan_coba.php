@@ -24,19 +24,6 @@
                         </div>
                     <?php } ?>
 
-                    <?php
-                    if ($this->session->has_userdata('error')) { ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <?=
-                            $this->session->flashdata('error');
-                            $this->session->set_flashdata('error', NULL);
-                            ?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    <?php } ?>
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -95,7 +82,7 @@
                                             <tr>
                                                 <td><?php echo $i ?></td>
                                                 <td><?php echo $u->nama ?></td>
-                                                <td><?php echo $u->nik_training ?></td>
+                                                <td><?php echo $u->nik_temp ?></td>
                                                 <td><?php echo $u->nama_divisi ?></td>
                                                 <td><?php echo $u->nama_dep ?></td>
                                                 <td><?php echo $u->nama_section ?></td>
@@ -126,7 +113,7 @@
                                                                 </a>
                                                             </p>
                                                             <p class="dropdown-item">
-                                                                <a href="" class="btn btn-danger btn-icon-split btn-sm accordion-toggle" data-toggle="modal" data-target="#ModalOut<?php echo $u->nik_training ?>">
+                                                                <a href="" class="btn btn-danger btn-icon-split btn-sm accordion-toggle" data-toggle="modal" data-target="#ModalOut<?php echo $u->nik ?>">
                                                                     <span class="icon text-white-50">
                                                                         <i class="fas fa-trash"></i>
                                                                     </span>
@@ -137,10 +124,8 @@
                                                     </div>
                                                 </td>
                                             </tr>
-
-
-                                            <!-- Modal untuk Keluarkan Karyawan -->
-                                            <div class="modal fade" id="ModalOut<?php echo $u->nik_training ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <!-- KeLUARKAN Modal-->
+                                            <div class="modal fade" id="ModalOut<?php echo $u->nik ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -150,7 +135,7 @@
                                                             </button>
                                                         </div>
                                                         <form action="<?php echo site_url() . 'Master/c_karyawan/do_out_karyawan_temp'; ?>" method="post">
-                                                            <input type="text" name="nik_training" value="<?= $u->nik_training ?>" hidden>
+                                                            <input type="text" name="nik" value="<?= $u->nik ?>" hidden>
                                                             <div class="modal-body">
                                                                 <div class="form-row">
                                                                     <div class="col-md-12 mb-3">
@@ -164,28 +149,15 @@
                                                                         <small id="emailHelp" class="form-text text-muted">Pilih alasan perubahan disini</small>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-row" id="formNik">
-                                                                    <div class="col-md-12 mb-3">
-                                                                        <label for="exampleInputEmail1"><b>Nomor Induk Karyawan (NIK)</b></label>
-                                                                        <input type="text" class="form-control" id="newNik" name="new_nik" placeholder="Contoh: A001 atau 1234">
-                                                                        <small class="form-text text-muted">NIK harus terdiri dari 1 huruf di depan dan 3 angka, atau langsung 4 angka seluruhnya.</small>
-                                                                        <div id="errorAlert" class="alert alert-danger mt-2" style="display: none;"></div>
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                                <button type="submit" id="submitButton" class="btn btn-primary" disabled>Submit</button>
+                                                                <button type="submit" class="btn btn-primary">Submit</button>
                                                             </div>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
-
-
 
                                             <!-- EDIT KARYAWAN Modal-->
                                             <div class="modal fade" id="ModalEditKar<?php echo $u->nik ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -377,20 +349,13 @@
                                 <div class="modal-body">
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="exampleInputEmail1"><b>Spyssid</b></label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" name="spysiid" required>
-                                            <small id="emailHelp" class="form-text text-muted">Input nama karyawan disini</small>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
                                             <label for="exampleInputEmail1"><b>Nama Karyawan</b></label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" name="nama" required>
                                             <small id="emailHelp" class="form-text text-muted">Input nama karyawan disini</small>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label><b>NIK</b></label>
-                                            <input type="text" class="form-control" name="nik_training" required>
+                                            <input type="text" class="form-control" name="nik_temp" required>
                                             <small class="form-text text-muted">Nomor Induk Karyawan</small>
                                         </div>
                                     </div>
@@ -510,92 +475,3 @@
                         </div>
                     </div>
                 </div>
-
-                <script>
-                    // Fungsi untuk mengatur visibilitas form "nik" berdasarkan pilihan select box
-                    function toggleNikForm() {
-                        var selectBox = document.getElementById('exampleFormControlSelect1');
-                        var formNik = document.getElementById('formNik');
-
-                        // Jika pilihan "Aktif" dipilih, tampilkan form "nik", jika tidak, sembunyikan form "nik"
-                        if (selectBox.value === 'Aktif') {
-                            formNik.style.display = 'block';
-                        } else {
-                            formNik.style.display = 'none';
-                        }
-
-                        // Panggil fungsi toggleSubmitButton untuk memperbarui status tombol submit
-                        toggleSubmitButton();
-                    }
-
-                    // Panggil fungsi toggleNikForm() saat halaman pertama kali dimuat
-                    toggleNikForm();
-
-                    // Tambahkan event listener untuk memantau perubahan pada select box
-                    document.getElementById('exampleFormControlSelect1').addEventListener('change', toggleNikForm);
-
-                    // Tambahkan event listener untuk memantau perubahan pada input "nik"
-                    document.getElementById('newNik').addEventListener('input', toggleSubmitButton);
-
-                    // Fungsi untuk menampilkan pesan error
-                    function showError(message) {
-                        var errorAlert = document.getElementById('errorAlert');
-                        errorAlert.innerHTML = message;
-                        errorAlert.style.display = 'block';
-                    }
-
-                    // Fungsi untuk menyembunyikan pesan error
-                    function hideError() {
-                        var errorAlert = document.getElementById('errorAlert');
-                        errorAlert.style.display = 'none';
-                    }
-
-                    // Fungsi untuk memeriksa apakah NIK sudah digunakan sebelumnya dengan permintaan AJAX ke server
-                    function isNikUsed(nik) {
-                        var xhr = new XMLHttpRequest();
-                        var formData = new FormData();
-                        formData.append('new_nik', nik);
-                        xhr.open('POST', '<?php echo site_url() . 'action_his/check_nik_availability'; ?>', false);
-                        xhr.onload = function() {
-                            if (xhr.status === 200) {
-                                var response = JSON.parse(xhr.responseText);
-                                if (response.available) {
-                                    return false; // NIK belum digunakan
-                                } else {
-                                    return true; // NIK telah digunakan
-                                }
-                            }
-                        };
-                        xhr.onerror = function() {
-                            showError('Terjadi kesalahan saat mengirim data ke server.');
-                            return false; // Pengolahan NIK dibatalkan karena kesalahan server
-                        };
-                        xhr.send(formData);
-                    }
-
-                    // Fungsi untuk mengaktifkan atau menonaktifkan tombol submit
-                    function toggleSubmitButton() {
-                        var submitButton = document.getElementById('submitButton');
-                        var keterangan = document.getElementById('exampleFormControlSelect1').value;
-                        var newNik = document.getElementById('newNik').value;
-
-                        // Validasi "nik" harus terdiri dari 1 huruf di depan dan 3 angka, atau langsung 4 angka seluruhnya
-                        var nikRegex = /^[A-Za-z]?\d{3}$|^[A-Za-z]\d{4}$/;
-                        if (!newNik.match(nikRegex)) {
-                            showError('NIK harus terdiri dari 1 huruf di depan dan 3 angka, atau langsung 4 angka seluruhnya.');
-                            submitButton.disabled = true; // Nonaktifkan tombol submit jika "nik" tidak valid
-                        } else {
-                            hideError();
-                            if (keterangan === 'Aktif') {
-                                if (isNikUsed(newNik)) {
-                                    showError('NIK telah digunakan. Silakan pilih NIK yang lain.');
-                                    submitButton.disabled = true; // Nonaktifkan tombol submit jika "nik" telah digunakan
-                                } else {
-                                    submitButton.disabled = false; // Aktifkan tombol submit jika "nik" valid dan belum digunakan sebelumnya
-                                }
-                            } else {
-                                submitButton.disabled = false; // Aktifkan tombol submit jika pilihan bukan "Aktif"
-                            }
-                        }
-                    }
-                </script>
