@@ -9,40 +9,35 @@ class m_jenis extends CI_Model
 
     public function getJenisAll()
     {
-        $this->db->select('sdr_jenis.*, sdr_kategori.kategori');
-        $this->db->from('sdr_jenis');
-        $this->db->join('sdr_kategori', 'sdr_jenis.id_kategori = sdr_kategori.id_kategori');
-        $this->db->order_by('sdr_jenis.id_jenis', 'DESC');
-        return $this->db->get()->result();
+    	return $this->db->from('sdr_jenis')
+            ->join('sdr_kategori', 'sdr_kategori.id_kategori=sdr_jenis.id_kategori')
+            ->get()
+            ->result();
     }
 
-     public function getJenisById($id)
+     public function getJenisById()
     {
-        $this->db->select('sdr_jenis.*, sdr_kategori.kategori');
-        $this->db->from('sdr_jenis');
-        $this->db->join('sdr_kategori', 'sdr_jenis.id_kategori = sdr_kategori.id_kategori');
-        $this->db->where('sdr_jenis.id_jenis', $id);
-        return $this->db->get()->row();   
+        return $this->db->from('sdr_jenis')
+            ->join('sdr_kategori', 'sdr_kategori.id_kategori=sdr_jenis.id_kategori')
+            ->where('sdr_jenis.id_kategori','1')
+            ->get()
+            ->result();  
     }
 
-    public function storeJenis($data)
+    public function saveJenis($data)
     {
-        $this->db->insert('sdr_jenis', $data);
-        return $this->db->insert_id();
+        return $this->db->insert($this->table, $data);
     }
 
-    public function updateJenis($id, $data)
+    public function updateJenis($where, $data)
     {
-        $this->db->where('id_jenis', $id);
-        $this->db->update('sdr_jenis', $data);
-        // return $this->db->affected_rows();
+        $this->db->where($where);
+        $this->db->update($this->table,$data);
     }
 
     public function deleteJenis($id)
     {
-        $this->db->where('id_jenis', $id);
-        $this->db->delete('sdr_jenis');
-        // return $this->db->affected_rows();
+        return $this->db->delete($this->table, array("id_jenis" => $id));
     }
 }
 ?>

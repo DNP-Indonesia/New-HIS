@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+
 class m_barang extends CI_Model
 {
     protected $table = 'sdr_barang';
@@ -26,7 +26,7 @@ class m_barang extends CI_Model
         return $this->db->get()->row();
     }
 
-    public function storeBarang($data)
+    public function saveBarang($data)
     {
         $this->db->insert('sdr_barang', $data);
         return $this->db->insert_id();

@@ -23,7 +23,7 @@ class m_kategori extends CI_Model
         return $this->db->get()->row();
     }
 
-    public function storeKategori($data)
+    public function saveKategori($data)
     {
         $this->db->insert('sdr_kategori', $data);
         return $this->db->insert_id();
