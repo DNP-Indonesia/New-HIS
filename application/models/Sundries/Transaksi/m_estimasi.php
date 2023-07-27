@@ -8,9 +8,9 @@ class m_estimasi extends CI_Model
 
     public function getEstimasi()
     {
-        return $this->db->from('sdr_estimasi')
-            ->join('tbl_user','tbl_user.id_user=sdr_estimasi.id_user')
-            ->join('his_section','his_section.id_section=tbl_user.id_section')
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
             ->order_by('id_estimasi', 'DESC')
             ->get()
@@ -19,9 +19,9 @@ class m_estimasi extends CI_Model
 
     public function getEstimasiAll()
     {
-        return $this->db->from('sdr_estimasi')
-            ->join('tbl_user','tbl_user.id_user=sdr_estimasi.id_user')
-            ->join('his_section','his_section.id_section=tbl_user.id_section')
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->order_by('id_estimasi', 'DESC')
             ->get()
             ->result();
@@ -30,18 +30,18 @@ class m_estimasi extends CI_Model
     public function getBarang()
     {
         return $this->db->from('sdr_barang')
-        ->join('sdr_jenis','sdr_jenis.id_jenis=sdr_barang.id_jenis')
-        ->join('sdr_kategori','sdr_kategori.id_kategori=sdr_jenis.id_kategori')
-        ->where('sdr_jenis.id_kategori','2')
-        ->get()
-        ->result();
+            ->join('sdr_jenis', 'sdr_jenis.id_jenis = sdr_barang.id_jenis')
+            ->join('sdr_kategori', 'sdr_kategori.id_kategori = sdr_jenis.id_kategori')
+            ->where('sdr_jenis.id_kategori', '2')
+            ->get()
+            ->result();
     }
 
     public function forKepalaBagian()
     {
-        return $this->db->from('sdr_estimasi')
-            ->join('tbl_user','tbl_user.id_user=sdr_estimasi.id_user')
-            ->join('his_section','his_section.id_section=tbl_user.id_section')
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->order_by('id_estimasi', 'DESC')
             ->get()
@@ -60,10 +60,10 @@ class m_estimasi extends CI_Model
 
     public function getKeranjang($id_user)
     {
-        $this->db->select('sdr_estimasi_keranjang. id_barang, barang, jumlah, id_user');
+        $this->db->select('sdr_estimasi_keranjang.id_barang, barang, jumlah, id_user');
         $this->db->from('sdr_estimasi_keranjang');
-        $this->db->join('sdr_barang','sdr_barang.id_barang=sdr_estimasi_keranjang.id_barang');
-        $this->db->where('id_user',$id_user);
+        $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_estimasi_keranjang.id_barang');
+        $this->db->where('id_user', $id_user);
         return $this->db->get();        
     }
 
@@ -77,14 +77,14 @@ class m_estimasi extends CI_Model
 
     public function save($data, $iduser, $faktur)
     {
-        $simpan = $this->db->insert('sdr_estimasi',$data);
+        $simpan = $this->db->insert($this->table, $data);
         if ($simpan) {
             $carikeranjang = $this->db->get_where('sdr_estimasi_keranjang', array('id_user'=>$iduser));
-            foreach ($carikeranjang->result() as $tempel){
+            foreach ($carikeranjang->result() as $tempel) {
                 $detail = array(
-                    'faktur'=>$faktur,
-                    'id_barang'=>$tempel->id_barang,
-                    'jumlah'=>$tempel->jumlah
+                    'faktur' => $faktur,
+                    'id_barang' => $tempel->id_barang,
+                    'jumlah' => $tempel->jumlah
                 );
                 $this->db->insert('sdr_estimasi_detail', $detail);   
             }
@@ -94,9 +94,9 @@ class m_estimasi extends CI_Model
 
     public function deleteEstimasi($faktur)
     {
-        $hapus = $this->db->delete('sdr_estimasi', array('faktur'=>$faktur));
+        $hapus = $this->db->delete($this->table, array('faktur' => $faktur));
         if ($hapus) {
-            $hapusdetail = $this->db->delete('sdr_estimasi_detail', array('faktur'=>$faktur));
+            $hapusdetail = $this->db->delete('sdr_estimasi_detail', array('faktur' => $faktur));
             if ($hapusdetail) {
                 redirect('Sundries/estimasicontroller/estimasipage');
             }
@@ -105,9 +105,9 @@ class m_estimasi extends CI_Model
 
     public function getEstimasiById($id)
     {
-        return $this->db->from('sdr_estimasi')
-            ->join('tbl_user','tbl_user.id_user=sdr_estimasi.id_user')
-            ->join('his_section','his_section.id_section=tbl_user.id_section')
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->where('id_estimasi', $id)
             ->get()
             ->row();
@@ -116,20 +116,20 @@ class m_estimasi extends CI_Model
     public function getEstimasiDetail($id)
     {
         return $this->db->from('sdr_estimasi_detail')
-            ->join('sdr_estimasi','sdr_estimasi.faktur=sdr_estimasi_detail.faktur')
-            ->join('sdr_barang','sdr_barang.id_barang=sdr_estimasi_detail.id_barang')
-            ->join('tbl_user','tbl_user.id_user=sdr_estimasi.id_user')
-            ->join('his_section','his_section.id_section=tbl_user.id_section')
-            ->where('sdr_estimasi_detail.faktur',$id)
+            ->join('sdr_estimasi', 'sdr_estimasi.faktur = sdr_estimasi_detail.faktur')
+            ->join('sdr_barang', 'sdr_barang.id_barang = sdr_estimasi_detail.id_barang')
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+            ->where('sdr_estimasi_detail.faktur', $id)
             ->get()
             ->result();
     }
 
     public function getIdPdf($id)
     {
-        $query = $this->db->from('sdr_estimasi')
-            ->join('tbl_user','tbl_user.id_user=sdr_estimasi.id_user')
-            ->join('his_section','his_section.id_section=tbl_user.id_section')
+        $query = $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->where('sdr_estimasi.faktur', $id)
             ->get();
 
@@ -139,11 +139,11 @@ class m_estimasi extends CI_Model
     public function getDetailIdPdf($id)
     {
         $query = $this->db->from('sdr_estimasi_detail')
-            ->join('sdr_estimasi','sdr_estimasi.faktur=sdr_estimasi_detail.faktur')
-            ->join('sdr_barang','sdr_barang.id_barang=sdr_estimasi_detail.id_barang')
-            ->join('tbl_user','tbl_user.id_user=sdr_estimasi.id_user')
-            ->join('his_section','his_section.id_section=tbl_user.id_section')
-            ->where('sdr_estimasi_detail.faktur',$id)
+            ->join('sdr_estimasi', 'sdr_estimasi.faktur = sdr_estimasi_detail.faktur')
+            ->join('sdr_barang', 'sdr_barang.id_barang = sdr_estimasi_detail.id_barang')
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+            ->where('sdr_estimasi_detail.faktur', $id)
             ->get();
 
         return $query->result_array();
@@ -151,10 +151,10 @@ class m_estimasi extends CI_Model
 
     public function forApprove()
     {
-        return $this->db->from('sdr_estimasi')
-            ->join('tbl_user','tbl_user.id_user=sdr_estimasi.id_user')
-            ->join('his_section','his_section.id_section=tbl_user.id_section')
-            ->where('status','Diajukan')
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+            ->where('status', 'Diajukan')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->order_by('id_estimasi', 'DESC')
             ->get()
@@ -164,7 +164,7 @@ class m_estimasi extends CI_Model
     public function update($where, $data)
     {
         $this->db->where($where);
-        $this->db->update($this->table,$data);
+        $this->db->update($this->table, $data);
     }
 }
 ?>

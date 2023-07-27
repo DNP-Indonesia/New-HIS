@@ -253,6 +253,32 @@
     </a>
     <!-- End Scroll to Top Button -->
 
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Yakin Ingin Keluar Aplikasi ?
+                    </h5>
+                    <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Tutup</span>
+                    </button>
+                </div>
+                <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-success" type="button" data-dismiss="modal">
+                        Batal
+                    </button>
+                    <a class="btn btn-sm btn-danger" href="<?php echo site_url('logout') ?>">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Start Script -->
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>

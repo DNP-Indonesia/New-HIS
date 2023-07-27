@@ -98,13 +98,13 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-
+                        <h4>Estimation Making</h4>
                         <?php  
                             if ($this->session->userdata('role')=='sdr_Admin Bagian') {
                         ?>
                         <!-- DataTales Example -->
                         <a href="#" class="btn btn-sm btn-success mb-3"data-toggle="modal" data-target="#modal-tambah">
-                            Buat Estimasi Baru
+                            Buat Baru
                         </a>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -156,17 +156,17 @@
                                                 </td>
                                                 <td>
                                                     <?php if ($tempel->status =='Diajukan'){?>
-                                                            <a onclick="deleteConfirm('<?php echo base_url('delete/'.$tempel->faktur) ?>')"
+                                                            <a onclick="deleteConfirm('<?php echo site_url('delete/'.$tempel->faktur) ?>')"
                                                                 href="#" class="btn btn-sm btn-danger">
                                                                 Hapus
                                                             </a>
                                                      <?php } ?>
                                                     
-                                                    <a href="<?php echo base_url('detail'); ?>" target="_blank" class="btn btn-sm btn-purple">
-                                                        Lihat Detail
+                                                    <a href="<?php echo site_url('detailestimasi'); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                                        Detail
                                                     </a>
 
-                                                    <a href="<?php echo base_url('print'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                                    <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
                                                         Cetak PDF
                                                     </a>
                                                 </td>
@@ -340,9 +340,9 @@
                     <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
                     <div class="modal-footer">
                         <button class="btn btn-success" type="button" data-dismiss="modal">
-                            Nggak Jadi
+                            Batal
                         </button>
-                        <a class="btn btn-warning" href="<?php echo site_url() ?>/auth/logout">
+                        <a class="btn btn-warning" href="<?php echo site_url('logout') ?>">
                             Logout
                         </a>
                     </div>
@@ -359,7 +359,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('addestimasi') ?>" method="POST">
+                    <form action="<?= site_url('addestimasi') ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
@@ -372,7 +372,7 @@
                                 </div>                        
                                 <div class="col-md-4 mb-3">
                                     <label>Dibuat Oleh</label>
-                                    <input type="text" class="form-control" name="nama" required placeholder="Masukan Nama Pembuat...">
+                                    <input type="text" class="form-control" value=" <?php echo $this->session->userdata('nama') ?>"  name="nama" required readonly>
 
                                     <input type="text" id="id_user" name="id_user"
                                         value=" <?php echo $this->session->userdata('id_user') ?>" 
@@ -385,10 +385,10 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-row">
                                         <div class="col-md-11 mb-3">
-                                            <label>Pilihan Barang Tersedia</label>
+                                            <label>Pilihan Barang</label>
                                             <select class="form-control yoi" id="id_barang">
                                                 <option value="0">--Pilih Barang--</option>
-                                                <?php foreach($barcons as $tempel){ ?>
+                                                <?php foreach ($barcons as $tempel) { ?>
                                                     <option value="<?php echo $tempel->id_barang ?>">
                                                         <?php echo $tempel->barang ?>
                                                     </option>
@@ -405,12 +405,12 @@
                                     <div class="form-row">    
                                         <div class="col-md-11 mb-3">
                                             <label>Catatan Detail Barang Atau Lainnya</label>
-                                            <input type="text" class="form-control" id="keterangan" placeholder="Misal, Pulpen Standar Joyko Hitam 75 Mili....">
+                                            <input type="text" class="form-control" id="keterangan" placeholder="Contoh, Pulpen Standar Joyko Hitam 75 Mili...">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-11 mb-3">
-                                            <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukan Ke Keranjang</a>
+                                            <a href="<?php echo site_url('addkeranjangestimasi'); ?>" class="btn btn-sm btn-info" id="keranjang">Tambahkan Ke Keranjang</a>
                                         </div>                        
                                     </div>
                                 </div>
@@ -441,8 +441,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Nggak Jadi Deh</button>
-                            <button type="submit" class="btn btn-success btn-sm">Buat Estimasi</button>
+                            <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-success btn-sm">Buat</button>
                         </div>
                     </form>
                 </div>
@@ -463,10 +463,10 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">
-                            Nggak Jadi Deh
+                            Batal
                         </button>
                         <a id="tombolhapus" class="btn btn-danger" href="#">
-                            Hapus Aja
+                            Lanjutkan
                         </a>
                     </div>
                 </div>
@@ -495,9 +495,6 @@
         <script type="text/javascript" src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
         
         <script>
-            loaddatabarang();
-
-
             $(document).ready(function (){
                 $('.tabel-data').DataTable();
             });
@@ -506,7 +503,7 @@
                 var id_user   = $('#id_user').val();
                 $.ajax({
                     type:'POST',
-                    url: "<?= site_url('showkeranjang')?>",
+                    url: "<?php site_url('showkeranjangestimasi')?>",
                     data:{id_user:id_user},
                     cache:false,
                     success:function(respond){
@@ -528,7 +525,7 @@
                 }else{
                     $.ajax({
                         type:'POST',
-                        url:"<?= site_url('addkeranjangestimasi')?>",
+                        url:"<?php site_url('addkeranjangestimasi')?>",
                         data:{
                             id_barang : id_barang,
                             qty : qty,

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class c_penerimaan extends MY_Controller
+class C_penerimaan extends MY_Controller
 {
     public function __construct()
     {
@@ -33,22 +33,22 @@ class c_penerimaan extends MY_Controller
         $keterangan = $this->input->post('keterangan');
         $po = $this->input->post('po');
 
-        $data=array(
-            'suratjalan'=>$suratjalan,
-            'fakturpurchase'=>$fakturpch,
-            'keterangan'=>$keterangan
+        $data = array(
+            'suratjalan' => $suratjalan,
+            'fakturpurchase' => $fakturpch,
+            'keterangan' => $keterangan
         );
 
         $this->m_penerimaan->savePenerimaan($data);
         $this->session->set_flashdata('success', 'Data Penerimaan Berhasil Dibuat...');
-        redirect('Sundries/Transaksi/c_penerimaan/index');
+        redirect('Sundries/Transaksi/C_penerimaan/index');
     }
 
     public function formPenerimaan()
     {
-        $fakpch  = $this->uri->segment(4);
+        $fakpch = $this->uri->segment(4);
 
-        $data['daftarpembelian'] = $this->m_pembelian->getPembelian($fakpch);
+        $data['daftarpembelian'] = $this->m_penerimaan->getPembelian($fakpch);
         $this->load->view('Sundries/Transaksi/Penerimaan/v_form', $data);
     }
 }

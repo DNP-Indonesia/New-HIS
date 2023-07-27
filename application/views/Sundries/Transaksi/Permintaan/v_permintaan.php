@@ -81,7 +81,7 @@
                                         }
                                         ?>
                                     </span>
-                                    <img class="img-profile rounded-circle" src="<?php echo site_url() ?>bootstrap/img/user.png">
+                                    <img class="img-profile rounded-circle" src="<?php echo base_url() ?>bootstrap/img/user.png">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -104,7 +104,7 @@
                             ?>
                             <!-- DataTales Example -->
                             <a href="#" class="btn btn-sm btn-success mb-3"data-toggle="modal" data-target="#modal-tambah">
-                                Buat Request Sundries Baru
+                                Buat Baru
                             </a>
                         
                             <?php if ($this->session->userdata('berhasil')) { ?>
@@ -205,7 +205,7 @@
                                                     <tbody>
                                                         <?php
                                                         $no = 1;
-                                                        foreach ($request as $tempel) {
+                                                        foreach ($permintaan as $tempel) {
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $no ?></td>
@@ -224,12 +224,12 @@
                                                                  <?php } ?> 
                                                                 </td>
                                                                 <td>
-                                                                    <a onclick="deleteConfirm('<?php echo site_url('Sundries/requestsundriescontroller/requestsundriesdelete/' . $tempel->faktur) ?>')"
+                                                                    <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur) ?>')"
                                                                         href="#" class="btn btn-sm btn-danger">
                                                                         Hapus
                                                                     </a>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                        Lihat Detail   
+                                                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                        Detail   
                                                                     </a> 
                                                                 </td>
                                                             </tr>
@@ -261,7 +261,7 @@
                                                     <tbody>
                                                         <?php
                                                         $no = 1;
-                                                        foreach ($disetujui1 as $tempel) {
+                                                        foreach ($setuju1 as $tempel) {
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $no ?></td>
@@ -282,11 +282,11 @@
                                                                   <?php } ?>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
-                                                                    Cetak PDF
+                                                                    <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                        Cetak PDF
                                                                     </a>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                        Lihat Detail   
+                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                        Detail   
                                                                     </a> 
                                                                 </td>
                                                             </tr>
@@ -318,7 +318,7 @@
                                                     <tbody>
                                                         <?php
                                                         $no = 1;
-                                                        foreach ($disetujui2 as $tempel) {
+                                                        foreach ($setuju2 as $tempel) {
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $no ?></td>
@@ -339,11 +339,11 @@
                                                                   <?php } ?>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
-                                                                    Cetak PDF
+                                                                    <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                        Cetak PDF
                                                                     </a>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                        Lihat Detail   
+                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                        Detail   
                                                                     </a> 
                                                                 </td>
                                                             </tr>
@@ -375,7 +375,7 @@
                                                     <tbody>
                                                         <?php
                                                         $no = 1;
-                                                        foreach ($ditolak as $tempel) {
+                                                        foreach ($tolak as $tempel) {
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $no ?></td>
@@ -396,11 +396,11 @@
                                                                   <?php } ?> 
                                                                 </td>
                                                                 <td>
-                                                                    <a onclick="deleteConfirm('<?php echo site_url('Sundries/requestsundriescontroller/requestsundriesdelete/' . $tempel->faktur) ?>')"
+                                                                    <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan' . $tempel->faktur) ?>')"
                                                                         href="#" class="btn btn-sm btn-danger">
                                                                         Hapus
                                                                     </a>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                         Lihat Alasan  
                                                                     </a> 
                                                                 </td>
@@ -431,7 +431,7 @@
                                                     <tbody>
                                                         <?php
                                                         $no = 1;
-                                                        foreach ($diproses as $tempel) {
+                                                        foreach ($proses as $tempel) {
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo $no ?></td>
@@ -450,11 +450,11 @@
                                                                 </td>
                                                                 <td><?php echo $tempel->waktu ?></td>
                                                                 <td>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                    <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                     Cetak PDF
                                                                     </a>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                        Lihat Detail   
+                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                        Detail   
                                                                     </a> 
                                                                 </td>
                                                             </tr>
@@ -503,11 +503,11 @@
                                                                 </td>
                                                                 <td><?php echo $tempel->waktu ?></td>
                                                                 <td>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                    <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                     Cetak PDF
                                                                     </a>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                        Lihat Detail   
+                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                        Detail   
                                                                     </a> 
                                                                 </td>
                                                             </tr>
@@ -573,7 +573,7 @@
                                                 <tbody>
                                                     <?php
                                                     $no = 1;
-                                                    foreach ($forkepalabagianbyrequest as $tempel) {
+                                                    foreach ($kabagpermintaan as $tempel) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no ?></td>
@@ -591,8 +591,8 @@
                                                              <?php } ?> 
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                    Lihat Detail   
+                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    Detail   
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -624,7 +624,7 @@
                                                 <tbody>
                                                     <?php
                                                     $no = 1;
-                                                    foreach ($forkepalabagianbydisetujui as $tempel) {
+                                                    foreach ($kabagsetuju as $tempel) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no ?></td>
@@ -645,11 +645,11 @@
                                                               <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                 Cetak PDF
                                                                 </a>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                    Lihat Detail   
+                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    Detail   
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -681,7 +681,7 @@
                                                 <tbody>
                                                     <?php
                                                     $no = 1;
-                                                    foreach ($forkepalabagianbydisetujui as $tempel) {
+                                                    foreach ($kabagsetuju as $tempel) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no ?></td>
@@ -702,11 +702,11 @@
                                                               <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                 Cetak PDF
                                                                 </a>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                    Lihat Detail   
+                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    Detail   
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -735,7 +735,7 @@
                                                 <tbody>
                                                     <?php
                                                     $no = 1;
-                                                    foreach ($forkepalabagianbyditolak as $tempel) {
+                                                    foreach ($kabagtolak as $tempel) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no ?></td>
@@ -753,8 +753,8 @@
                                                               <?php } ?> 
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                    Lihat Detail   
+                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    Detail   
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -783,7 +783,7 @@
                                                 <tbody>
                                                     <?php
                                                     $no = 1;
-                                                    foreach ($forkepalabagianbydiproses as $tempel) {
+                                                    foreach ($kabagproses as $tempel) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no ?></td>
@@ -801,11 +801,11 @@
                                                               <?php } ?>     
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                 Cetak PDF
                                                                 </a>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                    Lihat Detail   
+                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    Detail   
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -834,7 +834,7 @@
                                                 <tbody>
                                                     <?php
                                                     $no = 1;
-                                                    foreach ($forkepalabagianbyselesai as $tempel) {
+                                                    foreach ($kabagselesai as $tempel) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no ?></td>
@@ -852,11 +852,11 @@
                                                               <?php } ?>     
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                 Cetak PDF
                                                                 </a>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                    Lihat Detail   
+                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    Detail   
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -877,7 +877,7 @@
                         ?>
                         <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
                             <a href="#" class="btn btn-sm btn-info mb-3"data-toggle="modal" data-target="#modal-tambah-barang">
-                                Tambahin Barang Baru
+                                Tambah Barang
                             </a>
                         <?php } ?>
                         <div class="card shadow mb-3">
@@ -940,8 +940,8 @@
                                                               <?php } ?>    
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                    Lihat Detail   
+                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    Detail   
                                                                 </a> 
                                                             </td>
                                                         </tr>
@@ -998,8 +998,8 @@
                                                         <?php } ?>
                                                             <?php if ($this->session->userdata('role') == 'sdr_Kepala Gudang' or $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
                                                                 <td>
-                                                                    <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                        Lihat Detail   
+                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                        Detail   
                                                                     </a> 
                                                                 </td>
                                                         <?php } ?>
@@ -1049,8 +1049,8 @@
                                                               <?php } ?>     
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/requestsundriescontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                                    Lihat Detail   
+                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    Detail   
                                                                 </a> 
                                                             </td>
                                                         </tr>
@@ -1085,46 +1085,17 @@
             <!-- End of Content Wrapper -->
         </div>
         <!-- End of Page Wrapper -->
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Yakin Ingin Keluar Aplikasi ?
-                        </h5>
-                        <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">Tutup</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-success" type="button" data-dismiss="modal">
-                            Batal
-                        </button>
-                        <a class="btn btn-sm btn-danger" href="<?php echo site_url() ?>/auth/logout">
-                            Logout
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Buat Request Sundries Baru</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Request Sundries</h5>
                         <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">Tutup</span>
                         </button>
                     </div>
-                    <form action="<?php echo site_url('Sundries/requestsundriescontroller/requestsundriesadd') ?>" method="POST">
+                    <form action="<?php echo site_url('addpermintaan') ?>" method="POST">
                         <div class="modal-body">
                             <?php if (validation_errors()) { ?>
                                 <div class="alert alert-danger">
@@ -1134,7 +1105,7 @@
                             <div class="form-row">
                                 <div class="col-md-3 mb-3">
                                     <label>Faktur</label>
-                                    <input type="text" class="form-control" value="<?= $fakturotomatis; ?>" name="faktur" required readonly>
+                                    <input type="text" class="form-control" value="<?= $faktur; ?>" name="faktur" required readonly>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label>Tanggal</label>
@@ -1160,32 +1131,22 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label>Pilihan Barang Tersedia</label>
-                                    <select class="form-control yoi" id="id_barang">
+                                    <label>Pilihan Barang</label>
+                                    <select class="form-control yoi" id="id_barang" onchange="getBarangDetails()">
                                         <option value="">--Pilih Barang--</option>
-                                        <?php foreach ($barsund as $tempel) { ?>
+                                        <?php foreach ($barang as $tempel) { ?>
                                             <option value="<?php echo $tempel->id_barang ?>">
-                                                <?php echo $tempel->barang ?> 
-                                                [<?php echo $tempel->brand ?>] 
-                                                [<?php echo $tempel->type ?>] 
-                                                [<?php echo $tempel->ukuran ?>]
-                                                [<?php echo $tempel->satuan ?>]
+                                                <?php echo $tempel->barang ?>
                                             </option>
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="text-danger font-weight-bold">Barang Yang Diinginkan Tidak Ada Dipilihan, Silahkan Hubungi Gudang Untuk Menambahkan Barang</label>
-                                </div>
-                                    <input type="text" class="form-control" name="penyetuju" value="-" readonly hidden>
-
-                                    <input type="text" class="form-control" name="tgl_setuju" value="00-00-0000" required hidden>                     
                             </div>
                             <div class="form-row">
                                 <div class="col-md-3 mb-3">
                                     <label>Brand</label>
                                     <input type="text" class="form-control" id="brand" readonly>
-                                </div> 
+                                </div>
                                 <div class="col-md-3 mb-3">
                                     <label>Type</label>
                                     <input type="text" class="form-control" id="type" readonly>
@@ -1193,7 +1154,7 @@
                                 <div class="col-md-3 mb-3">
                                     <label>Ukuran</label>
                                     <input type="text" class="form-control" id="ukuran" readonly>
-                                </div> 
+                                </div>
                                 <div class="col-md-3 mb-3">
                                     <label>Satuan</label>
                                     <input type="text" class="form-control" id="satuan" readonly>
@@ -1206,7 +1167,7 @@
                                 </div> 
                                 <div class="col-md-6 mb-3">
                                     <label>Catatan Khusus</label>
-                                    <input type="text" class="form-control" id="catatan" placeholder="Misal, Yang Warna Pink Ya....">
+                                    <input type="text" class="form-control" id="catatan" placeholder="Contoh, Warna Merah...">
                                 </div> 
                             </div>
                             <div class="form-row mb-3">
@@ -1244,16 +1205,12 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-success btn-sm">Buat Request</button>
+                            <button type="submit" class="btn btn-success btn-sm">Buat</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
-
-        
-
 
         <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -1289,7 +1246,7 @@
                                 <span aria-hidden="true">Tutup</span>
                             </button>
                         </div>
-                        <form action="<?php echo site_url('Sundries/requestsundriescontroller/requestfinish') ?>" method="POST">
+                        <form action="<?php echo site_url('permintaanselesai') ?>" method="POST">
                             <div class="modal-body">
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
@@ -1327,7 +1284,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tambah Barang Baru</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Barang</h5>
                         <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">Tutup</span>
                         </button>
@@ -1353,27 +1310,27 @@
                                 </div> 
                                 <div class="col-md-6 mb-3">
                                     <label>Nama Barang</label>
-                                    <input type="text" class="form-control" name="barang" required placeholder="Masukan Nama Barang....">
+                                    <input type="text" class="form-control" name="barang" required placeholder="Inputkan Nama Barang...">
                                 </div>                        
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label>Brand</label>
-                                    <input type="text" class="form-control" name="brand" required placeholder="Masukan Brand....">
+                                    <input type="text" class="form-control" name="brand" required placeholder="Inputkan Brand...">
                                 </div> 
                                 <div class="col-md-6 mb-3">
                                     <label>Type</label>
-                                    <input type="text" class="form-control" name="type" required placeholder="Masukan Type....">
+                                    <input type="text" class="form-control" name="type" required placeholder="Inputkan Type...">
                                 </div>                       
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label>Ukuran</label>
-                                    <input type="text" class="form-control" name="ukuran" required placeholder="Masukan Ukuran....">
+                                    <input type="text" class="form-control" name="ukuran" required placeholder="Inputkan Ukuran...">
                                 </div> 
                                 <div class="col-md-6 mb-3">
                                     <label>Satuan</label>
-                                    <input type="text" class="form-control" name="satuan" required placeholder="Masukan Satuan....">
+                                    <input type="text" class="form-control" name="satuan" required placeholder="Inputkan Satuan...">
                                 </div> 
                                 <input type="text" class="form-control" name="stok" value="0" required hidden>                    
                             </div>
@@ -1383,6 +1340,36 @@
                             <button type="submit" class="btn btn-success btn-sm">Buat</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            Yakin Ingin Keluar Aplikasi ?
+                        </h5>
+                        <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">Tutup</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-success" type="button" data-dismiss="modal">
+                            Batal
+                        </button>
+                        <a class="btn btn-sm btn-danger" href="<?php echo site_url() ?>/auth/logout">
+                            Logout
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1407,6 +1394,8 @@
 
         <script type="text/javascript" src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script>
             $(document).ready(function (){
                 $('.tbl').DataTable();
@@ -1416,7 +1405,7 @@
                 var id_user   = $('#id_user').val();
                 $.ajax({
                     type:'POST',
-                    url: "<?php echo site_url('Sundries/requestsundriescontroller/showbarangkeranjang') ?>",
+                    url: "<?php echo site_url('showkeranjangpermintaan') ?>",
                     data:{id_user:id_user},
                     cache:false,
                     success:function(respond){
@@ -1432,15 +1421,15 @@
                 var id_user   = $('#id_user').val();
 
                 if (id_barang == 0){
-                    Swal.fire("Barang Belum Dipilih... !", "Pilih Dahulu...", "warning");
+                    Swal.fire("Barang Belum Dipilih... !", "Pilih Barang...", "warning");
                 }else if (qty == "" || qty == 0){
-                    Swal.fire("Jumlah Barang Kosong...", "Isikna Dahulu....", "warning");
+                    Swal.fire("Jumlah Barang Kosong...", "Isi Jumlah...", "warning");
                // }else if(catatan ==""){
                  //   Swal.fire("Yakin Nggak Ada Catatan Khusus ?", "Isikan '-' Aja Kalo Begitu...", "warning");
                 }else{
                     $.ajax({
                         type:'POST',
-                        url:"<?php echo site_url('Sundries/requestsundriescontroller/cekkeranjang') ?>",
+                        url:"<?php echo site_url('cekkeranjangpermintaan') ?>",
                         data:{
                             id_barang : id_barang,
                             qty : qty,
@@ -1471,7 +1460,7 @@
                     var id_barang = $(this).val();
                     $.ajax({
                         type:'POST',
-                        url:"<?php echo site_url('Sundries/requestsundriescontroller/tampildetailbarang') ?>",
+                        url:"<?php echo site_url('detailbarang') ?>",
                         data:'id_barang='+id_barang,
                         dataType:'JSON',
                         success:function(data){
@@ -1484,6 +1473,30 @@
                 });
             });
         </script>
+
+        <script>
+            function getBarangDetails() {
+                var selectedBarangId = document.getElementById("id_barang").value;
+            
+                // Buat request AJAX ke controller untuk mendapatkan informasi barang berdasarkan ID
+                $.ajax({
+                    url: "<?php echo site_url('Sundries/Transaksi/c_permintaan/detailBarang') ?>",
+                    method: "POST",
+                    data: {id_barang: selectedBarangId},
+                    success: function(response) {
+                        // Isi nilai field dengan informasi barang yang diterima dari controller
+                        document.getElementById("brand").value = response.brand;
+                        document.getElementById("type").value = response.type;
+                        document.getElementById("ukuran").value = response.ukuran;
+                        document.getElementById("satuan").value = response.satuan;
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        </script>
+
     </body>
 </html>
 

@@ -79,25 +79,24 @@ $route['daftar-golongan'] = 'Page_his/golongan';
 # -------------------------- SUNDRIES -------------------------- #
 // User
 
-
 // Barang
 $route['barang'] = 'Sundries/Barang/c_barang/index';
 $route['addbarang'] = 'Sundries/Barang/c_barang/addBarang';
 $route['addbarangother'] = 'Sundries/Barang/c_barang/addBarangOther';
-$route['updatebarang'] = 'Sundries/Barang/c_barang/updateBarang';
-$route['deletebarang/(:any)'] = 'Sundries/Barang/c_barang/deleteBarang/$1';
+$route['updatebarang/(:num)'] = 'Sundries/Barang/c_barang/updateBarang/$1';
+$route['deletebarang/(:num)'] = 'Sundries/Barang/c_barang/deleteBarang/$1';
 
 // Jenis
 $route['jenis'] = 'Sundries/Master/c_jenis/index';
 $route['addjenis'] = 'Sundries/Master/c_jenis/addJenis';
-$route['updatejenis'] = 'Sundries/Master/c_jenis/updateJenis';
-$route['deletejenis/(:any)'] = 'Sundries/Master/c_jenis/deleteJenis/$1';
+$route['updatejenis/(:num)'] = 'Sundries/Master/c_jenis/updateJenis/$1';
+$route['deletejenis/(:num)'] = 'Sundries/Master/c_jenis/deleteJenis/$1';
 
 // Kategori
 $route['kategori'] = 'Sundries/Master/c_kategori/index';
 $route['addkategori'] = 'Sundries/Master/c_kategori/addKategori';
-$route['updatekategori'] = 'Sundries/Master/c_kategori/update';
-$route['deletekategori/(:any)'] = 'Sundries/Master/c_kategori/deleteKategori/$1';
+$route['updatekategori/(:num)'] = 'Sundries/Master/c_kategori/update/$1';
+$route['deletekategori/(:num)'] = 'Sundries/Master/c_kategori/deleteKategori/$1';
 
 // Estimasi
 $route['estimasi'] = 'Sundries/Transaksi/c_estimasi/index';
@@ -105,8 +104,8 @@ $route['addkeranjangestimasi'] = 'Sundries/Transaksi/c_estimasi/addKeranjang';
 $route['showkeranjangestimasi'] = 'Sundries/Transaksi/c_estimasi/showKeranjang';
 $route['deletekeranjangestimasi'] = 'Sundries/Transaksi/c_estimasi/deleteKeranjang';
 $route['addestimasi'] = 'Sundries/Transaksi/c_estimasi/addEstimasi';
-$route['deleteestimasi'] = 'Sundries/Transaksi/c_estimasi/deleteEstimasi';
-$route['detailestimasi'] = 'Sundries/Transaksi/c_estimasi/detailEstimasi';
+$route['deleteestimasi/(:num)'] = 'Sundries/Transaksi/c_estimasi/deleteEstimasi/$1';
+$route['detailestimasi/(:num)'] = 'Sundries/Transaksi/c_estimasi/detailEstimasi/$1';
 $route['printestimasi'] = 'Sundries/Transaksi/c_estimasi/printEstimasi';
 $route['approveestimasi'] = 'Sundries/Transaksi/c_estimasi/approveEstimasi';
 $route['rejectestimasi'] = 'Sundries/Transaksi/c_estimasi/rejectEstimasi';
@@ -118,8 +117,8 @@ $route['addkeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/addKeranjang';
 $route['showkeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/showKeranjang';
 $route['deletekeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/deleteKeranjang';
 $route['addkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/addKonsumsi';
-$route['deletekonsumsi'] = 'Sundries/Transaksi/c_konsumsi/deleteKonsumsi';
-$route['detailkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/detailKonsumsi';
+$route['deletekonsumsi/(:num)'] = 'Sundries/Transaksi/c_konsumsi/deleteKonsumsi/$1';
+$route['detailkonsumsi/(:num)'] = 'Sundries/Transaksi/c_konsumsi/detailKonsumsi/$1';
 $route['printkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/printKonsumsi';
 $route['approvekonsumsi'] = 'Sundries/Transaksi/c_konsumsi/approveKonsumsi';
 $route['rejectkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/rejectKonsumsi';
@@ -130,7 +129,7 @@ $route['addkeranjangpembelian'] = 'Sundries/Transaksi/c_pembelian/addKeranjang';
 $route['showkeranjangpembelian'] = 'Sundries/Transaksi/c_pembelian/showKeranjang';
 $route['deletekeranjangpembelian'] = 'Sundries/Transaksi/c_pembelian/deleteKeranjang';
 $route['addpembelian'] = 'Sundries/Transaksi/c_pembelian/addPembelian';
-$route['detailpembelian'] = 'Sundries/Transaksi/c_pembelian/detailPembelian';
+$route['detailpembelian/(:num)'] = 'Sundries/Transaksi/c_pembelian/detailPembelian/$1';
 $route['printpembelian'] = 'Sundries/Transaksi/c_pembelian/printPembelian';
 $route['formpembelian'] = 'Sundries/Transaksi/c_pembelian/formPembelian';
 
@@ -141,18 +140,20 @@ $route['formpenerimaan'] = 'Sundries/Transaksi/c_penerimaan/formPenerimaan';
 
 // Permintaan
 $route['permintaan'] = 'Sundries/Transaksi/c_permintaan/index';
+$route['detailpermintaan/(:num)'] = 'Sundries/Transaksi/c_permintaan/detail/$1';
+$route['updatepermintaan/(:num)'] = 'Sundries/Transaksi/c_permintaan/updateJumlah/$1';
 $route['cekkeranjangpermintaan'] = 'Sundries/Transaksi/c_permintaan/cekKeranjang';
 $route['showkeranjangpermintaan'] = 'Sundries/Transaksi/c_permintaan/showKeranjang';
 $route['deletekeranjangpermintaan'] = 'Sundries/Transaksi/c_permintaan/deleteKeranjang';
 $route['addpermintaan'] = 'Sundries/Transaksi/c_permintaan/addPermintaan';
-$route['deletepermintaan'] = 'Sundries/Transaksi/c_permintaan/deletePermintaan';
+$route['deletepermintaan/(:num)'] = 'Sundries/Transaksi/c_permintaan/deletePermintaan/$1';
 $route['printpermintaan'] = 'Sundries/Transaksi/c_permintaan/printPermintaan';
 $route['approvepermintaan'] = 'Sundries/Transaksi/c_permintaan/approvePermintaan';
 $route['rejectpermintaan'] = 'Sundries/Transaksi/c_permintaan/rejectPermintaan';
 $route['addbarang'] = 'Sundries/Transaksi/c_permintaan/addBarang';
-$route['deletebarang'] = 'Sundries/Transaksi/c_permintaan/deleteBarang';
-$route['detailbarang'] = 'Sundries/Transaksi/c_permintaan/detailBarang';
-$route['permintaanulang'] = 'Sundries/Transaksi/c_permintaan/permintaanUlang';
-$route['permintaanproses'] = 'Sundries/Transaksi/c_permintaan/permintaanProses';
-$route['permintaanselesai'] = 'Sundries/Transaksi/c_permintaan/permintaanSelesai';
-$route['permintaansiap'] = 'Sundries/Transaksi/c_permintaan/permintaanSiap';
+$route['deletebarangpermintaan/(:num)'] = 'Sundries/Transaksi/c_permintaan/deleteBarang/$1';
+$route['detailbarang/(:num)'] = 'Sundries/Transaksi/c_permintaan/detailBarang/$1';
+$route['permintaanulang/(:num)'] = 'Sundries/Transaksi/c_permintaan/permintaanUlang/$1';
+$route['permintaanproses/(:num)'] = 'Sundries/Transaksi/c_permintaan/permintaanProses/$1';
+$route['permintaanselesai/(:num)'] = 'Sundries/Transaksi/c_permintaan/permintaanSelesai/$1';
+$route['permintaansiap/(:num)'] = 'Sundries/Transaksi/c_permintaan/permintaanSiap/$1';

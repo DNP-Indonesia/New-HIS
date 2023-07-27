@@ -41,27 +41,27 @@ class c_pembelian extends MY_Controller
         $stkeranjang = $this->input->post('stkeranjang');
         $iduser = $this->input->post('id_user');
     
-            $data = array(
-                'id_barang'=>$idbarang,
-                'jumlah'=>$qty,
-                'faktursundries'=>$faktur,
-                'keterangan'=>$catatan,
-                'id_user'=>$iduser
-            );
+        $data = array(
+            'id_barang' => $idbarang,
+            'jumlah' => $qty,
+            'faktursundries' => $faktur,
+            'keterangan' => $catatan,
+            'id_user' => $iduser
+        );
 
-            $ubahkeranjang = array(
-                'statuskeranjang'=>$stkeranjang
-            );
+        $ubahkeranjang = array(
+            'statuskeranjang' => $stkeranjang
+        );
 
-            $where = array(
-                'id_barang'=>$idbarang,
-                'faktur'=>$faktur
-            );
+        $where = array(
+            'id_barang' => $idbarang,
+            'faktur' => $faktur
+        );
             
-            $this->m_pembelian->saveKeranjang($data);
-            $this->m_pembelian->updateKeranjang($where, $ubahkeranjang);
+        $this->m_pembelian->saveKeranjang($data);
+        $this->m_pembelian->updateKeranjang($where, $ubahkeranjang);
 
-            return redirect('Sundries/Transaksi/c_pembelian/formPembelian');
+        return redirect('Sundries/Transaksi/C_pembelian/formPembelian');
     }
 
     public function showKeranjang()
@@ -76,18 +76,18 @@ class c_pembelian extends MY_Controller
         $stkeranjang = $this->uri->segment(4);
 
         $data = array(
-            'statuskeranjang'=>$stkeranjang
+            'statuskeranjang' => $stkeranjang
         );
 
         $where = array(
-            'id_barang'=>$id_barang
+            'id_barang' => $id_barang
         );
 
         $ubah = $this->m_pembelian->updateKeranjang($where, $data);
         $hapus = $this->m_pembelian->deleteKeranjang($id_barang);
         echo $ubah;
         echo $hapus;
-        return redirect('Sundries/Transaksi/c_pembelian/formPembelian');
+        return redirect('Sundries/Transaksi/C_pembelian/formPembelian');
     }
 
     public function addPembelian()
@@ -99,16 +99,16 @@ class c_pembelian extends MY_Controller
         $jamdibuat = $this->input->post('jam');
         
         $data = array(
-            'faktur'=>$faktur,
-            'nama_peminta'=>$nama,
-            'id_user'=>$iduser,
-            'tanggal'=>$tanggal,
-            'jamdibuat'=>$jamdibuat
+            'faktur' => $faktur,
+            'nama_peminta' => $nama,
+            'id_user' => $iduser,
+            'tanggal' => $tanggal,
+            'jamdibuat' => $jamdibuat
         );
 
-        $simpan = $this->m_pembelian->save($data);
+        $simpan = $this->m_pembelian->save($data, $iduser, $faktur); // Tambahkan $iduser dan $faktur sebagai parameter
         $this->session->set_userdata('sukses', 'Berhasil, Request Pembelian telah dibuat');
-        return redirect('Sundries/Transaksi/c_pembelian/index');
+        return redirect('Sundries/Transaksi/C_pembelian/index');
     }
 
     public function detailPembelian()

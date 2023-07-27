@@ -96,13 +96,13 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-
+                        <h4>Consumption Sundries</h4>                        
                         <?php  
                             if ($this->session->userdata('role')=='sdr_Admin Bagian') {
                         ?>
                         <!-- DataTales Example -->
                         <a href="#" class="btn btn-sm btn-success mb-3"data-toggle="modal" data-target="#modal-tambah">
-                            Buat Request Consumption Baru
+                            Buat Baru
                         </a>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -127,7 +127,7 @@
                                         <tbody>
                                             <?php
                                                 $no=1;
-                                                foreach($consumptiondata as $tempel){
+                                                foreach($konsumsi as $tempel){
                                             ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
@@ -164,17 +164,17 @@
                                                 </td>
                                                 <td>
                                                     <?php if ($tempel->status =='Request'){?>
-                                                            <a onclick="deleteConfirm('<?php echo base_url('Sundries/consumptioncontroller/consumptiondelete/'.$tempel->faktur) ?>')"
+                                                            <a onclick="deleteConfirm('<?php echo site_url('deletekonsumsi/'.$tempel->faktur) ?>')"
                                                                 href="#" class="btn btn-sm btn-danger">
                                                                 Hapus
                                                             </a>
                                                      <?php } ?>
                                                     
-                                                    <a href="<?php echo base_url(); ?>Sundries/consumptioncontroller/detail/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-purple">
-                                                        Lihat Detail
+                                                    <a href="<?php echo site_url('detailkonsumsi/'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-purple">
+                                                        Detail
                                                     </a>
                                                     <?php if ($tempel->status != 'Request') { ?>
-                                                        <a href="<?php echo base_url(); ?>Sundries/consumptioncontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                        <a href="<?php echo site_url(); ?>Sundries/consumptioncontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                             Cetak PDF
                                                         </a>
                                                     <?php } ?>
@@ -215,7 +215,7 @@
                                         <tbody>
                                             <?php
                                                 $no=1;
-                                                foreach($dataconsumkepalabagian as $tempel){
+                                                foreach($kepalabagian as $tempel){
                                             ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
@@ -276,7 +276,7 @@
                                         <tbody>
                                             <?php
                                                 $no=1;
-                                                foreach($consumall as $tempel){
+                                                foreach($allkonsumsi as $tempel){
                                             ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
@@ -416,7 +416,7 @@
                                     <div class="form-row">    
                                         <div class="col-md-11 mb-3">
                                             <label>Jumlahnya</label>
-                                            <input type="text" class="form-control" id="jumlah" placeholder="Masukan Jumlahnya....">
+                                            <input type="text" class="form-control" id="jumlah" placeholder="Inputkan Jumlah....">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -452,8 +452,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Nggak Jadi Deh</button>
-                            <button type="submit" class="btn btn-success btn-sm">Buat Estimasi</button>
+                            <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-success btn-sm">Buat</button>
                         </div>
                     </form>
                 </div>
@@ -474,10 +474,10 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">
-                            Nggak Jadi Deh
+                            Batal
                         </button>
                         <a id="tombolhapus" class="btn btn-danger" href="#">
-                            Hapus Aja
+                            Lanjutkan
                         </a>
                     </div>
                 </div>

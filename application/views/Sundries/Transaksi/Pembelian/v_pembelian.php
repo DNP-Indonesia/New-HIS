@@ -148,8 +148,8 @@
                                                  <?php } ?> 
                                             </td>
                                             <td>
-                                                <a href="<?php echo base_url(); ?>Sundries/purchasecontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                    Lihat Detail   
+                                                <a href="<?php echo site_url(); ?>Sundries/purchasecontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                    Detail   
                                                 </a> 
                                             </td>
                                         </tr>
@@ -181,7 +181,7 @@
                             </div> 
                         <?php }?>
                         <a href="<?= base_url('Sundries/purchasecontroller/formpurchase') ?>" class="btn btn-sm btn-success mb-3">
-                            Buat Request Purchase Baru
+                            Request Purchase
                         </a>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -212,11 +212,11 @@
                                                 <td><?php echo $tempel->tanggal ?></td>
                                                 <td><?php echo $tempel->jamdibuat ?></td>
                                                 <td>
-                                                    <a href="<?php echo base_url(); ?>Sundries/purchasecontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                    <a href="<?php echo site_url(); ?>Sundries/purchasecontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                     Cetak PDF
                                                     </a>
-                                                    <a href="<?php echo base_url(); ?>Sundries/purchasecontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
-                                                        Lihat Detail   
+                                                    <a href="<?php echo site_url(); ?>Sundries/purchasecontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                        Detail   
                                                     </a> 
                                                 </td>
                                             </tr>
@@ -247,36 +247,6 @@
             <!-- End of Content Wrapper -->
         </div>
         <!-- End of Page Wrapper -->
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Yakin Ingin Keluar Aplikasi ?
-                        </h5>
-                        <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">Tutup</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-success" type="button" data-dismiss="modal">
-                            Batal
-                        </button>
-                        <a class="btn btn-sm btn-danger" href="<?php echo site_url() ?>/auth/logout">
-                            Logout
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
        
         <!-- Bootstrap core JavaScript-->
         <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>

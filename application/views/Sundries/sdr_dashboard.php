@@ -87,7 +87,7 @@
                                     ?>
                                 </span>
                                 <img class="img-profile rounded-circle"
-                                    src="<?php echo site_url() ?>bootstrap/img/user.png">
+                                    src="<?php echo base_url() ?>bootstrap/img/user.png">
                             </a>
 
                             <!-- Dropdown - User Information -->
@@ -204,7 +204,7 @@
                                                                 <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/Transaksi/Permintaan/v_detail/<?php echo $tempel->faktur ?>"
+                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>"
                                                                     class="btn btn-sm btn-purple">
                                                                     Lihat Detail
                                                                 </a>
@@ -272,7 +272,7 @@
                                                                 <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/estimasicontroller/detail/<?php echo $tempel->faktur ?>"
+                                                                <a href="<?php echo site_url('detailestimasi'); ?><?php echo $tempel->faktur ?>"
                                                                     target="blank" class="btn btn-sm btn-purple">
                                                                     Lihat Detail
                                                                 </a>
@@ -350,7 +350,7 @@
                                                                 <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url(); ?>Sundries/consumptioncontroller/detail/<?php echo $tempel->faktur ?>"
+                                                                <a href="<?php echo site_url('detailkonsumsi'); ?><?php echo $tempel->faktur ?>"
                                                                     target="blank" class="btn btn-sm btn-purple">
                                                                     Lihat Detail
                                                                 </a>
@@ -438,7 +438,7 @@
                                                         <?php } ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?php echo site_url(); ?>Sundries/Transaksi/Permintaan/v_detail/<?php echo $tempel->faktur ?>"
+                                                        <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>"
                                                             class="btn btn-sm btn-purple">
                                                             Lihat Detail
                                                         </a>
@@ -521,7 +521,7 @@
                                                         <?php } ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?php echo site_url(); ?>Sundries/Transaksi/Permintaan/v_detail/<?php echo $tempel->faktur ?>"
+                                                        <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>"
                                                             class="btn btn-sm btn-purple">
                                                             Lihat Detail
                                                         </a>
@@ -623,7 +623,7 @@
                                                         <?php } ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?php echo site_url(); ?>Sundries/Transaksi/Permintaan/v_detail/<?php echo $approve2->faktur ?>"
+                                                        <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $approve2->faktur ?>"
                                                             class="btn btn-sm btn-purple">
                                                             Lihat Detail
                                                         </a>
@@ -670,6 +670,32 @@
 
     </div>
     <!-- End Page Wrapper -->
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            Yakin Ingin Keluar Aplikasi ?
+                        </h5>
+                        <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">Tutup</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-success" type="button" data-dismiss="modal">
+                            Batal
+                        </button>
+                        <a class="btn btn-sm btn-danger" href="<?php echo site_url() ?>/auth/logout">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>

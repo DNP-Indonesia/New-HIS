@@ -8,9 +8,9 @@ class m_penerimaan extends CI_Model
 
     public function getPenerimaan()
     {
-    	return $this->db->from('sdr_penerimaan')
+        return $this->db->from('sdr_penerimaan')
             ->join('sdr_purchase', 'sdr_purchase.faktur=sdr_penerimaan.fakturpurchase')
-            ->order_by('id_penerimaan','DESC')
+            ->order_by('id_penerimaan', 'DESC')
             ->get()
             ->result();
     }
@@ -22,12 +22,11 @@ class m_penerimaan extends CI_Model
 
     public function getPembelian($faktur)
     {
-        return $this->db->from('sdr_purchase')
-            ->join('sdr_purchase_detail', 'sdr_purchase.faktur=sdr_purchase_detail.faktur')
-            ->join('sdr_barang','sdr_barang.id_barang=sdr_purchase_detail.id_barang')
-            ->where('sdr_purchase.faktur', $faktur)
+        return $this->db->from('sdr_purchase_detail')
+            ->join('sdr_barang', 'sdr_barang.id_barang=sdr_purchase_detail.id_barang')
+            ->where('sdr_purchase_detail.faktur', $faktur)
             ->get()
-            ->result();  
+            ->result();
     }
 }
 ?>

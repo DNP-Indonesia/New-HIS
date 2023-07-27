@@ -99,12 +99,12 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        <h4>Penerimaan Barang</h4>    
+                        <h4>Goods Receipt</h4>    
                     <?php
                         if ($this->session->userdata('role')=='sdr_Admin Gudang') {
                     ?>
                         <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-penerimaan">
-                            Buat Penerimaan Barang
+                            Buat Baru
                         </a>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -140,10 +140,10 @@
                                                     Hapus
                                                 </a>
                                                 <a href="<?php echo base_url(); ?>Sundries/penerimaancontroller/detail/<?php echo $tempel->id_penerimaan ?>" class="btn btn-sm btn-purple">
-                                                    Lihat Detail   
+                                                    Detail   
                                                 </a> 
                                                 <a href="<?php echo base_url(); ?>Sundries/penerimaancontroller/formaddbarang/<?php echo $tempel->id_penerimaan ?>" class="btn btn-sm btn-info">
-                                                    Masukan Daftar Barang  
+                                                    Inputkan Daftar Barang  
                                                 </a>  
                                             </td>
                                         </tr>
@@ -209,7 +209,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
-                            Buat Penerimaan Barang
+                            Goods Receipt
                         </h5>
                         <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">Tutup</span>
@@ -222,14 +222,14 @@
                                     <label>Faktur Purchase</label>
                                     <select class="form-control" name="fakturpch">
                                         <option>--Pilih Faktur Purchase</option>
-                                        <?php foreach ($purchase as $tempel) {?>
+                                        <?php foreach ($pembelian as $tempel) {?>
                                             <option><?php echo $tempel->faktur ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label>Surat Jalan</label>
-                                    <input type="text" name="suratjalan" class="form-control" placeholder="Masukan Nomor Surat Jalan....">
+                                    <input type="text" name="suratjalan" class="form-control" placeholder="Inputkan Nomor Surat Jalan...">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -240,7 +240,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Nomer PO</label>
-                                    <input type="text" name="po" class="form-control" placeholder="Masukan Nomer PO....">
+                                    <input type="text" name="po" class="form-control" placeholder="Inputkan Nomer PO...">
                                 </div>
                             </div>
                         </div>
@@ -249,7 +249,7 @@
                                 Batal
                             </button>
                             <button class="btn btn-sm btn-success" type="submit"> 
-                                Buat Penerimaan
+                                Lanjutkan
                             </button>
                         </div>
                     </form>
@@ -276,14 +276,14 @@
                                         <label>Faktur Purchase</label>
                                         <select class="form-control" name="fakturpch">
                                             <option>--Pilih Barang</option>
-                                            <?php foreach ($purchase as $tempel) {?>
+                                            <?php foreach ($pembelian as $tempel) {?>
                                                 <option><?php echo $tempel->faktur ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label>Surat Jalan</label>
-                                        <input type="text" name="suratjalan" class="form-control" placeholder="Masukan Nomor Surat Jalan....">
+                                        <input type="text" name="suratjalan" class="form-control" placeholder="Inputkan Nomor Surat Jalan...">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -294,7 +294,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label>Nomer PO</label>
-                                        <input type="text" name="po" class="form-control" placeholder="Masukan Nomer PO....">
+                                        <input type="text" name="po" class="form-control" placeholder="Inputkan Nomer PO...">
                                     </div>
                                 </div>
                             </div>
@@ -303,7 +303,7 @@
                                     Batal
                                 </button>
                                 <button class="btn btn-sm btn-success" type="submit"> 
-                                    Tambahkan Barang
+                                    Lanjutkan
                                 </button>
                             </div>
                         </form>

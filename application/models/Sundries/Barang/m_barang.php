@@ -4,7 +4,7 @@ class m_barang extends CI_Model
 {
     protected $table = 'sdr_barang';
     protected $primaryKey = 'id_barang';
-    protected $allowedFields = ['id_barang', 'barang', 'id_jenis', 'stok'];
+    protected $allowedFields = ['id_barang', 'barang', 'brand', 'type', 'ukurang', 'satuan', 'id_jenis', 'stok'];
 
     public function getBarangAll()
     {
