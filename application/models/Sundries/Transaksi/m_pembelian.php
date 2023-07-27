@@ -1,13 +1,16 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_pembelian extends CI_Model{
-	protected $table = "sdr_purchase";
-    protected $primaryKey = "id_purchase";
-    protected $tabledetail = "sdr_purchase_detail";
-    protected $table2 = "sdr_purchase_keranjang";
-    protected $table3 = "sdr_request_sundries_detail";
+class m_pembelian extends CI_Model
+{
+    protected $table = 'sdr_purchase';
+    protected $primaryKey = 'id_purchase';
+    protected $tabledetail = 'sdr_purchase_detail';
+    protected $table2 = 'sdr_purchase_keranjang';
+    protected $table3 = 'sdr_request_sundries_detail';
 
-    public function findpurchase(){
+    public function getPembelian()
+    {
         return $this->db->from('sdr_purchase')
             ->join('tbl_user','tbl_user.id_user=sdr_purchase.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
@@ -16,24 +19,27 @@ class m_pembelian extends CI_Model{
             ->result();
     }
 
-    public function findbarangrequest(){
+    public function getPermintaanBarang()
+    {
         return $this->db->from('sdr_request_sundries_detail')
-        ->join('sdr_request_sundries','sdr_request_sundries.faktur=sdr_request_sundries_detail.faktur')
-        ->join('sdr_barang','sdr_barang.id_barang=sdr_request_sundries_detail.id_barang')
-        ->where('sdr_request_sundries.status','Disetujui2')
-        ->where('sdr_request_sundries_detail.statuskeranjang','tidak')
-        ->get()
-        ->result();
+            ->join('sdr_request_sundries','sdr_request_sundries.faktur=sdr_request_sundries_detail.faktur')
+            ->join('sdr_barang','sdr_barang.id_barang=sdr_request_sundries_detail.id_barang')
+            ->where('sdr_request_sundries.status','Disetujui2')
+            ->where('sdr_request_sundries_detail.statuskeranjang','tidak')
+            ->get()
+            ->result();
     }
 
-    public function findbyid($id){
+    public function getPembelianById($id)
+    {
         return $this->db->from('sdr_purchase')
             ->where('sdr_purchase.faktur', $id)
             ->get()
             ->result();
     }
 
-    public function findbyidforpdf($id){
+    public function getIdPdf($id)
+    {
         $query = $this->db->from('sdr_purchase')
             ->join('tbl_user','tbl_user.id_user=sdr_purchase.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
@@ -43,17 +49,8 @@ class m_pembelian extends CI_Model{
         return $query->result_array();
     }
 
-    public function finddetailforpdf($id){
-        // $query = $this->db->from('sdr_purchase_detail')
-        //     ->join('sdr_purchase','sdr_purchase.faktur=sdr_purchase_detail.faktur')
-        //     ->join('sdr_barang','sdr_barang.id_barang=sdr_purchase_detail.id_barang')
-        //     ->join('tbl_user','tbl_user.id_user=sdr_purchase.id_user')
-        //     ->join('his_section','his_section.id_section=tbl_user.id_section')
-        //     ->where('sdr_purchase_detail.faktur',$id)
-        //     ->get();
-
-        // return $query->result_array();
-
+    public function getDetailIdPdf($id)
+    {
         $this->db->select('*');
         $this->db->select_sum('jumlah');
         $this->db->from('sdr_purchase_detail');
@@ -65,10 +62,10 @@ class m_pembelian extends CI_Model{
         $this->db->where('sdr_purchase_detail.faktur',$id);
         $query = $this->db->get();
         return $query->result_array();
-
     }
 
-    public function findforaprove(){
+    public function forApprove()
+    {
         return $this->db->from('sdr_purchase')
             ->join('tbl_user','tbl_user.id_user=sdr_purchase.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
@@ -79,76 +76,75 @@ class m_pembelian extends CI_Model{
             ->result();
     }
 
-    public function finddetail($id){
-        // return $this->db->from('sdr_purchase_detail')
-        //     ->join('sdr_purchase','sdr_purchase.faktur=sdr_purchase_detail.faktur')
-        //     ->join('sdr_barang','sdr_barang.id_barang=sdr_purchase_detail.id_barang')
-        //     ->join('tbl_user','tbl_user.id_user=sdr_purchase.id_user')
-        //     ->join('his_section','his_section.id_section=tbl_user.id_section')
-        //     ->where('sdr_purchase_detail.faktur',$id)
-        //     ->get()
-        //     ->result();
-
+    public function getDetailPembelian($id)
+    {
         $this->db->select('*');
-        //$this->db->select_sum('jumlah');
         $this->db->from('sdr_purchase_detail');
         $this->db->join('sdr_request_sundries','sdr_request_sundries.faktur=sdr_purchase_detail.faktursundries');
         $this->db->join('sdr_purchase','sdr_purchase.faktur=sdr_purchase_detail.faktur');
         $this->db->join('sdr_barang','sdr_barang.id_barang=sdr_purchase_detail.id_barang');
         $this->db->join('tbl_user','tbl_user.id_user=sdr_request_sundries.id_user');
         $this->db->join('his_section','his_section.id_section=tbl_user.id_section');
-        //$this->db->group_by('sdr_purchase_detail.id_barang');
         $this->db->where('sdr_purchase_detail.faktur',$id);
         $query = $this->db->get();
         return $query->result();
     }
 
-    public function cekkeranjang($faktur){
-        return $this->db->get_where('sdr_purchase_keranjang', array('faktur'=>$faktur));
+    public function cekKerangjang($faktur)
+    {
+        return $this->db->get_where('sdr_purchase_keranjang', array('faktur'=>$faktur));  
     }
 
-    public function cekkeranjang2($idbarang){
-        return $this->db->get_where('sdr_purchase_keranjang', array('id_barang'=>$idbarang));
+    public function cekKeranjang2($idbarang)
+    {
+        return $this->db->get_where('sdr_purchase_keranjang', array('id_barang'=>$idbarang));  
     }
 
-    public function cekkeranjang3($faktur, $idbarang){
-        return $this->db->get_where('sdr_purchase_keranjang', array('id_barang'=>$idbarang), array('faktur'=>$faktur));
+    public function cekKeranjang3($faktur, $idbarang)
+    {
+        return $this->db->get_where('sdr_purchase_keranjang', array('faktur'=>$faktur, 'id_barang'=>$idbarang));  
     }
 
-    public function cekjumlahbarang($idbarang){
+    public function getJmlBarang($idbarang)
+    {
         return $this->db->from('sdr_purchase_keranjang')
             ->where('id_barang',$idbarang)
             ->get()
             ->result();
     }
 
-    public function savekeranjang($data){
-        $this->db->insert('sdr_purchase_keranjang',$data);
+    public function saveKeranjang($data)
+    {
+        $this->db->insert('sdr_purchase_keranjang', $data);
     }
 
-    public function ubahstkeranjang($data, $where){
+    public function updateKeranjang($data, $where)
+    {
         $this->db->where($where);
-        $this->db->update($this->table3,$data);
+        $this->db->update($this->table3, $data);
     }
 
-    public function findkeranjang(){
+    public function getKeranjang()
+    {
         $this->db->select('*');
         $this->db->select_sum('jumlah');
         $this->db->from('sdr_purchase_keranjang');
         $this->db->join('sdr_barang','sdr_barang.id_barang=sdr_purchase_keranjang.id_barang');
         $this->db->group_by('sdr_purchase_keranjang.id_barang');
         $query = $this->db->get();
-        return $query->result();
+        return $query->result();   
     }
 
-    public function deletekeranjang($id_barang){
+    public function deleteKeranjang($id_barang)
+    {
         $hapus = $this->db->delete('sdr_purchase_keranjang', array('id_barang'=>$id_barang));
         if ($hapus) {
             return 1;
-        }
+        } 
     }
 
-    public function save($data, $iduser, $faktur){
+    public function save($data, $iduser, $faktur)
+    {
         $simpan = $this->db->insert('sdr_purchase',$data);
         if ($simpan) {
             $carikeranjang = $this->db->get('sdr_purchase_keranjang');
@@ -163,11 +159,11 @@ class m_pembelian extends CI_Model{
                 $this->db->insert('sdr_purchase_detail', $detail);   
             }
             $this->db->delete('sdr_purchase_keranjang', array('id_user'=>$iduser));
-        }
+        }        
     }
 
-    public function generatefaktur(){
-
+    public function generateFaktur()
+    {
         $this->db->select('RIGHT(faktur,4) as faktur', false);
         $this->db->order_by("faktur", "DESC");
         $this->db->limit(1);
@@ -192,3 +188,4 @@ class m_pembelian extends CI_Model{
         return $newfaktur; 
     }
 }
+?>

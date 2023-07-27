@@ -1,10 +1,13 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_konsumsi extends CI_Model{
-	protected $table = "sdr_consumption";
-    protected $primaryKey = "id_consumption";
+class m_konsumsi extends CI_Model
+{
+    protected $table = 'sdr_consumption';
+    protected $primaryKey = 'id_consumption';
 
-    public function find(){
+    public function getKonsumsi()
+    {
         return $this->db->from('sdr_consumption')
             ->join('tbl_user','tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
@@ -14,7 +17,8 @@ class m_konsumsi extends CI_Model{
             ->result();
     }
 
-    public function findbarangbyfaktur($faktur){
+    public function getBarangByFaktur($faktur)
+    {
         return $this->db->from('sdr_estimasi_detail')
             ->join('sdr_barang','sdr_estimasi_detail.id_barang=sdr_barang.id_barang')
             ->where('faktur',$faktur)
@@ -22,16 +26,8 @@ class m_konsumsi extends CI_Model{
             ->result();
     }
 
-    public function findestimasi(){
-        return $this->db->from('sdr_estimasi')
-            ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
-            ->order_by('id_estimasi', 'DESC')
-            ->limit(1)
-            ->get()
-            ->result();
-    }
-
-    public function findall(){
+    public function getKonsumsiAll()
+    {
         return $this->db->from('sdr_consumption')
             ->join('tbl_user','tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
@@ -40,7 +36,18 @@ class m_konsumsi extends CI_Model{
             ->result();
     }
 
-    public function findforkepalabagian(){
+    public function getEstimasi()
+    {
+        return $this->db->from('sdr_estimasi')
+            ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
+            ->order_by('id_estimasi', 'DESC')
+            ->limit(1)
+            ->get()
+            ->result();        
+    }
+
+    public function forKepalaBagian()
+    {
         return $this->db->from('sdr_consumption')
             ->join('tbl_user','tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
@@ -50,30 +57,35 @@ class m_konsumsi extends CI_Model{
             ->result();
     }
 
-    public function cekkeranjang($idbarang, $iduser){
+    public function cekKeranjang($idbarang, $iduser)
+    {
         return $this->db->get_where('sdr_consumption_keranjang', array('id_barang'=>$idbarang, 'id_user'=>$iduser));
     }
 
-    public function savekeranjang($data){
-        $this->db->insert('sdr_consumption_keranjang',$data);
+    public function saveKeranjang($data)
+    {
+        $this->db->insert('sdr_consumption_keranjang', $data);
     }
 
-    public function findkeranjang($id_user){
+    public function getKeranjang($id_user)
+    {
         $this->db->select('sdr_consumption_keranjang. id_barang, barang, jumlah, id_user');
         $this->db->from('sdr_consumption_keranjang');
         $this->db->join('sdr_barang','sdr_barang.id_barang=sdr_consumption_keranjang.id_barang');
         $this->db->where('id_user',$id_user);
         return $this->db->get();
-    }
+    }   
 
-    public function deletekeranjang($id_barang, $id_user){
+    public function deleteKeranjang($id_barang, $id_user)
+    {
         $hapus = $this->db->delete('sdr_consumption_keranjang', array('id_barang'=>$id_barang, 'id_user'=> $id_user));
         if ($hapus) {
             return 1;
         }
     }
 
-    public function save($data, $iduser, $faktur, $fakest){
+    public function save($data, $iduser, $faktur, $fakest)
+    {
         $simpan = $this->db->insert('sdr_consumption',$data);
         if ($simpan) {
             $carikeranjang = $this->db->get_where('sdr_consumption_keranjang', array('id_user'=>$iduser));
@@ -98,17 +110,19 @@ class m_konsumsi extends CI_Model{
         }
     }
 
-    public function deleteconsumption($faktur){
+    public function deleteKonsumsi($faktur)
+    {
         $hapus = $this->db->delete('sdr_consumption', array('faktur'=>$faktur));
         if ($hapus) {
             $hapusdetail = $this->db->delete('sdr_consumption_detail', array('faktur'=>$faktur));
             if ($hapusdetail) {
-                redirect('Sundries/Transaksi/c_konsumsi/consumptionpage');
+                redirect('Sundries/consumptioncontroller/consumptionpage');
             }
         }
     }
 
-    public function findconsumptionbyid($id){
+    public function getKonsumsiById($id)
+    {
         return $this->db->from('sdr_consumption')
             ->join('tbl_user','tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
@@ -117,7 +131,8 @@ class m_konsumsi extends CI_Model{
             ->result();
     }
 
-    public function findconsumptiondetail($id){
+    public function getKonsumsiDetail($id)
+    {
         return $this->db->from('sdr_consumption_detail')
             ->join('sdr_consumption','sdr_consumption.faktur=sdr_consumption_detail.faktur')
             ->join('sdr_barang','sdr_barang.id_barang=sdr_consumption_detail.id_barang')
@@ -125,10 +140,11 @@ class m_konsumsi extends CI_Model{
             ->join('his_section','his_section.id_section=tbl_user.id_section')
             ->where('sdr_consumption_detail.faktur',$id)
             ->get()
-            ->result();
+            ->result();   
     }
 
-    public function findbyidforpdf($id){
+    public function getIdPdf($id)
+    {
         $query = $this->db->from('sdr_consumption')
             ->join('tbl_user','tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
@@ -138,20 +154,8 @@ class m_konsumsi extends CI_Model{
         return $query->result_array();
     }
 
-    public function finddetailforpdf($id){
-        $query = $this->db->from('sdr_consumption_detail')
-            ->join('sdr_consumption','sdr_consumption.faktur=sdr_consumption_detail.faktur')
-            ->join('sdr_barang','sdr_barang.id_barang=sdr_consumption_detail.id_barang')
-            ->join('tbl_user','tbl_user.id_user=sdr_consumption.id_user')
-            ->join('his_section','his_section.id_section=tbl_user.id_section')
-            ->where('sdr_consumption_detail.faktur',$id)
-            ->get();
-
-        return $query->result_array();
-
-    }
-
-    public function findforaprove(){
+    public function forApprove()
+    {
         return $this->db->from('sdr_consumption')
             ->join('tbl_user','tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
@@ -162,10 +166,10 @@ class m_konsumsi extends CI_Model{
             ->result();
     }
 
-    public function update($where,$data){
+    public function update($where, $data)
+    {
         $this->db->where($where);
         $this->db->update($this->table,$data);
     }
-
 }
-
+?>
