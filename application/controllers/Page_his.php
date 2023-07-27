@@ -1,132 +1,122 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-class Page_his extends MY_Controller
-{
-  public function __construct()
-  {
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Page_his extends MY_Controller {
+  public function __construct(){
     parent::__construct();
-    $this->load->model('Master/m_karyawan');
+    $this->load->model('M_his');
   }
 
-  public function home()
-  {
+  public function home(){
     $menu = 'hom';
     $data[''] = "";
-
+  
     // $data['sidebar'] = $this->load->view('side_medical/admin_medical');
-    if (
-      $this->session->userdata('role') == 'sdr_Admin Bagian'
-      or $this->session->userdata('role') == 'sdr_Kepala Bagian'
-      or $this->session->userdata('role') == 'sdr_Admin Gudang'
-      or $this->session->userdata('role') == 'sdr_Kepala Gudang'
-    ) {
-      redirect('Sundries/Transaksi/c_persetujuan/dashboard');
-    } else {
-      $this->render_backend('layout/v_dashboard', $menu, $data);
+    if ($this->session->userdata('role')=='sdr_Admin Bagian'
+      OR $this->session->userdata('role')=='sdr_Kepala Bagian'
+      OR $this->session->userdata('role')=='sdr_Admin Gudang'
+      OR $this->session->userdata('role')=='sdr_Kepala Gudang'){
+      redirect('Sundries/requestsundriescontroller/dashboard');
+    }else{
+      $this->render_backend('v_dashboard', $menu, $data); 
     }
   }
 
-  // tampil role super user
-  public function user()
-  {
-    $data['user'] = $this->m_karyawan->data_user();
+
+  public function user(){
+    $data['user'] = $this->M_his->data_user();
 
     $menu = 'user';
 
-    if ($this->session->userdata('role') == 'super_user') {
+    if($this->session->userdata('role') == 'super_user'){
       $this->render_backend('v_user', $menu, $data);
-    } else {
+    }else{
       $this->render_backend('v_error', $menu, $data);
     }
   }
 
-  // 
-  public function karyawan()
-  {
+  public function karyawan(){
     $menu = $this->uri->segment(2);
-
-    $data['karyawan'] = $this->m_karyawan->data_karyawan();
-
-    if ($this->session->userdata('role') == 'super_user') {
-      $this->render_backend('Sundries/Personal/v_karyawan.php', $menu, $data);
-    } else {
-      $this->render_backend('v_error', $menu, $data);
-    }
-  }
-
-  public function karyawan_out()
-  {
-    $menu = $this->uri->segment(2);
-
-    $data['karyawan_out'] = $this->m_karyawan->data_karyawan_out();
     
-    $this->render_backend('Sundries/Personal/v_karyawan_keluar.php', $menu, $data);
+    $data['karyawan'] = $this->M_his->data_karyawan();
+
+    if($this->session->userdata('role') == 'super_user'){
+        $this->render_backend('v-his_karyawan', $menu, $data);     
+    } else {
+      $this->render_backend('v_error', $menu, $data);
+    }
   }
 
-  public function karyawan_temp()
-  {
+  public function karyawan_out(){
     $menu = $this->uri->segment(2);
+    
+    $data['karyawan_out'] = $this->M_his->data_karyawan_out();
 
-    $data['karyawan'] = $this->m_karyawan->data_karyawan_temp();
-
-    $this->render_backend('Sundries/Personal/v_pelatihan_coba.php', $menu, $data);
+    $this->render_backend('v-his_karyawan_out', $menu, $data);
   }
 
-  public function karyawan_out_temp()
-  {
+  public function karyawan_temp(){
     $menu = $this->uri->segment(2);
+    
+    $data['karyawan'] = $this->M_his->data_karyawan_temp();
 
-    $data['karyawan'] = $this->m_karyawan->data_karyawan_out_temp();
-
-    $this->render_backend('Sundries/Personal/v_pelatihan_keluar', $menu, $data);
+    $this->render_backend('v-his_karyawan_temp', $menu, $data);
   }
 
-  function divisi()
-  {
+  public function karyawan_out_temp(){
     $menu = $this->uri->segment(2);
-    $data['div'] = $this->m_karyawan->data_divisi();
+    
+    $data['karyawan'] = $this->M_his->data_karyawan_out_temp();
 
-    $this->render_backend('Sundries/Personal/v_divisi', $menu, $data);
+    $this->render_backend('v-his_karyawan_out_temp', $menu, $data);
   }
 
-  function departemen()
-  {
+  function divisi(){
     $menu = $this->uri->segment(2);
-    $data['dep'] = $this->m_karyawan->data_dep();
-    // $data['section'] = $this->Master/m_karyawan->data_section_byId();
+    $data['div'] = $this->M_his->data_divisi();
 
-    $this->render_backend('Sundries/Personal/v_departemen', $menu, $data);
+    $this->render_backend('v-his_divisi', $menu, $data);
+    
   }
 
-  function section()
-  {
+  function departemen(){
     $menu = $this->uri->segment(2);
-    $data['section'] = $this->m_karyawan->data_section();
+    $data['dep'] = $this->M_his->data_dep();
+    // $data['section'] = $this->M_his->data_section_byId();
 
-    $this->render_backend('Sundries/Personal/v_section', $menu, $data);
+    $this->render_backend('v-his_departemen', $menu, $data);
+    
   }
 
-  function shift()
-  {
+  function section(){
     $menu = $this->uri->segment(2);
-    $data['shift'] = $this->m_karyawan->data_shift();
+    $data['section'] = $this->M_his->data_section();
 
-    $this->render_backend('Sundries/Personal/v_shift', $menu, $data);
+    $this->render_backend('v-his_section', $menu, $data);
+    
   }
 
-  function jabatan()
-  {
+  function shift(){
     $menu = $this->uri->segment(2);
-    $data['jabatan'] = $this->m_karyawan->data_jabatan();
+    $data['shift'] = $this->M_his->data_shift();
 
-    $this->render_backend('Sundries/Personal/v_jabatan', $menu, $data);
+    $this->render_backend('v-his_shift', $menu, $data);
+    
   }
 
-  function golongan()
-  {
+  function jabatan(){
     $menu = $this->uri->segment(2);
-    $data['golongan'] = $this->m_karyawan->data_golongan();
+    $data['jabatan'] = $this->M_his->data_jabatan();
 
-    $this->render_backend('Sundries/Personal/v_golongan', $menu, $data);
+    $this->render_backend('v-his_jabatan', $menu, $data);
+    
   }
+
+  function golongan(){
+    $menu = $this->uri->segment(2);
+    $data['golongan'] = $this->M_his->data_golongan();
+
+    $this->render_backend('v-his_golongan', $menu, $data);
+    
+  }
+
 }

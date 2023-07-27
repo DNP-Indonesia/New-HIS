@@ -1,11 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends MY_Controller {
-	public function __construct()
-	{
-		parent::__construct();
-	}
+class Welcome extends CI_Controller {
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -23,6 +20,6 @@ class Welcome extends MY_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('layout/index');
+		$this->load->view('welcome_message');
 	}
 }

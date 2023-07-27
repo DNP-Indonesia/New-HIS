@@ -1,0 +1,24 @@
+<?php
+
+class modelkategori extends CI_Model{
+	protected $table = "sdr_kategori";
+    protected $primaryKey = "id_kategori";
+    protected $allowedFields = ['id_kategori', 'kategori'];
+
+    public function findAll(){
+    	return $this->db->get($this->table)->result();
+    }
+
+    public function save($data){
+        return $this->db->insert($this->table, $data);
+    }
+
+    public function delete($id){
+        return $this->db->delete($this->table, array("id_kategori" => $id));
+    }
+
+    function update($where,$data){
+        $this->db->where($where);
+        $this->db->update($this->table,$data);
+    }   
+}
