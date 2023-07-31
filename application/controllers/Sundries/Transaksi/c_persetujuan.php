@@ -18,7 +18,7 @@ class c_persetujuan extends MY_Controller{
     public function dashboard(){
         $data['diproses'] = $this->m_persetujuan->finddiproses();
         $data['foraprove'] = $this->m_persetujuan->findforaprove();
-        $data['estimasi'] = $this->modelestimasi->findforaprove();
+        $data['estimasi'] = $this->m_estimasi->findforaprove();
         $data['consum'] = $this->m_konsumsi->findforaprove();
         $data['foradmingudang'] = $this->m_persetujuan->findforadmingudang();
         $data['forkplgudang'] = $this->m_persetujuan->findforkplgudang();

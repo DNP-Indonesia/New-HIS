@@ -52,7 +52,7 @@ class Action_his extends MY_Controller{
 				$this->session->set_flashdata('success', 'Data User berhasil ditambahkan');
 		}
 
-		redirect(site_url("page_his/user"));
+		redirect(site_url("Auth/c_role/user"));
 	}
 
 	function do_edit_user(){

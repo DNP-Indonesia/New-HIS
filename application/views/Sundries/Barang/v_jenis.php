@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <link href="<?php echo base_url() ?>dnp-logo.png"rel="icon">
+        <link href="<?php echo base_url('assets/dnp-logo.png') ?>" rel="icon">
         <title>DNP - HIS</title>
 
 
@@ -55,7 +55,7 @@
                 </li>        
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('page_his/user') ?>">
+                    <a class="nav-link" href="<?= base_url('Auth/c_role/user') ?>">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Data User Account</span>
                     </a>
@@ -269,7 +269,7 @@
                         <button class="btn btn-success" type="button" data-dismiss="modal">
                             Nggak Jadi
                         </button>
-                        <a class="btn btn-warning" href="<?php echo site_url() ?>/auth/logout">
+                        <a class="btn btn-warning" href="<?php echo site_url() ?>logout">
                             Logout
                         </a>
                     </div>

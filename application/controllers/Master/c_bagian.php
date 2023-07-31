@@ -10,6 +10,55 @@ class c_bagian extends MY_Controller
         $this->load->model('Master/c_karyawan');
     }
 
+    function divisi()
+    {
+        $menu = $this->uri->segment(2);
+        $data['div'] = $this->m_karyawan->data_divisi();
+
+        $this->render_backend('Sundries/Personal/v_divisi', $menu, $data);
+    }
+
+    function departemen()
+    {
+        $menu = $this->uri->segment(2);
+        $data['dep'] = $this->m_karyawan->data_dep();
+        // $data['section'] = $this->Master/m_karyawan->data_section_byId();
+
+        $this->render_backend('Sundries/Personal/v_departemen', $menu, $data);
+    }
+
+    function section()
+    {
+        $menu = $this->uri->segment(2);
+        $data['section'] = $this->m_karyawan->data_section();
+
+        $this->render_backend('Sundries/Personal/v_section', $menu, $data);
+    }
+
+    function shift()
+    {
+        $menu = $this->uri->segment(2);
+        $data['shift'] = $this->m_karyawan->data_shift();
+
+        $this->render_backend('Sundries/Personal/v_shift', $menu, $data);
+    }
+
+    function jabatan()
+    {
+        $menu = $this->uri->segment(2);
+        $data['jabatan'] = $this->m_karyawan->data_jabatan();
+
+        $this->render_backend('Sundries/Personal/v_jabatan', $menu, $data);
+    }
+
+    function golongan()
+    {
+        $menu = $this->uri->segment(2);
+        $data['golongan'] = $this->m_karyawan->data_golongan();
+
+        $this->render_backend('Sundries/Personal/v_golongan', $menu, $data);
+    }
+
     function do_tbh_divisi()
     {
         $nama_divisi    = $_POST['nama_divisi'];
