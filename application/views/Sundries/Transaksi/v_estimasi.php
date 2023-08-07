@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <link href="<?php echo base_url() ?>dnp-logo.png"rel="icon">
+        <link href="<?php echo base_url('assets/dnp-logo.png') ?>" rel="icon">
         <title>DNP - HIS</title>
 
 
@@ -76,6 +76,7 @@
                     </a>
                     <div id="collapse-transaksi" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
+                            <?php if ($this->session->userdata('role') ) ?>
                             <a class="collapse-item text-success" href="<?= base_url('transaksi-sundries/pembuatan-estimasi') ?>">Pembuatan Estimasi</a>
                             <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-consumption') ?>">Request Consumption</a>
                             <a class="collapse-item" href="<?= base_url('transaksi-sundries/request-sundries') ?>">Request Sundries</a>
@@ -395,7 +396,7 @@
                         <button class="btn btn-success" type="button" data-dismiss="modal">
                             Nggak Jadi
                         </button>
-                        <a class="btn btn-warning" href="<?php echo site_url() ?>/auth/logout">
+                        <a class="btn btn-warning" href="<?php echo site_url() ?>logout">
                             Logout
                         </a>
                     </div>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="<?php echo base_url() ?>dnp-logo.png" rel="icon">
+    <link href="<?php echo base_url('assets/dnp-logo.png') ?>" rel="icon">
     <title>DNP - HIS</title>
 
 
@@ -402,7 +402,7 @@
                     <button class="btn btn-success" type="button" data-dismiss="modal">
                         Nggak Jadi
                     </button>
-                    <a class="btn btn-warning" href="<?php echo site_url() ?>/auth/logout">
+                    <a class="btn btn-warning" href="<?php echo site_url() ?>logout">
                         Logout
                     </a>
                 </div>
