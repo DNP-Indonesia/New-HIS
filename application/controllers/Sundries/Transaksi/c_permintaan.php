@@ -19,8 +19,7 @@ class c_permintaan extends MY_Controller
 
     public function dashboard()
     {
-        $id_user = $this->session->userdata('id_user');
-        $data['diproses'] = $this->m_permintaan->getProses($id_user);
+        $data['diproses'] = $this->m_permintaan->getProses();
         $data['forapprove'] = $this->m_permintaan->forApprove();
         $data['estimasi'] = $this->m_estimasi->forApprove();
         $data['konsumsi'] = $this->m_konsumsi->forApprove();
@@ -32,19 +31,17 @@ class c_permintaan extends MY_Controller
 
     public function index()
     {
-        $id_user = $this->session->userdata('id_user');
-        $status = $this->session->userdata('status');
         $data['bypermintaan'] = $this->m_permintaan->byPermintaan();
         $data['bysetuju2'] = $this->m_permintaan->bySetuju2();
         $data['bytolak'] = $this->m_permintaan->byTolak();
         $data['byproses'] = $this->m_permintaan->byProses();
         $data['byselesai'] = $this->m_permintaan->bySelesai();
-        $data['permintaan'] = $this->m_permintaan->getPermintaan($status, $id_user);
-        $data['setuju1'] = $this->m_permintaan->getSetuju1($id_user);
-        $data['setuju2'] = $this->m_permintaan->getSetuju2($id_user);
-        $data['tolak'] = $this->m_permintaan->getTolak($id_user);
-        $data['proses'] = $this->m_permintaan->getProses($id_user);
-        $data['selesai'] = $this->m_permintaan->getSelesai($id_user);
+        $data['permintaan'] = $this->m_permintaan->getPermintaan();
+        $data['setuju1'] = $this->m_permintaan->getSetuju1();
+        $data['setuju2'] = $this->m_permintaan->getSetuju2();
+        $data['tolak'] = $this->m_permintaan->getTolak();
+        $data['proses'] = $this->m_permintaan->getProses();
+        $data['selesai'] = $this->m_permintaan->getSelesai();
         $data['kabagpermintaan'] = $this->m_permintaan->forKepalaBagianPermintaan();
         $data['kabagsetuju'] = $this->m_permintaan->forKepalaBagianSetuju();
         $data['kabagtolak'] = $this->m_permintaan->forKepalaBagianTolak();

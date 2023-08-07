@@ -47,70 +47,7 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo site_url() ?>">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3"> DNP - HIS</div>
-                </a>
-
-                <!-- Divider -->
-                
-                <hr class="sidebar-divider my-0">
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo site_url() ?>">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>        
-
-                <li class="nav-item active">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
-                        aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Transaksi Sundries</span>
-                    </a>
-                    <div id="collapse-transaksi" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <?php if ($this->session->userdata('role') != 'sdr_Admin Gudang' AND $this->session->userdata('role') != 'sdr_Kepala Gudang') {?>
-                                <a class="collapse-item" href="<?= base_url('Sundries/estimasicontroller/estimasipage') ?>">
-                                    Pembuatan Estimasi
-                                </a>
-                                <a class="collapse-item" href="<?= base_url('Sundries/consumptioncontroller/consumptionpage') ?>">
-                                    Request Consumption
-                                </a>
-                            <?php } ?>
-                            
-                            <a class="collapse-item" href="<?= base_url('Sundries/requestsundriescontroller/requestsundriespage') ?>">
-                                Request Sundries
-                            </a>
-                            <a class="collapse-item text-success" href="<?= base_url('Sundries/purchasecontroller/purchasepage') ?>">
-                                Request Purchase
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Log Out</span>
-                    </a>
-                </li>
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
-
-            </ul>
-            <!-- End of Sidebar -->
+            <?php $this->load->view('Sundries/sdr_sidebar');?>
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -145,7 +82,7 @@
                                             }
                                         ?>
                                     </span>
-                                    <img class="img-profile rounded-circle" src="<?php echo base_url() ?>bootstrap/img/user.png">
+                                    <img class="img-profile rounded-circle" src="<?php echo site_url() ?>bootstrap/img/user.png">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -162,8 +99,8 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        <h5>Request Purchase / Form Request Purchase</h5>
-                        <a href="<?= base_url('Sundries/purchasecontroller/purchasepage') ?>" class="btn btn-sm btn-secondary mb-2">Kembali</a>
+                        <h5>Form Request Purchase</h5>
+                        <a href="<?= site_url('pembelian') ?>" class="btn btn-sm btn-secondary mb-2">Kembali</a>
                         <?php
                             if ($this->session->userdata('role')=='super_user') {
                         ?>
@@ -208,7 +145,7 @@
                                     <?php echo $this->session->set_userdata('update', NULL); ?> 
                                 </div> 
                             <?php }?>
-                            <form action="<?= site_url('Sundries/purchasecontroller/addkeranjang') ?>" method="POST">
+                            <form action="<?= site_url('addkeranjangpembelian') ?>" method="POST">
                                 <div class="card shadow mb-3">
                                     <div class="card-header">
                                         <h5>Keranjang</h5>
@@ -258,7 +195,8 @@
                                                 value=" <?php echo $this->session->userdata('id_user') ?>" hidden>
                                             </div> 
                                             <div class="col-md-4 mb-3">
-                                                <label>Klik Untuk Masukan Ke Keranjang</label>
+                                                <label>Klik Untuk Masukkan Ke Keranjang</label>
+                                                <br>
                                                 <button type="submit" class="btn btn-sm btn-info">Tambahkan Ke Keranjang</button>
                                             </div>
                                         </div>
@@ -298,7 +236,7 @@
                                                                         <td><?php echo $tempel->keterangan; ?></td>
                                                                         <td>
                                                                             <a href="#" class="btn btn-sm btn-danger" 
-                                                                            onclick="deleteConfirm('<?php echo base_url('Sundries/purchasecontroller/hapuskeranjang/tidak/'.$tempel->id_barang ) ?>')">
+                                                                            onclick="deleteConfirm('<?php echo site_url('deletekeranjangpembelian'.$tempel->id_barang ) ?>')">
                                                                                 Hapus Dari Keranjang
                                                                             </a>
                                                                         </td>
@@ -315,7 +253,7 @@
                                 </div>
                             </form>
                             
-                            <form action="<?= site_url('Sundries/purchasecontroller/purchaseadd') ?>" method="POST">
+                            <form action="<?= site_url('addpembelian') ?>" method="POST">
                                 <div class="card shadow mb-3">
                                     <div class="card-header">
                                         <h5>Form Request Purchase</h5>
@@ -347,7 +285,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-success btn-sm">
-                                            Buat Request
+                                            Buat
                                         </button>
                                     </div>
                                 </div>
@@ -392,7 +330,7 @@
                         <button class="btn btn-sm btn-success" type="button" data-dismiss="modal">
                             Batal
                         </button>
-                        <a class="btn btn-sm btn-danger" href="<?php echo site_url() ?>/auth/logout">
+                        <a class="btn btn-sm btn-danger" href="<?php echo site_url('logout') ?>">
                             Logout
                         </a>
                     </div>
@@ -455,7 +393,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                        foreach($barangrequest as $tempel){
+                                                        foreach($permintaanbarang as $tempel){
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $tempel->faktur ?></td>

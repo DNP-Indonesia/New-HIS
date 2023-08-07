@@ -26,9 +26,9 @@ class c_pembelian extends MY_Controller
 
     public function formPembelian()
     {
-        $data['permintaanBarang'] = $this->m_pembelian->getPermintaanBarang();
+        $data['permintaanbarang'] = $this->m_pembelian->getPermintaanBarang();
         $data['fakturotomatis'] = $this->m_pembelian->generateFaktur();
-        $data['kerangan'] = $this->m_pembelian->getKeterangan();
+        $data['keranjang'] = $this->m_pembelian->getKeranjang();
         $this->load->view('Sundries/Transaksi/Pembelian/v_form', $data);
     }
 
@@ -106,7 +106,7 @@ class c_pembelian extends MY_Controller
             'jamdibuat' => $jamdibuat
         );
 
-        $simpan = $this->m_pembelian->save($data, $iduser, $faktur); // Tambahkan $iduser dan $faktur sebagai parameter
+        $this->m_pembelian->save($data, $iduser, $faktur); // Tambahkan $iduser dan $faktur sebagai parameter
         $this->session->set_userdata('sukses', 'Berhasil, Request Pembelian telah dibuat');
         return redirect('Sundries/Transaksi/C_pembelian/index');
     }

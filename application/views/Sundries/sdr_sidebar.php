@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +10,6 @@
 
     <link href=<?php echo base_url() ?>dnp-logo.png rel="icon">
     <title>DNP - HIS</title>
-
 
     <link href="<?php echo base_url() ?>bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
         type="text/css">
@@ -27,19 +25,37 @@
 
     <link href="<?php echo base_url() ?>bootstrap/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
+    <style type="text/css">
+        .btn-purple {
+            background-color: #8000ff;
+            color: white;
+        }
+
+        .btn-purple:hover {
+            color: white;
+            background-color: #6906cc;
+        }
+
+        /* Gaya untuk font pada elemen navigasi aktif */
+        .navbar-nav .nav-item.active .nav-link,
+        .navbar-nav .nav-item.active .nav-link:hover,
+        .navbar-nav .nav-item.active .nav-link:focus {
+            color: white !important;
+        }
+
+        /* Gaya untuk font pada elemen navigasi ketika dihover (tersedia juga pada versi mobile) */
+        .navbar-nav .nav-item .nav-link:hover {
+            color: white;
+        }
+
+        /* Gaya untuk menampilkan dropdown */
+        .show {
+            display: block !important;
+        }
+    </style>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 </head>
-<style type="text/css">
-    .btn-purple {
-        background-color: #8000ff;
-        color: white;
-    }
-
-    .btn-purple:hover {
-        color: white;
-        background-color: #6906cc;
-    }
-</style>
 
 <body id="page-top">
 
@@ -64,51 +80,43 @@
                 <span>Dashboard</span>
             </a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
-                aria-expanded="true" aria-controls="collapsePages">
+                aria-expanded="false" aria-controls="collapsePages" onclick="toggleDropdown('collapse-transaksi')">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Transaksi Sundries</span>
             </a>
             <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages"
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="<?php echo site_url('permintaan') ?>">Request Sundries</a>
                     <?php
                     // Cek apakah peran pengguna termasuk dalam 'sdr_Admin Bagian' atau 'sdr_Kepala Bagian'
                     if ($this->session->userdata('role') == 'sdr_Admin Bagian' || $this->session->userdata('role') == 'sdr_Kepala Bagian') {
                         ?>
-                        <a class="collapse-item" href="<?php echo site_url('estimasi') ?>">
-                            Estimation Making
-                        </a>
-                        <a class="collapse-item" href="<?php echo site_url('konsumsi') ?>">
-                            Request Consumption
-                        </a>
+                        <a class="collapse-item" href="<?php echo site_url('estimasi') ?>">Estimation Making</a>
+                        <a class="collapse-item" href="<?php echo site_url('konsumsi') ?>">Request Consumption</a>
                         <?php
                     }
                     ?>
-                    <a class="collapse-item" href="<?php echo site_url('permintaan') ?>">
-                        Request Sundries
-                    </a>
                     <?php
                     // Cek apakah peran pengguna termasuk dalam 'sdr_Admin Gudang' atau 'sdr_Kepala Gudang'
                     if ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'sdr_Kepala Gudang') {
                         ?>
-                        <a class="collapse-item" href="<?php echo site_url('pembelian') ?>">
-                            Request Purchase
-                        </a>
-                        <a class="collapse-item" href="<?php echo site_url('penerimaan') ?>">
-                            Goods Receipt
-                        </a>
+                        <a class="collapse-item" href="<?php echo site_url('pembelian') ?>">Request Purchase</a>
+                        <a class="collapse-item" href="<?php echo site_url('penerimaan') ?>">Goods Receipt</a>
                         <?php
                     }
                     ?>
                 </div>
             </div>
         </li>
+
         <?php if ($this->session->userdata('role') == 'sdr_Kepala Bagian') { ?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-laporan"
-                    aria-expanded="true" aria-controls="collapsePages">
+                    aria-expanded="false" aria-controls="collapsePages" onclick="toggleDropdown('collapse-laporan')">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Laporan</span>
                 </a>
@@ -168,33 +176,45 @@
     </div>
     <!-- End Logout Modal -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
-
-    <script src="<?php echo base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="<?php echo base_url() ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="<?php echo base_url() ?>bootstrap/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="<?php echo base_url() ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-
-    <script src="<?php echo base_url() ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<?php echo base_url() ?>bootstrap/js/demo/datatables-demo.js"></script>
-
-    <script type="text/javascript"
-        src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
-
+    <!-- JavaScript untuk mengatur dropdown -->
     <script>
+        function toggleDropdown(collapseId) {
+            var $collapse = $('#' + collapseId);
+            var isOpen = $collapse.hasClass('show');
+
+            if (!isOpen) {
+                // Jika dropdown tidak terbuka, buka dropdown
+                $collapse.collapse('show');
+            } else {
+                // Jika dropdown terbuka, tutup dropdown
+                $collapse.collapse('hide');
+            }
+        }
+
+        // Hapus kelas 'show' saat halaman berubah
         $(document).ready(function () {
-            $('.table').DataTable();
+            $(window).on('beforeunload', function () {
+                // Cari elemen dengan kelas 'show' pada sidebar
+                var $activeDropdown = $('.navbar-nav .show');
+                // Hapus kelas 'show' pada elemen tersebut
+                $activeDropdown.removeClass('show');
+            });
+
+            // Tandai elemen navigasi yang sesuai dengan halaman aktif
+            var activeSegment = "<?php echo $this->uri->segment(1); ?>";
+            var $activeNavItem = $('.navbar-nav .nav-item');
+            $activeNavItem.removeClass('active');
+            $activeNavItem.each(function () {
+                var href = $(this).find('a').attr('href');
+                var segment = href.substr(href.lastIndexOf('/') + 1);
+                if (segment === activeSegment || (activeSegment === '' && href === '<?php echo site_url(); ?>')) {
+                    $(this).addClass('active');
+                    return false;
+                }
+            });
         });
     </script>
 
 </body>
+
 </html>

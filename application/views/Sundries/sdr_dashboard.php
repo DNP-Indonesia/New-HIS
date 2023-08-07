@@ -143,7 +143,7 @@
                                     Sundries
                                 </a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                    role="tab" aria-controls="nav-profile" aria-selected="false"> Estimasi
+                                    role="tab" aria-controls="nav-profile" aria-selected="false"> Estimation
                                 </a>
                                 <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
                                     role="tab" aria-controls="nav-contact" aria-selected="false"> Consumption
@@ -156,7 +156,7 @@
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="font-weight-bold text-success">
-                                            Request Sundries Menunggu Persetujuan
+                                            Menunggu Persetujuan
                                         </h6>
                                     </div>
                                     <div class="card-body">
@@ -176,7 +176,7 @@
                                                 <tbody>
                                                     <?php
                                                     $no = 1;
-                                                    foreach ($foraprove as $tempel) {
+                                                    foreach ($forapprove as $tempel) {
                                                         ?>
                                                         <tr>
                                                             <td>
@@ -224,7 +224,7 @@
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="font-weight-bold text-success">
-                                            Estimasi Menunggu Persetujuan
+                                            Menunggu Persetujuan
                                         </h6>
                                     </div>
                                     <div class="card-body">
@@ -302,7 +302,7 @@
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="font-weight-bold text-success">
-                                            Permintaan Consumption Menunggu Persetujuan
+                                            Menunggu Persetujuan
                                         </h6>
                                     </div>
                                     <div class="card-body">
@@ -322,7 +322,7 @@
                                                 <tbody>
                                                     <?php
                                                     $no = 1;
-                                                    foreach ($consum as $tempel) {
+                                                    foreach ($konsumsi as $tempel) {
                                                         ?>
                                                         <tr>
                                                             <td>
@@ -563,7 +563,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="font-weight-bold text-success">
-                                    Request Sundries Menunggu Persetujuan
+                                    Menunggu Persetujuan
                                 </h6>
                             </div>
                             <div class="card-body">

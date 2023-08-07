@@ -125,6 +125,7 @@ $route['rejectkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/rejectKonsumsi';
 
 // Pembelian
 $route['pembelian'] = 'Sundries/Transaksi/c_pembelian/index';
+$route['formpembelian'] = 'Sundries/Transaksi/c_pembelian/formPembelian';
 $route['addkeranjangpembelian'] = 'Sundries/Transaksi/c_pembelian/addKeranjang';
 $route['showkeranjangpembelian'] = 'Sundries/Transaksi/c_pembelian/showKeranjang';
 $route['deletekeranjangpembelian'] = 'Sundries/Transaksi/c_pembelian/deleteKeranjang';

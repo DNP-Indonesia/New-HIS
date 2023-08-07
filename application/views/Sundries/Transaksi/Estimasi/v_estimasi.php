@@ -162,7 +162,7 @@
                                                             </a>
                                                      <?php } ?>
                                                     
-                                                    <a href="<?php echo site_url('detailestimasi'); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                                    <a href="<?php echo site_url('detailestimasi/'); ?>" target="_blank" class="btn btn-sm btn-purple">
                                                         Detail
                                                     </a>
 

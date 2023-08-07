@@ -113,7 +113,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="font-weight-bold text-success">
-                                    Data Request Purchase
+                                    Data Buat Baru
                                 </h6>
                             </div>
                             <div class="table-responsive-xl">
@@ -148,7 +148,7 @@
                                                  <?php } ?> 
                                             </td>
                                             <td>
-                                                <a href="<?php echo site_url(); ?>Sundries/purchasecontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                <a href="<?php echo site_url('detailpembelian/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                     Detail   
                                                 </a> 
                                             </td>
@@ -180,8 +180,8 @@
                                 <?php echo $this->session->set_userdata('sukses', NULL); ?>  
                             </div> 
                         <?php }?>
-                        <a href="<?= base_url('Sundries/purchasecontroller/formpurchase') ?>" class="btn btn-sm btn-success mb-3">
-                            Request Purchase
+                        <a href="<?= site_url('formpembelian') ?>" class="btn btn-sm btn-success mb-3">
+                            Buat Baru
                         </a>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -212,10 +212,10 @@
                                                 <td><?php echo $tempel->tanggal ?></td>
                                                 <td><?php echo $tempel->jamdibuat ?></td>
                                                 <td>
-                                                    <a href="<?php echo site_url(); ?>Sundries/purchasecontroller/printpdf/<?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                    <a href="<?php echo site_url('printpembelian'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                     Cetak PDF
                                                     </a>
-                                                    <a href="<?php echo site_url(); ?>Sundries/purchasecontroller/detail/<?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                    <a href="<?php echo site_url('detailpembelian/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                         Detail   
                                                     </a> 
                                                 </td>
