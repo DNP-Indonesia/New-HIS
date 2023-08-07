@@ -51,8 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'index';
 $route['folder1/folder2/controller'] = 'folder1/folder2/ControllerName/method';
-$route['Sundries/Barang'] = 'Sundries/Barang/c_barang/barangpage';
-
+$route['Sundries/Barang'] = 'Sundries/Barang/c_barang/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -61,28 +60,5 @@ $route['auth'] = 'auth/c_auth';
 $route['home'] = 'auth/c_auth/home';
 $route['logout'] = 'auth/c_auth/logout';
 $route['dashboard'] = 'Page_his/home';
-$route['data-user'] = 'Page_his/user';
-
-// Personal Data
-$route['data-karyawan'] = 'Page_his/karyawan';
-$route['data-karyawan-keluar'] = 'Page_his/karyawan_out';
-$route['data-karyawan-training-dan-percobaan'] = 'Page_his/karyawan_temp';
-$route['data-karyawan-training-dan-percobaan-keluar'] = 'Page_his/karyawan_out_temp';
-$route['daftar-divisi'] = 'Page_his/divisi';
-$route['daftar-departemen'] = 'Page_his/departemen';
-$route['daftar-section'] = 'Page_his/section';
-$route['daftar-shift'] = 'Page_his/shift';
-$route['daftar-jabatan'] = 'Page_his/jabatan';
-$route['daftar-golongan'] = 'Page_his/golongan';
 
 
-// Sundries Master
-$route['Master-Sundries/Barang'] = 'Sundries/Barang/c_barang/barangpage';
-$route['Master-Sundries/Jenis'] = 'Sundries/Barang/c_jenis/jenispage';
-$route['Master-Sundries/Kategori'] = 'Sundries/Barang/c_kategori/kategoripage';
-
-// Transaksi Sundries
-$route['transaksi-sundries/pembuatan-estimasi'] = 'Sundries/Transaksi/c_estimasi/estimasipage';
-$route['transaksi-sundries/request-sundries'] = 'Sundries/Transaksi/c_persetujuan/requestsundriespage';
-$route['transaksi-sundries/request-purchase'] = 'Sundries/Transaksi/c_pembelian/purchasepage';
-$route['transaksi-sundries/request-consumption'] = 'Sundries/Transaksi/c_konsumsi/consumptionpage';

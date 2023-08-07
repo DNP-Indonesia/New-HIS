@@ -1,27 +1,27 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class c_penerimaan extends MY_Controller{
+class penerimaancontroller extends MY_Controller{
 
     
     public function __construct(){
         parent::__construct();
-        $this->load->model("Sundries/Barang/m_jenis");
-        $this->load->model("Sundries/Barang/m_barang");
-        $this->load->model("Sundries/Barang/m_kategori");
-        $this->load->model("Sundries/Transaksi/m_persetujuan");
-        $this->load->model("Sundries/Transaksi/m_detail");
-        $this->load->model("Sundries/Transaksi/m_detail_sementara");
-        $this->load->model("Sundries/Transaksi/m_estimasi");
-        $this->load->model("Sundries/Transaksi/m_konsumsi");
-        $this->load->model("Sundries/Transaksi/m_penerimaan");
-        $this->load->model("Sundries/Transaksi/m_pembelian");
+        $this->load->model("Sundries/modeljenis");
+        $this->load->model("Sundries/modelbarang");
+        $this->load->model("Sundries/modelkategori");
+        $this->load->model("Sundries/modelrequestsundries");
+        $this->load->model("Sundries/modeldetailsundries");
+        $this->load->model("Sundries/modeldetailsundriessementara");
+        $this->load->model("Sundries/modelestimasi");
+        $this->load->model("Sundries/modelconsumption");
+        $this->load->model("Sundries/modelpenerimaan");
+        $this->load->model("Sundries/modelpurchase");
         $this->load->library('Pdf');
     }
 
     public function penerimaanpage(){
-        $data['penerimaan'] = $this->m_penerimaan->findall();
-        $data['purchase'] = $this->m_pembelian->findpurchase();
-        $this->load->view('Sundries/Transaksi/v_penerimaan_barang',$data);
+        $data['penerimaan'] = $this->modelpenerimaan->findall();
+        $data['purchase'] = $this->modelpurchase->findpurchase();
+        $this->load->view('sundries/penerimaan',$data);
     }
 
     public function penerimaanadd(){
@@ -36,15 +36,15 @@ class c_penerimaan extends MY_Controller{
             'keterangan'=>$keterangan
         );
 
-        $this->m_penerimaan->savepenerimaan($data);
+        $this->modelpenerimaan->savepenerimaan($data);
         $this->session->set_userdata('sukses', 'Berhasil, Data Penerimaan Telah Dibuat....');
-        return redirect('Sundries/Transaksi/c_penerimaan/penerimaanpage');
+        return redirect('Sundries/penerimaancontroller/penerimaanpage');
     }
 
     public function formaddbarang(){
         $fakpch = $this->uri->segment(4);
 
-        $data['daftarpurchase'] = $this->m_penerimaan->purchase($fakpch);
+        $data['daftarpurchase'] = $this->modelpenerimaan->purchase($fakpch);
         $this->load->view('sundries/formdaftarbarang');
     }
 }

@@ -26,7 +26,7 @@
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="<?= base_url('Sundries/Barang/c_kategori/kategoripage') ?>" style="text-decoration: none;">
+            <a href="<?= base_url('Sundries/kategoricontroller/kategoripage') ?>" style="text-decoration: none;">
                 <div class="card text-white bg-secondary mb-3">
                     <div class="card-body">
                         <h5 class="card-title">HIS Sundries</h5>

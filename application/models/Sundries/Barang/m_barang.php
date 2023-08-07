@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+
 class m_barang extends CI_Model
 {
     protected $table = 'sdr_barang';

@@ -38,15 +38,18 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Selamat Datang</h1>
-                                        <?php if ($this->session->has_userdata('message')) : ?>
+                                        <?php
+                                        if ($this->session->has_userdata('error')) { ?>
                                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                <?= $this->session->flashdata('message'); ?>
-                                                <?php $this->session->set_flashdata('message', NULL); ?>
+                                                <?=
+                                                $this->session->flashdata('error');
+                                                $this->session->set_flashdata('error', NULL);
+                                                ?>
                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                        <?php endif; ?>
+                                        <?php } ?>
                                     </div>
                                     <form class="user" action="<?= base_url('index.php/auth/c_auth/login'); ?>" method="POST">
                                         <div class="form-group">

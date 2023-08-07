@@ -1,26 +1,24 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-class c_barang extends MY_Controller
+
+class c_barang extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-		$this->load->model('Sundries/Barang/m_kategori');
-		$this->load->model('Sundries/Barang/m_jenis');
-        $this->load->model('Sundries/Barang/m_barang');
+        $this->load->model('Sundries\Barang\m_barang');
     }
 
-    public function barangpage()
+    public function index()
     {
         $data['title'] = 'Barang';
-        $data['ambil'] = $this->m_barang->getBarangAll();
+        $data['sdr_barang'] = $this->m_barang->getBarangAll();
         $this->load->view('Sundries/Barang/v_barang', $data);
     }
 
     public function create()
     {
         $data['title'] = 'Barang';
-        $this->load->view('Sundries/Barang/v_barang', $data);
+        $this->load->view('Sundries/Barang/v_barang_create', $data);
     }
 
     public function store()
@@ -37,8 +35,8 @@ class c_barang extends MY_Controller
     public function edit($id)
     {
         $data['title'] = 'Barang';
-        $data['ambil'] = $this->m_barang->getBarangById($id);
-        $this->load->view('Sundries/Barang/v_barang', $data);
+        $data['sdr_barang'] = $this->m_barang->getBarangById($id);
+        $this->load->view('Sundries/Barang/v_barang_edit', $data);
     }
 
     public function update()
