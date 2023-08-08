@@ -14,13 +14,19 @@ class c_barang extends MY_Controller
     public function index()
     {
         $data['title'] = 'Barang';
-        $data['ambil'] = $this->m_barang->getBarangAll();
+        $data['sdr_barang'] = $this->m_barang->getBarangAll();
         $this->load->view('Sundries/Barang/v_barang', $data);
     }
 
     public function addBarang()
     {
-        $data = array(
+        $data['title'] = 'Barang';
+        $this->load->view('Sundries/Barang/v_barang_create', $data);
+    }
+
+    public function store()
+    {
+        $data = [
             'barang' => $this->input->post('barang'),
             'brand' => $this->input->post('brand'),
             'type' => $this->input->post('type'),

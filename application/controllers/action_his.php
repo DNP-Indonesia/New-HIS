@@ -211,19 +211,26 @@ class Action_his extends MY_Controller{
 	}
 
 	function do_tbh_karyawan(){
-		$spysiid = $_POST['spysiid'];
-		$nama = $_POST['nama'];
-		$id_section = $_POST['id_section'];
-		$nik = $_POST['nik'];
-		$id_golongan = $_POST['id_golongan'];
-		$id_jabatan = $_POST['id_jabatan'];
-		$id_shift = $_POST['id_shift'];
-		$tgl_masuk = $_POST['tgl_masuk'];
-		$tgl_lahir = $_POST['tgl_lahir'];
-		$gender = $_POST['gender'];
-		$pendidikan = $_POST['pendidikan'];
-		$keterangan = "Aktif";
+		$spysiid 		= $_POST['spysiid'];
+		$nama 			= $_POST['nama'];
+		$id_section 	= $_POST['id_section'];
+		$nik 			= $_POST['nik'];
+		$id_golongan 	= $_POST['id_golongan'];
+		$id_jabatan 	= $_POST['id_jabatan'];
+		$id_shift 		= $_POST['id_shift'];
+		$tgl_masuk 		= $_POST['tgl_masuk'];
+		$tgl_lahir 		= $_POST['tgl_lahir'];
+		$gender 		= $_POST['gender'];
+		$pendidikan 	= $_POST['pendidikan'];
+		$keterangan 	= "Aktif";
 	
+		// Validasi spysiid telah digunakan
+		$existingSpysiid = $this->M_his->get_by_condition('his_karyawan', array('spysiid' => $spysiid));
+		if ($existingSpysiid) {
+			$this->session->set_flashdata('error', 'SPYSIID telah digunakan. Silakan pilih SPYSIID yang lain.');
+			redirect(site_url("page_his/karyawan"));
+		}
+
 		// Validasi 1: spysiid harus angka sepanjang 8 digit dan harus unik
 		if (!preg_match('/^\d{8}$/', $spysiid)) {
 			// Format spysiid tidak valid
@@ -231,6 +238,14 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('error', 'Format spysiid tidak valid. Harus berupa angka 8 digit.');
 			redirect(site_url("page_his/karyawan"));
 		}
+
+		// Validasi nik telah digunakan
+		$existingNik = $this->M_his->get_by_condition('his_karyawan', array('nik' => $nik));
+		if ($existingNik) {
+			$this->session->set_flashdata('error', 'NIK telah digunakan. Silakan pilih NIK yang lain.');
+			redirect(site_url("page_his/karyawan"));
+		}
+
 	
 		// Validasi 2: nama tidak boleh mengandung karakter spesial atau angka
 		if (!preg_match('/^[a-zA-Z\s]+$/', $nama)) {
@@ -298,7 +313,7 @@ class Action_his extends MY_Controller{
 		$spysiid 			= $_POST['spysiid'];
 		$nama       		= $_POST['nama'];
 		$id_section       	= $_POST['id_section'];
-		$nik_temp   		= $_POST['nik_temp'];
+		$nik_training   	= $_POST['nik_training'];
 		$id_golongan       	= $_POST['id_golongan'];
 		$id_jabatan       	= $_POST['id_jabatan'];
 		$id_shift       	= $_POST['id_shift'];
@@ -306,14 +321,65 @@ class Action_his extends MY_Controller{
 		$tgl_lahir       	= $_POST['tgl_lahir'];
 		$gender       		= $_POST['gender'];
 		$pendidikan       	= $_POST['pendidikan'];
-		$keterangan       	= $_POST['keterangan'];
+		$keterangan 		= $_POST['keterangan'];
+
+		// Validasi spysiid telah digunakan
+			$existingSpysiid = $this->M_his->get_by_condition('his_karyawan', array('spysiid' => $spysiid));
+		if ($existingSpysiid) {
+			$this->session->set_flashdata('error', 'SPYSIID telah digunakan. Silakan pilih SPYSIID yang lain.');
+			redirect(site_url("page_his/karyawan_temp"));
+		}
+
+		// Validasi 1: spysiid harus angka sepanjang 8 digit dan harus unik
+		if (!preg_match('/^\d{8}$/', $spysiid)) {
+			// Format spysiid tidak valid
+			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
+			$this->session->set_flashdata('error', 'Format spysiid tidak valid. Harus berupa angka 8 digit.');
+			redirect(site_url("page_his/karyawan_temp"));
+		}
+
+		// Validasi nik telah digunakan
+		$existingNik = $this->M_his->get_by_condition('his_karyawan', array('nik_training' => $nik_training));
+		if ($existingNik) {
+			$this->session->set_flashdata('error', 'NIK telah digunakan. Silakan pilih NIK yang lain.');
+			redirect(site_url("page_his/karyawan_temp"));
+		}
+
+	
+		// Validasi 2: nama tidak boleh mengandung karakter spesial atau angka
+		if (!preg_match('/^[a-zA-Z\s]+$/', $nama)) {
+			// Format nama tidak valid
+			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
+			$this->session->set_flashdata('error', 'Format nama tidak valid. Hanya huruf dan spasi yang diperbolehkan.');
+			redirect(site_url("page_his/karyawan_temp"));
+		}
+	
+		// Validasi 3: nik harus angka sepanjang 4 digit dan harus unik
+		if (!preg_match('/^\d{4}$/', $nik_training)) {
+			// Format nik tidak valid
+			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
+			$this->session->set_flashdata('error', 'Format nik tidak valid. Harus berupa angka 4 digit.');
+			redirect(site_url("page_his/karyawan_temp"));
+		}
+
+
+		// Validasi tanggal lahir
+		$birthdate = new DateTime($tgl_lahir);
+		$today = new DateTime();
+		$age = $birthdate->diff($today)->y;
+	
+		if ($age < 18) {
+			$this->session->set_flashdata('error', 'Usia karyawan harus minimal 18 tahun');
+			redirect(site_url("page_his/karyawan_temp"));
+		}
+
+
 		
 		$data = array(
 			'spysiid'		=> $spysiid,
-			'nik'			=> $nik_temp,
-			'nik_temp' 		=> $nik_temp,
 			'nama' 			=> $nama,
 			'id_section' 	=> $id_section,
+			'nik_training' 	=> $nik_training,
 			'id_golongan' 	=> $id_golongan,
 			'id_jabatan' 	=> $id_jabatan,
 			'id_shift' 		=> $id_shift,
@@ -336,65 +402,67 @@ class Action_his extends MY_Controller{
 
 	// EDIT ===================================================================================
 	function do_edit_karyawan($nik_awal){
+		$nama 			= $_POST['nama'];
+		$id_section 	= $_POST['id_section'];
+		$nik 			= $_POST['nik'];
+		$id_golongan 	= $_POST['id_golongan'];
+		$id_jabatan 	= $_POST['id_jabatan'];
+		$id_shift 		= $_POST['id_shift'];
+		$tgl_masuk 		= $_POST['tgl_masuk'];
+		$tgl_lahir 		= $_POST['tgl_lahir'];
+		$gender 		= $_POST['gender'];
+		$pendidikan 	= $_POST['pendidikan'];
 
-		$nama       		= $_POST['nama'];
-		$id_section       	= $_POST['id_section'];
-		$nik       			= $_POST['nik'];
-		$id_golongan       	= $_POST['id_golongan'];
-		$id_jabatan       	= $_POST['id_jabatan'];
-		$id_shift       	= $_POST['id_shift'];
-		$tgl_masuk       	= $_POST['tgl_masuk'];
-		$tgl_lahir       	= $_POST['tgl_lahir'];
-		$gender       		= $_POST['gender'];
-		$pendidikan       	= $_POST['pendidikan'];
-
-		// echo "nama : ".$nama."<br>";
-		// echo "id_section : ".$id_section."<br>";
-		// echo "nik : ".$nik."<br>";
-		// echo "id_golongan : ".$id_golongan."<br>";
-		// echo "id_jabatan : ".$id_jabatan."<br>";
-		// echo "id_shift : ".$id_shift."<br>";
-		// echo "tgl_masuk : ".$tgl_masuk."<br>";
-		// echo "tgl_lahir : ".$tgl_lahir."<br>";
-		// echo "gender : ".$gender."<br>";
-		// echo "pendidikan : ".$pendidikan."<br>";
-
-		// echo "<br>nik : ".$nik_awal."<br>";
-		
-
+		// validasi nama
+		if (!preg_match('/^[A-Za-z\s]+$/', $nama)) {
+        $this->session->set_flashdata('error', 'Format nama tidak valid. Hanya huruf dan spasi yang diperbolehkan.');
+        redirect(site_url("page_his/karyawan"));
+   		}
+		// Validasi nik
+		if (!preg_match('/^\d{4}$/', $nik)) {
+			$this->session->set_flashdata('error', 'Format nik tidak valid. Harus berupa angka 4 digit.');
+			redirect(site_url("page_his/karyawan"));
+		}
+	
+		// Validasi tanggal lahir
+		$today = new DateTime();
+		$birthdate = DateTime::createFromFormat('Y-m-d', $tgl_lahir);
+		$age = $birthdate->diff($today)->y;
+		if ($age < 18) {
+			$this->session->set_flashdata('error', 'Umur harus minimal 18 tahun.');
+			redirect(site_url("page_his/karyawan"));
+		}
+	
 		$data = array(
-			'nama' 			=> $nama,
-			'id_section' 	=> $id_section,
-			'nik' 			=> $nik,
-			'id_golongan' 	=> $id_golongan,
-			'id_jabatan' 	=> $id_jabatan,
-			'id_shift' 		=> $id_shift,
-			'tgl_masuk' 	=> $tgl_masuk,
-			'tgl_lahir' 	=> $tgl_lahir,
-			'gender' 		=> $gender,
-			'pendidikan' 	=> $pendidikan,
+			'nama' => $nama,
+			'id_section' => $id_section,
+			'nik' => $nik,
+			'id_golongan' => $id_golongan,
+			'id_jabatan' => $id_jabatan,
+			'id_shift' => $id_shift,
+			'tgl_masuk' => $tgl_masuk,
+			'tgl_lahir' => $tgl_lahir,
+			'gender' => $gender,
+			'pendidikan' => $pendidikan,
 		);
-
+	
 		$where = array(
 			'nik' => $nik_awal
 		);
-
-		
-		//update status keluarga proporsional pada tbl_st_kel
+	
 		$this->M_his->update_any($where, $data, 'his_karyawan');
-
-		if($this->db->affected_rows() > 0) {
-			// echo "<script>alert('Data berhasil disimpan');</script>";
+	
+		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
-
+	
 		redirect(site_url("page_his/karyawan"));
-
 	}
 
 	function do_edit_karyawan_temp($nik_temp){
 
 		$nama       		= $_POST['nama'];
+		$nik_training		= $_POST['nik_training'];
 		$id_section       	= $_POST['id_section'];
 		$id_golongan       	= $_POST['id_golongan'];
 		$id_jabatan       	= $_POST['id_jabatan'];
@@ -404,8 +472,10 @@ class Action_his extends MY_Controller{
 		$gender       		= $_POST['gender'];
 		$pendidikan       	= $_POST['pendidikan'];
 
+
 		$data = array(
 			'nama' 			=> $nama,
+			'nik_training' 	=> $nik_training,
 			'id_section' 	=> $id_section,
 			'id_golongan' 	=> $id_golongan,
 			'id_jabatan' 	=> $id_jabatan,
@@ -416,8 +486,11 @@ class Action_his extends MY_Controller{
 			'pendidikan' 	=> $pendidikan,
 		);
 
+
+
+
 		$where = array(
-			'nik_temp' => $nik_temp
+			'nik_training' => $nik_temp
 		);
 
 		
@@ -623,10 +696,9 @@ class Action_his extends MY_Controller{
 		redirect(site_url("page_his/karyawan_out"));
 	}
 
-	function do_out_karyawan_temp(){
-
+	function do_out_karyawan_temp() {
 		$keterangan       			= $_POST['keterangan'];
-		$nik       					= $_POST['nik'];
+		$nik_training       		= $_POST['nik_training'];
 		
 
 		$data = array(
@@ -634,7 +706,7 @@ class Action_his extends MY_Controller{
 		);
 
 		$where = array(
-			'nik' 		=> $nik
+			'nik_training' 	=> $nik_training
 		);
 
 		
@@ -650,7 +722,51 @@ class Action_his extends MY_Controller{
 		} else {
 			redirect(site_url("page_his/karyawan_out_temp"));
 		}
-		
 	}
+
+	function angkat_karyawan(){
+		$keterangan       			= $_POST['keterangan'];
+		$nik_training       		= $_POST['nik_training'];
+		$new_nik					= $_POST['new_nik'];
+		
+		$existingNik = $this->M_his->get_by_condition('his_karyawan', array('nik' => $new_nik));
+			if ($existingNik) {
+				$this->session->set_flashdata('error', 'NIK telah digunakan. Silakan pilih NIK yang lain.');
+				redirect(site_url("page_his/karyawan"));
+			}
+
+		$data = array(
+			'keterangan' 	=> $keterangan,
+			'nik' 			=> $new_nik
+		);
+
+		$where = array(
+			'nik_training' 		=> $nik_training
+		);
+
+		
+		//update status keluarga proporsional pada tbl_st_kel
+		$this->M_his->update_any($where, $data, 'his_karyawan');
+
+		if($this->db->affected_rows() > 0) {
+			// echo "<script>alert('Data berhasil disimpan');</script>";
+			$this->session->set_flashdata('success', 'Karyawan berhasil diangkat');
+		}
+			redirect(site_url("page_his/karyawan"));
+	}
+
+	function check_nik_availability() {
+		$response = array();
+		$newNik = $_POST['new_nik'];
+	
+		// Lakukan validasi unik untuk memeriksa apakah "nik" sudah ada di dalam database
+		$existingNik = $this->M_his->get_by_condition('his_karyawan', array('nik' => $newNik));
+		$response['available'] = !$existingNik;
+	
+		header('Content-Type: application/json');
+		echo json_encode($response);
+	}
+	
+	
 
 }

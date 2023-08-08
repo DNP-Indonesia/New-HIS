@@ -6,10 +6,10 @@ class c_estimasi extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("Sundries/Barang/m_jenis");
-        $this->load->model("Sundries/Barang/m_barang");
-        $this->load->model("Sundries/Barang/m_kategori");
-        $this->load->model("Sundries/Transaksi/m_estimasi");
+        $this->load->model("Sundries/modeljenis");
+        $this->load->model("Sundries/modelbarang");
+        $this->load->model("Sundries/modelkategori");
+        $this->load->model("Sundries/modelestimasi");
         $this->load->library('Pdf');
     }
 
@@ -17,7 +17,7 @@ class c_estimasi extends MY_Controller
     {
         $data['estimasi'] = $this->m_estimasi->getEstimasi();
         $data['barcons'] = $this->m_barang->getBarangAll();
-        $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
+       $y   data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
         $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
 
         $this->load->view('Sundries/Transaksi/Estimasi/v_estimasi', $data);

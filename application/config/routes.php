@@ -51,8 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'index';
 $route['folder1/folder2/controller'] = 'folder1/folder2/ControllerName/method';
-$route['Sundries/Barang'] = 'Sundries/Barang/c_barang/barangpage';
-
+$route['Sundries/Barang'] = 'Sundries/Barang/c_barang/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

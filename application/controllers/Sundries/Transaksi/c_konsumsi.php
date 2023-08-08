@@ -1,8 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class c_konsumsi extends MY_Controller
-{
+{       
     public function __construct()
     {
         parent::__construct();
@@ -27,9 +27,9 @@ class c_konsumsi extends MY_Controller
         $faktur = $this->input->post('faktur');
         $data = $this->m_konsumsi->getBarangByFaktur($faktur);
         $output = '<option value="">--Pilih Barang--</option>';
-        foreach ($data as $row){
-            $output .= '<option value = "'.$row->id_barang.'">'.$row->barang.' Dengan Jumlah Tersisa ('.$row->jumlah.')</option>';
-        }   
+        foreach ($data as $row) {
+                $output .= '<option value = "' . $row->id_barang . '">' . $row->barang . ' Dengan Jumlah Tersisa (' . $row->jumlah . ')</option>';
+        }
         $this->output->set_content_type('application/json')->set_output(json_encode($output));
     }
 
@@ -39,19 +39,16 @@ class c_konsumsi extends MY_Controller
         $qty = $this->input->post('qty');
         $id_user = $this->input->post('id_user');
         $fakest = $this->input->post('fakest');
-
         $cekbarang = $this->m_konsumsi->cekKeranjang($id_barang, $id_user)->num_rows();
-        if ($cekbarang > 0){
-            
-        }else{
+        if ($cekbarang > 0) {
+        } else {
             $data = array(
-                'id_barang'=>$id_barang,
-                'jumlah'=>$qty,
-                'id_user'=>$id_user,
-                'fakest'=>$fakest
+                'id_barang' => $id_barang,
+                'jumlah' => $qty,
+                'id_user' => $id_user,
+                'fakest' => $fakest
             );
-            
-            $this->m_konsumsi->saveKeranjang($data);
+        $this->m_konsumsi->saveKeranjang($data);
         }
     }
 
@@ -78,28 +75,27 @@ class c_konsumsi extends MY_Controller
         $status = $this->input->post('status');
         $nama = $this->input->post('nama');
         $fakest = $this->input->post('fakest');
-
+        
         $data = array(
-            'faktur'=>$faktur,
-            'nama_peminta'=>$nama,
-            'id_user'=>$iduser,
-            'tanggal'=>$tanggal,
-            'status'=>$status
+            'faktur' => $faktur,
+            'nama_peminta' => $nama,
+            'id_user' => $iduser,
+            'tanggal' => $tanggal,
+            'status' => $status
         );
-
         $simpan = $this->m_konsumsi->save($data, $iduser, $faktur, $fakest);
         $this->session->set_userdata('sukses', 'Yeay, Data Berhasil Disimpan');
         return redirect('Sundries/Transaksi/c_konsumsi/index');
     }
 
     public function detailKonsumsi()
-    {   
+    {
         $id = $this->uri->segment(4);
         $data['data'] = $this->m_konsumsi->getKonsumsiById($id);
         $data['detail'] = $this->m_konsumsi->getKonsumsiDetail($id);
         $this->load->view('Sundries/Transaksi/Konsumsi/v_detail', $data);
     }
-
+    
     public function printKonsumsi()
     {
         $id = $this->uri->segment(4);
@@ -107,47 +103,40 @@ class c_konsumsi extends MY_Controller
         $data['detail'] = $this->m_konsumsi->getDetailIdPdf($id);
         $this->load->view('Sundries/Transaksi/Konsumsi/v_print', $data);
     }
-
+    
     public function deleteKonsumsi($faktur)
     {
         $faktur = $this->uri->segment(4);
         $hapus = $this->m_konsumsi->deleteKonsumsi($faktur);
     }
-
+    
     public function approveKonsumsi()
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
- 
         $data = array(
             'status' => $status
         );
-     
         $where = array(
             'faktur' => $faktur
         );
-        
         $this->m_konsumsi->update($where, $data);
         $this->session->set_userdata('sukses', 'Yeay, Data Berhasil Disetujui');
         return redirect('Sundries/Transaksi/c_permintaan/dashboard');
     }
-
+    
     public function rejectKonsumsi()
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
- 
         $data = array(
             'status' => $status
         );
-     
         $where = array(
             'faktur' => $faktur
         );
-        
         $this->m_konsumsi->update($where, $data);
         $this->session->set_userdata('tolak', 'Yeay, Data Berhasil Ditolak');
         return redirect('Sundries/Transaksi/c_permintaan/dashboard');
     }
 }
-?>
