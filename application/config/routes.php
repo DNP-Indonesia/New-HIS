@@ -61,7 +61,7 @@ $route['auth'] = 'auth/c_auth';
 $route['home'] = 'auth/c_auth/home';
 $route['logout'] = 'auth/c_auth/logout';
 $route['dashboard'] = 'Page_his/home';
-$route['data-user'] = 'Page_his/user';
+$route['data-user'] = 'Auth/c_role/user';
 
 // Personal Data
 $route['data-karyawan'] = 'Page_his/karyawan';

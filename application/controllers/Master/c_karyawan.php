@@ -13,6 +13,46 @@ class c_karyawan extends MY_Controller
 		$this->load->model('Master/m_karyawan');
 	}
 
+	public function karyawan()
+	{
+		$menu = $this->uri->segment(2);
+
+		$data['karyawan'] = $this->m_karyawan->data_karyawan();
+
+		if ($this->session->userdata('role') == 'super_user') {
+			$this->render_backend('Sundries/Personal/v_karyawan.php', $menu, $data);
+		} else {
+			$this->render_backend('v_error', $menu, $data);
+		}
+	}
+
+	public function karyawan_out()
+	{
+		$menu = $this->uri->segment(2);
+
+		$data['karyawan_out'] = $this->m_karyawan->data_karyawan_out();
+
+		$this->render_backend('Sundries/Personal/v_karyawan_keluar.php', $menu, $data);
+	}
+
+	public function karyawan_temp()
+	{
+		$menu = $this->uri->segment(2);
+
+		$data['karyawan'] = $this->m_karyawan->data_karyawan_temp();
+
+		$this->render_backend('Sundries/Personal/v_pelatihan_coba.php', $menu, $data);
+	}
+
+	public function karyawan_out_temp()
+	{
+		$menu = $this->uri->segment(2);
+
+		$data['karyawan'] = $this->m_karyawan->data_karyawan_out_temp();
+
+		$this->render_backend('Sundries/Personal/v_pelatihan_keluar', $menu, $data);
+	}
+
 	function do_tbh_user()
 	{
 		$spysiid       	= $_POST['spysiid'];
@@ -38,7 +78,7 @@ class c_karyawan extends MY_Controller
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata('success', 'Data User berhasil ditambahkan');
 		}
-		redirect(site_url("page_his/user"));
+		redirect(site_url("Auth/c_role/user"));
 	}
 
 	function do_edit_user()
