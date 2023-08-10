@@ -81,6 +81,15 @@ class Page_his extends MY_Controller
     $this->render_backend('personalData/v_pelatihan_keluar', $menu, $data);
   }
 
+  public function karyawan_mutasi()
+  {
+    $menu = $this->url->segment(2);
+
+    $data['karyawan'] = this->M_his->data_karyawan_mutasi();
+
+    $this->render_backend('personalData/v_karyawan_mutasi', $menu, $data);
+  }
+
   function divisi()
   {
     $menu = $this->uri->segment(2);

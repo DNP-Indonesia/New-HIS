@@ -110,6 +110,10 @@ class M_his extends CI_Model{
             ->result();
     }
 
+    function karyawan_mutasi(){
+        
+    }
+
     function data_divisi(){
         return $this->db->from('his_divisi')
             ->get()

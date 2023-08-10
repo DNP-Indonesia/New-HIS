@@ -3,12 +3,12 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Data Karyawan</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Data Karyawan Mutasi</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-lg btn-primary shadow-sm" data-toggle="modal" data-target="#ModalTbhKar">
                             <span class="icon text-white-50">
                                 <i class="fas fa-plus-circle"></i>
                             </span>
-                            <span class="text">Tambah Karyawan</span>
+                            <span class="text">Mutasi Karyawan</span>
                         </a>
                     </div>
                     <?php
@@ -117,19 +117,11 @@
                                                             </p>
                 
                                                             <p class="dropdown-item">
-                                                                <a href="" class="btn btn-primary btn-icon-split btn-sm" data-toggle="modal" data-target="#ModalEditKar<?php echo $u->nik ?>">
+                                                                <a href="" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#ModalEditKar<?php echo $u->nik ?>">
                                                                     <span class="icon text-white-50">
                                                                         <i class="fas fa-edit"></i>
                                                                     </span>
                                                                     <span class="text">Edit Data Karyawan</span>
-                                                                </a>
-                                                            </p>
-                                                            <p class="dropdown-item">
-                                                                <a href="" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#Mutasi<?php echo $u->nik ?>">
-                                                                    <span class="icon text-white-50">
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </span>
-                                                                    <span class="text">Mutasi Karyawan</span>
                                                                 </a>
                                                             </p>
                                                             <p class="dropdown-item">
@@ -351,129 +343,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        
-                                        <!-- Modal Mutasi Karyawan -->
-                                        <div class="modal fade" id="Mutasi<?php echo $u->nik ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel">Mutasi Karyawan</h3>
-                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">×</span>
-                                                            </button>
-                                                        </div>
-                                                        <form action="<?php echo site_url("action_his/do_edit_karyawan/" . $u->nik) ?>" method="post">
-                                                            <div class="modal-body">
-                                                                <div class="form-row">
-                                                                <div class="col-md-6 mb-3">
-                                                                        <label for="exampleInputEmail1"><b>Nama Karyawan</b></label>
-                                                                        <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value="<?php echo $u->nama ?>" disabled>
-                                                                        <small id="emailHelp" class="form-text text-muted">Nama Karyawan</small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="col-md-6 mb-3">
-                                                                        <label><b>NIK</b></label>
-                                                                        <input type="text" class="form-control" name="nik" value="<?php echo $u->nik; ?>" disabled>
-                                                                        <small class="form-text text-muted">Nomor Induk Karyawan</small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">                                                                   
-                                                                    <div class="col-md-6 mb-3">
-                                                                        <label for="exampleFormControlSelect1"><b>Section</b></label>
-                                                                        <select class="form-control" id="exampleFormControlSelect1" name="id_section" required>
-                                                                            <?php
-                                                                            include "koneksi.php";
-                                                                            ?>
-                                                                            <?php
-                                                                            // $q_sec = mysqli_query($conn, "SELECT * FROM his_section");
-                                                                            $q_sec = $this->M_his->data_section();
-                                                                            foreach ($q_sec as $sec) {
-                                                                                if ($sec->id_section == $u->id_section) {
-                                                                                    $sel = "selected";
-                                                                                } else {
-                                                                                    $sel = "";
-                                                                                } ?>
-                                                                                <option value="<?php echo $sec->id_section; ?>" <?php echo $sel; ?>><?php echo $sec->nama_section; ?></option>
-                                                                            <?php } ?>
-                                                                        </select>
-                                                                        <small id="emailHelp" class="form-text text-muted">Section</small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="col-md-6 mb-3">
-                                                                        <label for="exampleFormControlSelect1"><b>Golongan</b></label>
-                                                                        <select class="form-control" id="exampleFormControlSelect1" name="id_golongan" required>
-                                                                            <option value="" selected disabled> -- Pilih Golongan -- </option>
-                                                                            <?php
-                                                                            // $q_class = mysqli_query($conn, "SELECT * FROM his_golongan");
-                                                                            $q_class = $this->M_his->data_golongan();
-                                                                            foreach ($q_class as $class) {
-                                                                                if ($class->id_golongan == $u->id_golongan) {
-                                                                                    $sel = "selected";
-                                                                                } else {
-                                                                                    $sel = "";
-                                                                                }
-                                                                            ?>
-                                                                                <option value="<?php echo $class->id_golongan; ?>" <?php echo $sel; ?>><?php echo $class->nama_golongan; ?></option>
-                                                                            <?php } ?>
-                                                                        </select>
-                                                                        <small id="emailHelp" class="form-text text-muted">Class</small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="col-md-6 mb-3">
-                                                                        <label for="exampleFormControlSelect1"><b>Shift</b></label>
-                                                                        <select class="form-control" id="exampleFormControlSelect1" name="id_shift" required>
-                                                                            <option value="" selected disabled> -- Pilih Shift -- </option>
-                                                                            <?php
-                                                                            // $q_shift = mysqli_query($conn, "SELECT * FROM his_shift");
-                                                                            $q_shift = $this->M_his->data_shift();
-                                                                            foreach ($q_shift as $sh) {
-                                                                                if ($sh->id_shift == $u->id_shift) {
-                                                                                    $sel = "selected";
-                                                                                } else {
-                                                                                    $sel = "";
-                                                                                } ?>
-                                                                                <option value="<?php echo $sh->id_shift; ?>" <?php echo $sel; ?>><?php echo $sh->nama_shift; ?></option>
-                                                                            <?php } ?>
-                                                                        </select>
-                                                                        <small id="emailHelp" class="form-text text-muted">Shift</small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="col-md-6 mb-3">
-                                                                        <label for="exampleFormControlSelect1"><b>Jabatan</b></label>
-                                                                        <select class="form-control" id="exampleFormControlSelect1" name="id_jabatan" required>
-                                                                            <?php
-                                                                            // $q_jab = mysqli_query($conn, "SELECT * FROM his_jabatan");
-                                                                            $q_jab = $this->M_his->data_jabatan();
-                                                                            foreach ($q_jab as $jab) {
-                                                                                if ($jab->id_jabatan == $u->id_jabatan) {
-                                                                                    $sel = "selected";
-                                                                                } else {
-                                                                                    $sel = "";
-                                                                                }
-                                                                            ?>
-                                                                                <option value="<?php echo $jab->id_jabatan; ?>" <?php echo $sel; ?>><?php echo $jab->nama_jabatan; ?></option>
-                                                                            <?php } ?>
-                                                                        </select>
-                                                                        <small id="emailHelp" class="form-text text-muted">Jabatan</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                                                                                
-
-
-
                                         <?php $i++;
                                         } ?>
                                     </tbody>
@@ -627,5 +496,3 @@
                         </div>
                     </div>
                 </div>
-
-                

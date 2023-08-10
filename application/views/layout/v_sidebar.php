@@ -31,14 +31,14 @@
             <span>Data User Account</span></a>
     </li>
 
-    <li class="nav-item <?php if ($menu == 'karyawan' or $menu == 'divisi' or $menu == 'departemen' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp') {
+    <li class="nav-item <?php if ($menu == 'karyawan' or $menu == 'divisi' or $menu == 'departemen' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp' or $menu == 'karyawan_mutasi') {
                             echo 'active';
                         } ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_personal" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
             <span>Personal Data</span>
         </a>
-        <div id="collapsePages_personal" class="collapse <?php if ($menu == 'karyawan' or $menu == 'departemen' or $menu == 'divisi' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp') {
+        <div id="collapsePages_personal" class="collapse <?php if ($menu == 'karyawan' or $menu == 'departemen' or $menu == 'divisi' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp' or $menu == 'karyawan_mutasi') {
                                                                 echo 'show';
                                                             } ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -55,6 +55,9 @@
                 <a class="collapse-item <?php if ($menu == 'karyawan_out_temp') {
                                             echo 'active';
                                         } ?>" href="<?php echo site_url("page_his/karyawan_out_temp") ?>">Karyawan Training & <br>Percobaan Keluar</a>
+                <a class="collapse-item <?php if ($menu == 'karyawan_mutasi') {
+                                            echo 'active';
+                                        } ?>" href="<?php echo site_url("page_his/departemen") ?>">Log karyawan mutasi</a>
                 <a class="collapse-item <?php if ($menu == 'divisi') {
                                             echo 'active';
                                         } ?>" href="<?php echo site_url("page_his/divisi") ?>">Daftar Divisi</a>
@@ -73,7 +76,6 @@
                 <a class="collapse-item <?php if ($menu == 'golongan') {
                                             echo 'active';
                                         } ?>" href="<?php echo site_url("page_his/golongan") ?>">Daftar Golongan</a>
-
             </div>
         </div>
     </li>
