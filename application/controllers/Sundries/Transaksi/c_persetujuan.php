@@ -16,6 +16,7 @@ class requestsundriescontroller extends MY_Controller{
     }
 
     public function dashboard(){
+<<<<<<< HEAD
         $data['diproses'] = $this->modelrequestsundries->finddiproses();
         $data['foraprove'] = $this->modelrequestsundries->findforaprove();
         $data['estimasi'] = $this->modelestimasi->findforaprove();
@@ -23,6 +24,15 @@ class requestsundriescontroller extends MY_Controller{
         $data['foradmingudang'] = $this->modelrequestsundries->findforadmingudang();
         $data['forkplgudang'] = $this->modelrequestsundries->findforkplgudang();
         $this->load->view('sundries/Dashboard',$data);
+=======
+        $data['diproses'] = $this->m_persetujuan->finddiproses();
+        $data['foraprove'] = $this->m_persetujuan->findforaprove();
+        $data['estimasi'] = $this->m_estimasi->findforaprove();
+        $data['consum'] = $this->m_konsumsi->findforaprove();
+        $data['foradmingudang'] = $this->m_persetujuan->findforadmingudang();
+        $data['forkplgudang'] = $this->m_persetujuan->findforkplgudang();
+        $this->load->view('Sundries/Template/dashboard',$data);
+>>>>>>> rief-branch
     }
 
     public function requestsundriespage(){

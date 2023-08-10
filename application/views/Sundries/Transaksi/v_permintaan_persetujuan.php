@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="<?php echo base_url() ?>dnp-logo.png" rel="icon">
+    <link href="<?php echo base_url('assets/dnp-logo.png') ?>" rel="icon">
     <title>DNP - HIS</title>
 
     <link href="<?php echo base_url() ?>bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -1172,7 +1172,7 @@
                     <button class="btn btn-sm btn-success" type="button" data-dismiss="modal">
                         Batal
                     </button>
-                    <a class="btn btn-sm btn-danger" href="<?php echo site_url() ?>/auth/logout">
+                    <a class="btn btn-sm btn-danger" href="<?php echo site_url() ?>logout">
                         Logout
                     </a>
                 </div>
