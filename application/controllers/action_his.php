@@ -506,6 +506,38 @@ class Action_his extends MY_Controller{
 
 	}
 
+	function do_mutasi_karyawan(){
+
+		$spysiid			= $_POST['spysiid'];
+		$nik       			= $_POST['nik'];
+		$id_section       	= $_POST['id_section'];
+		$id_golongan       	= $_POST['id_golongan'];
+		$id_jabatan       	= $_POST['id_jabatan'];
+		$id_shift       	= $_POST['id_shift'];
+
+		$data = array(
+			'spysiid'		=> $spysiid,
+			'nik'			=> $nik,
+			'id_section' 	=> $id_section,
+			'id_golongan' 	=> $id_golongan,
+			'id_jabatan' 	=> $id_jabatan,
+			'id_shift' 		=> $id_shift,
+		);
+
+		$where = array(
+			'nik' => $nik
+		);
+
+		$this->M_his->update_any($where, $data, 'his_karyawan');
+
+		if($this->db->affected_rows() > 0) {
+			// echo "<script>alert('Data berhasil disimpan');</script>";
+			$this->session->set_flashdata('success', 'Data berhasil diubah');
+		}
+
+		redirect(site_url("page_his/karyawan_mutasi"));
+	}
+
 
 	function do_edit_divisi(){
 

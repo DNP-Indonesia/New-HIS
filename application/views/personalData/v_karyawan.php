@@ -362,7 +362,7 @@
                                                                 <span aria-hidden="true">×</span>
                                                             </button>
                                                         </div>
-                                                        <form action="<?php echo site_url("action_his/do_edit_karyawan/" . $u->nik) ?>" method="post">
+                                                        <form action="<?php echo site_url("action_his/do_mutasi_karyawan/" . $u->nik) ?>" method="post">
                                                             <div class="modal-body">
                                                                 <div class="form-row">
                                                                 <div class="col-md-6 mb-3">
