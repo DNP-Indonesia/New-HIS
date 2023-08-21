@@ -85,9 +85,10 @@ class Page_his extends MY_Controller
   {
     $menu = $this->uri->segment(2);
 
-    // $data['karyawan'] = $this->M_his->data_karyawan_mutasi();
 
-    $this->render_backend('personalData/v_karyawan_mutasi', $menu);
+    $data['karyawan'] = $this->M_his->data_karyawan_mutasi();
+
+    $this->render_backend('personalData/v_karyawan_mutasi', $menu, $data);
   }
 
   function divisi()

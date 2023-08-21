@@ -506,36 +506,68 @@ class Action_his extends MY_Controller{
 
 	}
 
-	function do_mutasi_karyawan(){
+	function do_mutasi_karyawan($nik_awal){
 
-		$spysiid			= $_POST['spysiid'];
-		$nik       			= $_POST['nik'];
-		$id_section       	= $_POST['id_section'];
-		$id_golongan       	= $_POST['id_golongan'];
-		$id_jabatan       	= $_POST['id_jabatan'];
-		$id_shift       	= $_POST['id_shift'];
+		$karyawan = $this->M_his->data_karyawan_bynik($nik_awal);
 
-		$data = array(
-			'spysiid'		=> $spysiid,
-			'nik'			=> $nik,
-			'id_section' 	=> $id_section,
-			'id_golongan' 	=> $id_golongan,
-			'id_jabatan' 	=> $id_jabatan,
-			'id_shift' 		=> $id_shift,
-		);
+        if (!empty($karyawan)) {
+            // Menyimpan data lama sebelum perubahan
+            $data_lama = array(
+                'id_section'  => $karyawan[0]->id_section,
+                'id_golongan' => $karyawan[0]->id_golongan,
+                'id_jabatan'  => $karyawan[0]->id_jabatan,
+                'id_shift'    => $karyawan[0]->id_shift,
+            );
 
-		$where = array(
-			'nik' => $nik
-		);
+            // Tampilkan data lama sebelum perubahan
 
-		$this->M_his->update_any($where, $data, 'his_karyawan');
 
-		if($this->db->affected_rows() > 0) {
-			// echo "<script>alert('Data berhasil disimpan');</script>";
-			$this->session->set_flashdata('success', 'Data berhasil diubah');
-		}
 
-		redirect(site_url("page_his/karyawan_mutasi"));
+            // Proses mutasi dan penyimpanan log
+            $id_section = $this->input->post('id_section');
+            $id_golongan = $this->input->post('id_golongan');
+            $id_jabatan = $this->input->post('id_jabatan');
+            $id_shift = $this->input->post('id_shift');
+
+            $data_baru = array(
+                'id_section' => $id_section,
+                'id_golongan' => $id_golongan,
+                'id_jabatan' => $id_jabatan,
+                'id_shift' => $id_shift,
+            );
+
+            $where = array(
+                'nik' => $nik_awal
+            );
+
+
+			$log_data = array(
+
+				'spysiid' => $karyawan[0]->spysiid,
+				'nik' => $karyawan[0]->nik,
+				'id_section_sebelum' => $data_lama['id_section'],
+				'id_section_sesudah' => $data_baru['id_section'],
+				'id_golongan_sebelum' => $data_lama['id_golongan'],
+				'id_golongan_sesudah' => $data_baru['id_golongan'],
+				'id_jabatan_sebelum' => $data_lama['id_jabatan'],
+				'id_jabatan_sesudah' => $data_baru['id_jabatan'],
+				'id_shift_sebelum' => $data_lama['id_shift'],
+				'id_shift_sesudah' => $data_baru['id_shift'],
+				'tgl_mutasi'       => date('Y-m-d H:i:s'),
+				
+			);
+
+            $this->M_his->update_any($where, $data_baru, 'his_karyawan');
+			$this->M_his->input_any($log_data, 'his_mutasi');
+
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Data berhasil diubah');
+            }
+
+            redirect(site_url("page_his/karyawan_mutasi"));
+        } else {
+            echo "Data karyawan tidak ditemukan.";
+        }
 	}
 
 
