@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="<?php echo base_url() ?>dnp-logo.png" rel="icon">
+    <link href="<?php echo base_url() ?>"dnp-logo.png rel="icon">
     <title>DNP - HIS</title>
 
     <!-- Custom fonts for this template-->

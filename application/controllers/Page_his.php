@@ -34,7 +34,7 @@ class Page_his extends MY_Controller
     $menu = 'user';
 
     if ($this->session->userdata('role') == 'super_user') {
-      $this->render_backend('v_user', $menu, $data);
+      $this->render_backend('Sundries/User/user', $menu, $data);
     } else {
       $this->render_backend('v_error', $menu, $data);
     }
