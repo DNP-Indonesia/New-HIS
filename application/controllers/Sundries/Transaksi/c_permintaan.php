@@ -157,7 +157,6 @@ class c_permintaan extends MY_Controller
 
     public function deletePermintaan($faktur)
     {
-        $faktur = $this->uri->segment(4);
         $this->m_permintaan->delete($faktur);
         $this->session->set_userdata('hapus', 'Yeay, Request Berhasil Dihapus...');
         redirect('Sundries/Transaksi/c_permintaan/index');
@@ -171,11 +170,10 @@ class c_permintaan extends MY_Controller
     //     redirect('Sundries/Transaksi/c_permintaan/index');
     // }
 
-    public function printPermintaan()
+    public function printPermintaan($id)
     {
-        $id = $this->uri->segment(4);
         $data['data'] = $this->m_permintaan->getIdPdf($id);
-        $data['detail'] = $this->m_permintaan->getDetailIdPdf($id);
+        $data['detail'] = $this->m_detail->getDetailIdPdf($id);
         $this->load->view('Sundries/Transaksi/Permintaan/v_print', $data);
     }
 

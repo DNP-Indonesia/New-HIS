@@ -279,10 +279,10 @@
                                                                   <?php } ?>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                    <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                         Cetak PDF
                                                                     </a>
-                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                         Detail   
                                                                     </a> 
                                                                 </td>
@@ -336,10 +336,10 @@
                                                                   <?php } ?>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                    <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                         Cetak PDF
                                                                     </a>
-                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                         Detail   
                                                                     </a> 
                                                                 </td>
@@ -397,7 +397,7 @@
                                                                         href="#" class="btn btn-sm btn-danger">
                                                                         Hapus
                                                                     </a>
-                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                         Lihat Alasan  
                                                                     </a> 
                                                                 </td>
@@ -447,10 +447,10 @@
                                                                 </td>
                                                                 <td><?php echo $tempel->waktu ?></td>
                                                                 <td>
-                                                                    <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                    <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                     Cetak PDF
                                                                     </a>
-                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                         Detail   
                                                                     </a> 
                                                                 </td>
@@ -500,10 +500,10 @@
                                                                 </td>
                                                                 <td><?php echo $tempel->waktu ?></td>
                                                                 <td>
-                                                                    <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                    <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                     Cetak PDF
                                                                     </a>
-                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                         Detail   
                                                                     </a> 
                                                                 </td>
@@ -642,10 +642,10 @@
                                                               <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                 Cetak PDF
                                                                 </a>
-                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                     Detail   
                                                                 </a>
                                                             </td>
@@ -699,10 +699,10 @@
                                                               <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                 Cetak PDF
                                                                 </a>
-                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                     Detail   
                                                                 </a>
                                                             </td>
@@ -750,7 +750,7 @@
                                                               <?php } ?> 
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                     Detail   
                                                                 </a>
                                                             </td>
@@ -798,10 +798,10 @@
                                                               <?php } ?>     
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                 Cetak PDF
                                                                 </a>
-                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                     Detail   
                                                                 </a>
                                                             </td>
@@ -849,10 +849,10 @@
                                                               <?php } ?>     
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('printpermintaan'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
+                                                                <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur ?>" target="_blank" class="btn btn-sm btn-success">
                                                                 Cetak PDF
                                                                 </a>
-                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                     Detail   
                                                                 </a>
                                                             </td>
@@ -937,7 +937,7 @@
                                                               <?php } ?>    
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                     Detail   
                                                                 </a> 
                                                             </td>
@@ -995,7 +995,7 @@
                                                         <?php } ?>
                                                             <?php if ($this->session->userdata('role') == 'sdr_Kepala Gudang' or $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
                                                                 <td>
-                                                                    <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                         Detail   
                                                                     </a> 
                                                                 </td>
@@ -1046,7 +1046,7 @@
                                                               <?php } ?>     
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                                <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
                                                                     Detail   
                                                                 </a> 
                                                             </td>
