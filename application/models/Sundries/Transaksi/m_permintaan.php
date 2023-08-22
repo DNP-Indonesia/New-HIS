@@ -336,21 +336,21 @@ class m_permintaan extends CI_Model
     // Fungsi untuk mengecek apakah item barang sudah ada di keranjang berdasarkan id_barang dan id_user
     public function cekKeranjang($idbarang, $iduser)
     {
-        return $this->db->get_where('sdr_request_sundries_keranjang', array('id_barang' => $idbarang, 'id_user' => $iduser));
+        return $this->db->get_where('sdr_request_sundries_keranjang', array('id_barang'=>$idbarang, 'id_user'=>$iduser));
     }
 
     // Fungsi untuk mengecek apakah user memiliki item barang di keranjang berdasarkan id_user
     public function cekKeranjang2($iduser)
     {
-        return $this->db->get_where('sdr_request_sundries_keranjang', array('id_user' => $iduser));
+        return $this->db->get_where('sdr_request_sundries_keranjang', array('id_user'=>$iduser));
     }
 
     // Fungsi untuk mengambil data keranjang berdasarkan id_user
     public function selectKeranjang($id_user)
     {
         return $this->db->from('sdr_request_sundries_keranjang')
-            ->join('sdr_barang', 'sdr_barang.id_barang = sdr_request_sundries_keranjang.id_barang')
-            ->where('id_user', $id_user)
+            ->join('sdr_barang', 'sdr_barang.id_barang=sdr_request_sundries_keranjang.id_barang')
+            ->where('sdr_request_sundries_keranjang.id_user', $id_user)
             ->get()
             ->result();
     }
@@ -358,14 +358,11 @@ class m_permintaan extends CI_Model
     // Fungsi untuk menghapus data barang dari keranjang berdasarkan id_barang dan id_user
     public function deleteKeranjang($id_barang, $id_user)
     {
-        $hapus = $this->db->delete('sdr_estimasi_keranjang', array('id_barang' => $id_barang, 'id_user' => $id_user));
+        $hapus = $this->db->delete('sdr_request_sundries_keranjang', array('id_barang' => $id_barang, 'id_user' => $id_user));
         if ($hapus) {
-            return true; // Penghapusan berhasil
-        } else {
-            return false; // Penghapusan gagal
+            return 1;
         }
     }
-
 
     // Fungsi untuk mengupdate data permintaan berdasarkan kondisi tertentu
     public function update($where, $data)
@@ -395,6 +392,7 @@ class m_permintaan extends CI_Model
         $this->db->limit(1);
         $query = $this->db->get('sdr_request_sundries');
 
+
         if ($query->num_rows() <> 0) {
             $data = $query->row();
             $faktur = intval($data->faktur) + 1;
@@ -402,10 +400,14 @@ class m_permintaan extends CI_Model
             $faktur = 1;
         }
 
-        $date = date('ym');
-        $batas = str_pad($faktur, 4, "0", STR_PAD_LEFT);
-        $faktur = "SDR/" . $date . "/" . $batas;
-        return $faktur;
+        $lastKode = str_pad($faktur, 4, "0", STR_PAD_LEFT);
+        $tahun = date("y");
+        $bulan = date("m");
+        $rs = "RS";
+
+        $newfaktur = $rs . "" . $tahun . "" . $bulan . "." . $lastKode;
+
+        return $newfaktur;
     }
 }
 ?>

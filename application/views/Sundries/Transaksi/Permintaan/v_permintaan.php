@@ -224,7 +224,7 @@
                                                                  <?php } ?> 
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger" onclick="deleteConfirm()">Hapus</a>
+                                                                    <a href="#" class="btn btn-sm btn-danger" onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')">Hapus</a>
                                                                     <a href="<?php echo site_url('detailpermintaan/' . $tempel->faktur); ?>" class="btn btn-sm btn-purple">
                                                                         Detail   
                                                                     </a> 
@@ -1391,7 +1391,6 @@
 
         <script type="text/javascript" src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script>
             $(document).ready(function (){
@@ -1477,7 +1476,7 @@
             
                 // Buat request AJAX ke controller untuk mendapatkan informasi barang berdasarkan ID
                 $.ajax({
-                    url: "<?php echo site_url('Sundries/Transaksi/c_permintaan/detailBarang') ?>",
+                    url: "<?php echo site_url('detailbarang') ?>",
                     method: "POST",
                     data: {id_barang: selectedBarangId},
                     success: function(response) {
