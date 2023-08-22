@@ -586,7 +586,7 @@
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            foreach ($forkplgudang as $approve2) {
+                                            foreach ($kepalagudang as $approve2) {
                                                 ?>
                                                 <tr>
                                                     <td>

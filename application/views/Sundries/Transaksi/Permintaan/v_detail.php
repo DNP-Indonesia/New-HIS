@@ -113,7 +113,7 @@
                     <div class="col-md-6">
                         <?php
                         if ($tempel->status == 'Ditolak' and $this->session->userdata('role') == 'sdr_Admin Bagian' or $this->session->userdata('role') == 'sdr_Kepala Bagian' or $this->session->userdata('role') == 'sdr_Kepala Gudang') {
-                            foreach ($penolakan as $isi) {
+                            foreach ($tolak as $isi) {
                                 ?>
 
                                 <div class="list-group mb-2">
