@@ -26,6 +26,24 @@ class Page_his extends MY_Controller
     }
   }
 
+  public function home_personalia()
+  {
+    $data[''] = "";
+    $menu = $this->uri->segment(2);
+
+    // $data['sidebar'] = $this->load->view('side_medical/admin_medical');
+    if (
+      $this->session->userdata('role') == 'sdr_Admin Bagian'
+      or $this->session->userdata('role') == 'sdr_Kepala Bagian'
+      or $this->session->userdata('role') == 'sdr_Admin Gudang'
+      or $this->session->userdata('role') == 'sdr_Kepala Gudang'
+    ) {
+      $this->render_backend('v_error', $menu, $data);
+    } else {
+      $this->render_backend('personalData/dashboard', $menu, $data);
+    }
+  }
+
   // tampil role super user
   public function user()
   {
@@ -40,7 +58,7 @@ class Page_his extends MY_Controller
     }
   }
 
-  // 
+  
   public function karyawan()
   {
     $menu = $this->uri->segment(2);
