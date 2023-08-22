@@ -54,17 +54,22 @@
                                 <th scope="row">Tanggal Pensiun</th>
                                 <td><?php echo date('d M y', strtotime($log->tgl_lahir)) ?></td>
                             </tr>
+                            <tr>
+                                <th scope="row">Status</th>
+                                <td><?php echo $log->keterangan ?></td>
+                            </tr>
 
                             <tr>
-                            <td colspan="2" style="text-align: center;">
+                                <th scope="row">
                                 <a href="" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#ModalEditKar<?php echo $log->nik ?>">
                 					<span class="icon text-white-50">
                 						<i class="fas fa-edit"></i>
                 					</span>
                 					<span class="text">Edit Data Karyawan</span>
                 				</a>
-                            </td>
-                        </tr>
+                                </th>
+                                
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -79,18 +84,18 @@
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr class="table-info">
                                 <th>Nama</th>
                                 <th>NIK</th>
-                                <th>Section Sebelum</th>
+                                <th style="background-color: #de0404; color: #ffffff;">Section Sebelum</th>
                                 <th>Section Sesudah</th>
-                                <th>Golongan Sebelum</th>
+                                <th style="background-color: #de0404; color: #ffffff;">Golongan Sebelum</th>
                                 <th>Golongan Sesudah</th>
-                                <th>Jabatan Sebelum</th>
+                                <th style="background-color: #de0404; color: #ffffff;">Jabatan Sebelum</th>
                                 <th>Jabatan Sesudah</th>
-                                <th>Shift Sebelum</th>
+                                <th style="background-color: #de0404; color: #ffffff;">Shift Sebelum</th>
                                 <th>Shift Sesudah</th>
                                 <th>Waktu Mutasi</th>
                                 <!-- Tambahkan kolom-kolom lain yang diperlukan -->
@@ -101,13 +106,13 @@
                                 <tr>
                                     <td><?php echo $h->nama_karyawan; ?></td>
                                     <td><?php echo $h->nik; ?></td>
-                                    <td><?php echo $h->nama_section_sebelum; ?></td>
+                                    <td style="background-color: #de0404; color: #ffffff;"><?php echo $h->nama_section_sebelum; ?></td>
                                     <td><?php echo $h->nama_section_sesudah; ?></td>
-                                    <td><?php echo $h->nama_golongan_sebelum; ?></td>
+                                    <td style="background-color: #de0404; color: #ffffff;"><?php echo $h->nama_golongan_sebelum; ?></td>
                                     <td><?php echo $h->nama_golongan_sesudah; ?></td>
-                                    <td><?php echo $h->nama_jabatan_sebelum; ?></td>
+                                    <td style="background-color: #de0404; color: #ffffff;"><?php echo $h->nama_jabatan_sebelum; ?></td>
                                     <td><?php echo $h->nama_jabatan_sesudah; ?></td>
-                                    <td><?php echo $h->nama_shift_sebelum; ?></td>
+                                    <td style="background-color: #de0404; color: #ffffff;"><?php echo $h->nama_shift_sebelum; ?></td>
                                     <td><?php echo $h->nama_shift_sesudah; ?></td>
                                     <td><?php echo $h->tgl_mutasi; ?></td>
                                     <!-- Tambahkan kolom-kolom lain yang diperlukan -->
@@ -373,4 +378,8 @@
         #pagination {
             margin-top: 10px;
         }
+        .bg-red {
+        background-color: #ff0000; /* Red color */
+        color: #ffffff; /* White text color for better contrast */
+    }
     </style>
