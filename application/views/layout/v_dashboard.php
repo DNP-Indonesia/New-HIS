@@ -16,11 +16,11 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <a href="#" style="text-decoration: none;">
+            <a href="<?= base_url('index.php/page_his/karyawan') ?>" style="text-decoration: none;">
                 <div class="card text-white bg-primary mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">HIS Medical</h5>
-                        <p class="card-text">Pergi ke halaman HIS Medical</p>
+                        <h5 class="card-title">Personalia</h5>
+                        <p class="card-text">Pergi ke halaman personalia</p>
                     </div>
                 </div>
             </a>

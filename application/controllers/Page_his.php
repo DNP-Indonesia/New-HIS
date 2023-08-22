@@ -91,6 +91,16 @@ class Page_his extends MY_Controller
     $this->render_backend('personalData/v_karyawan_mutasi', $menu, $data);
   }
 
+  public function history_karyawan($nik)
+  {
+    $menu = $this->uri->segment(2);
+
+    $data['history'] = $this->M_his->history_karyawan($nik);
+    $data['karyawan'] = $this->M_his->data_karyawan_bynik($nik);
+
+    $this->render_backend('personalData/v_detail_karyawan', $menu,$data);
+  }
+
   function divisi()
   {
     $menu = $this->uri->segment(2);

@@ -564,7 +564,7 @@ class Action_his extends MY_Controller{
                 $this->session->set_flashdata('success', 'Data berhasil diubah');
             }
 
-            redirect(site_url("page_his/karyawan_mutasi"));
+            redirect(site_url("page_his/history_karyawan/$nik_awal"));
         } else {
             echo "Data karyawan tidak ditemukan.";
         }
