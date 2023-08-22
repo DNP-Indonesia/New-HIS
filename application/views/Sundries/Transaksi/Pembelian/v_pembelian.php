@@ -148,7 +148,7 @@
                                                  <?php } ?> 
                                             </td>
                                             <td>
-                                                <a href="<?php echo site_url('detailpembelian/'); ?><?php echo $tempel->faktur ?>" class="btn btn-sm btn-purple">
+                                                <a href="<?php echo site_url('detailpembelian/' . $tempel->faktur); ?>" class="btn btn-sm btn-purple">
                                                     Detail   
                                                 </a> 
                                             </td>

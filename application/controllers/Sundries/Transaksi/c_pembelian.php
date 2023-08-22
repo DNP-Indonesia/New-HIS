@@ -111,9 +111,8 @@ class c_pembelian extends MY_Controller
         return redirect('Sundries/Transaksi/C_pembelian/index');
     }
 
-    public function detailPembelian()
+    public function detailPembelian($id)
     {
-        $id = $this->uri->segment(4);
         $data['data'] = $this->m_pembelian->getPembelianById($id);
         $data['detail'] = $this->m_pembelian->getDetailPembelian($id);
         $this->load->view('Sundries/Transaksi/Pembelian/v_detail', $data);

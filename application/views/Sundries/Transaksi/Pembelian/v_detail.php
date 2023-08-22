@@ -40,7 +40,7 @@
     </style>
     <body id="page-top">   
         <div class="container-fluid">
-                <a href="<?= base_url('Sundries/purchasecontroller/purchasepage') ?>" class="btn btn-sm btn-purple mt-4 mb-4">
+                <a href="<?php echo site_url('pembelian') ?>" class="btn btn-sm btn-purple mt-4 mb-4">
                     Kembali Ke Halaman Request Purchase
                 </a>
                 <?php if ($this->session->userdata('role')== 'sdr_Kepala Gudang') {?>
