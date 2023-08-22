@@ -204,7 +204,7 @@
                                                                 <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>"
+                                                                <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>"
                                                                     class="btn btn-sm btn-purple">
                                                                     Lihat Detail
                                                                 </a>
@@ -272,7 +272,7 @@
                                                                 <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('detailestimasi'); ?><?php echo $tempel->faktur ?>"
+                                                                <a href="<?php echo site_url('detailestimasi/'); ?><?php echo $tempel->faktur ?>"
                                                                     target="blank" class="btn btn-sm btn-purple">
                                                                     Lihat Detail
                                                                 </a>
@@ -350,7 +350,7 @@
                                                                 <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?php echo site_url('detailkonsumsi'); ?><?php echo $tempel->faktur ?>"
+                                                                <a href="<?php echo site_url('detailkonsumsi/'); ?><?php echo $tempel->faktur ?>"
                                                                     target="blank" class="btn btn-sm btn-purple">
                                                                     Lihat Detail
                                                                 </a>
@@ -438,7 +438,7 @@
                                                         <?php } ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>"
+                                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>"
                                                             class="btn btn-sm btn-purple">
                                                             Lihat Detail
                                                         </a>
@@ -521,7 +521,7 @@
                                                         <?php } ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $tempel->faktur ?>"
+                                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur ?>"
                                                             class="btn btn-sm btn-purple">
                                                             Lihat Detail
                                                         </a>
@@ -623,7 +623,7 @@
                                                         <?php } ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?php echo site_url('detailpermintaan'); ?><?php echo $approve2->faktur ?>"
+                                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $approve2->faktur ?>"
                                                             class="btn btn-sm btn-purple">
                                                             Lihat Detail
                                                         </a>
