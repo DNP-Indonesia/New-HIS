@@ -17,7 +17,7 @@
         <li class="nav-item active">
             <a class="nav-link" href="<?php echo site_url() ?>">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Super User</span>
+                <span>Dashboard</span>
             </a>
         </li>
         <hr class="sidebar-divider">
@@ -31,14 +31,14 @@
                 <span>Data User Account</span></a>
         </li>
 
-        <li class="nav-item <?php if ($menu == 'karyawan' or $menu == 'divisi' or $menu == 'departemen' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp') {
+        <li class="nav-item <?php if ($menu == 'karyawan' or $menu == 'divisi' or $menu == 'departemen' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp' or $menu == 'mutasi') {
                                 echo 'active';
                             } ?>">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_personal" aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Personal Data</span>
             </a>
-            <div id="collapsePages_personal" class="collapse <?php if ($menu == 'karyawan' or $menu == 'departemen' or $menu == 'divisi' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp') {
+            <div id="collapsePages_personal" class="collapse <?php if ($menu == 'karyawan' or $menu == 'departemen' or $menu == 'divisi' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp' or $menu == 'mutasi') {
                                                                     echo 'show';
                                                                 } ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -58,6 +58,9 @@
                     <a class="collapse-item <?php if ($menu == 'divisi') {
                                                 echo 'active';
                                             } ?>" href="<?php echo site_url("page_his/divisi") ?>">Daftar Divisi</a>
+                    <a class="collapse-item <?php if ($menu == 'mutasi') {
+                                                echo 'active';
+                                            } ?>" href="<?php echo site_url("page_his/karyawan_mutasi") ?>">Log Karyawan Mutasi</a>
                     <a class="collapse-item <?php if ($menu == 'departemen') {
                                                 echo 'active';
                                             } ?>" href="<?php echo site_url("page_his/departemen") ?>">Daftar Departemen</a>

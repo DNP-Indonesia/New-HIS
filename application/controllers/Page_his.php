@@ -34,7 +34,7 @@ class Page_his extends MY_Controller
     $menu = 'user';
 
     if ($this->session->userdata('role') == 'super_user') {
-      $this->render_backend('application/views/v_user.php', $menu, $data);
+      $this->render_backend('v_user.php', $menu, $data);
     } else {
       $this->render_backend('v_error', $menu, $data);
     }
@@ -50,7 +50,7 @@ class Page_his extends MY_Controller
     if ($this->session->userdata('role') == 'super_user') {
       $this->render_backend('personalData/v_karyawan.php', $menu, $data);
     } else {
-      $this->render_backend('v_error', $menu, $data);
+      $this->render_backend('auth/v_error', $menu, $data);
     }
   }
 
@@ -60,7 +60,12 @@ class Page_his extends MY_Controller
 
     $data['karyawan_out'] = $this->M_his->data_karyawan_out();
 
-    $this->render_backend('personalData/v_karyawan_keluar.php', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_karyawan_keluar.php', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 
   public function karyawan_temp()
@@ -69,7 +74,12 @@ class Page_his extends MY_Controller
 
     $data['karyawan'] = $this->M_his->data_karyawan_temp();
 
-    $this->render_backend('personalData/v_pelatihan_coba.php', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_pelatihan_coba.php', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 
   public function karyawan_out_temp()
@@ -78,17 +88,27 @@ class Page_his extends MY_Controller
 
     $data['karyawan'] = $this->M_his->data_karyawan_out_temp();
 
-    $this->render_backend('personalData/v_pelatihan_keluar', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_pelatihan_keluar', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 
   public function karyawan_mutasi()
   {
-    $menu = $this->uri->segment(2);
+    $menu = 'mutasi';
 
 
     $data['karyawan'] = $this->M_his->data_karyawan_mutasi();
 
-    $this->render_backend('personalData/v_karyawan_mutasi', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_karyawan_mutasi', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 
   public function history_karyawan($nik)
@@ -98,7 +118,13 @@ class Page_his extends MY_Controller
     $data['history'] = $this->M_his->history_karyawan($nik);
     $data['karyawan'] = $this->M_his->data_karyawan_bynik($nik);
 
-    $this->render_backend('personalData/v_detail_karyawan', $menu,$data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_detail_karyawan', $menu,$data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+
+    
   }
 
   function divisi()
@@ -106,7 +132,12 @@ class Page_his extends MY_Controller
     $menu = $this->uri->segment(2);
     $data['div'] = $this->M_his->data_divisi();
 
-    $this->render_backend('personalData/v_divisi', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_divisi', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 
   function departemen()
@@ -115,7 +146,12 @@ class Page_his extends MY_Controller
     $data['dep'] = $this->M_his->data_dep();
     // $data['section'] = $this->M_his->data_section_byId();
 
-    $this->render_backend('personalData/v_departemen', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_departemen', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 
   function section()
@@ -123,7 +159,12 @@ class Page_his extends MY_Controller
     $menu = $this->uri->segment(2);
     $data['section'] = $this->M_his->data_section();
 
-    $this->render_backend('personalData/v_section', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_section', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 
   function shift()
@@ -131,7 +172,12 @@ class Page_his extends MY_Controller
     $menu = $this->uri->segment(2);
     $data['shift'] = $this->M_his->data_shift();
 
-    $this->render_backend('personalData/v_shift', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_shift', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 
   function jabatan()
@@ -139,7 +185,12 @@ class Page_his extends MY_Controller
     $menu = $this->uri->segment(2);
     $data['jabatan'] = $this->M_his->data_jabatan();
 
-    $this->render_backend('personalData/v_jabatan', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_jabatan', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 
   function golongan()
@@ -147,6 +198,11 @@ class Page_his extends MY_Controller
     $menu = $this->uri->segment(2);
     $data['golongan'] = $this->M_his->data_golongan();
 
-    $this->render_backend('personalData/v_golongan', $menu, $data);
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('personalData/v_golongan', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+    
   }
 }
