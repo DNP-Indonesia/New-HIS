@@ -1,28 +1,28 @@
 <?php $no = 1;
 foreach ($keranjang as $tempel) { ?>
     <tr>
-        <td>
+        <td class="text-center">
             <?php echo $no; ?>
         </td>
-        <td>
+        <td class="text-center">
             <?php echo $tempel->barang; ?>
         </td>
-        <td>
+        <td class="text-center">
             <?php echo $tempel->brand; ?>
         </td>
-        <td>
+        <td class="text-center">
             <?php echo $tempel->type; ?>
         </td>
-        <td>
+        <td class="text-center">
             <?php echo $tempel->ukuran; ?>
         </td>
-        <td>
+        <td class="text-center">
             <?php echo $tempel->satuan; ?>
         </td>
-        <td>
+        <td class="text-center">
             <?php echo $tempel->jumlah; ?>
         </td>
-        <td>
+        <td class="text-center">
             <?php echo $tempel->keterangan; ?>
         </td>
         <td>
