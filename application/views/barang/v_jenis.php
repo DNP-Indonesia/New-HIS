@@ -92,9 +92,9 @@
                     </a>
                     <div id="collapse-master" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="<?= base_url('Sundries/kategoricontroller/kategoripage') ?>">Kategori</a>
-                            <a class="collapse-item text-success" href="<?= base_url('Sundries/jeniscontroller/jenispage')?>">Jenis</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/barangcontroller/barangpage')?>">Barang</a>
+                            <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_kategori/kategoripage') ?>">Kategori</a>
+                            <a class="collapse-item text-success" href="<?= base_url('Sundries/Barang/c_jenis/jenispage')?>">Jenis</a>
+                            <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_barang/barangpage')?>">Barang</a>
                         </div>
                     </div>
                 </li>
@@ -214,7 +214,7 @@
                                                     <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit<?php echo $tempel->id_jenis ?>">
                                                         <span class="text">Ubah</span>
                                                     </a>
-                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/jeniscontroller/jenisdelete/'.$tempel->id_jenis) ?>')"
+                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/Barang/c_jenis/jenisdelete/'.$tempel->id_jenis) ?>')"
                                                         href="#" class="btn btn-sm btn-danger">
                                                         Hapus
                                                     </a>
@@ -285,7 +285,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('Sundries/jeniscontroller/jenisadd') ?>" method="POST">
+                    <form action="<?= base_url('Sundries/Barang/c_jenis/jenisadd') ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
@@ -299,7 +299,7 @@
                                     <select class="form-control" id="exampleFormControlSelect1" name="kategori" required>
                                         <option value="--Pilih Kategori--" selected>--Pilih Kategori--</option>
                                     <?php
-                                        $div = $this->modelkategori->findAll();
+                                        $div = $this->m_kategori->getKategoriAll();
                                         foreach($div as $d){ ?>
                                     ?>
                                         <option value="<?php echo $d->id_kategori?>">
@@ -331,7 +331,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('Sundries/jeniscontroller/jenisupdate') ?>" method="POST">
+                    <form action="<?= base_url('Sundries/Barang/c_jenis/jenisupdate') ?>" method="POST">
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
@@ -346,7 +346,7 @@
                                     <select class="form-control" id="exampleFormControlSelect1" name="id_kategori" required>
                                         <option value="" disabled> -- Pilih Kategori -- </option>
                                         <?php
-                                            $div = $this->modelkategori->findAll();
+                                            $div = $this->m_kategori->findAll();
                                             foreach($div as $d){ ?>
                                         ?>
                                         <option value="<?php echo $d->id_kategori?>" <?php if($d->id_kategori==$tempel->id_kategori) {echo "selected"; } ?> >
