@@ -178,7 +178,7 @@
                 										</button>
                 									</div>
                 									<form
-                										action="<?php echo site_url() . 'action_his/do_out_karyawan'; ?>"
+                										action="<?php echo site_url() . '/action_his/do_out_karyawan'; ?>"
                 										method="post">
                 										<input type="text" name="nik" value="<?= $u->nik ?>" hidden>
                 										<div class="modal-body">

@@ -38,7 +38,7 @@ class Page_his extends MY_Controller
       or $this->session->userdata('role') == 'sdr_Admin Gudang'
       or $this->session->userdata('role') == 'sdr_Kepala Gudang'
     ) {
-      $this->render_backend('v_error', $menu, $data);
+      $this->render_backend('auth/v_error', $menu, $data);
     } else {
       $this->render_backend('personalData/dashboard', $menu, $data);
     }
@@ -54,7 +54,7 @@ class Page_his extends MY_Controller
     if ($this->session->userdata('role') == 'super_user') {
       $this->render_backend('v_user.php', $menu, $data);
     } else {
-      $this->render_backend('v_error', $menu, $data);
+      $this->render_backend('auth/v_error', $menu, $data);
     }
   }
 
