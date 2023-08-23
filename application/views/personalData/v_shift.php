@@ -72,6 +72,12 @@
             </div>
         </div>
     </div>
+    <a href="<?php echo base_url('index.php/page_his/home_personalia')?>" class="back-link" >
+			<i class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali
+		</a>
+
+    <br>
+    <br>
 
 </div>
 <!-- /.container-fluid -->
@@ -144,3 +150,22 @@
     </div>
 
 <?php } ?>
+
+<style scoped>
+	.back-link{
+        text-decoration: none;
+        color: #fff;
+        background-color: #1cc88a;
+        padding: 1rem;
+        border-radius: 8px;
+        transition: color 0.3s, background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .back-link:hover{
+        color: #fff;
+        background-color: #1cc88a; /* Ubah latar belakang menjadi hijau */
+        text-decoration: none;
+        transform: translateY(-5px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+</style>
