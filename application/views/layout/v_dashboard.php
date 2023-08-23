@@ -74,7 +74,7 @@
         position: relative;
         transition: transform 0.3s, box-shadow 0.3s;
         will-change: transform;
-        background: #4e73df;
+        background: #1cc88a;
     }
 
     .card:hover, .card:focus {
