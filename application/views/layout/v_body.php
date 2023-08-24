@@ -136,7 +136,6 @@
                                                 } ?>" href="<?= base_url('penerimaan') ?>">
                         Penerimaan Barang
                     </a>
-
                 </div>
             </div>
         </li>

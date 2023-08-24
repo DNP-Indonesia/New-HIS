@@ -114,7 +114,7 @@
                 </a>
                 <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Pembuata Estimasi</a>
+                        <a class="collapse-item" href="#">Pembuatan Estimasi</a>
                         <a class="collapse-item" href="#">Request Sundries</a>
                         <a class="collapse-item" href="#">Request Consumption</a>
                         <a class="collapse-item" href="#">Request Purchase</a>

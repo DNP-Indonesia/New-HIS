@@ -20,7 +20,7 @@ class c_jenis extends MY_Controller
 	{
 		$data['jenis'] = $this->input->post('jenis');
 		$data['id_kategori'] = $this->input->post('kategori');
-		$this->m_jenis->save($data);
+		$this->m_jenis->savejenis($data);
 		$this->session->set_flashdata('success', 'Berhasil ditambah');
 		return redirect('Sundries/Barang/c_jenis/jenispage');
 	}
@@ -29,7 +29,7 @@ class c_jenis extends MY_Controller
 	{
 		if (!isset($id)) show_404();
 
-		if ($this->m_jenis->delete($id)) {
+		if ($this->m_jenis->deleteJenis($id)) {
 			$this->session->set_flashdata('hapus', 'Berhasil dihapus');
 			return redirect('Sundries/Barang/c_jenis/jenispage');
 		}

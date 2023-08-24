@@ -217,12 +217,12 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
-                                                <td><?php echo $tempel ?></td>
+                                                <td><?php echo $tempel->kategori ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit<?php echo $tempel->id_kategori ?>">
                                                         <span class="text">Ubah</span>
                                                     </a>
-                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/Barang/c_kategori/kategoridelete/'.$tempel->id_kategori) ?>')"
+                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/kategoricontroller/kategoridelete/'.$tempel->id_kategori) ?>')"
                                                         href="#" class="btn btn-sm btn-danger">
                                                         Hapus
                                                     </a>

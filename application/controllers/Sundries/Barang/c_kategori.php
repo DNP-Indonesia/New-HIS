@@ -19,7 +19,7 @@ class c_kategori extends MY_Controller
 	public function kategoriadd()
 	{
 		$data['kategori'] = $this->input->post('kategori');
-		$this->m_kategori->save($data);
+		$this->m_kategori->saveKategori($data);
 		$this->session->set_flashdata('success', 'Berhasil ditambah');
 		return redirect('Sundries/Barang/c_kategori/kategoripage');
 	}
@@ -28,7 +28,7 @@ class c_kategori extends MY_Controller
 	{
 		if (!isset($id)) show_404();
 
-		if ($this->m_kategori->delete($id)) {
+		if ($this->m_kategori->deletekategori($id)) {
 			$this->session->set_flashdata('hapus', 'Berhasil dihapus');
 			return redirect('Sundries/Barang/c_kategori/kategoripage');
 		}
@@ -47,7 +47,7 @@ class c_kategori extends MY_Controller
 			'id_kategori' => $id
 		);
 
-		$this->m_kategori->update($where, $data);
+		$this->m_kategori->updateKategori($where, $data);
 		return redirect('Sundries/Barang/c_kategori/kategoripage');
 	}
 }
