@@ -22,7 +22,7 @@ class Page_his extends MY_Controller
     ) {
       redirect('Sundries/Transaksi/c_permintaan/dashboard');
     } else {
-      $this->render_backend('layout/v_dashboard', $menu, $data);
+      $this->render_backend('Sundries/v_dashboard', $menu, $data);
     }
   }
 

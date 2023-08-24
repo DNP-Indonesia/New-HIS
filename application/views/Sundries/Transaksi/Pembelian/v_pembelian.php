@@ -72,24 +72,22 @@
     </div>
     <?php } ?>
 
-    <?php
-    if ($this->session->userdata('role') == 'sdr_Admin Gudang') {
-        ?>
+    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
     <?php if ($this->session->userdata('hapus')) { ?>
-    <div class="alert alert-danger">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <?php echo $this->session->userdata('hapus'); ?>
-        <?php echo $this->session->set_userdata('hapus', null); ?>
-    </div>
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <?php echo $this->session->userdata('hapus'); ?>
+            <?php echo $this->session->set_userdata('hapus', null); ?>
+        </div>
     <?php } ?>
     <?php if ($this->session->userdata('sukses')) { ?>
-    <div class="alert alert-success">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <?php echo $this->session->userdata('sukses'); ?>
-        <?php echo $this->session->set_userdata('sukses', null); ?>
-    </div>
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <?php echo $this->session->userdata('sukses'); ?>
+            <?php echo $this->session->set_userdata('sukses', null); ?>
+        </div>
     <?php } ?>
-    <a href="<?= site_url('formpembelian') ?>" class="btn btn-sm btn-success mb-3">
+    <a href="<?php echo site_url('formpembelian') ?>" class="btn btn-sm btn-success mb-3">
         Buat Baru
     </a>
     <div class="card shadow mb-4">
@@ -147,8 +145,8 @@
             </div>
         </div>
     </div>
-    <?php } ?>
-</div>
+<?php } ?>
+
 
 <script>
     $(document).ready(function() {

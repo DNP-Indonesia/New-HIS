@@ -231,7 +231,413 @@
         <!-- End of Content Wrapper -->
 
     </div>
-    <!-- Start Page Wrapper -->
+    <!-- End Page Wrapper -->
+
+    <!-- Scroll to Top Button -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Yakin Ingin Keluar Aplikasi ?
+                    </h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="button" data-dismiss="modal">
+                        Nggak Jadi
+                    </button>
+                    <a class="btn btn-warning" href="<?php echo site_url(); ?>/auth/logout">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SDR ADMIN BAGIAN -->
+    <!-- Permintaan -->
+    <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Request Sundries</h5>
+                    <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Tutup</span>
+                    </button>
+                </div>
+                <form action="<?php echo site_url('addpermintaan'); ?>" method="POST">
+                    <div class="modal-body">
+                        <?php if (validation_errors()) { ?>
+                            <div class="alert alert-danger">
+                                <?php echo validation_errors(); ?>
+                            </div>
+                        <?php } ?>
+                        <div class="form-row">
+                            <div class="col-md-3 mb-3">
+                                <label>Faktur</label>
+                                <input type="text" class="form-control" value="<?= $faktur ?>" name="faktur" required
+                                    readonly>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label>Tanggal</label>
+                                <input type="text" class="form-control" value="<?= date('Y-m-d') ?>" name="tanggal"
+                                    required readonly>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label>Jam</label>
+                                <input type="text" class="form-control" value="<?php date_default_timezone_set('Asia/Jakarta');
+                                echo date('H:i'); ?>" name="jamdibuat" required readonly>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label>Direquest Oleh</label>
+                                <input type="text" class="form-control" name="nama" required
+                                    value="<?php echo $this->session->userdata('nama'); ?>" readonly>
+
+                                <input type="text" id="id_user" name="id_user"
+                                    value=" <?php echo $this->session->userdata('id_user'); ?>" hidden>
+
+                                <input type="text" class="form-control" value="Request" name="status" hidden>
+                                <input type="text" class="form-control" value="-" name="alasan" hidden>
+                                <input type="text" class="form-control" value="tidak" name="statuskeranjang" hidden>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>Pilihan Barang</label>
+                                <select class="form-control yoi" id="id_barang" onchange="getBarangDetails()">
+                                    <option value="">--Pilih Barang--</option>
+                                    <?php foreach ($barang as $tempel) { ?>
+                                        <option value="<?php echo $tempel->id_barang; ?>">
+                                            <?php echo $tempel->barang; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-3 mb-3">
+                                <label>Brand</label>
+                                <input type="text" class="form-control" id="brand" readonly>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label>Type</label>
+                                <input type="text" class="form-control" id="type" readonly>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label>Ukuran</label>
+                                <input type="text" class="form-control" id="ukuran" readonly>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label>Satuan</label>
+                                <input type="text" class="form-control" id="satuan" readonly>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>Jumlah</label>
+                                <input type="number" class="form-control" id="jumlah">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Catatan Khusus</label>
+                                <input type="text" class="form-control" id="catatan"
+                                    placeholder="Contoh, Warna Merah...">
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col-md-12">
+                                <a href="#" class="btn btn-sm btn-info" id="keranjang">Tambahkan Ke
+                                    Keranjang</a>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label>Keranjang</label>
+                                <div class="card shadow">
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless small">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">No</th>
+                                                    <th class="text-center">Barang</th>
+                                                    <th class="text-center">Brand</th>
+                                                    <th class="text-center">Type</th>
+                                                    <th class="text-center">Ukuran</th>
+                                                    <th class="text-center">Satuan</th>
+                                                    <th class="text-center">Jumlah</th>
+                                                    <th class="text-center">Catatan</th>
+                                                    <th class="text-center">Opsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="isikeranjang">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estimasi -->
+    <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Buat Estimasi Baru</h5>
+                    <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Tutup</span>
+                    </button>
+                </div>
+                <form action="<?php echo site_url('addestimasi'); ?>" method="POST">
+                    <div class="modal-body">
+                        <?php if (validation_errors()) { ?>
+                            <div class="alert alert-danger">
+                                <?php echo validation_errors(); ?>
+                            </div>
+                        <?php } ?>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label>Faktur</label>
+                                <input type="text" class="form-control" value="ES-<?= date('d-m-Y-H-i-s') ?>"
+                                    name="faktur" required readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Tanggal</label>
+                                <input type="text" class="form-control" value="<?= date('Y-m-d') ?>" name="tanggal"
+                                    required readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Dibuat Oleh</label>
+                                <input type="text" class="form-control"
+                                    value=" <?php echo $this->session->userdata('nama'); ?>" name="nama" required
+                                    readonly>
+
+                                <input type="text" id="id_user" name="id_user"
+                                    value=" <?php echo $this->session->userdata('id_user'); ?>" hidden>
+
+                                <input type="text" class="form-control" value="Diajukan" name="status" hidden>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-row">
+                                    <div class="col-md-11 mb-3">
+                                        <label>Pilihan Barang</label>
+                                        <select class="form-control yoi" id="id_barang">
+                                            <option value="0">--Pilih Barang--</option>
+                                            <?php foreach ($barcons as $tempel) { ?>
+                                                <option value="<?php echo $tempel->id_barang; ?>">
+                                                    <?php echo $tempel->barang; ?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-11 mb-3">
+                                        <label>Jumlah Untuk Satu Bulan Kedepan</label>
+                                        <input type="number" class="form-control" id="jumlah">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-11 mb-3">
+                                        <label>Catatan Detail Barang Atau Lainnya</label>
+                                        <input type="text" class="form-control" id="keterangan"
+                                            placeholder="Contoh, Pulpen Standar Joyko Hitam 75 Mili...">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <a href="#" class="btn btn-sm btn-info" id="keranjang">Tambahkan Ke
+                                            Keranjang</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Keranjang</label>
+                                        <div class="card shadow">
+                                            <div class="table-responsive">
+                                                <table class="table table-borderless small">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center">No</th>
+                                                            <th class="text-center">Barang</th>
+                                                            <th class="text-center">Jumlah</th>
+                                                            <th class="text-center">Opsi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="isikeranjang">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Konsumsi -->
+    <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Buat Request Consumption Baru</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="<?php echo site_url('addkonsumsi'); ?>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label>Faktur</label>
+                                <input type="text" class="form-control" value="RC-<?= date('d-m-Y-H-i-s') ?>"
+                                    name="faktur" required readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Tanggal</label>
+                                <input type="text" class="form-control" value="<?= date('Y-m-d') ?>"
+                                    name="tanggal" required readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Di Request Oleh</label>
+                                <input type="text" class="form-control" value=" <?php echo $this->session->userdata('nama'); ?>"
+                                    name="nama" required readonly>
+
+                                <input type="text" id="id_user" name="id_user" value=" <?php echo $this->session->userdata('id_user'); ?>"
+                                    hidden>
+
+                                <input type="text" class="form-control" value="Request" name="status" hidden>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-row">
+                                    <div class="col-md-11 mb-3">
+                                        <label>Faktur Estimasi</label>
+                                        <select class="form-control" id="fakturestimasi" name="fakest">
+                                            <option value=" ">--Pilih Estimasi--</option>
+                                            <?php foreach ($estimasi as $tempel) { ?>
+                                            <option value="<?php echo $tempel->faktur; ?>">
+                                                <?php echo $tempel->faktur; ?>
+                                            </option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-11 mb-3">
+                                        <label>Pilihan Barang dan Jumlah, Sesuai Dengan Estimasi Yang Sudah
+                                            Dibuat</label>
+                                        <select class="form-control" id="id_barang">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-11 mb-3">
+                                        <label>Jumlahnya</label>
+                                        <input type="text" class="form-control" id="jumlah"
+                                            placeholder="Inputkan Jumlah....">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-11 mb-3">
+                                        <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukan Ke
+                                            Keranjang</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Keranjang</label>
+                                        <div class="card shadow">
+                                            <div class="table-responsive">
+                                                <table class="table table-borderless">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center">No</th>
+                                                            <th class="text-center">Barang</th>
+                                                            <th class="text-center">Jumlah</th>
+                                                            <th class="text-center">Opsi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="isikeranjang">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SDR KEPALA BAGIAN -->
+    <!-- Permintaan -->
+
+    <!-- Estimasi -->
+
+    <!-- Konsumsi -->
+
+    <!-- SDR ADMIN GUDANG -->
+    <!-- Permintaan -->
+    
+
+    <!-- Pembelian -->
+
+    <!-- Penerimaan -->
+
+    <!-- SDR KEPALA GUDANG -->
+    <!-- Permintaan -->
+
+    <!-- Pembelian -->
+
+    <!-- Penerimaan -->
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery/jquery.min.js"></script>
