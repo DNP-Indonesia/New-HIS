@@ -86,7 +86,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url() . 'Master/c_bagian/do_tbh_section'; ?>" method="post">
+            <form action="<?php echo site_url() . 'action_his/do_tbh_section'; ?>" method="post">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -94,7 +94,7 @@
                             <select class="form-control" id="exampleFormControlSelect1" name="id_dep" required>
                                 <option value="" selected disabled> -- Pilih Departemen -- </option>
                                 <?php
-                                $dep = $this->m_karyawan->data_dep();
+                                $dep = $this->M_his->data_dep();
                                 foreach ($dep as $d) { ?>
                                     ?>
                                     <option value="<?php echo $d->id_dep ?>"><?php echo $d->nama_dep ?></option>
@@ -131,7 +131,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="<?php echo site_url() . 'Master/c_bagian/do_edit_section' ?>" method="post">
+                <form action="<?php echo site_url() . 'action_his/do_edit_section' ?>" method="post">
                     <input type="text" name="id_section" value="<?= $u->id_section ?>" hidden>
                     <div class="modal-body">
                         <div class="form-row">
@@ -140,7 +140,7 @@
                                 <select class="form-control" id="exampleFormControlSelect1" name="id_dep" required>
                                     <option value="" selected disabled> -- Pilih Departemen -- </option>
                                     <?php
-                                    $dep = $this->m_karyawan->data_dep();
+                                    $dep = $this->M_his->data_dep();
                                     foreach ($dep as $d) { ?>
                                         ?>
                                         <option value="<?php echo $d->id_dep ?>" <?php if ($d->id_dep == $u->id_dep) {

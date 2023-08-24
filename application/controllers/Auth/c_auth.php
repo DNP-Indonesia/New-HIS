@@ -6,6 +6,7 @@ class c_auth extends MY_Controller
   {
     parent::__construct();
     $this->load->model('Auth/m_auth');
+    $this->load->helper('url');
   }
 
   public function index()
@@ -23,8 +24,8 @@ class c_auth extends MY_Controller
     $user = $this->m_auth->get($username); // Panggil fungsi get yang ada di UserModel.php
 
     if (empty($user)) { // Jika hasilnya kosong / user tidak ditemukan
-      $this->session->set_flashdata('message', 'Username tidak ditemukan'); // Buat session flashdata
-      redirect('auth'); // Redirect ke halaman login
+      $this->session->set_flashdata('error', 'Username tidak ditemukan'); // Buat session flashdata
+      redirect(site_url('auth')); // Redirect ke halaman login
 
     } else {
 
@@ -35,13 +36,13 @@ class c_auth extends MY_Controller
           'id_user' => $user->id_user,  // Buat session username
           'nama' => $user->nama, // Buat session nama
           'role' => $user->role, // Buat session role
-          'section' => $user->id_section 
+          'section' => $user->id_section
         );
         $this->session->set_userdata($session); // Buat session sesuai $session
         redirect('dashboard'); // Redirect ke halaman home
       } else {
-        $this->session->set_flashdata('message', 'Password salah'); // Buat session flashdata
-        redirect('auth'); // Redirect ke halaman login
+        $this->session->set_flashdata('error', 'Password salah'); // Buat session flashdata
+        redirect(site_url('auth')); // Redirect ke halaman login
       }
     }
   }
@@ -53,5 +54,23 @@ class c_auth extends MY_Controller
 
     $this->session->sess_destroy(); // Hapus semua session
     redirect('auth'); // Redirect ke halaman login
+  }
+
+  public function home()
+  {
+    $menu = 'event';
+    $data[''] = "";
+
+    if ($this->session->userdata('role') == 'sdr_Admin Bagian') {
+      redirect(('Auth/c_role/dashboard'));
+    } elseif ($this->session->userdata('role') == 'sdr_Admin Gudang') {
+      redirect(('Sundries/Auth/c_role/dashboard'));
+    } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
+      redirect(('Sundries/Auth/c_role/dashboard'));
+    } elseif ($this->session->userdata('role') == 'sdr_Kepala Gudang') {
+      redirect(('Sundries/Auth/c_role/dashboard'));
+    } else {
+      $this->reder_backend('layout/dashboard', $menu, $data);
+    }
   }
 }

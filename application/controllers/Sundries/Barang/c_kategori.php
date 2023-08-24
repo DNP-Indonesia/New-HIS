@@ -12,7 +12,9 @@ class c_kategori extends MY_Controller
 	public function kategoripage()
 	{
 		$data['ambil'] = $this->m_kategori->getKategoriAll();
-		$this->load->view('Sundries/Barang/v_kategori', $data);
+
+		$menu = 'ambil';
+		$this->render_backend('Sundries/Barang/v_kategori', $menu, $data);
 	}
 
 	public function kategoriadd()

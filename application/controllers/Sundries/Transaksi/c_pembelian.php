@@ -21,7 +21,9 @@ class c_pembelian extends MY_Controller
     public function index()
     {
         $data['pembelian'] = $this->m_pembelian->getPembelian();
-        $this->load->view('Sundries/Transaksi/Pembelian/v_pembelian', $data);
+
+        $menu = 'pembelian';
+        $this->render_backend('Sundries/Transaksi/Pembelian/v_pembelian', $menu,  $data);
     }
 
     public function formPembelian()

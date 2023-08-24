@@ -13,7 +13,9 @@ class c_jenis extends MY_Controller
 	public function jenispage()
 	{
 		$data['ambil'] = $this->m_jenis->getJenisAll();
-		$this->load->view('Sundries/Barang/v_jenis', $data);
+
+		$menu = 'ambil';
+		$this->render_backend('Sundries/Barang/v_jenis', $menu, $data);
 	}
 
 	public function jenisadd()

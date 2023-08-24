@@ -20,7 +20,8 @@ class c_estimasi extends MY_Controller
         $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
         $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
 
-        $this->load->view('Sundries/Transaksi/Estimasi/v_estimasi', $data);
+        $menu = 'estimasi';
+        $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);
     }
 
     public function addKeranjang()

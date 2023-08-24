@@ -26,7 +26,8 @@ class c_permintaan extends MY_Controller
         $data['admingudang'] = $this->m_permintaan->forAdminGudang();
         $data['kepalagudang'] = $this->m_permintaan->forKepalaGudang();
 
-        $this->load->view('Sundries/sdr_dashboard', $data);
+        $menu = 'dashboard';
+        $this->render_backend('Sundries/sdr_dashboard', $menu, $data);
     }
 
     public function index()
@@ -51,7 +52,8 @@ class c_permintaan extends MY_Controller
         $data['jenis'] = $this->m_jenis->getJenisById();
         $data['faktur'] = $this->m_permintaan->generateFaktur();
 
-        $this->load->view('Sundries/Transaksi/Permintaan/v_permintaan', $data);
+        $menu = 'permintaan';
+        $this->render_backend('Sundries/Transaksi/Permintaan/v_permintaan', $menu, $data);
     }
     
     public function detail($id)
