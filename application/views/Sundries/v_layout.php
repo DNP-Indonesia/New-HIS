@@ -9,34 +9,41 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="<?php echo base_url() ?>dnp-logo.png" rel="icon">
+    <link href="<?php echo base_url('assets/dnp-logo.png'); ?>" rel="icon">
     <title>DNP - HIS</title>
 
     <!-- Custom fonts for this template-->
-
-    <link href="<?php echo base_url() ?>bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-        type="text/css">
+    <link href="<?php echo base_url(); ?>bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?php echo base_url() ?>bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="<?php echo base_url() ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <link href="<?php echo base_url() ?>bootstrap/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>bootstrap/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style type="text/css">
-        /* body{
-            padding-top:50px;
-            background-color:#34495e;
+        /* Tambahkan gaya baru untuk footer */
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
 
-        .hiddenRow {
-            padding: 0 !important;
-        } */
+        /* Tambahkan margin bawah untuk container */
+        .container-fluid {
+            margin-bottom: 60px;
+        }
 
         .modal-header {
             background-color: #3498db;
@@ -67,50 +74,34 @@
         }
     </style>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $("#state").change(function () {
-                // foo is the id of the other select box 
-                if ($(this).val() == "TK0") {
-                    $("#foo").show();
-                } else {
-                    $("#foo").hide();
-                }
-            });
-        });
-    </script>
-
 </head>
 
-<body id="page - top">
+<body id="page-top">
 
     <!-- Start Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Start Sidebar -->
-        <!-- Variabel $headernya diambil dari MY_Controller -->
-        <?php echo $headernya; ?>
-        <!-- End Sidebar -->
+        <!-- Start of Sidebar -->
+        <!-- Variabel $sidebar diambil dari core MY_Controller -->
+        <?php echo $sidebar; ?>
+        <!-- End of Sidebar -->
 
-        <!-- Start Content Wrapper -->
+        <!-- Start of Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Start Main Content -->
-            <div id="content">
+            <!-- Start of Main Content -->
+            <div id="main-content">
 
-                <!-- Start Topbar -->
+                <!-- Start of Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Start Sidebar Toogle -->
+                    <!-- Topbar Toogle -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <!-- End Sidebar Toogle -->
 
-                    <!-- Start Topbar Search -->
-                    <form action="<?php echo site_url("") ?>" method="post"
+                    <!-- Topbar Search -->
+                    <form action="<?php echo site_url('page/search_bynik'); ?>" method="post"
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input name="nik" type="text" class="form-control bg-light border-0 small"
@@ -122,19 +113,17 @@
                             </div>
                         </div>
                     </form>
-                    <!-- End Topbar Search -->
 
                     <!-- Start Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Start Nav Item - Search Dropdown (Visible Only XS) -->
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-
-                            <!-- Start Dropdown - Messages -->
+                            <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
@@ -150,20 +139,43 @@
                                     </div>
                                 </form>
                             </div>
-                            <!-- End Dropdown - Messages -->
+                        </li>
 
-                            <!-- Start Nav Item - User Information -->
+                        <!-- Logout Modal -->
+                        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar?</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">Pilih tombol LOGOUT dibawah untuk keluar aplikasi.</div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button"
+                                            data-dismiss="modal">Cancel</button>
+                                        <a class="btn btn-primary" href="<?php echo site_url('logout'); ?>">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <?php echo "<b>" . strtoupper($this->session->userdata('nama')) . "</b> (" . $this->session->userdata('role') . ")" ?>
+                                    <?php echo '<b>' . strtoupper($this->session->userdata('nama')) . '</b> (' . $this->session->userdata('role') . ')'; ?>
                                 </span>
                                 <img class="img-profile rounded-circle"
-                                    src="<?php echo base_url() ?>bootstrap/img/user.png">
+                                    src="<?php echo base_url(); ?>bootstrap/img/user.png">
                             </a>
-
-                            <!-- Start Dropdown - User Information -->
+                            <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
@@ -184,99 +196,79 @@
                                     Logout
                                 </a>
                             </div>
-                            <!-- End Dropdown - User Information -->
-
-                            <!-- Start Logout Modal-->
-                            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar?</h5>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">Pilih tombol LOGOUT dibawah untuk keluar aplikasi.</div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-secondary" type="button"
-                                                data-dismiss="modal">Cancel</button>
-                                            <a class="btn btn-primary"
-                                                href="<?php echo site_url('logout') ?> ">Logout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Start Logout Modal-->
-
                         </li>
-                        <!-- End Nav Item - User Information -->
-
-                        </li>
-                        <!-- End Nav Item - Search Dropdown (Visible Only XS) -->
 
                     </ul>
                     <!-- End Topbar Navbar -->
 
                 </nav>
-                <!-- End Topbar -->
+                <!-- End of Topbar -->
 
                 <!-- Start Page Content -->
                 <div class="container-fluid">
-                    <!-- Variabel $contentnya diambil dari MY_Controller -->
-                    <?php echo $contentnya; ?>
+
+                    <!-- Start of Page Content -->
+                    <!-- Variabel $content diambil dari core MY_Controller -->
+                    <?php echo $content; ?>
+                    <!-- End of Page Content -->
+
                 </div>
-                <!-- End Page Content -->
 
             </div>
-            <!-- End Main Content -->
+            <!-- End of Main Content -->
 
-            <!-- Start Footer -->
-            <footer class="sticky-footer bg-white">
+            <!-- Start of Footer -->
+            <footer id="footer" class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>
-            <!-- End Footer -->
+            <!-- End of Footer -->
 
         </div>
-        <!-- End Content Wrapper -->
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End Page Wrapper -->
+    <!-- Start Page Wrapper -->
 
-    <!-- Start Scroll to Top Button -->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <!-- End Scroll to Top Button -->
-
-    <!-- Start Script -->
     <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="<?php echo base_url() ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="<?php echo base_url() ?>bootstrap/js/sb-admin-2.min.js"></script>
+    <script src="<?php echo base_url(); ?>bootstrap/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="<?php echo base_url() ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url() ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="<?php echo base_url() ?>bootstrap/js/demo/datatables-demo.js"></script>
+    <script src="<?php echo base_url(); ?>bootstrap/js/demo/datatables-demo.js"></script>
 
-    <script type="text/javascript"
-        src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#state").change(function() {
+                // foo is the id of the other select box 
+                if ($(this).val() == "TK0") {
+                    $("#foo").show();
+                } else {
+                    $("#foo").hide();
+                }
+            });
+        });
+    </script>
 
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             $(".datepicker").datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true,
@@ -284,17 +276,16 @@
             });
         });
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('table.display').DataTable();
         });
     </script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.tabel-data').DataTable();
         });
     </script>
-    <!-- End Script -->
 
 </body>
 

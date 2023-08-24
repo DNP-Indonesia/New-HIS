@@ -57,10 +57,57 @@ class M_his extends CI_Model{
             ->result();
     }
 
+    function data_karyawan_mutasi() {
+        return $this->db->from('his_mutasi')
+        ->join('his_karyawan', 'his_karyawan.nik = his_mutasi.nik')
+        ->join('his_section as section_sebelum', 'section_sebelum.id_section=his_mutasi.id_section_sebelum')
+        ->join('his_section as section_sesudah', 'section_sesudah.id_section=his_mutasi.id_section_sesudah')
+        ->join('his_departemen as dep_sebelum', 'dep_sebelum.id_dep=section_sebelum.id_dep')
+        ->join('his_departemen as dep_sesudah', 'dep_sesudah.id_dep=section_sesudah.id_dep')
+        ->join('his_divisi as divisi_sebelum', 'divisi_sebelum.id_divisi=dep_sebelum.id_divisi')
+        ->join('his_divisi as divisi_sesudah', 'divisi_sesudah.id_divisi=dep_sesudah.id_divisi')
+        ->join('his_jabatan as jabatan_sebelum', 'jabatan_sebelum.id_jabatan=his_mutasi.id_jabatan_sebelum')
+        ->join('his_jabatan as jabatan_sesudah', 'jabatan_sesudah.id_jabatan=his_mutasi.id_jabatan_sesudah')
+        ->join('his_shift as shift_sebelum', 'shift_sebelum.id_shift=his_mutasi.id_shift_sebelum', 'left') 
+        ->join('his_shift as shift_sesudah', 'shift_sesudah.id_shift=his_mutasi.id_shift_sesudah', 'left')
+        ->join('his_golongan as golongan_sebelum', 'golongan_sebelum.id_golongan=his_mutasi.id_golongan_sebelum')
+        ->join('his_golongan as golongan_sesudah', 'golongan_sesudah.id_golongan=his_mutasi.id_golongan_sesudah')
+        ->select('his_mutasi.*,
+        his_karyawan.nama as nama_karyawan,
+        section_sebelum.nama_section as nama_section_sebelum,
+        section_sesudah.nama_section as nama_section_sesudah,
+        dep_sebelum.nama_dep as nama_departemen_sebelum,
+        dep_sesudah.nama_dep as nama_departemen_sesudah,
+        divisi_sebelum.nama_divisi as nama_divisi_sebelum,
+        divisi_sesudah.nama_divisi as nama_divisi_sesudah,
+        jabatan_sebelum.nama_jabatan as nama_jabatan_sebelum,
+        jabatan_sesudah.nama_jabatan as nama_jabatan_sesudah,
+        shift_sebelum.nama_shift as nama_shift_sebelum,
+        shift_sesudah.nama_shift as nama_shift_sesudah,
+        golongan_sebelum.nama_golongan as nama_golongan_sebelum,
+        golongan_sesudah.nama_golongan as nama_golongan_sesudah')
+            ->get()
+            ->result();
+    }
+
     function data_karyawan_byspysi($spysiid){
         return $this->db->from('his_karyawan')
             ->join('his_section', 'his_section.id_section=his_karyawan.id_section')
             ->where('his_karyawan.spysiid', $spysiid)
+            ->get()
+            ->result();
+    }
+
+    function data_karyawan_bynik($nik){
+        return $this->db->from('his_karyawan')
+        ->join('his_section', 'his_section.id_section=his_karyawan.id_section')
+        ->join('his_departemen', 'his_departemen.id_dep=his_section.id_dep')
+        ->join('his_divisi', 'his_divisi.id_divisi=his_departemen.id_divisi')
+        ->join('his_jabatan', 'his_jabatan.id_jabatan=his_karyawan.id_jabatan')
+        ->join('his_shift', 'his_shift.id_shift=his_karyawan.id_shift', 'left')
+        ->join('his_golongan', 'his_golongan.id_golongan=his_karyawan.id_golongan')
+       
+            ->where('his_karyawan.nik', $nik)
             ->get()
             ->result();
     }
@@ -108,6 +155,41 @@ class M_his extends CI_Model{
             ->or_where('his_karyawan.keterangan', 'Pasca Percobaan')
             ->get()
             ->result();
+    }
+
+    function history_karyawan($nik){
+        return $this->db->from('his_mutasi')
+        ->join('his_karyawan', 'his_karyawan.nik = his_mutasi.nik')
+        ->join('his_section as section_sebelum', 'section_sebelum.id_section=his_mutasi.id_section_sebelum')
+        ->join('his_section as section_sesudah', 'section_sesudah.id_section=his_mutasi.id_section_sesudah')
+        ->join('his_departemen as dep_sebelum', 'dep_sebelum.id_dep=section_sebelum.id_dep')
+        ->join('his_departemen as dep_sesudah', 'dep_sesudah.id_dep=section_sesudah.id_dep')
+        ->join('his_divisi as divisi_sebelum', 'divisi_sebelum.id_divisi=dep_sebelum.id_divisi')
+        ->join('his_divisi as divisi_sesudah', 'divisi_sesudah.id_divisi=dep_sesudah.id_divisi')
+        ->join('his_jabatan as jabatan_sebelum', 'jabatan_sebelum.id_jabatan=his_mutasi.id_jabatan_sebelum')
+        ->join('his_jabatan as jabatan_sesudah', 'jabatan_sesudah.id_jabatan=his_mutasi.id_jabatan_sesudah')
+        ->join('his_shift as shift_sebelum', 'shift_sebelum.id_shift=his_mutasi.id_shift_sebelum', 'left') 
+        ->join('his_shift as shift_sesudah', 'shift_sesudah.id_shift=his_mutasi.id_shift_sesudah', 'left')
+        ->join('his_golongan as golongan_sebelum', 'golongan_sebelum.id_golongan=his_mutasi.id_golongan_sebelum')
+        ->join('his_golongan as golongan_sesudah', 'golongan_sesudah.id_golongan=his_mutasi.id_golongan_sesudah')
+        ->select('his_mutasi.*,
+        his_karyawan.nama as nama_karyawan,
+        section_sebelum.nama_section as nama_section_sebelum,
+        section_sesudah.nama_section as nama_section_sesudah,
+        dep_sebelum.nama_dep as nama_departemen_sebelum,
+        dep_sesudah.nama_dep as nama_departemen_sesudah,
+        divisi_sebelum.nama_divisi as nama_divisi_sebelum,
+        divisi_sesudah.nama_divisi as nama_divisi_sesudah,
+        jabatan_sebelum.nama_jabatan as nama_jabatan_sebelum,
+        jabatan_sesudah.nama_jabatan as nama_jabatan_sesudah,
+        shift_sebelum.nama_shift as nama_shift_sebelum,
+        shift_sesudah.nama_shift as nama_shift_sesudah,
+        golongan_sebelum.nama_golongan as nama_golongan_sebelum,
+        golongan_sesudah.nama_golongan as nama_golongan_sesudah')
+            ->where('his_karyawan.nik', $nik)
+            ->get()
+            ->result();
+        
     }
 
     function data_divisi(){
@@ -160,6 +242,11 @@ class M_his extends CI_Model{
         return $this->db->from('his_golongan')
             ->get()
             ->result();
+    }
+
+    public function get_by_condition($table, $condition) {
+        $this->db->where($condition);
+        return $this->db->get($table)->row();
     }
 
     

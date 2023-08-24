@@ -20,7 +20,8 @@ class c_estimasi extends MY_Controller
         $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
         $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
 
-        $this->load->view('Sundries/Transaksi/Estimasi/v_estimasi', $data);
+        $menu = 'estimasi';
+        $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);
     }
 
     public function addKeranjang()
@@ -83,19 +84,17 @@ class c_estimasi extends MY_Controller
         $this->m_estimasi->deleteEstimasi($faktur);
     }
 
-    public function detailEstimasi()
+    public function detailEstimasi($id)
     {
-        $id = $this->uri->segment(4);
         $data['data'] = $this->m_estimasi->getEstimasiById($id);
         $data['detail'] = $this->m_estimasi->getEstimasiDetail($id);
         $this->load->view('Sundries/Transaksi/Estimasi/v_detail', $data);
     }
 
-    public function printEstimasi()
+    public function printEstimasi($id)
     {
-        $id = $this->uri->segment(4);
         $data['data'] = $this->m_estimasi->getIdPdf($id);
-        $data['detail'] = $this->m_estimasi->getDetailIdPdf($id);
+        $data['detail'] = $this->m_detail->getDetailIdPdf($id);
         $this->load->view('Sundries/Transaksi/Estimasi/v_print', $data);
     }
 

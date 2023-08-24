@@ -17,6 +17,7 @@ class MY_Controller extends CI_Controller
                 redirect('auth'); // Redirect ke halaman login
         }
     }
+
     public function render_login($content, $data = NULL)
     {
         /*
@@ -26,16 +27,12 @@ class MY_Controller extends CI_Controller
         $data['contentnya'] = $this->load->view($content, $data, TRUE);
         $this->load->view('auth/v_login', $data);
     }
+
     public function render_backend($content, $menu, $data = NULL)
     {
-        /*
-        * $data['headernya'] , $data['contentnya']
-        * variabel diatas ^ nantinya akan dikirim ke file views/template/backend/index.php
-        * */
-
         $data['menu'] = "$menu";
-        $data['headernya'] = $this->load->view('Sundries/Template/role', $data, TRUE);
-        $data['contentnya'] = $this->load->view($content, $data, TRUE);
-        $this->load->view('Sundries/Template/layout', $data);
+        $data['sidebar'] = $this->load->view('Sundries/v_sidebar', $data, TRUE);
+        $data['content'] = $this->load->view($content, $data, TRUE);
+        $this->load->view('Sundries/v_layout', $data);
     }
 }

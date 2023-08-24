@@ -15,7 +15,9 @@ class c_barang extends MY_Controller
     {
         $data['title'] = 'Barang';
         $data['ambil'] = $this->m_barang->getBarangAll();
-        $this->load->view('Sundries/Barang/v_barang', $data);
+
+        $menu = 'ambil';
+        $this->render_backend('Sundries/Barang/v_barang', $menu, $data);
     }
 
     public function addBarang()
