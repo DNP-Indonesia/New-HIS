@@ -179,7 +179,7 @@ class m_pembelian extends CI_Model
         $lastKode = str_pad($faktur, 4, "0", STR_PAD_LEFT);
         $tahun = date("y");
         $bulan = date("m");
-        $rs = "PCH";
+        $rs = "PS";
 
         $newfaktur = $rs . "" . $tahun . "" . $bulan . "." . $lastKode;
 

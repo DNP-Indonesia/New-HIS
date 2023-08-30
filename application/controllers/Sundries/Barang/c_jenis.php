@@ -10,11 +10,11 @@ class c_jenis extends MY_Controller
 		$this->load->model('Sundries/Barang/m_jenis');
 	}
 
-	public function jenispage()
+	public function index()
 	{
-		$data['ambil'] = $this->m_jenis->getJenisAll();
+		$data['jenis'] = $this->m_jenis->getJenisAll();
 
-		$menu = 'ambil';
+		$menu = 'jenis';
 		$this->render_backend('Sundries/Barang/v_jenis', $menu, $data);
 	}
 
