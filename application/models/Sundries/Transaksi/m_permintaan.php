@@ -403,9 +403,10 @@ class m_permintaan extends CI_Model
         $lastKode = str_pad($faktur, 4, "0", STR_PAD_LEFT);
         $tahun = date("y");
         $bulan = date("m");
+        $tanggal = date("d");
         $rs = "RS";
 
-        $newfaktur = $rs . "" . $tahun . "" . $bulan . "." . $lastKode;
+        $newfaktur = $rs . "-" . $tanggal . "-" . $bulan . "-" . $tahun . "-" . $lastKode;
 
         return $newfaktur;
     }

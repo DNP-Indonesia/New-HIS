@@ -166,5 +166,32 @@ class m_estimasi extends CI_Model
         $this->db->where($where);
         $this->db->update($this->table, $data);
     }
+
+    // Fungsi untuk meng-generate nomor faktur berdasarkan data terakhir dalam database
+    public function generateFaktur()
+    {
+        $this->db->select('RIGHT(faktur,4) as faktur', false);
+        $this->db->order_by("faktur", "DESC");
+        $this->db->limit(1);
+        $query = $this->db->get('sdr_request_sundries');
+
+
+        if ($query->num_rows() <> 0) {
+            $data = $query->row();
+            $faktur = intval($data->faktur) + 1;
+        } else {
+            $faktur = 1;
+        }
+
+        $lastKode = str_pad($faktur, 4, "0", STR_PAD_LEFT);
+        $tahun = date("y");
+        $bulan = date("m");
+        $tanggal = date("d");
+        $em = "EM";
+
+        $newfaktur = $em . "-" . $tanggal . "-" . $bulan . "-" . $tahun . "-" . $lastKode;
+
+        return $newfaktur;
+    }
 }
 ?>

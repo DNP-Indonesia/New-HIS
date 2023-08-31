@@ -12,9 +12,9 @@ class c_jenis extends MY_Controller
 
 	public function page()
 	{
-		$data['ambil'] = $this->m_jenis->getJenisAll();
+		$data['jenis'] = $this->m_jenis->getJenisAll();
 
-		$menu = 'ambil';
+		$menu = 'jenis';
 		$this->render_backend('Sundries/Barang/v_jenis', $menu, $data);
 	}
 

@@ -11,9 +11,9 @@ class c_kategori extends MY_Controller
 
 	public function page()
 	{
-		$data['ambil'] = $this->m_kategori->getKategoriAll();
+		$data['kategori'] = $this->m_kategori->getKategoriAll();
 
-		$menu = 'ambil';
+		$menu = 'kategori';
 		$this->render_backend('Sundries/Barang/v_kategori', $menu, $data);
 	}
 

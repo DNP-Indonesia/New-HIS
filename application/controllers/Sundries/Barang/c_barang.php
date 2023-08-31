@@ -14,9 +14,9 @@ class c_barang extends MY_Controller
     public function page()
     {
         $data['title'] = 'Barang';
-        $data['ambil'] = $this->m_barang->getBarangAll();
+        $data['barang'] = $this->m_barang->getBarangAll();
 
-        $menu = 'ambil';
+        $menu = 'barang';
         $this->render_backend('Sundries/Barang/v_barang', $menu, $data);
     }
 
@@ -53,7 +53,7 @@ class c_barang extends MY_Controller
         return redirect('Sundries/Transaksi/c_permintaan/page');
     }
 
-    public function updateBarang()
+    public function updateBarang($id)
     {
         $id = $this->input->post('id_barang');
         $barang = $this->input->post('barang');

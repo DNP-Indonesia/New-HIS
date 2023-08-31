@@ -19,6 +19,7 @@ class c_estimasi extends MY_Controller
         $data['barcons'] = $this->m_barang->getBarangAll();
         $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
         $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
+        $data['faktur'] = $this->m_estimasi->generateFaktur();
 
         $menu = 'estimasi';
         $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);
@@ -32,7 +33,8 @@ class c_estimasi extends MY_Controller
         $catatan = $this->input->post('catatan');
         
         $cek = $this->m_estimasi->cekKeranjang($id_barang, $id_user)->num_rows();
-        if ($cek === 0) {
+        if ($cek > 0) {
+            echo "1";
             $data = array(
                 'id_barang' => $id_barang,
                 'jumlah' => $qty,
