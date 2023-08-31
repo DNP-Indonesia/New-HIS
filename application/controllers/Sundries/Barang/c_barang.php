@@ -11,7 +11,7 @@ class c_barang extends MY_Controller
         $this->load->model("Sundries/Barang/m_jenis");
     }
 
-    public function barangpage()
+    public function index()
     {
         $data['ambil'] = $this->m_barang->getBarangAll();
         $this->load->view('Sundries/Barang/v_barang', $data);
@@ -28,7 +28,7 @@ class c_barang extends MY_Controller
         $data['stok'] = $this->input->post('stok');
 
         $this->m_barang->save($data);
-        return redirect('Sundries/Barang/c_barang/barangpage');
+        return redirect('Sundries/Barang/c_barang/index');
     }
 
     public function barangaddbyother()
@@ -62,7 +62,7 @@ class c_barang extends MY_Controller
         );
 
         $this->m_barang->update($where, $data);
-        return redirect('Sundries/Barang/c_barang/barangpage');
+        return redirect('Sundries/Barang/c_barang/index');
     }
 
     public function barangdelete($id)
@@ -71,7 +71,7 @@ class c_barang extends MY_Controller
 
         if ($this->m_barang->delete($id)) {
             $this->session->set_flashdata('hapus', 'Berhasil dihapus');
-            return redirect('Sundries/Barang/c_barang/barangpage');
+            return redirect('Sundries/Barang/c_barang/index');
         }
     }
 }

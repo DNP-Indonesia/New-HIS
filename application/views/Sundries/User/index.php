@@ -91,7 +91,7 @@
 
                         <a class="collapse-item" href="<?php echo site_url("Master-Sundries/Jenis") ?>">Jenis</a>
 
-                        <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_barang/barangpage") ?>">Barang</a>
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_barang/index") ?>">Barang</a>
 
                     </div>
                 </div>

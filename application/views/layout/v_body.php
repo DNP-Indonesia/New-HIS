@@ -90,9 +90,9 @@
             </a>
             <div id="mastersundriesmenu" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_kategori/kategoripage") ?>">Kategori</a>
-                    <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_jenis/jenispage") ?>">Jenis</a>
-                    <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_barang/barangpage") ?>">Barang</a>
+                    <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_kategori/index") ?>">Kategori</a>
+                    <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_jenis/index") ?>">Jenis</a>
+                    <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_barang/index") ?>">Barang</a>
 
                 </div>
             </div>
