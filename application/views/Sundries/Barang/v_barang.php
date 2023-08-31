@@ -300,7 +300,7 @@
                                 <select class="form-control" id="exampleFormControlSelect1" name="jenis" required>
                                     <option value="--Pilih Kategori--" selected>--Pilih Jenis--</option>
                                     <?php
-                                    $div = $this->m_jenis->findAll();
+                                    $div = $this->m_jenis->getJenisAll();
                                     foreach ($div as $d) { ?>
                                         ?>
                                         <option value="<?php echo $d->id_jenis ?>">

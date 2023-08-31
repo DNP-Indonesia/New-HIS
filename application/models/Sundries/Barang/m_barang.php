@@ -8,7 +8,7 @@ class m_barang extends CI_Model
 
     public function getBarangAll()
     {
-        $this->db->select('sdr_barang.*, sdr_jenis.jenis');
+        $this->db->select('sdr_barang.*, sdr_jenis.jenis, sdr_kategori.kategori');
         $this->db->from('sdr_barang');
         $this->db->join('sdr_jenis', 'sdr_barang.id_jenis = sdr_jenis.id_jenis');
         $this->db->join('sdr_kategori', 'sdr_jenis.id_kategori = sdr_kategori.id_kategori');
