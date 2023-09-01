@@ -31,7 +31,7 @@
                 <span>Data User Account</span></a>
         </li>
 
-        <li class="nav-item <?php if ($menu == 'karyawan' or $menu == 'divisi' or $menu == 'departemen' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp' or $menu == 'mutasi') {
+        <!-- <li class="nav-item <?php if ($menu == 'karyawan' or $menu == 'divisi' or $menu == 'departemen' or $menu == 'section' or $menu == 'shift' or $menu == 'golongan' or $menu == 'jabatan' or $menu == 'karyawan_out' or $menu == 'karyawan_temp' or $menu == 'karyawan_out_temp' or $menu == 'mutasi') {
                                         echo 'active';
                                     } ?>">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_personal" aria-expanded="true" aria-controls="collapsePages">
@@ -79,7 +79,7 @@
 
                 </div>
             </div>
-        </li>
+        </li> -->
 
 
         <!-- Sundries Master -->
