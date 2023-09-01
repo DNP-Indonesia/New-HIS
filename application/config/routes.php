@@ -59,33 +59,33 @@ $route['translate_uri_dashes'] = FALSE;
 $route['auth'] = 'auth/c_auth';
 $route['home'] = 'auth/c_auth/home';
 $route['logout'] = 'auth/c_auth/logout';
-$route['dashboard'] = 'Page_his/home';
+$route['dashboard'] = 'Master/Page_his/home';
 
 $route['data-user'] = 'Auth/c_role/user';
 
 // Personal Data
-$route['data-karyawan'] = 'Page_his/karyawan';
-$route['data-karyawan-keluar'] = 'Page_his/karyawan_out';
-$route['data-karyawan-training-dan-percobaan'] = 'Page_his/karyawan_temp';
-$route['data-karyawan-training-dan-percobaan-keluar'] = 'Page_his/karyawan_out_temp';
-$route['daftar-divisi'] = 'Page_his/divisi';
-$route['daftar-departemen'] = 'Page_his/departemen';
-$route['daftar-section'] = 'Page_his/section';
-$route['daftar-shift'] = 'Page_his/shift';
-$route['daftar-jabatan'] = 'Page_his/jabatan';
-$route['daftar-golongan'] = 'Page_his/golongan';
+$route['data-karyawan'] = 'Master/Page_his/karyawan';
+$route['data-karyawan-keluar'] = 'Master/Page_his/karyawan_out';
+$route['data-karyawan-training-dan-percobaan'] = 'Master/Page_his/karyawan_temp';
+$route['data-karyawan-training-dan-percobaan-keluar'] = 'Master/Page_his/karyawan_out_temp';
+$route['daftar-divisi'] = 'Master/Page_his/divisi';
+$route['daftar-departemen'] = 'Master/Page_his/departemen';
+$route['daftar-section'] = 'Master/Page_his/section';
+$route['daftar-shift'] = 'Master/Page_his/shift';
+$route['daftar-jabatan'] = 'Master/Page_his/jabatan';
+$route['daftar-golongan'] = 'Master/Page_his/golongan';
 
 // Personal Data
-$route['data-karyawan'] = 'Page_his/karyawan';
-$route['data-karyawan-keluar'] = 'Page_his/karyawan_out';
-$route['data-karyawan-training-dan-percobaan'] = 'Page_his/karyawan_temp';
-$route['data-karyawan-training-dan-percobaan-keluar'] = 'Page_his/karyawan_out_temp';
-$route['daftar-divisi'] = 'Page_his/divisi';
-$route['daftar-departemen'] = 'Page_his/departemen';
-$route['daftar-section'] = 'Page_his/section';
-$route['daftar-shift'] = 'Page_his/shift';
-$route['daftar-jabatan'] = 'Page_his/jabatan';
-$route['daftar-golongan'] = 'Page_his/golongan';
+$route['data-karyawan'] = 'Master/Page_his/karyawan';
+$route['data-karyawan-keluar'] = 'Master/Page_his/karyawan_out';
+$route['data-karyawan-training-dan-percobaan'] = 'Master/Page_his/karyawan_temp';
+$route['data-karyawan-training-dan-percobaan-keluar'] = 'Master/Page_his/karyawan_out_temp';
+$route['daftar-divisi'] = 'Master/Page_his/divisi';
+$route['daftar-departemen'] = 'Master/Page_his/departemen';
+$route['daftar-section'] = 'Master/Page_his/section';
+$route['daftar-shift'] = 'Master/Page_his/shift';
+$route['daftar-jabatan'] = 'Master/Page_his/jabatan';
+$route['daftar-golongan'] = 'Master/Page_his/golongan';
 
 
 // Barang

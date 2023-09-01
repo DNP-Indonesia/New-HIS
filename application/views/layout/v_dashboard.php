@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <a href="<?= base_url('index.php/page_his/home_personalia') ?>" style="text-decoration: none;">
+            <a href="<?= base_url('Master/Page_his/home_personalia') ?>" style="text-decoration: none;">
                 <div class="card text-white mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Personalia</h5>
@@ -23,7 +23,7 @@
         </div>
         <!-- Tambahkan button-menu lain di sini -->
         <div class="col-sm-4">
-            <a href="<?= base_url('index.php/page_his/karyawan_out') ?>" style="text-decoration: none;">
+            <a href="<?= base_url('Master/Page_his/karyawan_out') ?>" style="text-decoration: none;">
                 <div class="card text-white  mb-3">
                     <div class="card-body">
                         <h5 class="card-title">DIV LAIN</h5>
@@ -33,7 +33,7 @@
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="<?= base_url('index.php/page_his/karyawan_temp') ?>" style="text-decoration: none;">
+            <a href="<?= base_url('Master/Page_his/karyawan_temp') ?>" style="text-decoration: none;">
                 <div class="card text-white  mb-3">
                     <div class="card-body">
                         <h5 class="card-title">DIV LAIN</h5>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="col-sm-4">
-            <a href="<?= base_url('index.php/page_his/karyawan_temp') ?>" style="text-decoration: none;">
+            <a href="<?= base_url('Master/Page_his/karyawan_temp') ?>" style="text-decoration: none;">
                 <div class="card text-white mb-3">
                     <div class="card-body">
                         <h5 class="card-title">DIV LAIN</h5>
@@ -54,7 +54,7 @@
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="<?= base_url('index.php/page_his/karyawan_temp') ?>" style="text-decoration: none;">
+            <a href="<?= base_url('Master/Page_his/karyawan_temp') ?>" style="text-decoration: none;">
                 <div class="card text-white mb-3">
                     <div class="card-body">
                         <h5 class="card-title">DIV LAIN</h5>

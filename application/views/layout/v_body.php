@@ -26,7 +26,7 @@
         <li class="nav-item <?php if ($menu == 'user') {
                                 echo 'active';
                             } ?>">
-            <a class="nav-link" href="<?php echo site_url("page_his/user") ?>">
+            <a class="nav-link" href="<?php echo site_url("Master/Page_his/user") ?>">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Data User Account</span></a>
         </li>
@@ -45,37 +45,37 @@
 
                     <a class="collapse-item <?php if ($menu == 'karyawan') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/karyawan") ?>">Daftar Karyawan</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/karyawan") ?>">Daftar Karyawan</a>
                     <a class="collapse-item <?php if ($menu == 'karyawan_out') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/karyawan_out") ?>">Daftar Karyawan Keluar</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/karyawan_out") ?>">Daftar Karyawan Keluar</a>
                     <a class="collapse-item <?php if ($menu == 'karyawan_temp') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/karyawan_temp") ?>">Karyawan Training & <br>Percobaan</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/karyawan_temp") ?>">Karyawan Training & <br>Percobaan</a>
                     <a class="collapse-item <?php if ($menu == 'karyawan_out_temp') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/karyawan_out_temp") ?>">Karyawan Training & <br>Percobaan Keluar</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/karyawan_out_temp") ?>">Karyawan Training & <br>Percobaan Keluar</a>
                     <a class="collapse-item <?php if ($menu == 'divisi') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/divisi") ?>">Daftar Divisi</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/divisi") ?>">Daftar Divisi</a>
                     <a class="collapse-item <?php if ($menu == 'mutasi') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/karyawan_mutasi") ?>">Log Karyawan Mutasi</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/karyawan_mutasi") ?>">Log Karyawan Mutasi</a>
                     <a class="collapse-item <?php if ($menu == 'departemen') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/departemen") ?>">Daftar Departemen</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/departemen") ?>">Daftar Departemen</a>
                     <a class="collapse-item <?php if ($menu == 'section') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/section") ?>">Daftar Section</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/section") ?>">Daftar Section</a>
                     <a class="collapse-item <?php if ($menu == 'shift') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/shift") ?>">Daftar Shift</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/shift") ?>">Daftar Shift</a>
                     <a class="collapse-item <?php if ($menu == 'jabatan') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/jabatan") ?>">Daftar Jabatan</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/jabatan") ?>">Daftar Jabatan</a>
                     <a class="collapse-item <?php if ($menu == 'golongan') {
                                                 echo 'active';
-                                            } ?>" href="<?php echo site_url("page_his/golongan") ?>">Daftar Golongan</a>
+                                            } ?>" href="<?php echo site_url("Master/Page_his/golongan") ?>">Daftar Golongan</a>
 
                 </div>
             </div>

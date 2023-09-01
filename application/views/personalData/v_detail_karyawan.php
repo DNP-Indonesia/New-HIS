@@ -124,7 +124,7 @@
                 <div id="pagination"></div>
             </div>
         </div>
-        <a href="<?php echo base_url('index.php/page_his/karyawan')?>" class="back-link" >
+        <a href="<?php echo base_url('Master/Page_his/karyawan')?>" class="back-link" >
 			<i class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali
 		</a>
         <br>

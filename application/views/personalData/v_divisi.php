@@ -78,7 +78,7 @@
 			</div>
 		</div>
 	</div>
-	<a href="<?php echo base_url('index.php/page_his/home_personalia')?>" class="back-link" >
+	<a href="<?php echo base_url('Master/Page_his/home_personalia')?>" class="back-link" >
 			<i class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali
 		</a>
 		<br>
@@ -103,7 +103,7 @@
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
-			<form action="<?php echo site_url() . '/action_his/do_tbh_divisi'; ?>" method="post">
+			<form action="<?php echo site_url() . 'action_his/do_tbh_divisi'; ?>" method="post">
 				<div class="modal-body">
 					<div class="form-row">
 						<div class="col-md-12 mb-3">

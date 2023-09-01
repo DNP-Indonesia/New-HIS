@@ -66,7 +66,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url("page_his/user") ?>">
+                <a class="nav-link" href="<?php echo site_url("Master/Page_his/user") ?>">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Data User Account</span>
                 </a>
@@ -80,16 +80,16 @@
                 <div id="collapsePages_personal" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="<?= base_url('page_his/karyawan') ?>">Daftar Karyawan</a>
-                        <a class="collapse-item" href="<?= base_url('page_his/karyawan_out') ?>">Daftar Karyawan Keluar</a>
-                        <a class="collapse-item" href="<?= base_url('page_his/karyawan_temp') ?>">Karyawan Training & <br>Percobaan</a>
-                        <a class="collapse-item" href="<?= base_url('page_his/karyawan_out_temp') ?>">Karyawan Training & <br>Percobaan Keluar</a>
-                        <a class="collapse-item" href="<?= base_url('page_his/divisi') ?>">Daftar Divisi</a>
-                        <a class="collapse-item" href="<?= base_url('page_his/departemen') ?>">Daftar Departemen</a>
-                        <a class="collapse-item" href="<?= base_url('page_his/section') ?>">Daftar Section</a>
-                        <a class="collapse-item" href="<?= base_url('page_his/shift') ?>">Daftar Shift</a>
-                        <a class="collapse-item" href="<?= base_url('page_his/jabatan') ?>">Daftar Jabatan</a>
-                        <a class="collapse-item" href="<?= base_url('page_his/golongan') ?>">Daftar Golongan</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/karyawan') ?>">Daftar Karyawan</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/karyawan_out') ?>">Daftar Karyawan Keluar</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/karyawan_temp') ?>">Karyawan Training & <br>Percobaan</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/karyawan_out_temp') ?>">Karyawan Training & <br>Percobaan Keluar</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/divisi') ?>">Daftar Divisi</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/departemen') ?>">Daftar Departemen</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/section') ?>">Daftar Section</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/shift') ?>">Daftar Shift</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/jabatan') ?>">Daftar Jabatan</a>
+                        <a class="collapse-item" href="<?= base_url('Master/Page_his/golongan') ?>">Daftar Golongan</a>
 
                     </div>
                 </div>

@@ -48,7 +48,7 @@
                                             </div>
                                         <?php } ?>
                                     </div>
-                                    <form class="user" action="<?= base_url('index.php/auth/c_auth/login'); ?>" method="POST">
+                                    <form class="user" action="<?= base_url('auth/c_auth/login'); ?>" method="POST">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukan Username" name="username" autofocus>
                                         </div>

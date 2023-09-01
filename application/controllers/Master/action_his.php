@@ -8,7 +8,7 @@ class Action_his extends MY_Controller{
 	    $this->load->dbforge();
 		$this->load->helper('url');
 		$this->load->library('Pdf');
-	    $this->load->model('M_his');
+	    $this->load->model('Master/M_his');
 
 	    
 	}
@@ -120,7 +120,7 @@ class Action_his extends MY_Controller{
 				$this->session->set_flashdata('success', 'Data Divisi baru berhasil ditambahkan');
 		}
 
-		redirect(site_url("page_his/divisi"));
+		redirect(site_url("Master/Page_his/divisi"));
 	}
 
 	function do_tbh_departemen(){
@@ -138,7 +138,7 @@ class Action_his extends MY_Controller{
 				$this->session->set_flashdata('success', 'Data Departemen baru berhasil ditambahkan');
 		}
 
-		redirect(site_url("page_his/departemen"));
+		redirect(site_url("Master/Page_his/departemen"));
 	}
 
 	function do_tbh_section(){
@@ -156,7 +156,7 @@ class Action_his extends MY_Controller{
 				$this->session->set_flashdata('success', 'Data Section baru berhasil ditambahkan');
 		}
 
-		redirect(site_url("page_his/section"));
+		redirect(site_url("Master/Page_his/section"));
 	}
 
 	function do_tbh_shift(){
@@ -173,7 +173,7 @@ class Action_his extends MY_Controller{
 				$this->session->set_flashdata('success', 'Data Shift baru berhasil ditambahkan');
 		}
 
-		redirect(site_url("page_his/shift"));
+		redirect(site_url("Master/Page_his/shift"));
 	}
 
 	function do_tbh_jabatan(){
@@ -190,7 +190,7 @@ class Action_his extends MY_Controller{
 				$this->session->set_flashdata('success', 'Data Jabatan baru berhasil ditambahkan');
 		}
 
-		redirect(site_url("page_his/jabatan"));
+		redirect(site_url("Master/Page_his/jabatan"));
 	}
 
 	function do_tbh_golongan(){
@@ -207,7 +207,7 @@ class Action_his extends MY_Controller{
 				$this->session->set_flashdata('success', 'Data Golongan baru berhasil ditambahkan');
 		}
 
-		redirect(site_url("page_his/golongan"));
+		redirect(site_url("Master/Page_his/golongan"));
 	}
 
 	function do_tbh_karyawan(){
@@ -228,7 +228,7 @@ class Action_his extends MY_Controller{
 		$existingSpysiid = $this->M_his->get_by_condition('his_karyawan', array('spysiid' => $spysiid));
 		if ($existingSpysiid) {
 			$this->session->set_flashdata('error', 'SPYSIID telah digunakan. Silakan pilih SPYSIID yang lain.');
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 		}
 
 		// Validasi 1: spysiid harus angka sepanjang 8 digit dan harus unik
@@ -236,14 +236,14 @@ class Action_his extends MY_Controller{
 			// Format spysiid tidak valid
 			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
 			$this->session->set_flashdata('error', 'Format spysiid tidak valid. Harus berupa angka 8 digit.');
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 		}
 
 		// Validasi nik telah digunakan
 		$existingNik = $this->M_his->get_by_condition('his_karyawan', array('nik' => $nik));
 		if ($existingNik) {
 			$this->session->set_flashdata('error', 'NIK telah digunakan. Silakan pilih NIK yang lain.');
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 		}
 
 	
@@ -252,7 +252,7 @@ class Action_his extends MY_Controller{
 			// Format nama tidak valid
 			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
 			$this->session->set_flashdata('error', 'Format nama tidak valid. Hanya huruf dan spasi yang diperbolehkan.');
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 		}
 	
 		// Validasi 3: nik harus angka sepanjang 4 digit dan harus unik
@@ -260,7 +260,7 @@ class Action_his extends MY_Controller{
 			// Format nik tidak valid
 			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
 			$this->session->set_flashdata('error', 'Format nik tidak valid. Harus berupa angka 4 digit.');
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 		}
 
 		// Validasi tanggal lahir
@@ -270,7 +270,7 @@ class Action_his extends MY_Controller{
 	
 		if ($age < 18) {
 			$this->session->set_flashdata('error', 'Usia karyawan harus minimal 18 tahun');
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 		}
 	
 		// // Periksa apakah spysiid atau nik sudah ada di database
@@ -279,7 +279,7 @@ class Action_his extends MY_Controller{
 		// 	// spysiid atau nik sudah ada di database
 		// 	// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
 		// 	$this->session->set_flashdata('error', 'spysiid atau nik sudah ada.');
-		// 	redirect(site_url("page_his/karyawan"));
+		// 	redirect(site_url("Master/Page_his/karyawan"));
 		// }
 	
 		$data = array(
@@ -303,7 +303,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data Karyawan baru berhasil ditambahkan');
 		}
 	
-		redirect(site_url("page_his/karyawan"));
+		redirect(site_url("Master/Page_his/karyawan"));
 	}
 	
 
@@ -327,7 +327,7 @@ class Action_his extends MY_Controller{
 			$existingSpysiid = $this->M_his->get_by_condition('his_karyawan', array('spysiid' => $spysiid));
 		if ($existingSpysiid) {
 			$this->session->set_flashdata('error', 'SPYSIID telah digunakan. Silakan pilih SPYSIID yang lain.');
-			redirect(site_url("page_his/karyawan_temp"));
+			redirect(site_url("Master/Page_his/karyawan_temp"));
 		}
 
 		// Validasi 1: spysiid harus angka sepanjang 8 digit dan harus unik
@@ -335,14 +335,14 @@ class Action_his extends MY_Controller{
 			// Format spysiid tidak valid
 			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
 			$this->session->set_flashdata('error', 'Format spysiid tidak valid. Harus berupa angka 8 digit.');
-			redirect(site_url("page_his/karyawan_temp"));
+			redirect(site_url("Master/Page_his/karyawan_temp"));
 		}
 
 		// Validasi nik telah digunakan
 		$existingNik = $this->M_his->get_by_condition('his_karyawan', array('nik_training' => $nik_training));
 		if ($existingNik) {
 			$this->session->set_flashdata('error', 'NIK telah digunakan. Silakan pilih NIK yang lain.');
-			redirect(site_url("page_his/karyawan_temp"));
+			redirect(site_url("Master/Page_his/karyawan_temp"));
 		}
 
 	
@@ -351,7 +351,7 @@ class Action_his extends MY_Controller{
 			// Format nama tidak valid
 			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
 			$this->session->set_flashdata('error', 'Format nama tidak valid. Hanya huruf dan spasi yang diperbolehkan.');
-			redirect(site_url("page_his/karyawan_temp"));
+			redirect(site_url("Master/Page_his/karyawan_temp"));
 		}
 	
 		// Validasi 3: nik harus angka sepanjang 4 digit dan harus unik
@@ -359,7 +359,7 @@ class Action_his extends MY_Controller{
 			// Format nik tidak valid
 			// Atur pesan kesalahan, misalnya, tampilkan pesan kesalahan atau redirect kembali dengan kesalahan
 			$this->session->set_flashdata('error', 'Format nik tidak valid. Harus berupa angka 4 digit.');
-			redirect(site_url("page_his/karyawan_temp"));
+			redirect(site_url("Master/Page_his/karyawan_temp"));
 		}
 
 
@@ -370,7 +370,7 @@ class Action_his extends MY_Controller{
 	
 		if ($age < 18) {
 			$this->session->set_flashdata('error', 'Usia karyawan harus minimal 18 tahun');
-			redirect(site_url("page_his/karyawan_temp"));
+			redirect(site_url("Master/Page_his/karyawan_temp"));
 		}
 
 
@@ -396,7 +396,7 @@ class Action_his extends MY_Controller{
 				$this->session->set_flashdata('success', 'Data Karyawan baru berhasil ditambahkan');
 		}
 
-		redirect(site_url("page_his/karyawan_temp"));
+		redirect(site_url("Master/Page_his/karyawan_temp"));
 	}
 
 
@@ -416,12 +416,12 @@ class Action_his extends MY_Controller{
 		// validasi nama
 		if (!preg_match('/^[A-Za-z\s]+$/', $nama)) {
         $this->session->set_flashdata('error', 'Format nama tidak valid. Hanya huruf dan spasi yang diperbolehkan.');
-        redirect(site_url("page_his/karyawan"));
+        redirect(site_url("Master/Page_his/karyawan"));
    		}
 		// Validasi nik
 		if (!preg_match('/^\d{4}$/', $nik)) {
 			$this->session->set_flashdata('error', 'Format nik tidak valid. Harus berupa angka 4 digit.');
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 		}
 	
 		// Validasi tanggal lahir
@@ -430,7 +430,7 @@ class Action_his extends MY_Controller{
 		$age = $birthdate->diff($today)->y;
 		if ($age < 18) {
 			$this->session->set_flashdata('error', 'Umur harus minimal 18 tahun.');
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 		}
 	
 		$data = array(
@@ -456,7 +456,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 	
-		redirect(site_url("page_his/karyawan"));
+		redirect(site_url("Master/Page_his/karyawan"));
 	}
 
 	function do_edit_karyawan_temp($nik_temp){
@@ -502,7 +502,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 
-		redirect(site_url("page_his/karyawan_temp"));
+		redirect(site_url("Master/Page_his/karyawan_temp"));
 
 	}
 
@@ -564,7 +564,7 @@ class Action_his extends MY_Controller{
                 $this->session->set_flashdata('success', 'Data berhasil diubah');
             }
 
-            redirect(site_url("page_his/history_karyawan/$nik_awal"));
+            redirect(site_url("Master/Page_his/history_karyawan/$nik_awal"));
         } else {
             echo "Data karyawan tidak ditemukan.";
         }
@@ -594,7 +594,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 
-		redirect(site_url("page_his/divisi"));
+		redirect(site_url("Master/Page_his/divisi"));
 
 	}
 
@@ -623,7 +623,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 
-		redirect(site_url("page_his/departemen"));
+		redirect(site_url("Master/Page_his/departemen"));
 	}
 
 	function do_edit_section(){
@@ -651,7 +651,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 
-		redirect(site_url("page_his/section"));
+		redirect(site_url("Master/Page_his/section"));
 	}
 
 	function do_edit_shift(){
@@ -677,7 +677,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 
-		redirect(site_url("page_his/shift"));
+		redirect(site_url("Master/Page_his/shift"));
 	}
 
 
@@ -704,7 +704,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 
-		redirect(site_url("page_his/jabatan"));
+		redirect(site_url("Master/Page_his/jabatan"));
 	}
 
 
@@ -731,7 +731,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 
-		redirect(site_url("page_his/golongan"));
+		redirect(site_url("Master/Page_his/golongan"));
 	}
 
 	function do_out_karyawan(){
@@ -757,7 +757,7 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 
-		redirect(site_url("page_his/karyawan_out"));
+		redirect(site_url("Master/Page_his/karyawan_out"));
 	}
 
 	function do_out_karyawan_temp() {
@@ -782,9 +782,9 @@ class Action_his extends MY_Controller{
 			$this->session->set_flashdata('success', 'Data berhasil diubah');
 		}
 		if ($keterangan == "Aktif"){
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 		} else {
-			redirect(site_url("page_his/karyawan_out_temp"));
+			redirect(site_url("Master/Page_his/karyawan_out_temp"));
 		}
 	}
 
@@ -796,7 +796,7 @@ class Action_his extends MY_Controller{
 		$existingNik = $this->M_his->get_by_condition('his_karyawan', array('nik' => $new_nik));
 			if ($existingNik) {
 				$this->session->set_flashdata('error', 'NIK telah digunakan. Silakan pilih NIK yang lain.');
-				redirect(site_url("page_his/karyawan"));
+				redirect(site_url("Master/Page_his/karyawan"));
 			}
 
 		$data = array(
@@ -816,7 +816,7 @@ class Action_his extends MY_Controller{
 			// echo "<script>alert('Data berhasil disimpan');</script>";
 			$this->session->set_flashdata('success', 'Karyawan berhasil diangkat');
 		}
-			redirect(site_url("page_his/karyawan"));
+			redirect(site_url("Master/Page_his/karyawan"));
 	}
 
 	function check_nik_availability() {

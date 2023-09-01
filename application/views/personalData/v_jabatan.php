@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    <a href="<?php echo base_url('index.php/page_his/home_personalia')?>" class="back-link" >
+    <a href="<?php echo base_url('Master/Page_his/home_personalia')?>" class="back-link" >
 			<i class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali
 		</a>
         <br>

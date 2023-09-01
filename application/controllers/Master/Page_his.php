@@ -5,7 +5,7 @@ class Page_his extends MY_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('M_his');
+    $this->load->model('Master/M_his');
   }
 
   public function home()

@@ -141,7 +141,7 @@
                 											</a>
                 										</p>
 														<p class="dropdown-item">
-                											<a href="<?php echo site_url("page_his/history_karyawan/" . $u->nik) ?>" class="btn btn-primary btn-icon-split btn-sm">
+                											<a href="<?php echo site_url("Master/Page_his/history_karyawan/" . $u->nik) ?>" class="btn btn-primary btn-icon-split btn-sm">
                 												<span class="icon text-white-50">
                 													<i class="fas fa-edit"></i>
                 												</span>
@@ -178,7 +178,7 @@
                 										</button>
                 									</div>
                 									<form
-                										action="<?php echo site_url() . '/action_his/do_out_karyawan'; ?>"
+                										action="<?php echo site_url() . 'action_his/do_out_karyawan'; ?>"
                 										method="post">
                 										<input type="text" name="nik" value="<?= $u->nik ?>" hidden>
                 										<div class="modal-body">
@@ -619,7 +619,7 @@
                 		</div>
 						
                 	</div>
-					<a href="<?php echo base_url('index.php/page_his/home_personalia')?>" class="back-link" >
+					<a href="<?php echo base_url('Master/Page_his/home_personalia')?>" class="back-link" >
 			<i class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali
 		</a>
 		<br>

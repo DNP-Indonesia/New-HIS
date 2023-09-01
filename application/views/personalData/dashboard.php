@@ -9,7 +9,7 @@
         </div>
         
     </div>
-    <a href="<?php echo base_url('index.php/dashboard')?>" class="back-link" >
+    <a href="<?php echo base_url('dashboard')?>" class="back-link" >
 			<i class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali
 		</a>
 
@@ -27,47 +27,47 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><a href="<?= base_url('index.php/page_his/karyawan') ?>" class="menu-link">Daftar Karyawan</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/karyawan') ?>" class="menu-link">Daftar Karyawan</a></td>
                         </tr>
                         <tr>
                             
-                            <td><a href="<?= base_url('index.php/page_his/karyawan_out') ?>" class="menu-link">Daftar Karyawan Keluar</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/karyawan_out') ?>" class="menu-link">Daftar Karyawan Keluar</a></td>
                         </tr>
                         <tr>
                             
-                            <td><a href="<?= base_url('index.php/page_his/karyawan_temp') ?>" class="menu-link">Karyawan Training dan Percobaan</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/karyawan_temp') ?>" class="menu-link">Karyawan Training dan Percobaan</a></td>
                         </tr>
                         <tr>
                             
-                            <td><a href="<?= base_url('index.php/page_his/karyawan_out_temp') ?>" class="menu-link">Karyawan Training dan Percobaan Keluar</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/karyawan_out_temp') ?>" class="menu-link">Karyawan Training dan Percobaan Keluar</a></td>
                         </tr>
                         <tr>
                             
-                            <td><a href="<?= base_url('index.php/page_his/divisi') ?>" class="menu-link">Daftar Divisi</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/divisi') ?>" class="menu-link">Daftar Divisi</a></td>
                         </tr>
                         <tr>
                             
-                            <td><a href="<?= base_url('index.php/page_his/karyawan_mutasi') ?>" class="menu-link">Log Mutasi</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/karyawan_mutasi') ?>" class="menu-link">Log Mutasi</a></td>
                         </tr>
                         <tr>
                             
-                            <td><a href="<?= base_url('index.php/page_his/departemen') ?>" class="menu-link">Daftar Departemen</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/departemen') ?>" class="menu-link">Daftar Departemen</a></td>
                         </tr>
                         <tr>
                             
-                            <td><a href="<?= base_url('index.php/page_his/section') ?>" class="menu-link">Daftar Section</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/section') ?>" class="menu-link">Daftar Section</a></td>
                         </tr>
                         <tr>
                         
-                            <td><a href="<?= base_url('index.php/page_his/shift') ?>" class="menu-link">Daftar Shift</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/shift') ?>" class="menu-link">Daftar Shift</a></td>
                         </tr>
                         <tr>
                             
-                            <td><a href="<?= base_url('index.php/page_his/jabatan') ?>" class="menu-link">Daftar Jabatan</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/jabatan') ?>" class="menu-link">Daftar Jabatan</a></td>
                         </tr>
                         <tr>
                         
-                            <td><a href="<?= base_url('index.php/page_his/golongan') ?>" class="menu-link">Daftar Golongan</a></td>
+                            <td><a href="<?= base_url('Master/Page_his/golongan') ?>" class="menu-link">Daftar Golongan</a></td>
                         </tr>
                     </tbody>
                 </table>
