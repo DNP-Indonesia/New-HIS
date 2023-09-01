@@ -20,7 +20,7 @@ class Page_his extends MY_Controller
       or $this->session->userdata('role') == 'sdr_Admin Gudang'
       or $this->session->userdata('role') == 'sdr_Kepala Gudang'
     ) {
-      redirect('Sundries/Transaksi/c_permintaan/dashboard');
+      $this->render_backend('layout/v_dashboard', $menu, $data);
     } else {
       $this->render_backend('layout/v_dashboard', $menu, $data);
     }
