@@ -90,9 +90,9 @@
                 </a>
                 <div id="collapse-master" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_kategori/kategoripage') ?>">Kategori</a>
-                        <a class="collapse-item text-success" href="<?= base_url('Sundries/Barang/c_jenis/jenispage') ?>">Jenis</a>
-                        <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_barang/barangpage') ?>">Barang</a>
+                        <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_kategori/index') ?>">Kategori</a>
+                        <a class="collapse-item text-success" href="<?= base_url('Sundries/Barang/c_jenis/index') ?>">Jenis</a>
+                        <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_barang/index') ?>">Barang</a>
                     </div>
                 </div>
             </li>
@@ -103,7 +103,7 @@
                 </a>
                 <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Pembuata Estimasi</a>
+                        <a class="collapse-item" href="#">Pembuatan Estimasi</a>
                         <a class="collapse-item" href="#">Request Sundries</a>
                         <a class="collapse-item" href="#">Request Consumption</a>
                         <a class="collapse-item" href="#">Request Purchase</a>
@@ -294,9 +294,8 @@
                                 <select class="form-control" id="exampleFormControlSelect1" name="kategori" required>
                                     <option value="--Pilih Kategori--" selected>--Pilih Kategori--</option>
                                     <?php
-                                    $div = $this->m_kategori->findAll();
+                                    $div = $this->m_kategori->getKategoriAll();
                                     foreach ($div as $d) { ?>
-
                                         <option value="<?php echo $d->id_kategori ?>">
                                             <?php echo $d->kategori ?>
                                         </option>
@@ -341,7 +340,7 @@
                                     <select class="form-control" id="exampleFormControlSelect1" name="id_kategori" required>
                                         <option value="" disabled> -- Pilih Kategori -- </option>
                                         <?php
-                                        $div = $this->m_kategori->findAll();
+                                        $div = $this->m_kategori->getJenisAll();
                                         foreach ($div as $d) { ?>
                                             ?>
                                             <option value="<?php echo $d->id_kategori ?>" <?php if ($d->id_kategori == $tempel->id_kategori) {

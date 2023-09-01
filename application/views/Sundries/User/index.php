@@ -91,7 +91,7 @@
 
                         <a class="collapse-item" href="<?php echo site_url("Master-Sundries/Jenis") ?>">Jenis</a>
 
-                        <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_barang/barangpage") ?>">Barang</a>
+                        <a class="collapse-item" href="<?php echo site_url("Sundries/Barang/c_barang/index") ?>">Barang</a>
 
                     </div>
                 </div>
@@ -104,7 +104,7 @@
             </a>
             <div id="collapse-transaksi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?php echo site_url("Sundries/estimasicontroller/estimasipage") ?>">Pembuata Estimasi</a>
+                    <a class="collapse-item" href="<?php echo site_url("Sundries/estimasicontroller/estimasipage") ?>">Pembuatan Estimasi</a>
                     <a class="collapse-item" href="<?php echo site_url("Sundries/requestsundriescontroller/requestsundriespage") ?>">Request Sundries</a>
                     <a class="collapse-item" href="<?php echo site_url("Sundries/consumptioncontroller/consumptionpage") ?>">Request Consumption</a>
                     <a class="collapse-item" href="#">Request Purchase</a>

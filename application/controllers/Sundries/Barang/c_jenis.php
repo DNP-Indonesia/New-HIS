@@ -10,7 +10,7 @@ class c_jenis extends MY_Controller
 		$this->load->model("Sundries/Barang/m_kategori");
 	}
 
-	public function jenispage()
+	public function index()
 	{
 		$data['ambil'] = $this->m_jenis->getJenisAll();
 		$this->load->view('Sundries/Barang/v_jenis', $data);
@@ -20,18 +20,18 @@ class c_jenis extends MY_Controller
 	{
 		$data['jenis'] = $this->input->post('jenis');
 		$data['id_kategori'] = $this->input->post('kategori');
-		$this->m_jenis->save($data);
+		$this->m_jenis->savejenis($data);
 		$this->session->set_flashdata('success', 'Berhasil ditambah');
-		return redirect('Sundries/Barang/c_jenis/jenispage');
+		return redirect('Sundries/Barang/c_jenis/index');
 	}
 
 	public function jenisdelete($id)
 	{
 		if (!isset($id)) show_404();
 
-		if ($this->m_jenis->delete($id)) {
+		if ($this->m_jenis->deleteJenis($id)) {
 			$this->session->set_flashdata('hapus', 'Berhasil dihapus');
-			return redirect('Sundries/Barang/c_jenis/jenispage');
+			return redirect('Sundries/Barang/c_jenis/index');
 		}
 	}
 
@@ -50,6 +50,6 @@ class c_jenis extends MY_Controller
 		);
 
 		$this->m_jenis->update($where, $data);
-		return redirect('Sundries/Barang/c_jenis/jenispage');
+		return redirect('Sundries/Barang/c_jenis/index');
 	}
 }

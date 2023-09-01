@@ -102,9 +102,9 @@
                     </a>
                     <div id="collapse-master" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item text-success" href="<?= base_url('Sundries/Barang/c_kategori/kategoripage') ?>">Kategori</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_jenis/jenispage') ?>">Jenis</a>
-                            <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_barang/barangpage')?>">Barang</a>
+                            <a class="collapse-item text-success" href="<?= base_url('Sundries/Barang/c_kategori/index') ?>">Kategori</a>
+                            <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_jenis/index') ?>">Jenis</a>
+                            <a class="collapse-item" href="<?= base_url('Sundries/Barang/c_barang/index')?>">Barang</a>
                         </div>
                     </div>
                 </li>
@@ -217,12 +217,12 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
-                                                <td><?php echo $tempel ?></td>
+                                                <td><?php echo $tempel->kategori ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit<?php echo $tempel->id_kategori ?>">
                                                         <span class="text">Ubah</span>
                                                     </a>
-                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/Barang/c_kategori/kategoridelete/'.$tempel->id_kategori) ?>')"
+                                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/kategoricontroller/kategoridelete/'.$tempel->id_kategori) ?>')"
                                                         href="#" class="btn btn-sm btn-danger">
                                                         Hapus
                                                     </a>
