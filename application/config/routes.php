@@ -88,21 +88,24 @@ $route['daftar-jabatan'] = 'Master/Page_his/jabatan';
 $route['daftar-golongan'] = 'Master/Page_his/golongan';
 
 
+# -------------------------- SUNDRIES -------------------------- #
+// User
+
 // Barang
-$route['barang'] = 'Sundries/Barang/c_barang/index';
+$route['barang'] = 'Sundries/Barang/c_barang/page';
 $route['addbarang'] = 'Sundries/Barang/c_barang/addBarang';
 $route['addbarangother'] = 'Sundries/Barang/c_barang/addBarangOther';
 $route['updatebarang/(:any)'] = 'Sundries/Barang/c_barang/updateBarang/$1';
 $route['deletebarang/(:any)'] = 'Sundries/Barang/c_barang/deleteBarang/$1';
 
 // Jenis
-$route['jenis'] = 'Sundries/Master/c_jenis/index';
+$route['jenis'] = 'Sundries/Master/_jenis/page';
 $route['addjenis'] = 'Sundries/Master/c_jenis/addJenis';
 $route['updatejenis/(:any)'] = 'Sundries/Master/c_jenis/updateJenis/$1';
 $route['deletejenis/(:any)'] = 'Sundries/Master/c_jenis/deleteJenis/$1';
 
 // Kategori
-$route['kategori'] = 'Sundries/Master/c_kategori/index';
+$route['kategori'] = 'Sundries/Master/c_kategori/page';
 $route['addkategori'] = 'Sundries/Master/c_kategori/addKategori';
 $route['updatekategori/(:any)'] = 'Sundries/Master/c_kategori/update/$1';
 $route['deletekategori/(:any)'] = 'Sundries/Master/c_kategori/deleteKategori/$1';

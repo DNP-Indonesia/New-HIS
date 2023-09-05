@@ -19,7 +19,7 @@ class m_kategori extends CI_Model
 
     public function updateKategori($id, $data)
     {
-        $this->db->where($id);
+        $this->db->where('id_kategori', $id);
         return $this->db->update($this->table, $data);
     }
 
