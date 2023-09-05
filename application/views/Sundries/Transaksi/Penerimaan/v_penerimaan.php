@@ -140,7 +140,7 @@
                         Batal
                     </button>
                     <button class="btn btn-sm btn-success" type="submit">
-                        Lanjutkan
+                        Terima
                     </button>
                 </div>
             </form>
@@ -155,7 +155,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    Menambahkan Daftar Barang
+                    Tambah Daftar Barang
                 </h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">Tutup</span>
@@ -197,7 +197,7 @@
                         Batal
                     </button>
                     <button class="btn btn-sm btn-success" type="submit">
-                        Lanjutkan
+                        Tambah
                     </button>
                 </div>
             </form>

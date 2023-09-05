@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <!-- DataTales Example -->
     <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
-        Buat Kategori
+        Tambah Kategori
     </a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -97,12 +97,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Buat Kategori Baru</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Tambah Kategori</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_kategori/kategoriadd'); ?>" method="POST">
+            <form action="<?php echo site_url('addkategori'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -114,7 +114,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <button type="submit" class="btn btn-success btn-sm">Tambah</button>
                 </div>
             </form>
         </div>
@@ -132,7 +132,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_kategori/kategoriupdate'); ?>" method="POST">
+            <form action="<?php echo site_url('updatekategori'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -159,12 +159,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Buat Jenis Baru</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Tambah Jenis</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_jenis/jenisadd'); ?>" method="POST">
+            <form action="<?php echo site_url('addjenis'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -173,7 +173,7 @@
                             <input type="text" name="kategori" value="<?= $tempel->id_kategori ?>" hidden
                                 required>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mb-3">
                             <label>Untuk Kategori</label>
                             <input type="text" class="form-control" value="<?= $tempel->kategori ?>" required
                                 readonly>
@@ -182,7 +182,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <button type="submit" class="btn btn-success btn-sm">Tambah</button>
                 </div>
             </form>
         </div>

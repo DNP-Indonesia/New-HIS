@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <!-- DataTales Example -->
     <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
-        Buat Jenis
+        Tambah Jenis
     </a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -82,7 +82,7 @@
             <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
             <div class="modal-footer">
                 <button class="btn btn-success" type="button" data-dismiss="modal">
-                    Nggak Jadi
+                    Batal
                 </button>
                 <a class="btn btn-warning" href="<?php echo site_url(); ?>/auth/logout">
                     Logout
@@ -97,12 +97,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Buat Jenis Baru Baru</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Tambah Jenis</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('addJenis'); ?>" method="POST">
+            <form action="<?php echo site_url('addjenis'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -134,7 +134,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Nggak
                         Jadi Deh</button>
-                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <button type="submit" class="btn btn-success btn-sm">Tambah</button>
                 </div>
             </form>
         </div>
@@ -184,8 +184,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Nggak Jadi
-                        Deh</button>
+                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-success btn-sm">Ubah</button>
                 </div>
             </form>
@@ -247,7 +246,7 @@
 <script>
     function deleteConfirm(url) {
         $('#btn-delete').attr('href', url);
-        $('#deleteModal').modal();
+        $('#modal-hapus').modal();
     }
 </script>
 

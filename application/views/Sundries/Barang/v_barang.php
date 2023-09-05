@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <!-- DataTales Example -->
     <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
-        Buat Barang
+        Tambah Barang
     </a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -122,7 +122,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Buat Barang Baru</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Tambah Barang Baru</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -184,9 +184,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Nggak Jadi
-                        Deh</button>
-                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Tambah</button>
                 </div>
             </form>
         </div>
@@ -243,8 +242,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Nggak Jadi
-                        Deh</button>
+                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-success btn-sm">Ubah</button>
                 </div>
             </form>
@@ -268,10 +266,10 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">
-                    Cancel
+                    Batal
                 </button>
                 <a id="btn-delete" class="btn btn-danger" href="#">
-                    Delete
+                    Hapus
                 </a>
             </div>
         </div>

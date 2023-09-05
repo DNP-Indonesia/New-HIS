@@ -629,7 +629,7 @@
                         <span aria-hidden="true">Tutup</span>
                     </button>
                 </div>
-                <form action="<?php echo site_url('Sundries/requestsundriescontroller/requestproses'); ?>" method="POST">
+                <form action="<?php echo site_url('permintaanproses'); ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
