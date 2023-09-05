@@ -94,7 +94,7 @@ $route['daftar-golongan'] = 'Master/Page_his/golongan';
 // Barang
 $route['barang'] = 'Sundries/Barang/c_barang/page';
 $route['addbarang'] = 'Sundries/Barang/c_barang/addBarang';
-$route['addbarangother'] = 'Sundries/Barang/c_barang/addBarangOther';
+$route['addbarangother'] = 'Sundries/Barang/c_barang/addBarangother';
 $route['updatebarang/(:any)'] = 'Sundries/Barang/c_barang/updateBarang/$1';
 $route['deletebarang/(:any)'] = 'Sundries/Barang/c_barang/deleteBarang/$1';
 

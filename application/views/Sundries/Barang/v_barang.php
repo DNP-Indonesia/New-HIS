@@ -124,7 +124,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_barang/create') ?>" method="POST">
+            <form action="<?php echo site_url('addbarang') ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
@@ -132,7 +132,7 @@
                             <select class="form-control" id="exampleFormControlSelect1" name="jenis" required>
                                 <option value="--Pilih Kategori--" selected>--Pilih Jenis--</option>
                                 <?php
-                                $div = $this->m_jenis->findAll();
+                                $div = $this->m_jenis->getJenisAll();
                                 foreach ($div as $d) { ?>
                                 ?>
                                 <option value="<?php echo $d->id_jenis; ?>">
@@ -218,7 +218,7 @@
                             <select class="form-control" id="exampleFormControlSelect1" name="jenis" required>
                                 <option value="" disabled> -- Pilih Jenis -- </option>
                                 <?php
-                                    $div = $this->m_jenis->findAll();
+                                    $div = $this->m_jenis->getJenisAll();
                                     foreach ($div as $d) { ?>
                                 ?>
                                 <option value="<?php echo $d->id_jenis; ?>" <?php if ($d->id_jenis == $tempel->id_jenis) {

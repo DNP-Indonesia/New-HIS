@@ -83,7 +83,7 @@
         </div>
     </li>
 
-    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['barang', 'jenis', 'kategori'])) {
+    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['kategori', 'jenis', 'barang'])) {
         echo 'active';
     } ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-master"
@@ -91,7 +91,7 @@
             <i class="fas fa-fw fa-folder"></i>
             <span>Master Sundries</span>
         </a>
-        <div id="collapse-master" class="collapse <?php if (isset($menu) && in_array($menu, ['barang', 'jenis', 'kategori'])) {
+        <div id="collapse-master" class="collapse <?php if (isset($menu) && in_array($menu, ['kategori', 'jenis', 'barang'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">

@@ -115,7 +115,7 @@
                                 <option value="--Pilih Kategori--" selected>--Pilih Kategori--
                                 </option>
                                 <?php
-                                $div = $this->m_kategori->findAll();
+                                $div = $this->m_kategori->getKategoriAll();
                                 foreach ($div as $d) { ?>
                                 ?>
                                 <option value="<?php echo $d->id_kategori; ?>">
@@ -165,7 +165,7 @@
                             <select class="form-control" id="exampleFormControlSelect1" name="id_kategori" required>
                                 <option value="" disabled> -- Pilih Kategori -- </option>
                                 <?php
-                                    $div = $this->m_kategori->findAll();
+                                    $div = $this->m_kategori->getKategoriAll();
                                     foreach ($div as $d) { ?>
                                 ?>
                                 <option value="<?php echo $d->id_kategori; ?>" <?php if ($d->id_kategori == $tempel->id_kategori) {
