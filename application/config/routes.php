@@ -61,7 +61,7 @@ $route['home'] = 'auth/c_auth/home';
 $route['logout'] = 'auth/c_auth/logout';
 $route['dashboard'] = 'Master/Page_his/home';
 
-$route['data-user'] = 'Auth/c_role/user';
+$route['data-user'] = 'Page_his/user';
 
 // Personal Data
 $route['data-karyawan'] = 'Master/Page_his/karyawan';
@@ -96,16 +96,16 @@ $route['updatebarang/(:any)'] = 'Sundries/Barang/c_barang/updateBarang/$1';
 $route['deletebarang/(:any)'] = 'Sundries/Barang/c_barang/deleteBarang/$1';
 
 // Jenis
-$route['jenis'] = 'Sundries/Master/c_jenis/index';
-$route['addjenis'] = 'Sundries/Master/c_jenis/addJenis';
-$route['updatejenis/(:any)'] = 'Sundries/Master/c_jenis/updateJenis/$1';
+$route['jenis'] = 'Sundries/Barang/c_jenis/page';
+$route['addjenis'] = 'Sundries/Barang/c_jenis/addJenis';
+$route['updatejenis/(:any)'] = 'Sundries/Barang/c_jenis/updateJenis/$1';
 $route['deletejenis/(:any)'] = 'Sundries/Master/c_jenis/deleteJenis/$1';
 
 // Kategori
-$route['kategori'] = 'Sundries/Master/c_kategori/index';
-$route['addkategori'] = 'Sundries/Master/c_kategori/addKategori';
-$route['updatekategori/(:any)'] = 'Sundries/Master/c_kategori/update/$1';
-$route['deletekategori/(:any)'] = 'Sundries/Master/c_kategori/deleteKategori/$1';
+$route['kategori'] = 'Sundries/Barang/c_kategori/page';
+$route['addkategori'] = 'Sundries/Barang/c_kategori/addKategori';
+$route['updatekategori/(:any)'] = 'Sundries/Barang/c_kategori/update/$1';
+$route['deletekategori/(:any)'] = 'Sundries/Barang/c_kategori/deleteKategori/$1';
 
 // Estimasi
 $route['estimasi'] = 'Sundries/Transaksi/c_estimasi/index';
