@@ -33,19 +33,19 @@
 </head>
 <style type="text/css">
     .btn-purple {
-        background-color: #6b0391;
+        background-color: #8000ff;
         color: white;
     }
 
     .btn-purple:hover {
         color: white;
-        background-color: #400257;
+        background-color: #6906cc;
     }
 </style>
 
 <body id="page-top">
     <div class="container-fluid">
-        <div class="card shadow mt-4">
+        <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-success">Data Request</h5>
             </div>
@@ -75,6 +75,10 @@
                         <?php } elseif ($tempel->status == 'Disetujui1') { ?>
                         <span class="badge badge-primary">
                             Disetujui Kepala Bagian
+                        </span>
+                        <?php } elseif ($tempel->status == 'Disetujui2') { ?>
+                        <span class="badge badge-primary">
+                            Disetujui Kepala Gudang
                         </span>
                         <?php } elseif ($tempel->status == 'Diproses') { ?>
                         <span class="badge badge-info">
@@ -128,7 +132,7 @@
                 </div>
             </div>
         </div>
-        <?php if ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request") { ?>
+        <?php if ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request" or $this->session->userdata('role') == 'sdr_Kepala Gudang' && $tempel->status == "Disetujui1") { ?>
         <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
             data-target="#modal-setujui<?php echo $tempel->id_request_sundries; ?>">
             Setujui
@@ -140,7 +144,7 @@
         </a>
         <?php } ?>
 
-        <?php if ($tempel->status == 'Disetujui1' && $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
+        <?php if ($tempel->status == 'Disetujui2' && $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
         <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
             data-target="#modal-proses<?php echo $tempel->id_request_sundries; ?>">
             Proses Sekarang
@@ -629,7 +633,7 @@
                         <span aria-hidden="true">Tutup</span>
                     </button>
                 </div>
-                <form action="<?php echo site_url('permintaanproses'); ?>" method="POST">
+                <form action="<?php echo site_url('Sundries/requestsundriescontroller/requestproses'); ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="col-md-12 mb-3">

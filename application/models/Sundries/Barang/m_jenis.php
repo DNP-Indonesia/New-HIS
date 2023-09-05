@@ -11,7 +11,6 @@ class m_jenis extends CI_Model
     {
     return $this->db->from('sdr_jenis')
             ->join('sdr_kategori', 'sdr_kategori.id_kategori=sdr_jenis.id_kategori')
-            ->order_by('id_jenis','ASC')
             ->get()
             ->result();
     }
@@ -38,7 +37,6 @@ class m_jenis extends CI_Model
 
     public function deleteJenis($id)
     {
-        $this->db->where('id_jenis', $id);
-        return $this->db->delete($this->table);
+        return $this->db->delete($this->table, array("id_jenis" => $id));
     }
 }

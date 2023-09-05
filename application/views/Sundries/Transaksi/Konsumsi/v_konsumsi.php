@@ -373,7 +373,7 @@
                     Batal
                 </button>
                 <a id="tombolhapus" class="btn btn-danger" href="#">
-                    Hapus
+                    Lanjutkan
                 </a>
             </div>
         </div>
