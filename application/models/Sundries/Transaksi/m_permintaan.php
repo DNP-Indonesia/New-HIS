@@ -170,7 +170,7 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where('status', 'Disetujui2')
+            ->where('status', 'Disetujui1')
             ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();

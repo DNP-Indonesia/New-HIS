@@ -76,10 +76,6 @@
                         role="tab" aria-controls="nav-profile" aria-selected="false">
                         Disetujui Kepala Bagian
                     </a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui2"
-                        role="tab" aria-controls="nav-profile" aria-selected="false">
-                        Disetujui Kepala Gudang
-                    </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak" role="tab"
                         aria-controls="nav-contact" aria-selected="false">
                         Ditolak
@@ -216,81 +212,6 @@
                                         <h6>
                                             <span class="badge badge-primary">
                                                 Disetujui Kepala Bagian
-                                            </span>
-                                        </h6>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-success">
-                                            Cetak PDF
-                                        </a>
-                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-purple">
-                                            Detail
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php
-                                        $no++;
-                                    }
-                                    ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="disetujui2" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <div class="table-responsive-xl">
-                        <table class="table table-borderless small tbl">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
-                                    <th class="text-center">Disetujui Tanggal</th>
-                                    <th class="text-center">Disetujui Jam</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Opsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $no = 1;
-                                    foreach ($setuju2 as $tempel) {
-                                        ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <?php echo $no; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->faktur; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal_setuju2; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamsetuju2; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php if ($tempel->status == 'Disetujui2') { ?>
-                                        <h6>
-                                            <span class="badge badge-primary">
-                                                Disetujui Kepala Gudang
                                             </span>
                                         </h6>
                                         <?php } ?>
@@ -546,10 +467,6 @@
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui1"
                         role="tab" aria-controls="nav-profile" aria-selected="false">
                         Disetujui Kepala Bagian
-                    </a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui2"
-                        role="tab" aria-controls="nav-profile" aria-selected="false">
-                        Disetujui Kepala Gudang
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
@@ -982,12 +899,10 @@
         <div class="card-body">
             <nav>
                 <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-
-                    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#disetujui2"
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui1"
                         role="tab" aria-controls="nav-profile" aria-selected="false">
-                        Disetujui Kepala Gudang
+                        Disetujui Kepala Bagian
                     </a>
-
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#diproses"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
                         Diproses
@@ -998,8 +913,9 @@
                     </a>
                 </div>
             </nav>
+            
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="disetujui2" role="tabpanel"
+                <div class="tab-pane fade show active" id="disetujui1" role="tabpanel"
                     aria-labelledby="nav-profile-tab">
                     <div class="table-responsive-xl">
                         <table class="table table-borderless small tbl">
@@ -1018,7 +934,7 @@
                             <tbody>
                                 <?php
                                     $no = 1;
-                                    foreach ($bysetuju2 as $tempel) {
+                                    foreach ($kabagsetuju as $tempel) {
                                         ?>
                                 <tr>
                                     <td class="text-center">

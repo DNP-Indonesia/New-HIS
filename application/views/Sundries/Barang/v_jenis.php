@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <!-- DataTales Example -->
     <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
-        Buat Jenis Baru
+        Buat Jenis
     </a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -15,10 +15,10 @@
                 <table class="table table-borderless small" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Jenis</th>
-                            <th>Kategori</th>
-                            <th>Opsi</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Jenis</th>
+                            <th class="text-center">Kategori</th>
+                            <th class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,22 +27,25 @@
                         foreach ($jenis as $tempel) {
                             ?>
                         <tr>
-                            <td>
+                            <td class="text-center">
                                 <?php echo $no; ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <?php echo $tempel->jenis; ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <?php echo $tempel->kategori; ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
                                     data-target="#modal-edit<?php echo $tempel->id_jenis; ?>">
                                     <span class="text">Ubah</span>
                                 </a>
-                                <a onclick="deleteConfirm('<?php echo site_url('Sundries/Barang/c_jenis/jenisdelete/' . $tempel->id_jenis); ?>')" href="#"
+                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deletejenis/' . $tempel->id_jenis); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
+                                    Hapus
+                                </a> -->
+                                <a href="<?php echo site_url('deletejenis/' . $tempel->id_jenis); ?>" class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
                             </td>
@@ -99,7 +102,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_jenis/jenisadd') ?>" method="POST">
+            <form action="<?php echo site_url('addJenis'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -149,7 +152,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_jenis/jenisupdate') ?>" method="POST">
+            <form action="<?php echo site_url('updatejenis'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
