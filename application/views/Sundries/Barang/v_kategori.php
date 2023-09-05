@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <!-- DataTales Example -->
     <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
-        Buat Kategori Baru
+        Tambah Kategori
     </a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -15,9 +15,9 @@
                 <table class="table table-borderless small" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Kategori</th>
-                            <th>Opsi</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Kategori</th>
+                            <th class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,24 +26,28 @@
                         foreach ($kategori as $tempel) {
                             ?>
                         <tr>
-                            <td>
+                            <td class="text-center">
                                 <?php echo $no; ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <?php echo $tempel->kategori; ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
                                     data-target="#modal-edit<?php echo $tempel->id_kategori; ?>">
                                     <span class="text">Ubah</span>
                                 </a>
-                                <a onclick="deleteConfirm('<?php echo site_url('deletekategori/(:any)' . $tempel->id_kategori); ?>')" href="#"
+                                <a onclick="deleteConfirm('<?php echo site_url('deleteKategori/' . $tempel->id_kategori); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
                                 <a href="#" class="btn btn-sm btn-purple" data-toggle="modal"
-                                    data-target="#modal-jenis<?php echo $tempel->id_kategori; ?>">Buat Jenis Barang
-                                    Baru</a>
+                                    data-target="#modal-jenis<?php echo $tempel->id_kategori; ?>">
+                                    Tambah Jenis
+                                </a>
+                                <a href="<?php echo site_url('deletekategori/' . $tempel->id_kategori); ?>" class="btn btn-sm btn-danger">
+                                    Hapus
+                                </a>
                             </td>
                         </tr>
                         <?php
@@ -93,12 +97,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Buat Kategori Baru</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Tambah Kategori</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('kategoriadd') ?>" method="POST">
+            <form action="<?php echo site_url('addkategori'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -110,7 +114,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <button type="submit" class="btn btn-success btn-sm">Tambah</button>
                 </div>
             </form>
         </div>
@@ -128,7 +132,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('kategoriupdate/(:any)') ?>" method="POST">
+            <form action="<?php echo site_url('updatekategori'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -155,12 +159,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Buat Jenis Baru</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Tambah Jenis</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('addjenis') ?>" method="POST">
+            <form action="<?php echo site_url('addjenis'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -169,7 +173,7 @@
                             <input type="text" name="kategori" value="<?= $tempel->id_kategori ?>" hidden
                                 required>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mb-3">
                             <label>Untuk Kategori</label>
                             <input type="text" class="form-control" value="<?= $tempel->kategori ?>" required
                                 readonly>
@@ -178,7 +182,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <button type="submit" class="btn btn-success btn-sm">Tambah</button>
                 </div>
             </form>
         </div>

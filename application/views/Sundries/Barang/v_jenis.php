@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <!-- DataTales Example -->
     <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
-        Buat Jenis Baru
+        Tambah Jenis
     </a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -15,10 +15,10 @@
                 <table class="table table-borderless small" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Jenis</th>
-                            <th>Kategori</th>
-                            <th>Opsi</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Jenis</th>
+                            <th class="text-center">Kategori</th>
+                            <th class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,22 +27,25 @@
                         foreach ($jenis as $tempel) {
                             ?>
                         <tr>
-                            <td>
+                            <td class="text-center">
                                 <?php echo $no; ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <?php echo $tempel->jenis; ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <?php echo $tempel->kategori; ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
                                     data-target="#modal-edit<?php echo $tempel->id_jenis; ?>">
                                     <span class="text">Ubah</span>
                                 </a>
-                                <a onclick="deleteConfirm('<?php echo site_url('deletejenis/(:any)' . $tempel->id_jenis); ?>')" href="#"
+                                <a onclick="deleteConfirm('<?php echo site_url('deletejenis/' . $tempel->id_jenis); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
+                                    Hapus
+                                </a>
+                                <a href="<?php echo site_url('deletejenis/' . $tempel->id_jenis); ?>" class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
                             </td>
@@ -79,7 +82,7 @@
             <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
             <div class="modal-footer">
                 <button class="btn btn-success" type="button" data-dismiss="modal">
-                    Nggak Jadi
+                    Batal
                 </button>
                 <a class="btn btn-warning" href="<?php echo site_url(); ?>/auth/logout">
                     Logout
@@ -94,12 +97,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Buat Jenis Baru Baru</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Tambah Jenis</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('addjenis') ?>" method="POST">
+            <form action="<?php echo site_url('addjenis'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -131,7 +134,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Nggak
                         Jadi Deh</button>
-                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <button type="submit" class="btn btn-success btn-sm">Tambah</button>
                 </div>
             </form>
         </div>
@@ -149,7 +152,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('updatejenis/(:any)') ?>" method="POST">
+            <form action="<?php echo site_url('updatejenis'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -181,8 +184,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Nggak Jadi
-                        Deh</button>
+                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-success btn-sm">Ubah</button>
                 </div>
             </form>
@@ -244,7 +246,7 @@
 <script>
     function deleteConfirm(url) {
         $('#btn-delete').attr('href', url);
-        $('#deleteModal').modal();
+        $('#modal-hapus').modal();
     }
 </script>
 

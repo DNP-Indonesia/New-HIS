@@ -9,7 +9,10 @@ class m_kategori extends CI_Model
 
     public function getKategoriAll()
     {
-        return $this->db->get($this->table)->result();
+        return $this->db->from('sdr_kategori')
+            ->order_by('id_kategori', 'ASC')
+            ->get()
+            ->result();
     }
 
     public function saveKategori($data)

@@ -43,6 +43,8 @@ class c_permintaan extends MY_Controller
         $data['tolak'] = $this->m_permintaan->getTolak();
         $data['proses'] = $this->m_permintaan->getProses();
         $data['selesai'] = $this->m_permintaan->getSelesai();
+        $data['adang'] = $this->m_permintaan->forAdminGudang();
+        $data['kadang'] = $this->m_permintaan->forKepalaGudang();
         $data['kabagpermintaan'] = $this->m_permintaan->forKepalaBagianPermintaan();
         $data['kabagsetuju'] = $this->m_permintaan->forKepalaBagianSetuju();
         $data['kabagtolak'] = $this->m_permintaan->forKepalaBagianTolak();
@@ -184,7 +186,6 @@ class c_permintaan extends MY_Controller
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
-        $status2 = $this->input->post('status2');
         $jamsetuju = $this->input->post('jamsetuju');
         $penyetuju = $this->input->post('penyetuju');
         $tanggalsetuju = $this->input->post('tgl_setuju');
@@ -198,13 +199,6 @@ class c_permintaan extends MY_Controller
             'jamsetuju1' => $jamsetuju,
             'penyetuju1' => $penyetuju,
             'tanggal_setuju1' => $tanggalsetuju
-        );
-
-        $data2 = array(
-            'status' => $status2,
-            'jamsetuju2' => $jamsetuju,
-            'penyetuju2' => $penyetuju,
-            'tanggal_setuju2' => $tanggalsetuju
         );
 
         // if ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
@@ -327,11 +321,13 @@ class c_permintaan extends MY_Controller
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
-        $jam = $this->input->post('jam');
+        $tanggalselesai = $this->input->post('tanggalselesai');
+        $jamselesai = $this->input->post('jamselesai');
 
         $data = array(
             'status' => $status,
-            'waktu' => $jam
+            'tanggal_selesai' => $tanggalselesai,
+            'jamselesai' => $jamselesai
         );
 
         $where = array(

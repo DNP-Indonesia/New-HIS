@@ -4,7 +4,7 @@ class m_barang extends CI_Model
 {
     protected $table = 'sdr_barang';
     protected $primaryKey = 'id_barang';
-    protected $allowedFields = ['id_barang', 'barang', 'brand', 'type', 'ukurang', 'satuan', 'id_jenis', 'stok'];
+    protected $allowedFields = ['id_barang', 'barang', 'id_jenis','stok'];
 
     public function getBarangAll()
     {
@@ -19,11 +19,10 @@ class m_barang extends CI_Model
 
     public function saveBarang($data)
     {
-        $this->db->insert('sdr_barang', $data);
-        return $this->db->insert_id();
+        return $this->db->insert($this->table, $data);
     }
 
-    public function updateBarang($id, $data)
+    public function updateBarang($where, $data)
     {
         $this->db->where('id_barang', $id);
         $this->db->update('sdr_barang', $data);
@@ -33,6 +32,5 @@ class m_barang extends CI_Model
     {
         $this->db->where('id_barang', $id);
         $this->db->delete('sdr_barang');
-        // return $this->db->affected_rows();
     }
 }
