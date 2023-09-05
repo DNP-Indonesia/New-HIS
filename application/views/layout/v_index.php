@@ -254,7 +254,7 @@
                 <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
                 <div class="modal-footer">
                     <button class="btn btn-success" type="button" data-dismiss="modal">
-                        Nggak Jadi
+                        Kembali
                     </button>
                     <a class="btn btn-warning" href="<?php echo site_url(); ?>/auth/logout">
                         Logout

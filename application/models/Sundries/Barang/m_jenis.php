@@ -9,13 +9,13 @@ class m_jenis extends CI_Model
 
     public function getJenisAll()
     {
-    	return $this->db->from('sdr_jenis')
+    return $this->db->from('sdr_jenis')
             ->join('sdr_kategori', 'sdr_kategori.id_kategori=sdr_jenis.id_kategori')
             ->get()
             ->result();
     }
 
-     public function getJenisById()
+    public function getJenisById()
     {
         return $this->db->from('sdr_jenis')
             ->join('sdr_kategori', 'sdr_kategori.id_kategori=sdr_jenis.id_kategori')
@@ -29,9 +29,9 @@ class m_jenis extends CI_Model
         return $this->db->insert($this->table, $data);
     }
 
-    public function updateJenis($where, $data)
+    public function updateJenis($id, $data)
     {
-        $this->db->where($where);
+        $this->db->where($id);
         $this->db->update($this->table,$data);
     }
 
@@ -40,4 +40,3 @@ class m_jenis extends CI_Model
         return $this->db->delete($this->table, array("id_jenis" => $id));
     }
 }
-?>

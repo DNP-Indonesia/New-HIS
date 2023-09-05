@@ -51,7 +51,7 @@ class c_jenis extends MY_Controller
 			'id_jenis' => $id
 		);
 
-		$this->m_jenis->update($where, $data);
+		$this->m_jenis->updatejenis($where, $data);
 		return redirect('Sundries/Barang/c_jenis/page');
 	}
 }

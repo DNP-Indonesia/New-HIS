@@ -30,7 +30,7 @@ class c_barang extends MY_Controller
         $data['id_jenis'] = $this->input->post('jenis');
         $data['stok'] = $this->input->post('stok');
 
-        $this->m_barang->save($data);
+        $this->m_barang->saveBarang($data);
         return redirect('Sundries/Barang/c_barang/page');
     }
 
@@ -62,11 +62,7 @@ class c_barang extends MY_Controller
             'stok' => $stok
         );
 
-        $where = array(
-            'id_barang' => $id
-        );
-
-        $this->m_barang->update($where, $data);
+        $this->m_barang->updateBarang($id, $data);
         return redirect('Sundries/Barang/c_barang/page');
     }
 
