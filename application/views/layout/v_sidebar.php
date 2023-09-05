@@ -25,7 +25,7 @@
     <li class="nav-item <?php if (isset($menu) && $menu == 'user') {
         echo 'active';
     } ?>">
-        <a class="nav-link" href="<?php echo site_url('page_his/user'); ?>">
+        <a class="nav-link" href="<?php echo site_url('data-user'); ?>">
             <i class="fas fa-fw fa-table"></i>
             <span>Data User Account</span>
         </a>
