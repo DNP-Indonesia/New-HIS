@@ -37,7 +37,7 @@
                                     data-target="#modal-edit<?php echo $tempel->id_kategori; ?>">
                                     <span class="text">Ubah</span>
                                 </a>
-                                <a onclick="deleteConfirm('<?php echo site_url('Sundries/Barang/c_kategori/kategoridelete/' . $tempel->id_kategori); ?>')" href="#"
+                                <a onclick="deleteConfirm('<?php echo site_url('deletekategori/(:any)' . $tempel->id_kategori); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
@@ -98,7 +98,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_kategori/kategoriadd') ?>" method="POST">
+            <form action="<?php echo site_url('kategoriadd') ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -128,7 +128,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_kategori/kategoriupdate') ?>" method="POST">
+            <form action="<?php echo site_url('kategoriupdate/(:any)') ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -160,7 +160,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_jenis/jenisadd') ?>" method="POST">
+            <form action="<?php echo site_url('addjenis') ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">

@@ -85,7 +85,7 @@ class c_permintaan extends MY_Controller
         );
 
         $this->m_detail->update($where, $data);
-        $this->session->set_userdata('update', 'Yeay, Jumlah Atau Catatan Berhasil Diperbarui, Yuk Lihat Di Detail Request...');
+        $this->session->set_userdata('update', 'Jumlah Atau Catatan Berhasil Diperbarui dapat dilihat pada Detail Request!');
         redirect('Sundries/Transaksi/c_permintaan/detail/' . $faktur);
     }
 
@@ -161,7 +161,7 @@ class c_permintaan extends MY_Controller
     public function deletePermintaan($faktur)
     {
         $this->m_permintaan->delete($faktur);
-        $this->session->set_userdata('hapus', 'Yeay, Request Berhasil Dihapus...');
+        $this->session->set_userdata('hapus', 'Request Berhasil Dihapus!');
         redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
@@ -169,7 +169,7 @@ class c_permintaan extends MY_Controller
     // {
     //     $faktur = $this->uri->segment(4);
     //     $hapus = $this->m_permintaan->delete($faktur);
-    //     $this->session->set_userdata('hapus', 'Yeay, Request Berhasil Dihapus...');
+    //     $this->session->set_userdata('hapus', 'Request Berhasil Dihapus!');
     //     redirect('Sundries/Transaksi/c_permintaan/index');
     // }
 
@@ -209,12 +209,12 @@ class c_permintaan extends MY_Controller
 
         // if ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
             $this->m_permintaan->update($where, $data);
-            $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui..., Masih Menunggu Persetujuan Kepala Gudang...');
+            $this->session->set_userdata('approve', 'Request Berhasil disetujui dan menunggu persetujuan Kepala Gudang!');
             return redirect('Sundries/Transaksi/c_permintaan/index');
         
         // } elseif ($this->session->userdata('role') == 'sdr_Kepala Gudang') {
         //     $this->m_permintaan->update($where, $data2);
-        //     $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui...');
+        //     $this->session->set_userdata('approve', 'Request Berhasil Disetujui!');
         // }
     }
 
@@ -275,7 +275,7 @@ class c_permintaan extends MY_Controller
         );
 
         $this->m_permintaan->add($data);
-        $this->session->set_userdata('sukses', 'Yeay, Barang Berhasil Ditambahkan...');
+        $this->session->set_userdata('sukses', 'Barang Berhasil Ditambahkan!');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
@@ -301,7 +301,7 @@ class c_permintaan extends MY_Controller
 
         $this->m_permintaan->update($where, $data);
         $this->m_permintaan->updateKeranjang($where, $data2);
-        $this->session->set_userdata('sukses', 'Yeay, Request Berhasil Dikirim Ulang...');
+        $this->session->set_userdata('sukses', 'Request Berhasil Dikirim Ulang!');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
@@ -319,7 +319,7 @@ class c_permintaan extends MY_Controller
         );
 
         $this->m_permintaan->update($where, $data);
-        $this->session->set_userdata('sukses', 'Yeay, Request Berhasil Diproses...');
+        $this->session->set_userdata('sukses', 'Request Berhasil Diproses!');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
@@ -339,7 +339,7 @@ class c_permintaan extends MY_Controller
         );
 
         $this->m_permintaan->update($where, $data);
-        $this->session->set_userdata('sukses', 'Yeay, Request Berhasil Diselesaikan...');
+        $this->session->set_userdata('sukses', 'Request Berhasil Diselesaikan!');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
@@ -363,7 +363,7 @@ class c_permintaan extends MY_Controller
         );
 
         $this->m_permintaan->update($where, $data);
-        $this->session->set_userdata('sukses', 'Yeay, Barang Sudah Tiba...');
+        $this->session->set_userdata('sukses', 'Barang Sudah Tiba!');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 

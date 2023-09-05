@@ -41,7 +41,7 @@
                                     data-target="#modal-edit<?php echo $tempel->id_jenis; ?>">
                                     <span class="text">Ubah</span>
                                 </a>
-                                <a onclick="deleteConfirm('<?php echo site_url('Sundries/Barang/c_jenis/jenisdelete/' . $tempel->id_jenis); ?>')" href="#"
+                                <a onclick="deleteConfirm('<?php echo site_url('deletejenis/(:any)' . $tempel->id_jenis); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
@@ -99,7 +99,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_jenis/jenisadd') ?>" method="POST">
+            <form action="<?php echo site_url('addjenis') ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -149,7 +149,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_jenis/jenisupdate') ?>" method="POST">
+            <form action="<?php echo site_url('updatejenis/(:any)') ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">

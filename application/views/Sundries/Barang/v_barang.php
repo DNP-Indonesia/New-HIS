@@ -65,7 +65,7 @@
                                     data-target="#modal-edit<?php echo $tempel->id_barang; ?>">
                                     <span class="text">Ubah</span>
                                 </a>
-                                <a onclick="deleteConfirm('<?php echo base_url('Sundries/Barang/c_barang/delete/' . $tempel->id_barang); ?>')" href="#"
+                                <a onclick="deleteConfirm('<?php echo base_url('deletebarang/(:any)' . $tempel->id_barang); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
@@ -106,7 +106,7 @@
                 <button class="btn btn-success" type="button" data-dismiss="modal">
                     Nggak Jadi
                 </button>
-                <a class="btn btn-warning" href="<?php echo site_url(); ?>/auth/logout">
+                <a class="btn btn-warning" href="<?php echo site_url('logout'); ?>/auth/logout">
                     Logout
                 </a>
             </div>
@@ -202,7 +202,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('Sundries/Barang/c_barang/update') ?>" method="POST">
+            <form action="<?php echo site_url('updatebarang/(:any)') ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">

@@ -103,7 +103,7 @@ class c_konsumsi extends MY_Controller
         );
 
         $this->m_konsumsi->save($data, $iduser, $faktur, $fakest);
-        $this->session->set_userdata('sukses', 'Yeay, Data Berhasil Disimpan');
+        $this->session->set_userdata('sukses', 'Data Berhasil Disimpan');
         return redirect('Sundries/Transaksi/c_konsumsi/index');
     }
 
@@ -142,7 +142,7 @@ class c_konsumsi extends MY_Controller
         );
         
         $this->m_konsumsi->update($where, $data);
-        $this->session->set_userdata('sukses', 'Yeay, Data Berhasil Disetujui');
+        $this->session->set_userdata('sukses', 'Data Berhasil Disetujui');
         return redirect('Sundries/Transaksi/c_permintaan/dashboard');
     }
 
@@ -160,7 +160,7 @@ class c_konsumsi extends MY_Controller
         );
         
         $this->m_konsumsi->update($where, $data);
-        $this->session->set_userdata('tolak', 'Yeay, Data Berhasil Ditolak');
+        $this->session->set_userdata('tolak', 'Data Berhasil Ditolak');
         return redirect('Sundries/Transaksi/c_permintaan/dashboard');
     }
 }

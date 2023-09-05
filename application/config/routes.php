@@ -100,7 +100,7 @@ $route['deletebarang/(:any)'] = 'Sundries/Barang/c_barang/deleteBarang/$1';
 
 // Jenis
 $route['jenis'] = 'Sundries/Barang/c_jenis/page';
-$route['addjenis'] = 'Sundries/Barang/c_jenis/addJenis';
+$route['addjenis'] = 'Sundries/Barang/c_jenis/jenisadd';
 $route['updatejenis/(:any)'] = 'Sundries/Barang/c_jenis/updateJenis/$1';
 $route['deletejenis/(:any)'] = 'Sundries/Master/c_jenis/deleteJenis/$1';
 
