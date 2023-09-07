@@ -51,19 +51,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
-                                <div class="alert alert-danger text-center">
+                                <span class="badge badge-warning">
                                     <?php echo $tempel->status; ?>
-                                </div>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                <div class="alert alert-success text-center">
+                                <span class="badge badge-primary">
                                     <?php echo $tempel->status; ?>
-                                </div>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Tolak') { ?>
-                                <div class="alert alert-warning text-center">
+                                <span class="badge badge-danger">
                                     <?php echo $tempel->status; ?>
-                                </div>
+                                </span>
                                 <?php } ?>
                             </td>
                             <td class="text-center">
@@ -141,19 +141,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
-                                <div class="alert alert-danger text-center">
+                                <span class="badge badge-warning">
                                     <?php echo $tempel->status; ?>
-                                </div>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                <div class="alert alert-success text-center">
+                                <span class="badge badge-primary">
                                     <?php echo $tempel->status; ?>
-                                </div>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Tolak') { ?>
-                                <div class="alert alert-warning text-center">
+                                <span class="badge badge-danger">
                                     <?php echo $tempel->status; ?>
-                                </div>
+                                </span>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -212,19 +212,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
-                                <div class="alert alert-danger text-center">
-                                    <?php echo $tempel->status; ?>
-                                </div>
+                                    <span class="badge badge-warning">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                <div class="alert alert-success text-center">
-                                    <?php echo $tempel->status; ?>
-                                </div>
+                                    <span class="badge badge-primary">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Tolak') { ?>
-                                <div class="alert alert-warning text-center">
-                                    <?php echo $tempel->status; ?>
-                                </div>
+                                    <span class="badge badge-danger">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
                             </td>
                         </tr>
