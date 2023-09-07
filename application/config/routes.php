@@ -154,21 +154,21 @@ $route['formpenerimaan'] = 'Sundries/Transaksi/c_penerimaan/formPenerimaan';
 // Permintaan
 $route['permintaan'] = 'Sundries/Transaksi/c_permintaan/index';
 $route['detailpermintaan/(:any)'] = 'Sundries/Transaksi/c_permintaan/detail/$1';
-$route['updatepermintaan/(:any)'] = 'Sundries/Transaksi/c_permintaan/updateJumlah/$1';
+$route['updatepermintaan'] = 'Sundries/Transaksi/c_permintaan/updateJumlah';
 $route['cekkeranjangpermintaan'] = 'Sundries/Transaksi/c_permintaan/cekKeranjang';
 $route['showkeranjangpermintaan'] = 'Sundries/Transaksi/c_permintaan/showKeranjang';
 $route['deletekeranjangpermintaan'] = 'Sundries/Transaksi/c_permintaan/deleteKeranjang';
 $route['addpermintaan'] = 'Sundries/Transaksi/c_permintaan/addPermintaan';
 $route['deletepermintaan/(:any)'] = 'Sundries/Transaksi/c_permintaan/deletePermintaan/$1';
-$route['printpermintaan/(:any)'] = 'Sundries/Transaksi/c_permintaan/printPermintaan/';
+$route['printpermintaan/(:any)'] = 'Sundries/Transaksi/c_permintaan/printPermintaan/$1';
 $route['approvepermintaan'] = 'Sundries/Transaksi/c_permintaan/approvePermintaan';
 $route['rejectpermintaan'] = 'Sundries/Transaksi/c_permintaan/rejectPermintaan';
 $route['addbarangpermintaan'] = 'Sundries/Transaksi/c_permintaan/addBarang';
 $route['deletebarangpermintaan/(:any)'] = 'Sundries/Transaksi/c_permintaan/deleteBarang/$1';
 $route['detailbarang'] = 'Sundries/Transaksi/c_permintaan/detailBarang';
-$route['permintaanulang/(:any)'] = 'Sundries/Transaksi/c_permintaan/permintaanUlang/$1';
+$route['permintaanulang'] = 'Sundries/Transaksi/c_permintaan/permintaanUlang';
 $route['permintaanproses'] = 'Sundries/Transaksi/c_permintaan/permintaanProses';
 $route['permintaanselesai'] = 'Sundries/Transaksi/c_permintaan/permintaanSelesai';
-$route['permintaansiap/(:any)'] = 'Sundries/Transaksi/c_permintaan/permintaanSiap/$1';
+$route['permintaansiap'] = 'Sundries/Transaksi/c_permintaan/permintaanSiap';
 
 
