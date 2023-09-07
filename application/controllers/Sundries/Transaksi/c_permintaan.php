@@ -38,8 +38,7 @@ class c_permintaan extends MY_Controller
         $data['byproses'] = $this->m_permintaan->byProses();
         $data['byselesai'] = $this->m_permintaan->bySelesai();
         $data['permintaan'] = $this->m_permintaan->getPermintaan();
-        $data['setuju1'] = $this->m_permintaan->getSetuju1();
-        $data['setuju2'] = $this->m_permintaan->getSetuju2();
+        $data['setuju'] = $this->m_permintaan->getSetuju();
         $data['tolak'] = $this->m_permintaan->getTolak();
         $data['proses'] = $this->m_permintaan->getProses();
         $data['selesai'] = $this->m_permintaan->getSelesai();

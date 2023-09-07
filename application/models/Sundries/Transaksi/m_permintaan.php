@@ -38,26 +38,13 @@ class m_permintaan extends CI_Model
     }
 
     // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui1'
-    public function getSetuju1()
+    public function getSetuju()
     {
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Disetujui1')
-            ->order_by($this->primaryKey, 'DESC')
-            ->get()
-            ->result();
-    }
-
-    // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui2'
-    public function getSetuju2()
-    {
-        return $this->db->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Disetujui2')
+            ->where('status', 'Disetujui')
             ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
@@ -222,7 +209,7 @@ class m_permintaan extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->where('status', 'Disetujui')
+            ->where('status', 'Disetujui1')
             ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
