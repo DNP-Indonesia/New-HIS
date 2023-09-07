@@ -46,7 +46,7 @@ class c_barang extends MY_Controller
 
         $this->m_barang->saveBarang($data);
         $this->session->set_userdata('berhasil', 'Barang Baru Berhasil Ditambahkan, Silahkan Lanjutkan Membuat Requestnya...');
-        return redirect('Sundries/Transaksi/c_permintaan/page');
+        return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
     public function updateBarang()
