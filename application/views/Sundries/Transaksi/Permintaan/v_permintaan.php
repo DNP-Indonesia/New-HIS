@@ -70,19 +70,19 @@
                 <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#request"
                         role="tab" aria-controls="nav-home" aria-selected="true">
-                        Request
+                        Permintaan
                     </a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui"
                         role="tab" aria-controls="nav-profile" aria-selected="false">
-                        Disetujui Kepala Bagian
+                        Persetujuan
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak" role="tab"
                         aria-controls="nav-contact" aria-selected="false">
-                        Ditolak
+                        Penolakan
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#diproses" role="tab"
                         aria-controls="nav-contact" aria-selected="false">
-                        Diproses
+                        Pemrosesan
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#selesai" role="tab"
                         aria-controls="nav-contact" aria-selected="false">
@@ -98,8 +98,8 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Status</th>
@@ -119,10 +119,10 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
+                                        <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
+                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
@@ -167,10 +167,11 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
+                                    <th class="text-center">Disetujui Oleh</th>
                                     <th class="text-center">Disetujui Tanggal</th>
                                     <th class="text-center">Disetujui Jam</th>
                                     <th class="text-center">Status</th>
@@ -180,7 +181,7 @@
                             <tbody>
                                 <?php
                                     $no = 1;
-                                    foreach ($setuju1 as $tempel) {
+                                    foreach ($setuju as $tempel) {
                                         ?>
                                 <tr>
                                     <td class="text-center">
@@ -190,16 +191,19 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
+                                        <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
+                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->penyetuju1; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal_setuju1; ?>
@@ -211,7 +215,7 @@
                                         <?php if ($tempel->status == 'Disetujui') { ?>
                                         <h6>
                                             <span class="badge badge-primary">
-                                                Disetujui Kepala Bagian
+                                                Disetujui
                                             </span>
                                         </h6>
                                         <?php } ?>
@@ -242,10 +246,11 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
+                                    <th class="text-center">Ditolak Oleh</th>
                                     <th class="text-center">Ditolak Tanggal</th>
                                     <th class="text-center">Ditolak Jam</th>
                                     <th class="text-center">Status</th>
@@ -265,16 +270,19 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
+                                        <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
+                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->penolak; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal_tolak; ?>
@@ -317,13 +325,14 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
-                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Diproses Oleh</th>
                                     <th class="text-center">Diproses Tanggal</th>
                                     <th class="text-center">Diproses Jam</th>
+                                    <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
                             </thead>
@@ -340,16 +349,25 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
+                                        <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
+                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->pemroses; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal_proses; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamproses; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Diproses') { ?>
@@ -361,21 +379,15 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->tanggal_proses; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamproses; ?>
-                                    </td>
-                                    <td class="text-center">
                                         <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-success">
-                                            Cetak PDF
-                                        </a>
-                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-purple">
-                                            Detail
-                                        </a>
-                                    </td>
+                                        class="btn btn-sm btn-success">
+                                        Cetak PDF
+                                    </a>
+                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
+                                    class="btn btn-sm btn-purple">
+                                    Detail
+                                </a>
+                            </td>
                                 </tr>
                                 <?php
                                         $no++;
@@ -392,13 +404,13 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
-                                    <th class="text-center">Status</th>
                                     <th class="text-center">Selesai Tanggal</th>
                                     <th class="text-center">Selesai Jam</th>
+                                    <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
                             </thead>
@@ -415,16 +427,22 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
+                                        <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
+                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal_selesai; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamselesai; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Selesai') { ?>
@@ -434,12 +452,6 @@
                                             </span>
                                         </h6>
                                         <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal_selesai; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamselesai; ?>
                                     </td>
                                     <td class="text-center">
                                         <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
@@ -478,11 +490,11 @@
                 <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#request"
                         role="tab" aria-controls="nav-home" aria-selected="true">
-                        Request
+                        Permintaan
                     </a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui"
                         role="tab" aria-controls="nav-profile" aria-selected="false">
-                        Disetujui Kepala Bagian
+                        Persetujuan
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
@@ -507,9 +519,10 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
+                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
@@ -527,13 +540,16 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
                                         <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
+                                        <?php echo $tempel->nama_peminta; ?>
+                                    </td>
+                                    <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamdibuat; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Request') { ?>
@@ -566,10 +582,11 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
+                                    <th class="text-center">Disetujui Oleh</th>
                                     <th class="text-center">Disetujui Tanggal</th>
                                     <th class="text-center">Disetujui Jam</th>
                                     <th class="text-center">Status</th>
@@ -589,16 +606,19 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
+                                        <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
+                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->penyetuju1; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal_setuju1; ?>
@@ -641,9 +661,13 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
+                                    <th class="text-center">Dibuat Jam</th>
+                                    <th class="text-center">Ditolak Oleh</th>
+                                    <th class="text-center">Ditolak Tanggal</th>
+                                    <th class="text-center">Ditolak Jam</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
@@ -661,13 +685,25 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
                                         <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
+                                        <?php echo $tempel->nama_peminta; ?>
+                                    </td>
+                                    <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->penolak; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal_tolak; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamtolak; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Ditolak') { ?>
@@ -700,9 +736,13 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
+                                    <th class="text-center">Dibuat Jam</th>
+                                    <th class="text-center">Diproses Oleh</th>
+                                    <th class="text-center">Diproses Tanggal</th>
+                                    <th class="text-center">Diproses Jam</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
@@ -720,13 +760,25 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
                                         <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
+                                        <?php echo $tempel->nama_peminta; ?>
+                                    </td>
+                                    <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->pemroses; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal_proses; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamproses; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Diproses') { ?>
@@ -763,9 +815,13 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
+                                    <th class="text-center">Dibuat jam</th>
+                                    <th class="text-center">Selesai Oleh</th>
+                                    <th class="text-center">Selesai Tanggal</th>
+                                    <th class="text-center">Selesai jam</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
@@ -783,13 +839,25 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
                                         <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
+                                        <?php echo $tempel->nama_peminta; ?>
+                                    </td>
+                                    <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_peminta; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal_selesai; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamselesai; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Selesai') { ?>
@@ -842,7 +910,7 @@
                 <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#disetujui"
                         role="tab" aria-controls="nav-home" aria-selected="true">
-                        Disetujui Kepala Bagian
+                        Disetujui
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#diproses"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
@@ -863,10 +931,11 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
+                                    <th class="text-center">Disetujui Oleh</th>
                                     <th class="text-center">Disetujui Tanggal</th>
                                     <th class="text-center">Disetujui Jam</th>
                                     <th class="text-center">Status</th>
@@ -886,16 +955,19 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
+                                        <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
+                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->penyetuju1; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal_setuju1; ?>
@@ -938,10 +1010,13 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
+                                    <th class="text-center">Diproses Oleh</th>
+                                    <th class="text-center">Diproses Tanggal</th>
+                                    <th class="text-center">Diproses Jam</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
@@ -959,16 +1034,25 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
+                                        <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
+                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->pemroses; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal_proses; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamproses; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Diproses') { ?>
@@ -983,7 +1067,7 @@
                                     <td class="text-center">
                                         <a href="#" class="btn btn-sm btn-success" data-toggle="modal"
                                             data-target="#modal-selesai<?php echo $tempel->id_request_sundries; ?>">
-                                            Selesaikan Request
+                                            Selesaikan
                                         </a>
                                     </td>
                                     <?php } ?>
@@ -1011,10 +1095,13 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
-                                    <th class="text-center">Direquest Oleh</th>
-                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
+                                    <th class="text-center">Selesai Oleh</th>
+                                    <th class="text-center">Selesai Tanggal</th>
+                                    <th class="text-center">Selesai Jam</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
@@ -1032,16 +1119,24 @@
                                         <?php echo $tempel->faktur; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
+                                        <?php echo $tempel->nama_section; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
+                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_peminta; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal_selesai; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamselesai; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Selesai') { ?>
@@ -1327,7 +1422,7 @@
                                     value="<?php echo $tempel->faktur; ?>" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label>Untuk Bagian</label>
+                                <label>Bagian</label>
                                 <input type="text" class="form-control" name="bagian" required
                                     value="<?php echo $tempel->nama_section; ?>" readonly>
                             </div>

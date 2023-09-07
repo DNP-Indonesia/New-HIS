@@ -219,6 +219,7 @@ class c_permintaan extends MY_Controller
         $tanggaltolak = $this->input->post('tanggaltolak');
         $jamtolak = $this->input->post('jam');
         $iduser = $this->input->post('id_user');
+        $penolak = $this->input->post('penolak');
 
         $data = array(
             'status' => $status
@@ -229,7 +230,8 @@ class c_permintaan extends MY_Controller
             'alasan_tolak' => $alasan,
             'tanggal_tolak' => $tanggaltolak,
             'jamtolak' => $jamtolak,
-            'id_user' => $iduser
+            'id_user' => $iduser,
+            'penolak' => $penolak
         );
 
         $where = array(
@@ -302,9 +304,15 @@ class c_permintaan extends MY_Controller
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
+        $pemroses = $this->input->post('pemroses');
+        $tanggalproses = $this->input->post('tanggalproses');
+        $jamproses = $this->input->post('jamproses');
 
         $data = array(
-            'status' => $status
+            'status' => $status,
+            'pemroses' => $pemroses,
+            'tanggal_proses' => $tanggalproses,
+            'jamproses' => $jamproses
         );
 
         $where = array(

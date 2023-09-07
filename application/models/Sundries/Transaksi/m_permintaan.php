@@ -37,7 +37,7 @@ class m_permintaan extends CI_Model
             ->result();
     }
 
-    // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui1'
+    // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui'
     public function getSetuju()
     {
         return $this->db->from($this->table)
@@ -157,19 +157,19 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where('status', 'Disetujui1')
+            ->where('status', 'Disetujui')
             ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
 
-    // Fungsi untuk mengambil data permintaan berdasarkan status 'Disetujui1' untuk kepala gudang
+    // Fungsi untuk mengambil data permintaan berdasarkan status 'Disetujui' untuk kepala gudang
     public function forKepalaGudang()
     {
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where('status', 'Disetujui1')
+            ->where('status', 'Disetujui')
             ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
@@ -209,7 +209,7 @@ class m_permintaan extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->where('status', 'Disetujui1')
+            ->where('status', 'Disetujui')
             ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
@@ -221,9 +221,11 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Ditolak')
             ->order_by($this->primaryKey, 'DESC')
+            ->group_by($this->tabletolak . '.faktur')
             ->get()
             ->result();
     }

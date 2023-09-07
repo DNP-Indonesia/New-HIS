@@ -61,7 +61,7 @@
                     <label>Direquest Oleh :
                         <?php echo $tempel->nama_peminta; ?>
                     </label><br>
-                    <label>Untuk Bagian :
+                    <label>Bagian :
                         <?php echo $tempel->nama_section; ?>
                     </label><br>
                     <label>Dibuat Tanggal :
@@ -131,7 +131,7 @@
         <?php if ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request") { ?>
         <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
             data-target="#modal-setujui<?php echo $tempel->id_request_sundries; ?>">
-            Setujui
+            Setuju
         </a>
 
         <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
@@ -140,10 +140,10 @@
         </a>
         <?php } ?>
 
-        <?php if ($tempel->status == 'Disetujui' && $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
+        <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == "Disetujui") { ?>
         <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
             data-target="#modal-proses<?php echo $tempel->id_request_sundries; ?>">
-            Proses Sekarang
+            Proses
         </a>
         <?php } ?>
         <div class="card shadow mt-4 mb-4">
@@ -233,8 +233,6 @@
         <?php } ?>
     </div>
 
-
-
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -287,17 +285,15 @@
     </script>
 </body>
 
-</html>
-
 <?php foreach ($data as $tempel) { ?>
 <div class="modal fade" id="modal-setujui<?php echo $tempel->id_request_sundries; ?>" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Apakah Anda akan menyetujui?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Persetujuan Permintaan</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
+                    <span aria-hidden="true">x</span>
                 </button>
             </div>
             <form action="<?php echo site_url('approvepermintaan'); ?>" method="POST">
@@ -309,7 +305,7 @@
                                 value="<?php echo $tempel->faktur; ?>" readonly>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Untuk Bagian</label>
+                            <label>Bagian</label>
                             <input type="text" class="form-control" name="bagian" required
                                 value="<?php echo $tempel->nama_section; ?>" readonly>
                         </div>
@@ -358,7 +354,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Setuju</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
                 </div>
             </form>
         </div>
@@ -369,34 +365,34 @@
 <?php foreach ($data as $tempel) { ?>
 <div class="modal fade" id="modal-tolak<?php echo $tempel->id_request_sundries; ?>" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Yakin Mau Menolak Request Sundries Ini ?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Penolakan Permintaan</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
+                    <span aria-hidden="true">x</span>
                 </button>
             </div>
             <form action="<?php echo site_url('rejectpermintaan'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Faktur</label>
                             <input type="text" class="form-control" name="faktur" required
                                 value="<?php echo $tempel->faktur; ?>" readonly>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <label>Dibuat Oleh</label>
-                            <input type="text" class="form-control" name="nama" required
-                                value="<?php echo $tempel->nama_peminta; ?>" readonly>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label>Untuk Bagian</label>
+                        <div class="col-md-6 mb-3">
+                            <label>Bagian</label>
                             <input type="text" class="form-control" name="bagian" required
                                 value="<?php echo $tempel->nama_section; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Oleh</label>
+                            <input type="text" class="form-control" name="nama" required
+                                value="<?php echo $tempel->nama_peminta; ?>" readonly>
+                        </div>
                         <div class="col-md-4 mb-3">
                             <label>Dibuat Tanggal</label>
                             <input type="text" class="form-control" required value="<?php echo $tempel->tanggal; ?>"
@@ -409,9 +405,25 @@
                             <input type="text" class="form-control" required value="<?php echo $tempel->jamdibuat; ?>"
                                 readonly>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-md-4 mb-3">
-                            <label>Akan Ditolak Oleh</label>
-                            <input type="text" class="form-control" value="<?php echo $this->session->userdata('nama'); ?>" readonly>
+                            <label>Ditolak Oleh</label>
+                            <input type="text" class="form-control" name="penolak" value="<?php echo $this->session->userdata('nama'); ?>"
+                                readonly>
+                            <input type="text" class="form-control" name="id_user" value="<?php echo $this->session->userdata('id_user'); ?>"
+                                readonly hidden>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Ditolak Tanggal</label>
+                            <input type="text" class="form-control" name="tanggaltolak" required
+                                value="<?= date('Y-m-d') ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Ditolak Jam</label>
+                            <input type="text" class="form-control" value="<?php date_default_timezone_set('Asia/Jakarta');
+                            echo date('H:i:s'); ?>" name="jam"
+                                required readonly>
                         </div>
                     </div>
                     <div class="form-row">
@@ -419,19 +431,12 @@
                             <label>Alasan Menolak</label>
                             <textarea class="form-control" required name="alasan"></textarea>
                         </div>
-                        <input type="text" class="form-control" name="tanggaltolak" required
-                            value="<?= date('Y-m-d') ?>" readonly hidden>
                         <input type="text" class="form-control" name="status" required value="Ditolak" hidden>
-                        <input type="text" class="form-control" value="<?php date_default_timezone_set('Asia/Jakarta');
-                        echo date('H:i:s'); ?>" name="jam"
-                            required hidden>
-                        <input type="text" class="form-control" name="id_user" value="<?php echo $this->session->userdata('id_user'); ?>"
-                            readonly hidden>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Tolak</button>
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
                 </div>
             </form>
         </div>
@@ -445,9 +450,9 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ubah Request Sundries</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pembaruan Permintaan</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
+                    <span aria-hidden="true">x</span>
                 </button>
             </div>
             <form action="<?php echo site_url('updatepermintaan/'); ?>" method="POST">
@@ -499,7 +504,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Ubah</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
                 </div>
             </form>
         </div>
@@ -513,9 +518,9 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Barang Baru Request Sundries ?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Barang</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
+                    <span aria-hidden="true">x</span>
                 </button>
             </div>
             <form action="<?php echo site_url('Sundries/requestsundriescontroller/barangnew'); ?>" method="POST">
@@ -532,7 +537,7 @@
                                 value="<?php echo $tempel->nama_peminta; ?>" readonly>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label>Untuk Bagian</label>
+                            <label>Bagian</label>
                             <input type="text" class="form-control" name="bagian" required
                                 value="<?php echo $tempel->nama_section; ?>" readonly>
                         </div>
@@ -592,7 +597,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Tambahkan</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
                 </div>
             </form>
         </div>
@@ -606,9 +611,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Apakah Anda akan mengajukan ulang?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pengajuan Ulang Permintaan</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
+                    <span aria-hidden="true">x</span>
                 </button>
             </div>
             <form action="<?php echo site_url('permintaanulang'); ?>" method="POST">
@@ -629,7 +634,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
-                            <label>Untuk Bagian</label>
+                            <label>Bagian</label>
                             <input type="text" class="form-control" name="bagian" required
                                 value="<?php echo $tempel->nama_section; ?>" readonly>
                         </div>
@@ -652,7 +657,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Ulang</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
                 </div>
             </form>
         </div>
@@ -666,9 +671,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Apakah Anda akan memproses?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pemrosesan Permintaan</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
+                    <span aria-hidden="true">x</span>
                 </button>
             </div>
             <form action="<?php echo site_url('permintaanproses'); ?>" method="POST">
@@ -680,7 +685,7 @@
                                 value="<?php echo $tempel->faktur; ?>" readonly>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Untuk Bagian</label>
+                            <label>Bagian</label>
                             <input type="text" class="form-control" name="bagian" required
                                 value="<?php echo $tempel->nama_section; ?>" readonly>
                         </div>
@@ -710,7 +715,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Diproses Tanggal</label>
-                            <input type="text" class="form-control" name="tanggal_proses" required
+                            <input type="text" class="form-control" name="tanggalproses" required
                                 value="<?= date('Y-m-d') ?>" readonly>
                         </div>
                         <div class="col-md-4 mb-3">
@@ -729,13 +734,14 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Proses</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 <?php } ?>
+
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -743,7 +749,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Kamu Yakin ?</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
+                    <span aria-hidden="true">x</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -760,3 +766,5 @@
         </div>
     </div>
 </div>
+</html>
+
