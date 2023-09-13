@@ -51,9 +51,11 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
-                                <span class="badge badge-warning">
-                                    <?php echo $tempel->status; ?>
-                                </span>
+                                <h6>
+                                    <span class="badge badge-warning">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
+                                </h6>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
                                 <span class="badge badge-primary">

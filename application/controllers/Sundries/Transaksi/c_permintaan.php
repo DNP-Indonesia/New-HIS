@@ -49,7 +49,7 @@ class c_permintaan extends MY_Controller
         $data['kabagtolak'] = $this->m_permintaan->forKepalaBagianTolak();
         $data['kabagproses'] = $this->m_permintaan->forKepalaBagianProses();
         $data['kabagselesai'] = $this->m_permintaan->forKepalaBagianSelesai();
-        $data['barang'] = $this->m_barang->getBarangAll();
+        $data['barang'] = $this->m_permintaan->getBarangSundries();
         $data['jenis'] = $this->m_jenis->getJenisById();
         $data['faktur'] = $this->m_permintaan->generateFaktur();
 

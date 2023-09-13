@@ -300,7 +300,7 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan' . $tempel->faktur); ?>')" href="#"
+                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
                                             class="btn btn-sm btn-danger">
                                             Hapus
                                         </a>
