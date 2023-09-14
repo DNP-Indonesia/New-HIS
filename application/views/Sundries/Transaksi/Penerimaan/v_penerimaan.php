@@ -166,8 +166,8 @@
                     <div class="form-row mb-3">
                         <div class="col-md-6">
                             <label>Faktur Purchase</label>
-                            <select class="form-control" name="fakturpch">
-                                <option>--Pilih Barang</option>
+                            <select class="form-control yoi" name="fakturpch">
+                                <option value="" disabled selected>Pilih Barang</option>
                                 <?php foreach ($pembelian as $tempel) {?>
                                 <option><?php echo $tempel->faktur; ?></option>
                                 <?php } ?>
@@ -243,4 +243,3 @@
         $('#modal-hapus').modal();
     }
 </script>
-

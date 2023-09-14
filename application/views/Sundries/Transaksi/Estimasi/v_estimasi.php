@@ -315,10 +315,10 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label>Pilihan Barang</label>
+                        <div class="col-md-6 mb-3">
+                            <label>Pilih Barang</label>
                             <select class="form-control yoi" id="id_barang">
-                                <option value="0">--Pilih Barang--</option>
+                                <option value="" disabled selected>Pilih Barang</option>
                                 <?php foreach ($barcons as $tempel) { ?>
                                 <option value="<?php echo $tempel->id_barang; ?>">
                                     <?php echo $tempel->barang; ?>
@@ -326,15 +326,17 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Jumlah untuk 1 Bulan</label>
                             <input type="number" class="form-control" id="jumlah">
                         </div>
-                        <div class="col-md-4 mb-3">
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
                             <label>Catatan</label>
                             <textarea class="form-control" id="catatan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
                                 rows="3"></textarea>
-
+    
                         </div>
                     </div>
                     <div class="form-row mb-3">
@@ -351,16 +353,15 @@
                                     <table class="table table-borderless small">
                                         <thead>
                                             <tr>
-                                            <tr>
                                                 <th class="text-center">No</th>
                                                 <th class="text-center">Barang</th>
                                                 <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Catatan</th>
                                                 <th class="text-center">Opsi</th>
-                                            </tr>
                                             </tr>
                                         </thead>
                                         <tbody id="isikeranjang">
-                                            <!-- Table rows for keranjang items here -->
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -376,8 +377,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -406,7 +405,7 @@
 
 <script>
     $(document).ready(function() {
-        $('.tabel-data').DataTable();
+        $('.tbl').DataTable();
     });
 
     function loaddatabarang() {
@@ -427,8 +426,8 @@
     $("#keranjang").click(function() {
         var id_barang = $('#id_barang').val();
         var qty = $('#jumlah').val();
+        var catatan = $('#catatan').val();
         var id_user = $('#id_user').val();
-        var catatan = $('#keterangan').val();
 
         if (id_barang == 0) {
             Swal.fire("Barang Belum Dipilih... !", "Pilih Barang...", "warning");
@@ -437,7 +436,7 @@
         } else {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('addkeranjangestimasi'); ?>",
+                url: "<?php echo site_url('cekkeranjangestimasi'); ?>",
                 data: {
                     id_barang: id_barang,
                     qty: qty,
@@ -451,8 +450,7 @@
             });
         }
     });
-</script>
-<script>
+
     function deleteConfirm(url) {
         $('#tombolhapus').attr('href', url);
         $('#modal-hapus').modal();
