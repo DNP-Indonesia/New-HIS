@@ -5,15 +5,28 @@ class m_estimasi extends CI_Model
 {
     protected $table = 'sdr_estimasi';
     protected $primaryKey = 'id_estimasi';
+    protected $tabletolak = "sdr_estimasi_tolak";
+
+    // public function getEstimasi()
+    // {
+    //     return $this->db
+    //         ->from($this->table)
+    //         ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+    //         ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+    //         ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
+    //         ->order_by('id_estimasi', 'DESC')
+    //         ->get()
+    //         ->result();
+    // }
 
     public function getEstimasi()
     {
-        return $this->db
-            ->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
-            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
-            ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
-            ->order_by('id_estimasi', 'DESC')
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
+            ->where('status', 'Diajukan')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -36,6 +49,32 @@ class m_estimasi extends CI_Model
             ->join('sdr_jenis', 'sdr_jenis.id_jenis = sdr_barang.id_jenis')
             ->join('sdr_kategori', 'sdr_kategori.id_kategori = sdr_jenis.id_kategori')
             ->where('sdr_jenis.id_kategori', '2')
+            ->get()
+            ->result();
+    }
+
+    public function getSetuju()
+    {
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
+            ->where('status', 'Disetujui')
+            ->order_by($this->primaryKey, 'DESC')
+            ->get()
+            ->result();
+    }
+
+    public function getTolak()
+    {
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
+            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
+            ->where('status', 'Ditolak')
+            ->order_by($this->primaryKey, 'DESC')
+            ->group_by($this->tabletolak . '.faktur')
             ->get()
             ->result();
     }
@@ -78,6 +117,17 @@ class m_estimasi extends CI_Model
         if ($hapus) {
             return 1;
         }
+    }
+
+    public function getTolakById($id)
+    {
+        return $this->db->from($this->tabletolak)
+            ->join($this->table, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->tabletolak . '.id_user')
+            ->where($this->tabletolak . '.faktur', $id)
+            ->order_by($this->tabletolak . '.id_tolak', 'DESC')
+            ->get()
+            ->result();
     }
 
     public function save($data, $iduser, $faktur)

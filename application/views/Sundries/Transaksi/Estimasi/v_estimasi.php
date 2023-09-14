@@ -15,85 +15,239 @@
             </h6>
         </div>
         <div class="card-body">
-            <div class="table-responsive-xl">
-                <table class="table table-borderless small" id="dataTable">
-                    <thead>
-                        <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Faktur</th>
-                            <th class="text-center">Dibuat Oleh</th>
-                            <th class="text-center">Untuk Bagian</th>
-                            <th class="text-center">Dibuat Tanggal</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Opsi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+            <nav>
+                <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#diajukan"
+                        role="tab" aria-controls="nav-home" aria-selected="true">
+                        Pengajuan
+                    </a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">
+                        Persetujuan
+                    </a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak" role="tab"
+                        aria-controls="nav-contact" aria-selected="false">
+                        Penolakan
+                    </a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabcontent">
+                <div class="tab-pane fade show active" id="diajukan" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="table-container table-responsive-xl">
+                        <table class="table table-borderless small" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Faktur</th>
+                                    <th class="text-center">Dibuat Oleh</th>
+                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Dibuat Tanggal</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
                             $no = 1;
                             foreach ($estimasi as $tempel) {
                                 ?>
-                        <tr>
-                            <td class="text-center">
-                                <?php echo $no; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->faktur; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->nama_pembuat; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->nama_section; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->tanggal; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php if ($tempel->status == 'Diajukan') { ?>
-                                <h6>
-                                    <span class="badge badge-warning">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
-                                </h6>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Disetujui') { ?>
-                                <span class="badge badge-primary">
-                                    <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Tolak') { ?>
-                                <span class="badge badge-danger">
-                                    R <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
-                            </td>
-                            <td class="text-center">
-                                <?php if ($tempel->status == 'Diajukan') { ?>
-                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
+                                <tr>
+                                    <td class="text-center">
+                                        <?php echo $no; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->faktur; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_pembuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_section; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Diajukan') { ?>
+                                        <h6>
+                                            <span class="badge badge-warning">
+                                                <?php echo $tempel->status; ?>
+                                            </span>
+                                        </h6>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Diajukan') { ?>
+                                        <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
                                     Hapus
                                 </a> -->
-                                <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
-                                    Hapus
-                                </a>
-                                <?php } ?>
+                                        <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                            Hapus
+                                        </a>
+                                        <?php } ?>
 
-                                <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
-                                    Detail
-                                </a>
+                                        <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                            Detail
+                                        </a>
 
-                                <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
-                                    Cetak PDF
-                                </a>
-                            </td>
-                        </tr>
-                        <?php
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                            Cetak PDF
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php
                                 $no++;
                             }
                             ?>
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="disetujui" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="table-container table-responsive-xl">
+                        <table class="table table-borderless small" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Faktur</th>
+                                    <th class="text-center">Dibuat Oleh</th>
+                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Dibuat Tanggal</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                            $no = 1;
+                            foreach ($setuju as $tempel) {
+                                ?>
+                                <tr>
+                                    <td class="text-center">
+                                        <?php echo $no; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->faktur; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_pembuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_section; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Disetujui') { ?>
+                                        <h6>
+                                            <span class="badge badge-warning">
+                                                <?php echo $tempel->status; ?>
+                                            </span>
+                                        </h6>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Diajukan') { ?>
+                                        <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
+                                    class="btn btn-sm btn-danger">
+                                    Hapus
+                                </a> -->
+                                        <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                            Hapus
+                                        </a>
+                                        <?php } ?>
+
+                                        <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                            Detail
+                                        </a>
+
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                            Cetak PDF
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php
+                                $no++;
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="ditolak" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="table-container table-responsive-xl">
+                        <table class="table table-borderless small" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Faktur</th>
+                                    <th class="text-center">Dibuat Oleh</th>
+                                    <th class="text-center">Untuk Bagian</th>
+                                    <th class="text-center">Dibuat Tanggal</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                            $no = 1;
+                            foreach ($tolak as $tempel) {
+                                ?>
+                                <tr>
+                                    <td class="text-center">
+                                        <?php echo $no; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->faktur; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_pembuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_section; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Ditolak') { ?>
+                                        <h6>
+                                            <span class="badge badge-warning">
+                                                <?php echo $tempel->status; ?>
+                                            </span>
+                                        </h6>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Diajukan') { ?>
+                                        <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
+                                    class="btn btn-sm btn-danger">
+                                    Hapus
+                                </a> -->
+                                        <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                            Hapus
+                                        </a>
+                                        <?php } ?>
+
+                                        <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                            Detail
+                                        </a>
+
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                            Cetak PDF
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php
+                                $no++;
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -108,7 +262,7 @@
             </h6>
         </div>
         <div class="card-body">
-            <div class="table-responsive-xl">
+            <div class="table-container table-responsive-xl">
                 <table class="table table-borderless small" id="dataTable">
                     <thead>
                         <tr>
@@ -153,7 +307,7 @@
                                     <?php echo $tempel->status; ?>
                                 </span>
                                 <?php } ?>
-                                <?php if ($tempel->status == 'Tolak') { ?>
+                                <?php if ($tempel->status == 'Ditolak') { ?>
                                 <span class="badge badge-danger">
                                     <?php echo $tempel->status; ?>
                                 </span>
@@ -186,7 +340,7 @@
             </h6>
         </div>
         <div class="card-body">
-            <div class="table-responsive-xl">
+            <div class="table-container table-responsive-xl">
                 <table class="table table-borderless small" id="dataTable">
                     <thead>
                         <tr>
@@ -230,7 +384,7 @@
                                     <?php echo $tempel->status; ?>
                                 </span>
                                 <?php } ?>
-                                <?php if ($tempel->status == 'Tolak') { ?>
+                                <?php if ($tempel->status == 'Ditolak') { ?>
                                 <span class="badge badge-danger">
                                     <?php echo $tempel->status; ?>
                                 </span>
