@@ -151,7 +151,7 @@
         </div>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-laporan"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
@@ -164,7 +164,7 @@
                 <a class="collapse-item" href="#">Laporan Purchase</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Bagian' || $this->session->userdata('role') == 'sdr_Kepala Bagian') { ?>
 
@@ -200,7 +200,7 @@
         </div>
     </li>
 
-    <?php if ($this->session->userdata('role') == 'sdr_Kepala Bagian') { ?>
+    <!-- </?php if ($this->session->userdata('role') == 'sdr_Kepala Bagian') { ?>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-laporan"
             aria-expanded="true" aria-controls="collapsePages">
@@ -215,7 +215,7 @@
             </div>
         </div>
     </li>
-    <?php } ?>
+    </?php } ?> -->
 
     <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'sdr_Kepala Gudang') { ?>
 
