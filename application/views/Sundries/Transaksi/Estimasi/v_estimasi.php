@@ -25,7 +25,7 @@
                             <th class="text-center">Untuk Bagian</th>
                             <th class="text-center">Dibuat Tanggal</th>
                             <th class="text-center">Status</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,7 +64,7 @@
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Tolak') { ?>
                                 <span class="badge badge-danger">
-                                    <?php echo $tempel->status; ?>
+                                    R <?php echo $tempel->status; ?>
                                 </span>
                                 <?php } ?>
                             </td>
@@ -118,6 +118,7 @@
                             <th class="text-center">Untuk Bagian</th>
                             <th class="text-center">Dibuat Tanggal</th>
                             <th class="text-center">Status</th>
+                            <th class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -157,6 +158,12 @@
                                     <?php echo $tempel->status; ?>
                                 </span>
                                 <?php } ?>
+                            </td>
+                            <td class="text-center">
+                                <a href="<?php echo site_url('detailestimasi/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
+                                    class="btn btn-sm btn-purple">
+                                    Detail
+                                </a>
                             </td>
                         </tr>
                         <?php
@@ -214,19 +221,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
-                                    <span class="badge badge-warning">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-warning">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                    <span class="badge badge-primary">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-primary">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Tolak') { ?>
-                                    <span class="badge badge-danger">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-danger">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -336,7 +343,7 @@
                             <label>Catatan</label>
                             <textarea class="form-control" id="catatan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
                                 rows="3"></textarea>
-    
+
                         </div>
                     </div>
                     <div class="form-row mb-3">
