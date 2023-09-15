@@ -79,14 +79,42 @@ class m_estimasi extends CI_Model
             ->result();
     }
 
-    public function forKepalaBagian()
+    public function forKepalaBagianPermintaan()
     {
-        return $this->db
-            ->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
-            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_estimasi', 'DESC')
+            ->where('status', 'Diajukan')
+            ->order_by($this->primaryKey, 'DESC')
+            ->get()
+            ->result();
+    }
+
+    // Fungsi untuk mengambil data permintaan berdasarkan status 'Disetujui' dan id_bagian untuk kepala bagian
+    public function forKepalaBagianSetuju()
+    {
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->where('tbl_user.id_section', $this->session->userdata('section'))
+            ->where('status', 'Disetujui')
+            ->order_by($this->primaryKey, 'DESC')
+            ->get()
+            ->result();
+    }
+
+    // Fungsi untuk mengambil data permintaan berdasarkan status 'Ditolak' dan id_bagian untuk kepala bagian
+    public function forKepalaBagianTolak()
+    {
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
+            ->where('tbl_user.id_section', $this->session->userdata('section'))
+            ->where('status', 'Ditolak')
+            ->order_by($this->primaryKey, 'DESC')
+            ->group_by($this->tabletolak . '.faktur')
             ->get()
             ->result();
     }
