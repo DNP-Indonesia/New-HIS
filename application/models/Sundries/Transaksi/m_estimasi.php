@@ -77,33 +77,6 @@ class m_estimasi extends CI_Model
             ->result();
     }
 
-    public function getSetuju()
-    {
-        return $this->db->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
-            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'DESC')
-            ->group_by($this->tabletolak . '.faktur')
-            ->get()
-            ->result();
-    }
-    public function getTolak()
-    {
-        return $this->db->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
-            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Ditolak')
-            ->order_by($this->primaryKey, 'DESC')
-            ->group_by($this->tabletolak . '.faktur')
-            ->get()
-            ->result();
-    }
-
     public function cekKeranjang($idbarang, $iduser)
     {
         return $this->db->get_where('sdr_estimasi_keranjang', array('id_barang'=>$idbarang, 'id_user'=>$iduser));
