@@ -300,11 +300,8 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <!-- <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
+                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
                                             class="btn btn-sm btn-danger">
-                                            Hapus
-                                        </a> -->
-                                        <a href="<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
                                             Hapus
                                         </a>
                                         <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
@@ -501,11 +498,11 @@
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
-                        Penolakan
+                        Ditolak
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#diproses"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
-                        Pemrosesan
+                        Diproses
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#selesai"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
@@ -895,8 +892,9 @@
     </div>
     <?php } ?>
     <?php
-    if ($this->session->userdata('role') == 'sdr_Admin Gudang' or $this->session->userdata('role') == 'sdr_Kepala Gudang') {?>
-    <?php if ($this ->session->userdata('role') == 'sdr_Admin Gudang') { ?>
+    if ($this->session->userdata('role') == 'sdr_Admin Gudang' or $this->session->userdata('role') == 'sdr_Kepala Gudang') {
+        ?>
+    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
     <a href="#" class="btn btn-sm btn-info mb-3" data-toggle="modal" data-target="#modal-tambah-barang">
         Tambah Barang
     </a>
@@ -1255,14 +1253,8 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Jumlah</label>
-                                <input type="number" class="form-control" id="jumlah" required>
+                                <input type="number" class="form-control" id="jumlah">
                             </div>
-                        </div>
-                        <div class="col-md-12 mb-3 text-center">
-                            <label class="text-danger font-weight-bold" style="font-size: 14px;">
-                                Jika barang yang Anda inginkan tidak ada,
-                                silahkan hubungi Gudang untuk menambahkan barang
-                            </label>
                         </div>
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
@@ -1332,8 +1324,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-tambah-barang" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-tambah-barang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">

@@ -49,7 +49,7 @@
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-success">Data Request</h5>
             </div>
-            <div class="card-body row">
+            <div class="card-body row justify-content-around">
                 <div class="col-md-6">
                     <?php foreach ($data as $tempel) { ?>
                     <label>Faktur :
@@ -71,7 +71,7 @@
                         </span>
                         <?php } elseif ($tempel->status == 'Disetujui') { ?>
                         <span class="badge badge-primary">
-                            <?php echo $tempel->status; ?>
+                        <?php echo $tempel->status; ?>
                         </span>
                         <?php } elseif ($tempel->status == 'Diproses') { ?>
                         <span class="badge badge-info">
@@ -101,26 +101,11 @@
                         data-target="#modal-repeat<?php echo $tempel->id_request_sundries; ?>">
                         <span class="text">Ajukan Perbaikan</span>
                     </a>
-                    <?php } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request") { ?>
-                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#modal-setujui<?php echo $tempel->id_request_sundries; ?>">
-                        Setuju
-                    </a>
-                    <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
-                        data-target="#modal-tolak<?php echo $tempel->id_request_sundries; ?>">
-                        Tolak
-                    </a>
-                    <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == "Disetujui") { ?>
-                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
-                        data-target="#modal-proses<?php echo $tempel->id_request_sundries; ?>">
-                        Proses
-                    </a>
                     <?php } ?>
                 </div>
                 <div class="col-md-6">
                     <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' OR $this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == 'Ditolak') { ?>
-                    <?php foreach ($tolak as $isi); ?>
-
+                    <?php foreach ($tolak as $isi) { ?>
                     <div class="list-group mb-2">
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
@@ -141,6 +126,21 @@
                         </a>
                     </div>
                     <?php }?>
+                    <?php } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request") { ?>
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
+                        data-target="#modal-setujui<?php echo $tempel->id_request_sundries; ?>">
+                        Setuju
+                    </a>
+                    <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
+                        data-target="#modal-tolak<?php echo $tempel->id_request_sundries; ?>">
+                        Tolak
+                    </a>
+                    <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == "Disetujui") { ?>
+                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
+                        data-target="#modal-proses<?php echo $tempel->id_request_sundries; ?>">
+                        Proses
+                    </a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -203,11 +203,8 @@
                                         data-target="#modal-edit<?php echo $tempel->id_detail_sundries; ?>">
                                         <span class="text">Ubah</span>
                                     </a>
-                                    <!-- <a onclick="deleteConfirm('<?php echo base_url('Sundries/requestsundriescontroller/barangdelete/' . $tempel->id_detail_sundries); ?>')" href="#"
+                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/requestsundriescontroller/barangdelete/' . $tempel->id_detail_sundries); ?>')" href="#"
                                         class="btn btn-sm btn-danger">
-                                        Hapus
-                                    </a> -->
-                                    <a href="<?php echo site_url('deletebarangpermintaan/' . $tempel->id_detail_sundries); ?>" class="btn btn-sm btn-danger">
                                         Hapus
                                     </a>
                                     <?php } ?>
@@ -223,58 +220,57 @@
             </div>
         </div>
     </div>
-</body>
 
-<!-- Bootstrap core JavaScript-->
-<script src="<?php echo base_url(); ?>bootstrap/vendor/jquery/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="<?php echo base_url(); ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="<?php echo base_url(); ?>bootstrap/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url(); ?>bootstrap/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="<?php echo base_url(); ?>bootstrap/js/demo/datatables-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="<?php echo base_url(); ?>bootstrap/js/demo/datatables-demo.js"></script>
 
-<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
 
-<script>
-    function deleteConfirm(url) {
-        $('#btn-delete').attr('href', url);
-        $('#deleteModal').modal();
-    }
+    <script>
+        function deleteConfirm(url) {
+            $('#btn-delete').attr('href', url);
+            $('#deleteModal').modal();
+        }
 
-    $(document).ready(function() {
-        $('.yoi').select2({
-            theme: 'bootstrap4',
-        });
-    });
-
-    $(document).ready(function() {
-        $('#id_barang').change(function() {
-            var id_barang = $(this).val();
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo site_url('detailbarang'); ?>",
-                data: 'id_barang=' + id_barang,
-                dataType: 'JSON',
-                success: function(data) {
-                    $("#brand").val(data.brand);
-                    $("#type").val(data.type);
-                    $("#ukuran").val(data.ukuran);
-                    $("#satuan").val(data.satuan);
-                }
+        $(document).ready(function() {
+            $('.yoi').select2({
+                theme: 'bootstrap4',
             });
         });
-    });
-</script>
+
+        $(document).ready(function() {
+            $('#id_barang').change(function() {
+                var id_barang = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: "<?= site_url('Sundries/requestsundriescontroller/tampildetailbarang') ?>",
+                    data: 'id_barang=' + id_barang,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        $("#brand").val(data.brand);
+                        $("#type").val(data.type);
+                        $("#ukuran").val(data.ukuran);
+                        $("#satuan").val(data.satuan);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 <?php foreach ($data as $tempel) { ?>
@@ -515,7 +511,7 @@
                     <span aria-hidden="true">x</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('addbarangpermintaan'); ?>" method="POST">
+            <form action="<?php echo site_url('Sundries/requestsundriescontroller/barangnew'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
@@ -536,50 +532,54 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label>Barang</label>
+                            <label>Pilih Barang</label>
                             <select class="form-control yoi" name="barang" id="id_barang">
-                                <option value="" disabled selected>Pilih Barang</option>
-                                <?php foreach ($barang as $tempel) { ?>
+                                <option value="">--Pilih Barang--</option>
+                                <?php foreach ($barsund as $tempel) { ?>
                                 <option value="<?php echo $tempel->id_barang; ?>">
                                     <?php echo $tempel->barang; ?>
+                                    [<?php echo $tempel->brand; ?>]
+                                    [<?php echo $tempel->type; ?>]
+                                    [<?php echo $tempel->ukuran; ?>]
+                                    [<?php echo $tempel->satuan; ?>]
                                 </option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Jumlah</label>
-                            <input type="number" class="form-control" name="jumlah" required>
+                            <label class="text-danger font-weight-bold">Barang Yang Diinginkan Tidak Ada Dipilihan,
+                                Silahkan Hubungi Gudang Untuk Menambahkan Barang</label>
                         </div>
                     </div>
-                    <div class="col-md-12 mb-3 text-center">
-                        <label class="text-danger font-weight-bold" style="font-size: 14px;">
-                            Jika barang yang Anda inginkan tidak ada,
-                            silahkan hubungi Gudang untuk menambahkan barang
-                        </label>
-                    </div>
                     <div class="form-row">
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Brand</label>
                             <input type="text" class="form-control" id="brand" readonly>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Type</label>
                             <input type="text" class="form-control" id="type" readonly>
                         </div>
-                        <div class="col-md-3 mb-3">
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
                             <label>Ukuran</label>
                             <input type="text" class="form-control" id="ukuran" readonly>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Satuan</label>
                             <input type="text" class="form-control" id="satuan" readonly>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <label>Catatan</label>
-                            <textarea class="form-control" id="catatan" name="keterangan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
-                                rows="2"></textarea>
+                        <div class="col-md-6 mb-3">
+                            <label>Jumlah</label>
+                            <input type="number" class="form-control" name="jumlah" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Catatan Khusus Atau Lainnya</label>
+                            <input type="text" class="form-control" name="keterangan"
+                                placeholder="Contoh : Yang Buy 1 Get 1....">
                         </div>
                     </div>
                 </div>
