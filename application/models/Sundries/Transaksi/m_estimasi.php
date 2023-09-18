@@ -5,6 +5,8 @@ class m_estimasi extends CI_Model
 {
     protected $table = 'sdr_estimasi';
     protected $primaryKey = 'id_estimasi';
+    protected $tabletolak = "sdr_estimasi_tolak";
+     
 
     public function getEstimasi()
     {
