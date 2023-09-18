@@ -55,11 +55,11 @@
                     <label>Faktur :
                         <?php echo $tempel->faktur; ?>
                     </label><br>
-                    <label>Direquest Oleh :
-                        <?php echo $tempel->nama_pembuat; ?>
-                    </label><br>
                     <label>Bagian :
                         <?php echo $tempel->nama_section; ?>
+                    </label><br>
+                    <label>Dibuat Oleh :
+                        <?php echo $tempel->nama_pembuat; ?>
                     </label><br>
                     <label>Dibuat Tanggal :
                         <?= date('d F Y', strtotime($tempel->tanggal)) ?>
@@ -89,30 +89,6 @@
                         data-target="#modal-repeat<?php echo $tempel->id_estimasi; ?>">
                         <span class="text">Ajukan Perbaikan</span>
                     </a>
-                    <?php } ?>
-
-                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' OR $this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == 'Ditolak') { ?>
-                    <?php foreach ($tolak as $isi) { ?>
-                    <div class="list-group mb-2">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1 font-weight-bold text-danger">
-                                    Alasan Penolakan
-                                </h5>
-                                <small class="text-muted text-right">
-                                    <?php echo date('d F Y', strtotime($isi->tanggal_tolak)); ?>
-                                    -
-                                    <?php echo $isi->jamtolak; ?><br>
-                                    Ditolak Oleh<br>
-                                    <?php echo $isi->nama; ?>
-                                </small>
-                            </div>
-                            <p class="mb-1">
-                                <?php echo $isi->alasan_tolak; ?>
-                            </p>
-                        </a>
-                    </div>
-                    <?php }?>
                     <?php } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Diajukan") { ?>
                     <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
                         data-target="#modal-setujui<?php echo $tempel->id_estimasi; ?>">
@@ -123,6 +99,32 @@
                         Tolak
                     </a>
                     <?php } ?>
+                    <div class="col-md-6">
+                        <?php if ($tempel->status == 'Ditolak') { ?>
+                        <?php foreach ($tolak as $isi) { ?>
+                        <div class="list-group mb-2">
+                            <a href="#"
+                                class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1 font-weight-bold text-danger">
+                                        Alasan Penolakan
+                                    </h5>
+                                    <small class="text-muted text-right">
+                                        <?php echo date('d F Y', strtotime($isi->tanggal_tolak)); ?>
+                                        -
+                                        <?php echo $isi->jamtolak; ?><br>
+                                        Ditolak Oleh<br>
+                                        <?php echo $isi->nama; ?>
+                                    </small>
+                                </div>
+                                <p class="mb-1">
+                                    <?php echo $isi->alasan_tolak; ?>
+                                </p>
+                            </a>
+                        </div>
+                        <?php } ?>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -150,13 +152,13 @@
                             foreach ($detail as $tempel) {
                                 ?>
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     <?php echo $no; ?>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <?php echo $tempel->barang; ?>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <?php echo $tempel->jumlah; ?>
                                 </td>
                                 <td class="text-center">
@@ -165,8 +167,11 @@
                                         data-target="#modal-edit<?php echo $tempel->id_detail_estimasi; ?>">
                                         <span class="text">Ubah</span>
                                     </a>
-                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/requestsundriescontroller/barangdelete/' . $tempel->id_detail_estimasi); ?>')" href="#"
+                                    <!-- <a onclick="deleteConfirm('<?php echo base_url('Sundries/requestsundriescontroller/barangdelete/' . $tempel->id_detail_estimasi); ?>')" href="#"
                                         class="btn btn-sm btn-danger">
+                                        Hapus
+                                    </a> -->
+                                    <a href="<?php echo site_url('deletebarangpermintaan/' . $tempel->id_detail_sundries); ?>" class="btn btn-sm btn-danger">
                                         Hapus
                                     </a>
                                     <?php } ?>
@@ -190,6 +195,7 @@
 
     <!-- Core plugin JavaScript-->
     <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="<?php echo base_url(); ?>bootstrap/js/sb-admin-2.min.js"></script>
@@ -207,7 +213,347 @@
         $(document).ready(function() {
             $('#dataTablee').DataTable();
         });
+
+        $(document).ready(function() {
+            $('.yoi').select2({
+                theme: 'bootstrap4',
+            });
+        });
+
+        $(document).ready(function() {
+            $('#id_barang').change(function() {
+                var id_barang = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: "<?php echo site_url('detailbarang'); ?>",
+                    data: 'id_barang=' + id_barang,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        $("#brand").val(data.brand);
+                        $("#type").val(data.type);
+                        $("#ukuran").val(data.ukuran);
+                        $("#satuan").val(data.satuan);
+                    }
+                });
+            });
+        });
     </script>
 </body>
+
+<?php foreach ($data as $tempel) { ?>
+<div class="modal fade" id="modal-setujui<?php echo $tempel->id_estimasi; ?>" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Persetujuan Permintaan</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form action="<?php echo site_url('approvepermintaan'); ?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Faktur</label>
+                            <input type="text" class="form-control" name="faktur" required
+                                value="<?php echo $tempel->faktur; ?>" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Bagian</label>
+                            <input type="text" class="form-control" name="bagian" required
+                                value="<?php echo $tempel->nama_section; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Oleh</label>
+                            <input type="text" class="form-control" name="nama" required
+                                value="<?php echo $tempel->nama_pembuat; ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Tanggal</label>
+                            <input type="text" class="form-control" name="tanggal" required
+                                value="<?php echo $tempel->tanggal; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Disetujui Oleh</label>
+                            <input type="text" class="form-control" name="penyetuju" value="<?php echo $this->session->userdata('nama'); ?>"
+                                readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Disetujui Tanggal</label>
+                            <input type="text" class="form-control" name="tgl_setuju"
+                                value="<?= date('Y-m-d') ?>" required readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <input type="text" class="form-control" name="status" required value="Disetujui"
+                                hidden>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<?php foreach ($data as $tempel) { ?>
+<div class="modal fade" id="modal-tolak<?php echo $tempel->id_estimasi; ?>" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Penolakan Permintaan</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form action="<?php echo site_url('rejectpermintaan'); ?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Faktur</label>
+                            <input type="text" class="form-control" name="faktur" required
+                                value="<?php echo $tempel->faktur; ?>" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Bagian</label>
+                            <input type="text" class="form-control" name="bagian" required
+                                value="<?php echo $tempel->nama_section; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Oleh</label>
+                            <input type="text" class="form-control" name="nama" required
+                                value="<?php echo $tempel->nama_pembuat; ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Tanggal</label>
+                            <input type="text" class="form-control" required value="<?php echo $tempel->tanggal; ?>"
+                                readonly>
+                            <input type="text" class="form-control" name="status" required value="Ditolak"
+                                hidden>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Ditolak Oleh</label>
+                            <input type="text" class="form-control" name="penolak" value="<?php echo $this->session->userdata('nama'); ?>"
+                                readonly>
+                            <input type="text" class="form-control" name="id_user" value="<?php echo $this->session->userdata('id_user'); ?>"
+                                readonly hidden>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Ditolak Tanggal</label>
+                            <input type="text" class="form-control" name="tanggaltolak" required
+                                value="<?= date('Y-m-d') ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Ditolak Jam</label>
+                            <input type="text" class="form-control" value="<?php date_default_timezone_set('Asia/Jakarta');
+                            echo date('H:i:s'); ?>" name="jam"
+                                required readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Alasan Menolak</label>
+                            <textarea class="form-control" required name="alasan"></textarea>
+                        </div>
+                        <input type="text" class="form-control" name="status" required value="Ditolak" hidden>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<?php foreach ($detail as $tempel) { ?>
+<div class="modal fade" id="modal-edit<?php echo $tempel->id_detail_estimasi; ?>" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pembaruan Permintaan</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form action="<?php echo site_url('updatepermintaan/'); ?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Faktur</label>
+                            <input class="form-control" type="text" name="faktur" value="<?php echo $tempel->faktur; ?>"
+                                readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Barang</label>
+                            <input class="form-control" type="text" name="barang" value="<?php echo $tempel->id_barang; ?>"
+                                hidden>
+                            <input class="form-control" type="text" value="<?php echo $tempel->barang; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Jumlah</label>
+                            <input type="number" class="form-control" name="jumlah" required
+                                value="<?php echo $tempel->jumlah; ?>">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Catatan</label>
+                            <input type="text" class="form-control" name="catatan" value="<?php echo $tempel->keterangan; ?>">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<?php foreach ($data as $tempel) { ?>
+<div class="modal fade" id="modal-tambah<?php echo $tempel->id_estimasi; ?>" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Barang</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form action="<?php echo site_url('addbarangpermintaan'); ?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Faktur</label>
+                            <input type="text" class="form-control" name="faktur" required
+                                value="<?php echo $tempel->faktur; ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Oleh</label>
+                            <input type="text" class="form-control" name="nama" required
+                                value="<?php echo $tempel->nama_pembuat; ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Bagian</label>
+                            <input type="text" class="form-control" name="bagian" required
+                                value="<?php echo $tempel->nama_section; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Barang</label>
+                            <select class="form-control yoi" name="barang" id="id_barang">
+                                <option value="" disabled selected>Pilih Barang</option>
+                                <?php foreach ($barang as $tempel) { ?>
+                                <option value="<?php echo $tempel->id_barang; ?>">
+                                    <?php echo $tempel->barang; ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Jumlah</label>
+                            <input type="number" class="form-control" name="jumlah" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Catatan</label>
+                            <textarea class="form-control" id="catatan" name="keterangan"
+                                placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<?php foreach ($data as $tempel) { ?>
+<div class="modal fade" id="modal-repeat<?php echo $tempel->id_estimasi; ?>" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pengajuan Ulang Permintaan</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form action="<?php echo site_url('permintaanulang'); ?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Faktur</label>
+                            <input type="text" class="form-control" name="faktur" required
+                                value="<?php echo $tempel->faktur; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Dibuat Oleh</label>
+                            <input type="text" class="form-control" name="nama" required
+                                value="<?php echo $tempel->nama_pembuat; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Bagian</label>
+                            <input type="text" class="form-control" name="bagian" required
+                                value="<?php echo $tempel->nama_section; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Tanggal</label>
+                            <input type="text" class="form-control" value="<?= date('Y-m-d') ?>" name="tanggal"
+                                required readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <input type="text" class="form-control" name="status" value="Request" required
+                                hidden>
+                            <input type="text" class="form-control" name="stkeranjang" value="Tidak" required
+                                hidden>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
 
 </html>
