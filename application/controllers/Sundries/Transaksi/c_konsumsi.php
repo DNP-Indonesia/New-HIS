@@ -27,8 +27,8 @@ class c_konsumsi extends MY_Controller
 
     public function barangFaktur()
     {
-        $faktur = $this->input->post('faktur');
-        $data = $this->m_konsumsi->getBarangByFaktur($faktur);
+        $faktur_estimasi = $this->input->post('faktur');
+        $data = $this->m_konsumsi->getBarangByFaktur($faktur_estimasi);
         
         $output = array(); // Buat array kosong untuk menyimpan opsi dropdown
         
@@ -46,6 +46,7 @@ class c_konsumsi extends MY_Controller
         // Mengirimkan data dalam format JSON
         $this->output->set_output(json_encode($output));
     }
+    
     
 
     public function addKeranjang()
