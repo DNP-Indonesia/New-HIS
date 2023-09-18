@@ -140,13 +140,13 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
-                                            class="btn btn-sm btn-danger">
-                                            Hapus
-                                        </a>
-                                        <!-- <a href="<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                        <!-- <a href="#" class="btn btn-sm btn-danger"
+                                            onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')">
                                             Hapus
                                         </a> -->
+                                        <a href="<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                            Hapus
+                                        </a>
                                         <a href="<?php echo site_url('detailpermintaan/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
                                             Detail
                                         </a>
@@ -300,16 +300,16 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
+                                        <!-- <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
                                             class="btn btn-sm btn-danger">
                                             Hapus
-                                        </a>
-                                        <!-- <a href="<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
-                                            Hapus
                                         </a> -->
+                                        <a href="<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                            Hapus
+                                        </a>
                                         <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
                                             class="btn btn-sm btn-purple">
-                                            Detail
+                                            Lihat Alasan
                                         </a>
                                     </td>
                                 </tr>
