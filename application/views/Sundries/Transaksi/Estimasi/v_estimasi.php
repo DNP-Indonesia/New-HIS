@@ -77,8 +77,8 @@
                                     Hapus
                                 </a> -->
                                 <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
-                                            Hapus
-                                        </a>
+                                    Hapus
+                                </a>
                                 <?php } ?>
 
                                 <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
@@ -156,7 +156,7 @@
                                 </div>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Tolak') { ?>
-                                <div class="alert alert-warning text-center">
+                                <span class="badge badge-danger">
                                     <?php echo $tempel->status; ?>
                                 </div>
                                 <?php } ?>
