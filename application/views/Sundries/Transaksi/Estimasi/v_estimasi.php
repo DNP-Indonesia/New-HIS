@@ -142,7 +142,7 @@
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Disetujui') { ?>
                                         <h6>
-                                            <span class="badge badge-warning">
+                                            <span class="badge badge-primary">
                                                 <?php echo $tempel->status; ?>
                                             </span>
                                         </h6>
