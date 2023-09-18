@@ -268,55 +268,55 @@
                                     $no = 1;
                                     foreach ($tolak as $tempel) {
                                         ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <?php echo $no; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->faktur; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->penolak; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal_tolak; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamtolak; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php if ($tempel->status == 'Ditolak') { ?>
-                                        <h6>
-                                            <span class="badge badge-danger">
-                                                <?php echo $tempel->status; ?>
-                                            </span>
-                                        </h6>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
-                                            class="btn btn-sm btn-danger">
-                                            Hapus
-                                        </a>
-                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-purple">
-                                            Lihat Alasan
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php
+                                    <tr>
+                                        <td class="text-center">
+                                            <?php echo $no; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->faktur; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->nama_section; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->nama_peminta; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->tanggal; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->jamdibuat; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->penolak; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->tanggal_tolak; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->jamtolak; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php if ($tempel->status == 'Ditolak') { ?>
+                                            <h6>
+                                                <span class="badge badge-danger">
+                                                    <?php echo $tempel->status; ?>
+                                                </span>
+                                            </h6>
+                                            <?php } ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan' . $tempel->faktur); ?>')" href="#"
+                                                class="btn btn-sm btn-danger">
+                                                Hapus
+                                            </a>
+                                            <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
+                                                class="btn btn-sm btn-purple">
+                                                Lihat Alasan
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php
                                         $no++;
                                     }
                                     ?>
@@ -401,138 +401,9 @@
                                             $no++;
                                         }
                                         ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <?php echo $no; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->faktur; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->pemroses; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal_proses; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamproses; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php if ($tempel->status == 'Diproses') { ?>
-                                        <h6>
-                                            <span class="badge badge-info">
-                                                <?php echo $tempel->status; ?>
-                                            </span>
-                                        </h6>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                        class="btn btn-sm btn-success">
-                                        Cetak PDF
-                                    </a>
-                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                    class="btn btn-sm btn-purple">
-                                    Detail
-                                </a>
-                            </td>
-                                </tr>
-                                <?php
-                                        $no++;
-                                    }
-                                    ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div class="table-responsive-xl">
-                        <table class="table table-borderless small tbl">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">Faktur</th>
-                                    <th class="text-center">Bagian</th>
-                                    <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
-                                    <th class="text-center">Selesai Tanggal</th>
-                                    <th class="text-center">Selesai Jam</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Opsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $no = 1;
-                                    foreach ($proses as $tempel) {
-                                        ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <?php echo $no; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->faktur; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->pemroses; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal_proses; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamproses; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php if ($tempel->status == 'Diproses') { ?>
-                                        <h6>
-                                            <span class="badge badge-info">
-                                                <?php echo $tempel->status; ?>
-                                            </span>
-                                        </h6>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-success">
-                                            Cetak PDF
-                                        </a>
-                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-purple">
-                                            Detail
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php
-                                        $no++;
-                                    }
-                                    ?>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="nav-home-tab">
