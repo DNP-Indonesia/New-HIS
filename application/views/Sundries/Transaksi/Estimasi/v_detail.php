@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,56 +30,123 @@
 
         <link href="<?php echo base_url() ?>bootstrap/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    </head>
-    <style type="text/css">
-        .btn-purple{
-            background-color: #6b0391;
-            color: white;
-        }
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+</head>
+<style type="text/css">
+    .btn-purple {
+        background-color: #6b0391;
+        color: white;
+    }
 
-        .btn-purple:hover{
-            color: white;
-            background-color: #400257;
-        }
-    </style>
-    <body id="page-top">   
-        <div class="container-fluid">
-            <div class="card shadow mt-4">
-                <div class="card-header py-3">
-                    <h5 class="m-0 font-weight-bold text-success">Data Estimasi Anda</h5>
+    .btn-purple:hover {
+        color: white;
+        background-color: #400257;
+    }
+</style>
+
+<body id="page-top">
+    <div class="container-fluid">
+        <div class="card shadow mt-4">
+            <div class="card-header py-3">
+                <h5 class="m-0 font-weight-bold text-success">Data Estimasi</h5>
+            </div>
+            <div class="card-body">
+                <?php foreach ($data as $tempel) { ?>
+                <label>Faktur :
+                    <?php echo $tempel->faktur; ?>
+                </label><br>
+                <label>Direquest Oleh :
+                    <?php echo $tempel->nama_pembuat; ?>
+                </label><br>
+                <label>Untuk Bagian :
+                    <?php echo $tempel->nama_section; ?>
+                </label><br>
+                <label>Dibuat Tanggal :
+                    <?= date('d F Y', strtotime($tempel->tanggal)) ?>
+                </label><br>
+                <h6>
+                    <?php if ($tempel->status == 'Diajukan') { ?>
+                    <span class="badge badge-warning">
+                        <?php echo $tempel->status; ?>
+                    </span>
+                    <?php } elseif ($tempel->status == 'Disetujui') { ?>
+                    <span class="badge badge-primary">
+                        <?php echo $tempel->status; ?>
+                    </span>
+                    <?php } elseif ($tempel->status == 'DiTolak') { ?>
+                    <span class="badge badge-danger">
+                        <?php echo $tempel->status; ?>
+                    </span>
+                    <?php } ?>
+                </h6>
+                <?php } ?>
+                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
+                <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
+                    data-target="#modal-tambah<?php echo $tempel->id_estimasi; ?>">
+                    <span class="text">Tambah Barang</span>
+                </a>
+                <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
+                    data-target="#modal-repeat<?php echo $tempel->id_estimasi; ?>">
+                    <span class="text">Ajukan Perbaikan</span>
+                </a>
+                <?php } ?>
+            </div>
+            <div class="col-md-6">
+                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' OR $this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == 'Ditolak') { ?>
+                <?php foreach ($tolak as $isi) { ?>
+                <div class="list-group mb-2">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1 font-weight-bold text-danger">
+                                Alasan Penolakan
+                            </h5>
+                            <small class="text-muted text-right">
+                                <?php echo date('d F Y', strtotime($isi->tanggal_tolak)); ?>
+                                -
+                                <?php echo $isi->jamtolak; ?><br>
+                                Ditolak Oleh<br>
+                                <?php echo $isi->nama; ?>
+                            </small>
+                        </div>
+                        <p class="mb-1">
+                            <?php echo $isi->alasan_tolak; ?>
+                        </p>
+                    </a>
                 </div>
-                <div class="card-body">
-                    <?php
-                        foreach($data as $tempel){
-                    ?>
-                    <label>Faktur : <?php echo $tempel->faktur ?></label><br>
-                    <label>Direquest Oleh : <?php echo $tempel->nama_pembuat ?></label><br>
-                    <label>Untuk Bagian : <?php echo $tempel->nama_section ?></label><br>
-                    <label>Dibuat Tanggal : <?php echo $tempel->tanggal ?></label><br>
-                    <?php
-                        }
-                    ?>
-                </div>
-            </div>   
-            <div class="card shadow mt-4">
-                <div class="card-header py-3">
-                    <h5 class="m-0 font-weight-bold text-success">Detail Estimasi Anda</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-borderless small">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Barang</th>
-                                    <th>Jumlah Barang</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $no=1;
-                                    foreach($detail as $tempel){
+                <?php }?>
+                <?php } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request") { ?>
+                <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
+                    data-target="#modal-setujui<?php echo $tempel->id_estimasi; ?>">
+                    Setuju
+                </a>
+                <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
+                    data-target="#modal-tolak<?php echo $tempel->id_estimasi; ?>">
+                    Tolak
+                </a>
+                <?php } ?>
+            </div>
+        </div>
+        <div class="card shadow mt-4">
+            <div class="card-header py-3">
+                <h5 class="m-0 font-weight-bold text-success">Detail Estimasi Anda</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless small">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Barang</th>
+                                <th>Jumlah Barang</th>
+                                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
+                                <th class="text-center">Opsi</th>
+                                <?php } ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            foreach ($detail as $tempel) {
                                 ?>
                                 <tr>
                                     <td><?php echo $no ?></td>

@@ -33,7 +33,6 @@ class c_permintaan extends MY_Controller
     public function index()
     {
         $data['bypermintaan'] = $this->m_permintaan->byPermintaan();
-        $data['bysetuju2'] = $this->m_permintaan->bySetuju2();
         $data['bytolak'] = $this->m_permintaan->byTolak();
         $data['byproses'] = $this->m_permintaan->byProses();
         $data['byselesai'] = $this->m_permintaan->bySelesai();
@@ -200,9 +199,15 @@ class c_permintaan extends MY_Controller
             'tanggal_setuju1' => $tanggalsetuju
         );
 
-        $this->m_permintaan->update($where, $data);
-        $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui..., Masih Menunggu Persetujuan Kepala Gudang...');
-        return redirect('Sundries/Transaksi/c_permintaan/index');
+        // if ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
+            $this->m_permintaan->update($where, $data);
+            $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui..., Masih Menunggu Persetujuan Kepala Gudang...');
+            return redirect('Sundries/Transaksi/c_permintaan/index');
+        
+        // } elseif ($this->session->userdata('role') == 'sdr_Kepala Gudang') {
+        //     $this->m_permintaan->update($where, $data2);
+        //     $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui...');
+        // }
     }
 
     public function rejectPermintaan()
@@ -240,13 +245,13 @@ class c_permintaan extends MY_Controller
 
     public function deleteBarang($id)
     {
-        // $this->m_permintaan->delete($id);
-        // $this->session->set_flashdata('success', 'Berhasil dihapus');
-        // return redirect('Sundries/Transaksi/c_permintaan/detail/' . $faktur);
+        if (!isset($id))
+            show_404();
 
-        $this->m_detail->delete($id);
-        $this->session->set_flashdata('success', 'Berhasil dihapus');
-        return;
+        if ($this->m_permintaan->delete($id)) {
+            $this->session->set_flashdata('success', 'Berhasil dihapus');
+            redirect(site_url('Sundries/Transaksi/c_permintaan/index'));
+        }
     }
 
     public function addBarang()
@@ -263,9 +268,9 @@ class c_permintaan extends MY_Controller
             'keterangan' => $catatan
         );
 
-        $this->m_detail->add($data);
+        $this->m_permintaan->addBarang($data);
         $this->session->set_userdata('sukses', 'Yeay, Barang Berhasil Ditambahkan...');
-        redirect('Sundries/Transaksi/c_permintaan/detail/' . $faktur);
+        return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
     public function permintaanUlang()

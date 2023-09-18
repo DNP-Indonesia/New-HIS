@@ -43,12 +43,27 @@ class m_estimasi extends CI_Model
     public function forKepalaBagian()
     {
         return $this->db->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
-            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
-            ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_estimasi', 'DESC')
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
+            ->where('status', 'Disetujui')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
-            ->result();   
+            ->result();
+    }
+
+    public function getTolak()
+    {
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
+            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
+            ->where('status', 'Ditolak')
+            ->order_by($this->primaryKey, 'DESC')
+            ->group_by($this->tabletolak . '.faktur')
+            ->get()
+            ->result();
     }
 
     public function cekKeranjang($idbarang, $iduser)
