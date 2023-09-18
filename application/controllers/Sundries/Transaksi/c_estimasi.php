@@ -92,6 +92,9 @@ class c_estimasi extends MY_Controller
     {
         $data['data'] = $this->m_estimasi->getEstimasiById($id);
         $data['detail'] = $this->m_estimasi->getEstimasiDetail($id);
+        $data['tolak'] = $this->m_estimasi->getTolakById($id);
+        $data['barang'] = $this->m_estimasi->getBarang();
+
         $this->load->view('Sundries/Transaksi/Estimasi/v_detail', $data);
     }
 
