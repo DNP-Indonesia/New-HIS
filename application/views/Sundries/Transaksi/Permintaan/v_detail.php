@@ -58,11 +58,11 @@
                     <label>Faktur :
                         <?php echo $tempel->faktur; ?>
                     </label><br>
-                    <label>Direquest Oleh :
-                        <?php echo $tempel->nama_peminta; ?>
-                    </label><br>
                     <label>Bagian :
                         <?php echo $tempel->nama_section; ?>
+                    </label><br>
+                    <label>Dibuat Oleh :
+                        <?php echo $tempel->nama_peminta; ?>
                     </label><br>
                     <label>Dibuat Tanggal :
                         <?= date('d F Y', strtotime($tempel->tanggal)) ?>
@@ -97,11 +97,8 @@
                     </h6>
                 </div>
                 <div class="col-md-6">
-                    <?php
-                        if ($tempel->status == 'Ditolak' and $this->session->userdata('role') == 'sdr_Admin Bagian' or $this->session->userdata('role') == 'sdr_Kepala Bagian' or $this->session->userdata('role') == 'sdr_Kepala Gudang') {
-                            foreach ($tolak as $isi) {
-                                ?>
-
+                    <?php if ($tempel->status == 'Ditolak') { ?>
+                    <?php foreach ($tolak as $isi); { ?>
                     <div class="list-group mb-2">
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
@@ -121,10 +118,8 @@
                             </p>
                         </a>
                     </div>
-                    <?php
-                            }
-                        }
-                        ?>
+                    <?php }?>
+                    <?php }?>
                 </div>
             </div>
         </div>
@@ -270,7 +265,7 @@
                 var id_barang = $(this).val();
                 $.ajax({
                     type: 'POST',
-                    url: "<?= site_url('Sundries/requestsundriescontroller/tampildetailbarang') ?>",
+                    url: "<?php echo site_url('detailbarang'); ?>",
                     data: 'id_barang=' + id_barang,
                     dataType: 'JSON',
                     success: function(data) {
@@ -584,14 +579,10 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label>Jumlah</label>
-                            <input type="number" class="form-control" name="jumlah" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label>Catatan Khusus Atau Lainnya</label>
-                            <input type="text" class="form-control" name="keterangan"
-                                placeholder="Contoh : Yang Buy 1 Get 1....">
+                        <div class="col-md-12 mb-3">
+                            <label>Catatan</label>
+                            <textarea class="form-control" id="catatan" name="keterangan"
+                                placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam" rows="2"></textarea>
                         </div>
                     </div>
                 </div>
