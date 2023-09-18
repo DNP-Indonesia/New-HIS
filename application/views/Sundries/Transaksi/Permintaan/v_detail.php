@@ -58,11 +58,11 @@
                     <label>Faktur :
                         <?php echo $tempel->faktur; ?>
                     </label><br>
+                    <label>Direquest Oleh :
+                        <?php echo $tempel->nama_peminta; ?>
+                    </label><br>
                     <label>Bagian :
                         <?php echo $tempel->nama_section; ?>
-                    </label><br>
-                    <label>Dibuat Oleh :
-                        <?php echo $tempel->nama_peminta; ?>
                     </label><br>
                     <label>Dibuat Tanggal :
                         <?= date('d F Y', strtotime($tempel->tanggal)) ?>
@@ -97,8 +97,9 @@
                     </h6>
                 </div>
                 <div class="col-md-6">
-                    <?php if ($tempel->status == 'Ditolak') { ?>
-                    <?php foreach ($tolak as $isi); { ?>
+                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' OR $this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == 'Ditolak') { ?>
+                    <?php foreach ($tolak as $isi); ?>
+
                     <div class="list-group mb-2">
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
@@ -118,7 +119,6 @@
                             </p>
                         </a>
                     </div>
-                    <?php }?>
                     <?php }?>
                 </div>
             </div>
@@ -227,57 +227,58 @@
         </div>
         <?php } ?>
     </div>
+</body>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="<?php echo base_url(); ?>bootstrap/vendor/jquery/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="<?php echo base_url(); ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="<?php echo base_url(); ?>bootstrap/js/sb-admin-2.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="<?php echo base_url(); ?>bootstrap/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Page level plugins -->
+<script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="<?php echo base_url(); ?>bootstrap/js/demo/datatables-demo.js"></script>
+<!-- Page level custom scripts -->
+<script src="<?php echo base_url(); ?>bootstrap/js/demo/datatables-demo.js"></script>
 
-    <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
 
-    <script>
-        function deleteConfirm(url) {
-            $('#btn-delete').attr('href', url);
-            $('#deleteModal').modal();
-        }
+<script>
+    function deleteConfirm(url) {
+        $('#btn-delete').attr('href', url);
+        $('#deleteModal').modal();
+    }
 
-        $(document).ready(function() {
-            $('.yoi').select2({
-                theme: 'bootstrap4',
+    $(document).ready(function() {
+        $('.yoi').select2({
+            theme: 'bootstrap4',
+        });
+    });
+
+    $(document).ready(function() {
+        $('#id_barang').change(function() {
+            var id_barang = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo site_url('detailbarang'); ?>",
+                data: 'id_barang=' + id_barang,
+                dataType: 'JSON',
+                success: function(data) {
+                    $("#brand").val(data.brand);
+                    $("#type").val(data.type);
+                    $("#ukuran").val(data.ukuran);
+                    $("#satuan").val(data.satuan);
+                }
             });
         });
-
-        $(document).ready(function() {
-            $('#id_barang').change(function() {
-                var id_barang = $(this).val();
-                $.ajax({
-                    type: 'POST',
-                    url: "<?php echo site_url('detailbarang'); ?>",
-                    data: 'id_barang=' + id_barang,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        $("#brand").val(data.brand);
-                        $("#type").val(data.type);
-                        $("#ukuran").val(data.ukuran);
-                        $("#satuan").val(data.satuan);
-                    }
-                });
-            });
-        });
-    </script>
+    });
+</script>
 </body>
 
 <?php foreach ($data as $tempel) { ?>
@@ -581,8 +582,8 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <label>Catatan</label>
-                            <textarea class="form-control" id="catatan" name="keterangan"
-                                placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam" rows="2"></textarea>
+                            <textarea class="form-control" id="catatan" name="keterangan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
+                                rows="2"></textarea>
                         </div>
                     </div>
                 </div>
