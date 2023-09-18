@@ -11,7 +11,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
-                Data Estimation Making Anda
+                Data Estimasi Anda
             </h6>
         </div>
         <div class="card-body">
@@ -75,8 +75,8 @@
                                     Hapus
                                 </a> -->
                                 <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
-                                    Hapus
-                                </a>
+                                            Hapus
+                                        </a>
                                 <?php } ?>
 
                                 <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
@@ -104,7 +104,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
-                Data Estimation Making Dibagian Anda
+                Data Estimasi Dibagian Anda
             </h6>
         </div>
         <div class="card-body">
@@ -182,7 +182,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
-                Data Estimation Making
+                Data Estimasi
             </h6>
         </div>
         <div class="card-body">
@@ -247,227 +247,224 @@
         </div>
     </div>
     <?php } ?>
-</div>
 
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    Yakin Ingin Keluar Aplikasi ?
-                </h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
-                </button>
-            </div>
-            <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
-            <div class="modal-footer">
-                <button class="btn btn-success" type="button" data-dismiss="modal">
-                    Batal
-                </button>
-                <a class="btn btn-warning" href="<?php echo site_url('logout'); ?>">
-                    Logout
-                </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Yakin Ingin Keluar Aplikasi ?
+                    </h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Tutup</span>
+                    </button>
+                </div>
+                <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="button" data-dismiss="modal">
+                        Batal
+                    </button>
+                    <a class="btn btn-warning" href="<?php echo site_url('logout'); ?>">
+                        Logout
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- SDR ADMIN BAGIAN MODAL -->
-<div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Estimation Making</h5>
-                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
-                </button>
-            </div>
-            <form action="<?php echo site_url('addestimasi'); ?>" method="POST">
-                <div class="modal-body">
-                    <?php if (validation_errors()) { ?>
-                    <div class="alert alert-danger">
-                        <?php echo validation_errors(); ?>
-                    </div>
-                    <?php } ?>
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label>Faktur</label>
-                            <input type="text" class="form-control" value="EM-<?= date('d-m-Y-H-i-s') ?>"
-                                name="faktur" required readonly>
+    <!-- SDR ADMIN BAGIAN MODAL -->
+    <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Estimation Making</h5>
+                    <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Tutup</span>
+                    </button>
+                </div>
+                <form action="<?php echo site_url('addestimasi'); ?>" method="POST">
+                    <div class="modal-body">
+                        <?php if (validation_errors()) { ?>
+                        <div class="alert alert-danger">
+                            <?php echo validation_errors(); ?>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <label>Tanggal</label>
-                            <input type="text" class="form-control" value="<?= date('Y-m-d') ?>" name="tanggal"
-                                required readonly>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label>Dibuat Oleh</label>
-                            <input type="text" class="form-control" value=" <?php echo $this->session->userdata('nama'); ?>" name="nama"
-                                required readonly>
+                        <?php } ?>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label>Faktur</label>
+                                <input type="text" class="form-control" value="EM-<?= date('d-m-Y-H-i-s') ?>"
+                                    name="faktur" required readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Tanggal</label>
+                                <input type="text" class="form-control" value="<?= date('Y-m-d') ?>"
+                                    name="tanggal" required readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Dibuat Oleh</label>
+                                <input type="text" class="form-control" value=" <?php echo $this->session->userdata('nama'); ?>"
+                                    name="nama" required readonly>
 
-                            <input type="text" id="id_user" name="id_user" value=" <?php echo $this->session->userdata('id_user'); ?>"
-                                hidden>
+                                <input type="text" id="id_user" name="id_user" value=" <?php echo $this->session->userdata('id_user'); ?>"
+                                    hidden>
 
-                            <input type="text" class="form-control" value="Diajukan" name="status" hidden>
+                                <input type="text" class="form-control" value="Diajukan" name="status" hidden>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label>Pilihan Barang</label>
-                            <select class="form-control yoi" id="id_barang">
-                                <option value="0">--Pilih Barang--</option>
-                                <?php foreach ($barcons as $tempel) { ?>
-                                <option value="<?php echo $tempel->id_barang; ?>">
-                                    <?php echo $tempel->barang; ?>
-                                </option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label>Jumlah untuk 1 Bulan</label>
-                            <input type="number" class="form-control" id="jumlah">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label>Catatan</label>
-                            <textarea class="form-control" id="catatan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
-                                rows="3"></textarea>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label>Pilihan Barang</label>
+                                <select class="form-control yoi" id="id_barang">
+                                    <option value="0">--Pilih Barang--</option>
+                                    <?php foreach ($barcons as $tempel) { ?>
+                                    <option value="<?php echo $tempel->id_barang; ?>">
+                                        <?php echo $tempel->barang; ?>
+                                    </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Jumlah untuk 1 Bulan</label>
+                                <input type="number" class="form-control" id="jumlah">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Catatan</label>
+                                <textarea class="form-control" id="catatan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
+                                    rows="3"></textarea>
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row mb-3">
-                        <div class="col-md-12">
-                            <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukkan Ke
-                                Keranjang</a>
+                        <div class="form-row mb-3">
+                            <div class="col-md-12">
+                                <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukkan Ke
+                                    Keranjang</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <label>Keranjang</label>
-                            <div class="card shadow">
-                                <div class="table-responsive">
-                                    <table class="table table-borderless small">
-                                        <thead>
-                                            <tr>
-                                            <tr>
-                                                <th class="text-center">No</th>
-                                                <th class="text-center">Barang</th>
-                                                <th class="text-center">Jumlah</th>
-                                                <th class="text-center">Opsi</th>
-                                            </tr>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="isikeranjang">
-                                            <!-- Table rows for keranjang items here -->
-                                        </tbody>
-                                    </table>
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label>Keranjang</label>
+                                <div class="card shadow">
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless small">
+                                            <thead>
+                                                <tr>
+                                                <tr>
+                                                    <th class="text-center">No</th>
+                                                    <th class="text-center">Barang</th>
+                                                    <th class="text-center">Jumlah</th>
+                                                    <th class="text-center">Opsi</th>
+                                                </tr>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="isikeranjang">
+                                                <!-- Table rows for keranjang items here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yakin ?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Tutup</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Data Yang Dihapus Tidak Akan Bisa Dikembalikan.
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                        Batal
+                    </button>
+                    <a id="tombolhapus" class="btn btn-danger" href="#">
+                        Lanjutkan
+                    </a>
                 </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Yakin ?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Tutup</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Data Yang Dihapus Tidak Akan Bisa Dikembalikan.
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">
-                    Batal
-                </button>
-                <a id="tombolhapus" class="btn btn-danger" href="#">
-                    Lanjutkan
-                </a>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    $(document).ready(function() {
-        $('.tabel-data').DataTable();
-    });
-
-    function loaddatabarang() {
-        var id_user = $('#id_user').val();
-        $.ajax({
-            type: 'POST',
-            url: "<?php echo site_url('showkeranjangestimasi'); ?>",
-            data: {
-                id_user: id_user
-            },
-            cache: false,
-            success: function(respond) {
-                $('#isikeranjang').html(respond);
-            }
+    <script>
+        $(document).ready(function() {
+            $('.tabel-data').DataTable();
         });
-    }
 
-    $("#keranjang").click(function() {
-        var id_barang = $('#id_barang').val();
-        var qty = $('#jumlah').val();
-        var id_user = $('#id_user').val();
-        var catatan = $('#keterangan').val();
-
-        if (id_barang == 0) {
-            Swal.fire("Barang Belum Dipilih... !", "Pilih Barang...", "warning");
-        } else if (qty == "" || qty == 0) {
-            Swal.fire("Jumlah Barang Kosong...", "Isi Jumlah...", "warning");
-        } else {
+        function loaddatabarang() {
+            var id_user = $('#id_user').val();
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('addkeranjangestimasi'); ?>",
+                url: "<?php echo site_url('showkeranjangestimasi'); ?>",
                 data: {
-                    id_barang: id_barang,
-                    qty: qty,
-                    id_user: id_user,
-                    catatan: catatan
+                    id_user: id_user
                 },
                 cache: false,
                 success: function(respond) {
-                    loaddatabarang();
+                    $('#isikeranjang').html(respond);
                 }
             });
         }
-    });
-</script>
-<script>
-    function deleteConfirm(url) {
-        $('#tombolhapus').attr('href', url);
-        $('#modal-hapus').modal();
-    }
 
-    $(document).ready(function() {
-        $('.yoi').select2({
-            theme: 'bootstrap4',
+        $("#keranjang").click(function() {
+            var id_barang = $('#id_barang').val();
+            var qty = $('#jumlah').val();
+            var id_user = $('#id_user').val();
+            var catatan = $('#keterangan').val();
+
+            if (id_barang == 0) {
+                Swal.fire("Barang Belum Dipilih... !", "Pilih Barang...", "warning");
+            } else if (qty == "" || qty == 0) {
+                Swal.fire("Jumlah Barang Kosong...", "Isi Jumlah...", "warning");
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: "<?php echo site_url('addkeranjangestimasi'); ?>",
+                    data: {
+                        id_barang: id_barang,
+                        qty: qty,
+                        id_user: id_user,
+                        catatan: catatan
+                    },
+                    cache: false,
+                    success: function(respond) {
+                        loaddatabarang();
+                    }
+                });
+            }
         });
-    });
-</script>
+    </script>
+    <script>
+        function deleteConfirm(url) {
+            $('#tombolhapus').attr('href', url);
+            $('#modal-hapus').modal();
+        }
+
+        $(document).ready(function() {
+            $('.yoi').select2({
+                theme: 'bootstrap4',
+            });
+        });
+    </script>

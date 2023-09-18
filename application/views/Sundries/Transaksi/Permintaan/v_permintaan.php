@@ -72,8 +72,8 @@
                         role="tab" aria-controls="nav-home" aria-selected="true">
                         Permintaan
                     </a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui" role="tab"
-                        aria-controls="nav-profile" aria-selected="false">
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui"
+                        role="tab" aria-controls="nav-profile" aria-selected="false">
                         Persetujuan
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak" role="tab"
@@ -300,11 +300,8 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <!-- <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
+                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
                                             class="btn btn-sm btn-danger">
-                                            Hapus
-                                        </a> -->
-                                        <a href="<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
                                             Hapus
                                         </a>
                                         <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
@@ -335,6 +332,84 @@
                                     <th class="text-center">Diproses Oleh</th>
                                     <th class="text-center">Diproses Tanggal</th>
                                     <th class="text-center">Diproses Jam</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $no = 1;
+                                    foreach ($proses as $tempel) {
+                                        ?>
+                                <tr>
+                                    <td class="text-center">
+                                        <?php echo $no; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->faktur; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_section; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_peminta; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamdibuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->pemroses; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal_proses; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamproses; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Diproses') { ?>
+                                        <h6>
+                                            <span class="badge badge-info">
+                                                <?php echo $tempel->status; ?>
+                                            </span>
+                                        </h6>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
+                                        class="btn btn-sm btn-success">
+                                        Cetak PDF
+                                    </a>
+                                    <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
+                                    class="btn btn-sm btn-purple">
+                                    Detail
+                                </a>
+                            </td>
+                                </tr>
+                                <?php
+                                        $no++;
+                                    }
+                                    ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="table-responsive-xl">
+                        <table class="table table-borderless small tbl">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Faktur</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
+                                    <th class="text-center">Dibuat Tanggal</th>
+                                    <th class="text-center">Dibuat Jam</th>
+                                    <th class="text-center">Selesai Tanggal</th>
+                                    <th class="text-center">Selesai Jam</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
@@ -913,11 +988,11 @@
                 <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#disetujui"
                         role="tab" aria-controls="nav-home" aria-selected="true">
-                        Persetujuan
+                        Disetujui
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#diproses"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
-                        Pemrosesan
+                        Diproses
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#selesai"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
@@ -1072,14 +1147,16 @@
                                             data-target="#modal-selesai<?php echo $tempel->id_request_sundries; ?>">
                                             Selesaikan
                                         </a>
-                                        <?php } ?>
-                                        <?php if ($this->session->userdata('role') == 'sdr_Kepala Gudang' or $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
+                                    </td>
+                                    <?php } ?>
+                                    <?php if ($this->session->userdata('role') == 'sdr_Kepala Gudang' or $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
+                                    <td class="text-center">
                                         <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
                                             class="btn btn-sm btn-purple">
                                             Detail
                                         </a>
-                                        <?php } ?>
                                     </td>
+                                    <?php } ?>
                                 </tr>
                                 <?php
                                         $no++;
@@ -1399,6 +1476,7 @@
         </div>
     </div>
 
+
     <?php foreach ($byproses as $tempel) { ?>
     <div class="modal fade" id="modal-selesai<?php echo $tempel->id_request_sundries; ?>" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1433,16 +1511,16 @@
                             <div class="col-md-4 mb-3">
                                 <label>Dibuat Tanggal</label>
                                 <input type="text" class="form-control" name="tanggal" required
-                                    value="<?php echo $tempel->tanggal; ?>" readonly>
+                                value="<?php echo $tempel->tanggal; ?>" readonly>
                                 <input type="text" class="form-control" name="status" required value="Selesai"
-                                    hidden>
+                                hidden>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label>Dibuat Jam</label>
                                 <input type="text" class="form-control" name="tanggal" required
-                                    value="<?php echo $tempel->jamdibuat; ?>" readonly>
+                                value="<?php echo $tempel->jamdibuat; ?>" readonly>
                                 <input type="text" class="form-control" name="status" required value="Selesai"
-                                    hidden>
+                                hidden>
                             </div>
                         </div>
                         <div class="form-row">
