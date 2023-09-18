@@ -58,44 +58,47 @@
                                 </h6>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                <span class="badge badge-primary">
-                                    <?php echo $tempel->status; ?>
-                                </span>
+                                    <span class="badge badge-primary">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Ditolak') { ?>
-                                <span class="badge badge-danger">
-                                    <?php echo $tempel->status; ?>
-                                </span>
+                                    <span class="badge badge-danger">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Diproses') { ?>
-                                <span class="badge badge-info">
-                                    <?php echo $tempel->status; ?>
-                                </span>
+                                    <span class="badge badge-info">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Selesai') { ?>
-                                <span class="badge badge-success">
-                                    <?php echo $tempel->status; ?>
-                                </span>
+                                    <span class="badge badge-success">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Request') { ?>
-                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
-                                                class="btn btn-sm btn-danger">
-                                                Hapus
-                                             </a> -->
-                                <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deletekonsumsi/' . $tempel->faktur); ?>')" href="#"
+                                    class="btn btn-sm btn-danger">
+                                    Hapus
+                                </a> -->
+                                <a href="<?php echo site_url('deletekonsumsi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
                                 <?php } ?>
 
-                                <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                <a href="<?= base_url() ?>Sundries/Transaksi/c_consumption/detail/<?php echo $tempel->faktur; ?>"
+                                    target="_blank" class="btn btn-sm btn-purple">
                                     Detail
                                 </a>
-
-                                <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                <?php if ($tempel->status != 'Request') { ?>
+                                <a href="<?php echo site_url(); ?>Sundries/consumptioncontroller/printpdf/<?php echo $tempel->faktur; ?>"
+                                    target="_blank" class="btn btn-sm btn-success">
                                     Cetak PDF
                                 </a>
+                                <?php } ?>
                             </td>
                         </tr>
                         <?php
@@ -153,31 +156,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Request') { ?>
-                                <h6>
                                     <span class="badge badge-warning">
                                         <?php echo $tempel->status; ?>
                                     </span>
-                                </h6>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                <span class="badge badge-primary">
-                                    <?php echo $tempel->status; ?>
-                                </span>
+                                    <span class="badge badge-primary">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
-                                <?php if ($tempel->status == 'Ditolak') { ?>
-                                <span class="badge badge-danger">
-                                    <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Diproses') { ?>
-                                <span class="badge badge-info">
-                                    <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Selesai') { ?>
-                                <span class="badge badge-success">
-                                    <?php echo $tempel->status; ?>
-                                </span>
+                                <?php if ($tempel->status == 'Tolak') { ?>
+                                    <span class="badge badge-danger">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -235,32 +226,20 @@
                                 <?php echo $tempel->tanggal; ?>
                             </td>
                             <td class="text-center">
-                                <?php if ($tempel->status == 'Request') { ?>
-                                <h6>
+                                <?php if ($tempel->status == 'Diajukan') { ?>
                                     <span class="badge badge-warning">
                                         <?php echo $tempel->status; ?>
                                     </span>
-                                </h6>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                <span class="badge badge-primary">
-                                    <?php echo $tempel->status; ?>
-                                </span>
+                                    <span class="badge badge-primary">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
-                                <?php if ($tempel->status == 'Ditolak') { ?>
-                                <span class="badge badge-danger">
-                                    <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Diproses') { ?>
-                                <span class="badge badge-info">
-                                    <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Selesai') { ?>
-                                <span class="badge badge-success">
-                                    <?php echo $tempel->status; ?>
-                                </span>
+                                <?php if ($tempel->status == 'Tolak') { ?>
+                                    <span class="badge badge-tolak">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -351,8 +330,8 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label>Faktur Estimasi</label>
-                            <select class="form-control yoi" id="fakest">
-                                <option value="" disabled selected>Pilih Estimasi</option>
+                            <select class="form-control" id="id_barang_estimasi">
+                                <option value=" ">--Pilih Estimasi--</option>
                                 <?php foreach ($estimasi as $tempel) { ?>
                                 <option value="<?php echo $tempel->faktur; ?>">
                                     <?php echo $tempel->faktur; ?>
@@ -362,11 +341,11 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Barang sesuai Faktur Estimasi</label>
-                            <input type="text" class="form-control" id="id_barang"
+                            <input type="text" class="form-control" id="id_barang_faktur"
                                 placeholder="Pilih Faktur Estimasi" readonly required>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label>Jumlah sesuai Faktur Estimasi</label>
+                            <label>Jumlah</label>
                             <input type="text" class="form-control" id="jumlah"
                                 placeholder="Pilih Faktur Estimasi" readonly required>
                         </div>
@@ -409,6 +388,8 @@
     </div>
 </div>
 
+
+
 <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -435,8 +416,11 @@
 </div>
 
 <script>
+    loaddatabarang();
+
+
     $(document).ready(function() {
-        $('.tbl').DataTable();
+        $('.tabel-data').DataTable();
     });
 
     function loaddatabarang() {
@@ -461,11 +445,13 @@
         var fakest = $('#fakturestimasi').val();
 
         if (id_barang == 0) {
-            Swal.fire("Faktur Estimasi Belum Dipilih !", "Pilih Faktur Estimasi...", "warning");
+            Swal.fire("Oops !", "Barang Harus Diisi...", "warning");
+        } else if (qty == "" || qty == 0) {
+            Swal.fire("Oops !", "Jumlah Permintaan Tidak Boleh Kosong...", "warning");
         } else {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('cekkeranjangkonsumsi'); ?>",
+                url: "<?php echo site_url('addkeranjangkonsumsi'); ?>",
                 data: {
                     id_barang: id_barang,
                     qty: qty,
@@ -480,7 +466,6 @@
         }
     });
 </script>
-
 <script>
     function deleteConfirm(url) {
         $('#tombolhapus').attr('href', url);
@@ -488,13 +473,7 @@
     }
 
     $(document).ready(function() {
-        $('.yoi').select2({
-            theme: 'bootstrap4',
-        });
-    });
-
-    $(document).ready(function() {
-        $('#fakest').change(function() {
+        $('#id_barang_estimasi').change(function() {
             var faktur = $(this).val();
             $.ajax({
                 type: "POST",
@@ -506,11 +485,11 @@
                 success: function(response) {
                     if (response.length > 0) {
                         // Set nilai input barang dan input jumlah sesuai dengan respons JSON
-                        $('#id_barang').val(response[0].barang);
+                        $('#id_barang_faktur').val(response[0].barang);
                         $('#jumlah').val(response[0].jumlah);
                     } else {
                         // Jika tidak ada barang yang ditemukan, kosongkan nilai input barang dan input jumlah
-                        $('#id_barang').val('');
+                        $('#id_barang_faktur').val('');
                         $('#jumlah').val('');
                     }
                 },

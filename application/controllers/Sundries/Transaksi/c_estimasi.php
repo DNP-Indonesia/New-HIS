@@ -16,7 +16,7 @@ class c_estimasi extends MY_Controller
     public function index()
     {
         $data['estimasi'] = $this->m_estimasi->getEstimasi();
-        $data['barcons'] = $this->m_estimasi->getBarang();
+        $data['barcons'] = $this->m_barang->getBarangAll();
         $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
         $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
         $data['faktur'] = $this->m_estimasi->generateFaktur();
@@ -25,7 +25,7 @@ class c_estimasi extends MY_Controller
         $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);
     }
 
-    public function cekKeranjang()
+    public function addKeranjang()
     {
         $id_barang = $this->input->post('id_barang');
         $qty = $this->input->post('qty');
@@ -35,7 +35,6 @@ class c_estimasi extends MY_Controller
         $cek = $this->m_estimasi->cekKeranjang($id_barang, $id_user)->num_rows();
         if ($cek > 0) {
             echo "1";
-        } else {
             $data = array(
                 'id_barang' => $id_barang,
                 'jumlah' => $qty,
@@ -50,7 +49,7 @@ class c_estimasi extends MY_Controller
     public function showKeranjang()
     {
         $id_user = $this->input->post('id_user');
-        $data['keranjang'] = $this->m_estimasi->getKeranjang($id_user);
+        $data['keranjang'] = $this->m_estimasi->getKeranjang($id_user)->result();
         $this->load->view('Sundries/Transaksi/Estimasi/v_keranjang', $data);
     }
 

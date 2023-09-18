@@ -1245,8 +1245,8 @@
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Barang</label>
-                                <select class="form-control yoi" id="id_barang">
-                                    <option value="" disabled selected>Pilih Barang</option>
+                                <select class="form-control yoi" id="id_barang" onchange="getBarangDetails()">
+                                    <option value="" disabled selected hidden>Pilih Barang</option>
                                     <?php foreach ($barang as $tempel) { ?>
                                     <option value="<?php echo $tempel->id_barang; ?>">
                                         <?php echo $tempel->barang; ?>
@@ -1254,6 +1254,7 @@
                                     <?php } ?>
                                 </select>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <label>Jumlah</label>
                                 <input type="number" class="form-control" id="jumlah">
@@ -1503,6 +1504,8 @@
             Swal.fire("Barang Belum Dipilih... !", "Pilih Barang...", "warning");
         } else if (qty == "" || qty == 0) {
             Swal.fire("Jumlah Barang Kosong...", "Isi Jumlah...", "warning");
+            // }else if(catatan ==""){
+            //   Swal.fire("Yakin Nggak Ada Catatan Khusus ?", "Isikan '-' Aja Kalo Begitu...", "warning");
         } else {
             $.ajax({
                 type: 'POST',
@@ -1549,4 +1552,29 @@
             });
         });
     });
+</script>
+
+<script>
+    function getBarangDetails() {
+        var selectedBarangId = document.getElementById("id_barang").value;
+
+        // Buat request AJAX ke controller untuk mendapatkan informasi barang berdasarkan ID
+        $.ajax({
+            url: "<?php echo site_url('detailbarang'); ?>",
+            method: "POST",
+            data: {
+                id_barang: selectedBarangId
+            },
+            success: function(response) {
+                // Isi nilai field dengan informasi barang yang diterima dari controller
+                document.getElementById("brand").value = response.brand;
+                document.getElementById("type").value = response.type;
+                document.getElementById("ukuran").value = response.ukuran;
+                document.getElementById("satuan").value = response.satuan;
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
 </script>

@@ -112,7 +112,7 @@ $route['deletekategori/(:any)'] = 'Sundries/Barang/c_kategori/deleteKategori/$1'
 
 // Estimasi
 $route['estimasi'] = 'Sundries/Transaksi/c_estimasi/index';
-$route['cekkeranjangestimasi'] = 'Sundries/Transaksi/c_estimasi/cekKeranjang';
+$route['addkeranjangestimasi'] = 'Sundries/Transaksi/c_estimasi/addKeranjang';
 $route['showkeranjangestimasi'] = 'Sundries/Transaksi/c_estimasi/showKeranjang';
 $route['deletekeranjangestimasi'] = 'Sundries/Transaksi/c_estimasi/deleteKeranjang';
 $route['addestimasi'] = 'Sundries/Transaksi/c_estimasi/addEstimasi';
@@ -125,7 +125,7 @@ $route['rejectestimasi'] = 'Sundries/Transaksi/c_estimasi/rejectEstimasi';
 // Konsumsi
 $route['konsumsi'] = 'Sundries/Transaksi/c_konsumsi/index';
 $route['barangfaktur'] = 'Sundries/Transaksi/c_konsumsi/barangFaktur';
-$route['cekkeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/cekKeranjang';
+$route['addkeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/addKeranjang';
 $route['showkeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/showKeranjang';
 $route['deletekeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/deleteKeranjang';
 $route['addkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/addKonsumsi';

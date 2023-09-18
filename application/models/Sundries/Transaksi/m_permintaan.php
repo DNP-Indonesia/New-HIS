@@ -113,6 +113,18 @@ class m_permintaan extends CI_Model
             ->result();
     }
 
+    // Fungsi untuk mengambil data permintaan berdasarkan status 'Disetujui2' tanpa memperhitungkan id_user
+    public function bySetuju2()
+    {
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->order_by($this->primaryKey, 'DESC')
+            ->where('status', 'Disetujui2')
+            ->get()
+            ->result();
+    }
+
     // Fungsi untuk mengambil data permintaan berdasarkan status 'Ditolak' tanpa memperhitungkan id_user
     public function byTolak()
     {
@@ -345,7 +357,7 @@ class m_permintaan extends CI_Model
     // Fungsi untuk menghapus data barang dari keranjang berdasarkan id_barang dan id_user
     public function deleteKeranjang($id_barang, $id_user)
     {
-        $hapus = $this->db->delete('sdr_request_sundries_keranjang', ['id_barang' => $id_barang, 'id_user' => $id_user]);
+        $hapus = $this->db->delete('sdr_request_sundries_keranjang', array('id_barang' => $id_barang, 'id_user' => $id_user));
         if ($hapus) {
             return 1;
         }
