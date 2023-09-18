@@ -75,7 +75,7 @@
                         </span>
                         <?php } elseif ($tempel->status == 'Disetujui') { ?>
                         <span class="badge badge-primary">
-                            <?php echo $tempel->status; ?>
+                        <?php echo $tempel->status; ?>
                         </span>
                         <?php } elseif ($tempel->status == 'Diproses') { ?>
                         <span class="badge badge-info">
