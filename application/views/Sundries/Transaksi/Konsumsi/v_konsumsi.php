@@ -58,24 +58,24 @@
                                 </h6>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                    <span class="badge badge-primary">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Ditolak') { ?>
-                                    <span class="badge badge-danger">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <div class="alert alert-primary text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Diproses') { ?>
-                                    <span class="badge badge-info">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <div class="alert alert-warning text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Selesai') { ?>
-                                    <span class="badge badge-success">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <div class="alert alert-success text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
+                                <?php } ?>
+                                <?php if ($tempel->status == 'Ditolak') { ?>
+                                <div class="alert alert-secondary text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
                                 <?php } ?>
                             </td>
                             <td class="text-center">
@@ -156,19 +156,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Request') { ?>
-                                    <span class="badge badge-warning">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <div class="alert alert-danger text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                    <span class="badge badge-primary">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <div class="alert alert-success text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Tolak') { ?>
-                                    <span class="badge badge-danger">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <div class="alert alert-warning text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -226,20 +226,20 @@
                                 <?php echo $tempel->tanggal; ?>
                             </td>
                             <td class="text-center">
-                                <?php if ($tempel->status == 'Diajukan') { ?>
-                                    <span class="badge badge-warning">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <?php if ($tempel->status == 'Request') { ?>
+                                <div class="alert alert-danger text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                    <span class="badge badge-primary">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <div class="alert alert-success text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
                                 <?php } ?>
-                                <?php if ($tempel->status == 'Tolak') { ?>
-                                    <span class="badge badge-tolak">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <?php if ($tempel->status == 'Ditolak') { ?>
+                                <div class="alert alert-warning text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -330,7 +330,7 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label>Faktur Estimasi</label>
-                            <select class="form-control" id="id_barang_estimasi">
+                            <select class="form-control" id="id_barang">
                                 <option value=" ">--Pilih Estimasi--</option>
                                 <?php foreach ($estimasi as $tempel) { ?>
                                 <option value="<?php echo $tempel->faktur; ?>">
@@ -341,13 +341,13 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Barang sesuai Faktur Estimasi</label>
-                            <input type="text" class="form-control" id="id_barang_faktur"
-                                placeholder="Pilih Faktur Estimasi" readonly required>
+                            <select class="form-control" id="id_barang">
+
+                            </select>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Jumlah</label>
-                            <input type="text" class="form-control" id="jumlah"
-                                placeholder="Pilih Faktur Estimasi" readonly required>
+                            <input type="text" class="form-control" id="jumlah" placeholder="Inputkan Jumlah">
                         </div>
                     </div>
                     <div class="form-row mb-3">
@@ -388,8 +388,7 @@
     </div>
 </div>
 
-
-
+<!-- Delete Modal -->
 <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -473,7 +472,7 @@
     }
 
     $(document).ready(function() {
-        $('#id_barang_estimasi').change(function() {
+        $('#fakturestimasi').change(function() {
             var faktur = $(this).val();
             $.ajax({
                 type: "POST",
@@ -483,14 +482,10 @@
                 },
                 dataType: 'JSON',
                 success: function(response) {
-                    if (response.length > 0) {
-                        // Set nilai input barang dan input jumlah sesuai dengan respons JSON
-                        $('#id_barang_faktur').val(response[0].barang);
-                        $('#jumlah').val(response[0].jumlah);
-                    } else {
-                        // Jika tidak ada barang yang ditemukan, kosongkan nilai input barang dan input jumlah
-                        $('#id_barang_faktur').val('');
-                        $('#jumlah').val('');
+                    var options = '<option value=" ">--Pilih Barang--</option>';
+                    for (var i = 0; i < response.length; i++) {
+                        options += '<option value="' + response[i].id_barang + '">' +
+                            response[i].barang + '</option>';
                     }
                 },
                 error: function(xhr, status, error) {
