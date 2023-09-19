@@ -51,46 +51,46 @@
                             $no = 1;
                             foreach ($estimasi as $tempel) {
                                 ?>
-                        <tr>
-                            <td class="text-center">
-                                <?php echo $no; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->faktur; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->nama_pembuat; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->nama_section; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->tanggal; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php if ($tempel->status == 'Diajukan') { ?>
-                                <h6>
-                                    <span class="badge badge-warning">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
-                                </h6>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Disetujui') { ?>
-                                    <h6>
-                                        <span class="badge badge-success">
-                                            <?php echo $tempel->status; ?>
+                                <tr>
+                                    <td class="text-center">
+                                        <?php echo $no; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->faktur; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_pembuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_section; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Diajukan') { ?>
+                                        <h6>
+                                            <span class="badge badge-warning">
+                                                <?php echo $tempel->status; ?>
+                                            </span>
+                                        </h6>
+                                        <?php } ?>
+                                        <?php if ($tempel->status == 'Disetujui') { ?>
+                                        <h6>
+                                            <span class="badge badge-success">
+                                                <?php echo $tempel->status; ?>
+                                            </span>
+                                        </h6>
+                                        <?php } ?>
+                                        <?php if ($tempel->status == 'Tolak') { ?>
+                                        <span class="badge badge-danger">
+                                            R <?php echo $tempel->status; ?>
                                         </span>
-                                    </h6>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Tolak') { ?>
-                                <span class="badge badge-danger">
-                                    R <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
-                            </td>
-                            <td class="text-center">
-                                <?php if ($tempel->status == 'Diajukan') { ?>
-                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Diajukan') { ?>
+                                        <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
                                     Hapus
                                 </a> -->
@@ -244,7 +244,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -472,6 +473,7 @@
                                 <input type="text" class="form-control" value="<?= date('Y-m-d') ?>"
                                     name="tanggal" required readonly>
                             </div>
+
                             <div class="col-md-4 mb-3">
                                 <label>Dibuat Oleh</label>
                                 <input type="text" class="form-control" value=" <?php echo $this->session->userdata('nama'); ?>"
@@ -536,11 +538,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success btn-sm">Buat</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                        </div>
                 </form>
             </div>
         </div>
@@ -588,8 +589,8 @@
                 success: function(respond) {
                     $('#isikeranjang').html(respond);
                 }
-            });
-        }
+            })
+        };
 
         $("#keranjang").click(function() {
             var id_barang = $('#id_barang').val();
@@ -606,28 +607,41 @@
                     type: 'POST',
                     url: "<?php echo site_url('addkeranjangestimasi'); ?>",
                     data: {
-                        id_barang: id_barang,
-                        qty: qty,
-                        id_user: id_user,
-                        catatan: catatan
+                        id_user: id_user
                     },
                     cache: false,
                     success: function(respond) {
-                        loaddatabarang();
+                        $('#isikeranjang').html(respond);
                     }
                 });
             }
         });
     </script>
+
     <script>
         function deleteConfirm(url) {
             $('#tombolhapus').attr('href', url);
             $('#modal-hapus').modal();
         }
 
-        $(document).ready(function() {
-            $('.yoi').select2({
-                theme: 'bootstrap4',
-            });
-        });
+        if (id_barang == 0) {
+            Swal.fire("Barang Belum Dipilih... !", "Pilih Barang...", "warning");
+        } else if (qty == "" || qty == 0) {
+            Swal.fire("Jumlah Barang Kosong...", "Isi Jumlah...", "warning");
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo site_url('addkeranjangestimasi'); ?>",
+                data: {
+                    id_barang: id_barang,
+                    qty: qty,
+                    id_user: id_user,
+                    catatan: catatan
+                },
+                cache: false,
+                success: function(respond) {
+                    loaddatabarang();
+                }
+            })
+        };
     </script>

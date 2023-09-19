@@ -25,10 +25,10 @@ foreach ($keranjang as $tempel) { ?>
         <td class="text-center">
             <?php echo $tempel->keterangan; ?>
         </td>
-        <td class="text-center">
-			<a href="#" class="btn btn-sm btn-danger hapuskeranjang" data-idbarang="<?php echo $tempel->id_barang; ?>"
-				data-iduser="<?php echo $tempel->id_user; ?>">Hapus Dari Keranjang</a>
-		</td>
+        <td>
+            <a href="#" class="btn btn-sm btn-danger hapuskeranjang" data-idbarang="<?php echo $tempel->id_barang; ?>"
+                data-iduser="<?php echo $tempel->id_user; ?>">Hapus</a>
+        </td>
     </tr>
     <?php $no++;
 } ?>
