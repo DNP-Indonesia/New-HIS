@@ -75,16 +75,6 @@
                                     </span>
                                 </h6>
                                 <?php } ?>
-                                <?php if ($tempel->status == 'Disetujui') { ?>
-                                <span class="badge badge-primary">
-                                    <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Tolak') { ?>
-                                <span class="badge badge-danger">
-                                    R <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
@@ -163,7 +153,7 @@
                                         <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
                                     Hapus
-                                </a>
+                                </a> -->
                                 <?php } ?>
 
                                 <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
@@ -391,7 +381,7 @@
                                         <?php echo $tempel->status; ?>
                                     </span>
                                 <?php } ?>
-                                <?php if ($tempel->status == 'Tolak') { ?>
+                                <?php if ($tempel->status == 'Ditolak') { ?>
                                 <span class="badge badge-danger">
                                     <?php echo $tempel->status; ?>
                                 </span>

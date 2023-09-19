@@ -5,7 +5,7 @@ class m_permintaan extends CI_Model
 {
     protected $table = "sdr_request_sundries";
     protected $primaryKey = "id_request_sundries";
-    protected $tabletolak = "sdr_tolak_sundries";
+    protected $tabletolak = "sdr_request_sundries_tolak";
     protected $table2 = "sdr_request_sundries_detail";
 
     public function __construct()
@@ -270,7 +270,7 @@ class m_permintaan extends CI_Model
 
 
     // Fungsi untuk mengambil data barang dari tabel 'sdr_barang'
-    public function getBarang()
+    public function getBarangSundries()
     {
         return $this->db->from('sdr_barang')
             ->join('sdr_jenis', 'sdr_jenis.id_jenis=sdr_barang.id_jenis')
