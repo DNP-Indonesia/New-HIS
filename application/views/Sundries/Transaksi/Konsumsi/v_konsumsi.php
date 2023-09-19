@@ -80,20 +80,20 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Request') { ?>
-                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
+                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deletekonsumsi/' . $tempel->faktur); ?>')" href="#"
                                                 class="btn btn-sm btn-danger">
                                                 Hapus
                                              </a> -->
-                                <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                <a href="<?php echo site_url('deletekonsumsi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
                                 <?php } ?>
 
-                                <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                <a href="<?php echo site_url('detailkonsumsi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
                                     Detail
                                 </a>
 
-                                <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                <a href="<?php echo site_url('printkonsumsi'); ?>" target="_blank" class="btn btn-sm btn-success">
                                     Cetak PDF
                                 </a>
                             </td>
@@ -197,7 +197,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
-                Data Estimasi
+                Data konsumsi
             </h6>
         </div>
         <div class="card-body">
