@@ -306,7 +306,7 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan' . $tempel->faktur); ?>')" href="#"
+                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
                                             class="btn btn-sm btn-danger">
                                             Hapus
                                         </a>
@@ -1338,8 +1338,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-tambah-barang" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-tambah-barang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">

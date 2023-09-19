@@ -22,7 +22,7 @@ class c_permintaan extends MY_Controller
         $data['diproses'] = $this->m_permintaan->getProses();
         $data['forapprove'] = $this->m_permintaan->forApprove();
         $data['estimasi'] = $this->m_estimasi->forApprove();
-        $data['konsumsistok'] = $this->m_konsumsistok->forApprove();
+        $data['konsumsi'] = $this->m_konsumsi->forApprove();
         $data['admingudang'] = $this->m_permintaan->forAdminGudang();
         $data['kepalagudang'] = $this->m_permintaan->forKepalaGudang();
 
@@ -33,7 +33,6 @@ class c_permintaan extends MY_Controller
     public function index()
     {
         $data['bypermintaan'] = $this->m_permintaan->byPermintaan();
-        $data['bysetuju2'] = $this->m_permintaan->bySetuju2();
         $data['bytolak'] = $this->m_permintaan->byTolak();
         $data['byproses'] = $this->m_permintaan->byProses();
         $data['byselesai'] = $this->m_permintaan->bySelesai();
@@ -49,7 +48,7 @@ class c_permintaan extends MY_Controller
         $data['kabagtolak'] = $this->m_permintaan->forKepalaBagianTolak();
         $data['kabagproses'] = $this->m_permintaan->forKepalaBagianProses();
         $data['kabagselesai'] = $this->m_permintaan->forKepalaBagianSelesai();
-        $data['barang'] = $this->m_barang->getBarangAll();
+        $data['barang'] = $this->m_permintaan->getBarangSundries();
         $data['jenis'] = $this->m_jenis->getJenisById();
         $data['faktur'] = $this->m_permintaan->generateFaktur();
 
@@ -200,9 +199,15 @@ class c_permintaan extends MY_Controller
             'tanggal_setuju1' => $tanggalsetuju
         );
 
-        $this->m_permintaan->update($where, $data);
-        $this->session->set_userdata('approve', 'Permintaan Anda telah disetujui, tunggu pemerosesan dari Admin Gudang');
-        return redirect('Sundries/Transaksi/c_permintaan/index');
+        // if ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
+            $this->m_permintaan->update($where, $data);
+            $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui..., Masih Menunggu Persetujuan Kepala Gudang...');
+            return redirect('Sundries/Transaksi/c_permintaan/index');
+        
+        // } elseif ($this->session->userdata('role') == 'sdr_Kepala Gudang') {
+        //     $this->m_permintaan->update($where, $data2);
+        //     $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui...');
+        // }
     }
 
     public function rejectPermintaan()
@@ -240,9 +245,8 @@ class c_permintaan extends MY_Controller
 
     public function deleteBarang($id)
     {
-        $this->m_detail->delete($id);
-        $this->session->set_flashdata('success', 'Data barang telah dihapus');
-        return;
+        if (!isset($id))
+            show_404();
 
         if ($this->m_permintaan->delete($id)) {
             $this->session->set_flashdata('success', 'Berhasil dihapus');
@@ -264,9 +268,9 @@ class c_permintaan extends MY_Controller
             'keterangan' => $catatan
         );
 
-        $this->m_detail->add($data);
-        $this->session->set_userdata('sukses', 'Data barang telah ditambahkan');
-        redirect('Sundries/Transaksi/c_permintaan/detail/' . $faktur);
+        $this->m_permintaan->addBarang($data);
+        $this->session->set_userdata('sukses', 'Yeay, Barang Berhasil Ditambahkan...');
+        return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
     public function permintaanUlang()

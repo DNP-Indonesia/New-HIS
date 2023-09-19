@@ -16,10 +16,12 @@ class c_estimasi extends MY_Controller
     public function index()
     {
         $data['estimasi'] = $this->m_estimasi->getEstimasi();
-        $data['barcons'] = $this->m_barang->getBarangAll();
+        $data['barcons'] = $this->m_estimasi->getBarang();
         $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
         $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
         $data['faktur'] = $this->m_estimasi->generateFaktur();
+        $data['setuju'] = $this->m_estimasi->getSetuju();
+        $data['tolak'] = $this->m_estimasi->getTolak();
 
         $menu = 'estimasi';
         $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);
