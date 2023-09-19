@@ -5,7 +5,7 @@ class m_permintaan extends CI_Model
 {
     protected $table = "sdr_request_sundries";
     protected $primaryKey = "id_request_sundries";
-    protected $tabletolak = "sdr_request_sundries_tolak";
+    protected $tabletolak = "sdr_tolak_sundries";
     protected $table2 = "sdr_request_sundries_detail";
 
     public function __construct()

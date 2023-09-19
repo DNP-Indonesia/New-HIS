@@ -74,7 +74,7 @@
                         </span>
                         <?php } elseif ($tempel->status == 'Disetujui') { ?>
                         <span class="badge badge-primary">
-                            <?php echo $tempel->status; ?>
+                            Disetujui Kepala Bagian
                         </span>
                         <?php } elseif ($tempel->status == 'Diproses') { ?>
                         <span class="badge badge-info">
@@ -97,8 +97,10 @@
                     </h6>
                 </div>
                 <div class="col-md-6">
-                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' OR $this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == 'Ditolak') { ?>
-                    <?php foreach ($tolak as $isi); ?>
+                    <?php
+                        if ($tempel->status == 'Ditolak' and $this->session->userdata('role') == 'sdr_Admin Bagian' or $this->session->userdata('role') == 'sdr_Kepala Bagian' or $this->session->userdata('role') == 'sdr_Kepala Gudang') {
+                            foreach ($tolak as $isi) {
+                                ?>
 
                     <div class="list-group mb-2">
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -119,7 +121,10 @@
                             </p>
                         </a>
                     </div>
-                    <?php }?>
+                    <?php
+                            }
+                        }
+                        ?>
                 </div>
             </div>
         </div>
