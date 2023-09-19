@@ -171,7 +171,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -243,7 +244,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -315,7 +317,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -387,7 +390,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -414,6 +418,30 @@
             </h6>
         </div>
         <div class="card-body">
+            <nav>
+                <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#diajukan"
+                        role="tab" aria-controls="nav-home" aria-selected="true">
+                        Pengajuan
+                    </a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui"
+                        role="tab" aria-controls="nav-profile" aria-selected="false">
+                        Persetujuan
+                    </a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak"
+                        role="tab" aria-controls="nav-contact" aria-selected="false">
+                        Penolakan
+                    </a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#diproses"
+                        role="tab" aria-controls="nav-contact" aria-selected="false">
+                        Pemrosesan
+                    </a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#selesai"
+                        role="tab" aria-controls="nav-contact" aria-selected="false">
+                        Selesai
+                    </a>
+                </div>
+            </nav>
             <div class="table-container table-responsive-xl">
                 <table class="table table-borderless small" id="dataTable">
                     <thead>
