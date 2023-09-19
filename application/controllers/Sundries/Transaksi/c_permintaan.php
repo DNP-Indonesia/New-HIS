@@ -11,7 +11,7 @@ class c_permintaan extends MY_Controller
         $this->load->model('Sundries/Barang/m_kategori');
         $this->load->model('Sundries/Transaksi/m_permintaan');
         $this->load->model('Sundries/Transaksi/m_estimasi');
-        $this->load->model('Sundries/Transaksi/m_konsumsi');
+        $this->load->model('Sundries/Transaksi/m_konsumsistok');
         $this->load->model('Sundries/m_detail');
         $this->load->model('Sundries/m_detail_sementara');
         $this->load->library('Pdf');
@@ -22,7 +22,7 @@ class c_permintaan extends MY_Controller
         $data['diproses'] = $this->m_permintaan->getProses();
         $data['forapprove'] = $this->m_permintaan->forApprove();
         $data['estimasi'] = $this->m_estimasi->forApprove();
-        $data['konsumsi'] = $this->m_konsumsi->forApprove();
+        $data['konsumsistok'] = $this->m_konsumsistok->forApprove();
         $data['admingudang'] = $this->m_permintaan->forAdminGudang();
         $data['kepalagudang'] = $this->m_permintaan->forKepalaGudang();
 

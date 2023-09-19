@@ -22,6 +22,8 @@ class c_estimasi extends MY_Controller
         $data['faktur'] = $this->m_estimasi->generateFaktur();
         $data['setuju'] = $this->m_estimasi->getSetuju();
         $data['tolak'] = $this->m_estimasi->getTolak();
+        $data['proses'] = $this->m_estimasi->getProses();
+        $data['selesai'] = $this->m_estimasi->getSelesai();
 
         $menu = 'estimasi';
         $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);

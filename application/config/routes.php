@@ -133,7 +133,20 @@ $route['deletekonsumsi/(:any)'] = 'Sundries/Transaksi/c_konsumsi/deleteKonsumsi/
 $route['detailkonsumsi/(:any)'] = 'Sundries/Transaksi/c_konsumsi/detailKonsumsi/$1';
 $route['printkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/printKonsumsi';
 $route['approvekonsumsi'] = 'Sundries/Transaksi/c_konsumsi/approveKonsumsi';
-$route['rejectkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/rejectKonsumsi';
+$route['rejectkonsumsistok'] = 'Sundries/Transaksi/c_konsumsi/rejectKonsumsi';
+
+// Konsumsistok
+$route['konsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/index';
+$route['barangfaktur'] = 'Sundries/Transaksi/c_konsumsistok/barangFaktur';
+$route['addkeranjangkonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/addKeranjang';
+$route['showkeranjangkonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/showKeranjang';
+$route['deletekeranjangkonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/deleteKeranjang';
+$route['addkonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/addKonsumsistok';
+$route['deletekonsumsistok/(:any)'] = 'Sundries/Transaksi/c_konsumsistok/deleteKonsumsistok/$1';
+$route['detailkonsumsistok/(:any)'] = 'Sundries/Transaksi/c_konsumsistok/detailKonsumsistok/$1';
+$route['printkonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/printKonsumsistok';
+$route['approvekonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/approveKonsumsistok';
+$route['rejectkonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/rejectKonsumsistok';
 
 // Pembelian
 $route['pembelian'] = 'Sundries/Transaksi/c_pembelian/index';
