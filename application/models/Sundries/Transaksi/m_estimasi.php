@@ -10,11 +10,10 @@ class m_estimasi extends CI_Model
     public function getEstimasi()
     {
         return $this->db->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Diajukan')
-            ->order_by($this->primaryKey, 'DESC')
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+            ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
+            ->order_by('id_estimasi', 'DESC')
             ->get()
             ->result();
     }
@@ -92,13 +91,12 @@ class m_estimasi extends CI_Model
     public function forKepalaBagian()
     {
         return $this->db->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'DESC')
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+            ->where('tbl_user.id_section', $this->session->userdata('section'))
+            ->order_by('id_estimasi', 'DESC')
             ->get()
-            ->result();
+            ->result();   
     }
 
     public function cekKeranjang($idbarang, $iduser)

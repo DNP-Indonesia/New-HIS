@@ -59,42 +59,42 @@
                             $no = 1;
                             foreach ($estimasi as $tempel) {
                                 ?>
-                        <tr>
-                            <td class="text-center">
-                                <?php echo $no; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->faktur; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->nama_pembuat; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->nama_section; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $tempel->tanggal; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php if ($tempel->status == 'Diajukan') { ?>
-                                <span class="badge badge-warning">
-                                    <?php echo $tempel->status; ?>
-                                </span>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Disetujui') { ?>
-                                <div class="alert alert-success text-center">
-                                    <?php echo $tempel->status; ?>
-                                </div>
-                                <?php } ?>
-                                <?php if ($tempel->status == 'Tolak') { ?>
-                                <div class="alert alert-warning text-center">
-                                    <?php echo $tempel->status; ?>
-                                </div>
-                                <?php } ?>
-                            </td>
-                            <td class="text-center">
-                                <?php if ($tempel->status == 'Diajukan') { ?>
-                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
+                                <tr>
+                                    <td class="text-center">
+                                        <?php echo $no; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->faktur; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_pembuat; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_section; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Diajukan') { ?>
+                                        <span class="badge badge-warning">
+                                            <?php echo $tempel->status; ?>
+                                        </span>
+                                        <?php } ?>
+                                        <?php if ($tempel->status == 'Disetujui') { ?>
+                                        <div class="alert alert-success text-center">
+                                            <?php echo $tempel->status; ?>
+                                        </div>
+                                        <?php } ?>
+                                        <?php if ($tempel->status == 'Tolak') { ?>
+                                        <div class="alert alert-warning text-center">
+                                            <?php echo $tempel->status; ?>
+                                        </div>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->status == 'Diajukan') { ?>
+                                        <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
                                     Hapus
                                 </a> -->
@@ -662,56 +662,56 @@
                                 <input type="text" class="form-control" value="Diajukan" name="status" hidden>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label>Pilihan Barang</label>
-                                <select class="form-control yoi" id="id_barang">
-                                    <option value="0">--Pilih Barang--</option>
-                                    <?php foreach ($barcons as $tempel) { ?>
-                                    <option value="<?php echo $tempel->id_barang; ?>">
-                                        <?php echo $tempel->barang; ?>
-                                    </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label>Jumlah untuk 1 Bulan</label>
-                                <input type="number" class="form-control" id="jumlah">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label>Catatan</label>
-                                <textarea class="form-control" id="catatan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
-                                    rows="3"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Pilihan Barang</label>
+                            <select class="form-control yoi" id="id_barang">
+                                <option value="0">--Pilih Barang--</option>
+                                <?php foreach ($barcons as $tempel) { ?>
+                                <option value="<?php echo $tempel->id_barang; ?>">
+                                    <?php echo $tempel->barang; ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Jumlah untuk 1 Bulan</label>
+                            <input type="number" class="form-control" id="jumlah">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Catatan</label>
+                            <textarea class="form-control" id="catatan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
+                                rows="3"></textarea>
 
-                            </div>
                         </div>
-                        <div class="form-row mb-3">
-                            <div class="col-md-12">
-                                <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukkan Ke
-                                    Keranjang</a>
-                            </div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukkan Ke
+                                Keranjang</a>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-12 mb-3">
-                                <label>Keranjang</label>
-                                <div class="card shadow">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless small">
-                                            <thead>
-                                                <tr>
-                                                <tr>
-                                                    <th class="text-center">No</th>
-                                                    <th class="text-center">Barang</th>
-                                                    <th class="text-center">Jumlah</th>
-                                                    <th class="text-center">Opsi</th>
-                                                </tr>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="isikeranjang">
-                                                <!-- Table rows for keranjang items here -->
-                                            </tbody>
-                                        </table>
-                                    </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Keranjang</label>
+                            <div class="card shadow">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless small">
+                                        <thead>
+                                            <tr>
+                                            <tr>
+                                                <th class="text-center">No</th>
+                                                <th class="text-center">Barang</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Opsi</th>
+                                            </tr>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="isikeranjang">
+                                            <!-- Table rows for keranjang items here -->
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -746,36 +746,72 @@
                         Lanjutkan
                     </a>
                 </div>
+                </form>
             </div>
         </div>
     </div>
 
 
-    <script>
-        $(document).ready(function() {
-            $('.tabel-data').DataTable();
-        });
 
-        function loaddatabarang() {
-            var id_user = $('#id_user').val();
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo site_url('showkeranjangestimasi'); ?>",
-                data: {
-                    id_user: id_user
-                },
-                cache: false,
-                success: function(respond) {
-                    $('#isikeranjang').html(respond);
+    <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yakin ?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Tutup</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Data Yang Dihapus Tidak Akan Bisa Dikembalikan.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                        Batal
+                    </button>
+                    <a id="tombolhapus" class="btn btn-danger" href="#">
+                        Lanjutkan
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('.tabel-data').DataTable();
+            });
+
+            $("#keranjang").click(function() {
+                var id_barang = $('#id_barang').val();
+                var qty = $('#jumlah').val();
+                var id_user = $('#id_user').val();
+                var catatan = $('#keterangan').val();
+
+                if (id_barang == 0) {
+                    Swal.fire("Barang Belum Dipilih... !", "Pilih Barang...", "warning");
+                } else if (qty == "" || qty == 0) {
+                    Swal.fire("Jumlah Barang Kosong...", "Isi Jumlah...", "warning");
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: "<?php echo site_url('addkeranjangestimasi'); ?>",
+                        data: {
+                            id_user: id_user
+                        },
+                        cache: false,
+                        success: function(respond) {
+                            $('#isikeranjang').html(respond);
+                        }
+                    });
                 }
             });
-        }
-
-        $("#keranjang").click(function() {
-            var id_barang = $('#id_barang').val();
-            var qty = $('#jumlah').val();
-            var id_user = $('#id_user').val();
-            var catatan = $('#keterangan').val();
+        </script>
+        <script>
+            function deleteConfirm(url) {
+                $('#tombolhapus').attr('href', url);
+                $('#modal-hapus').modal();
+            }
 
             if (id_barang == 0) {
                 Swal.fire("Barang Belum Dipilih... !", "Pilih Barang...", "warning");
@@ -797,17 +833,4 @@
                     }
                 });
             }
-        });
-    </script>
-    <script>
-        function deleteConfirm(url) {
-            $('#tombolhapus').attr('href', url);
-            $('#modal-hapus').modal();
-        }
-
-        $(document).ready(function() {
-            $('.yoi').select2({
-                theme: 'bootstrap4',
-            });
-        });
-    </script>
+        </script>

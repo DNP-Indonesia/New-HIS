@@ -33,6 +33,7 @@ class c_permintaan extends MY_Controller
     public function index()
     {
         $data['bypermintaan'] = $this->m_permintaan->byPermintaan();
+        $data['bysetuju2'] = $this->m_permintaan->bySetuju2();
         $data['bytolak'] = $this->m_permintaan->byTolak();
         $data['byproses'] = $this->m_permintaan->byProses();
         $data['byselesai'] = $this->m_permintaan->bySelesai();

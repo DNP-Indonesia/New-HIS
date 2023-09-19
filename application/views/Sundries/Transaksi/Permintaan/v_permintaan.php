@@ -1515,6 +1515,8 @@
             Swal.fire("Barang Belum Dipilih... !", "Pilih Barang...", "warning");
         } else if (qty == "" || qty == 0) {
             Swal.fire("Jumlah Barang Kosong...", "Isi Jumlah...", "warning");
+            // }else if(catatan ==""){
+            //   Swal.fire("Yakin Nggak Ada Catatan Khusus ?", "Isikan '-' Aja Kalo Begitu...", "warning");
         } else {
             $.ajax({
                 type: 'POST',
