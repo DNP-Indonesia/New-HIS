@@ -74,7 +74,7 @@
                         </span>
                         <?php } elseif ($tempel->status == 'Disetujui') { ?>
                         <span class="badge badge-primary">
-                            <?php echo $tempel->status; ?>
+                            Disetujui Kepala Bagian
                         </span>
                         <?php } elseif ($tempel->status == 'Diproses') { ?>
                         <span class="badge badge-info">
@@ -95,17 +95,6 @@
                         <?php } ?>
 
                     </h6>
-                    <?php } ?>
-                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
-                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#modal-tambah<?php echo $tempel->id_request_sundries; ?>">
-                        <span class="text">Tambah Barang</span>
-                    </a>
-                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
-                        data-target="#modal-repeat<?php echo $tempel->id_request_sundries; ?>">
-                        <span class="text">Ajukan Perbaikan</span>
-                    </a>
-                    <?php } ?>
                 </div>
                 <div class="col-md-6">
                     <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' OR $this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == 'Ditolak') { ?>
@@ -236,6 +225,7 @@
                 </div>
             </div>
         </div>
+        <?php } ?>
     </div>
 </body>
 
@@ -592,8 +582,8 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <label>Catatan</label>
-                            <textarea class="form-control" id="catatan" name="keterangan"
-                                placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam" rows="2"></textarea>
+                            <textarea class="form-control" id="catatan" name="keterangan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
+                                rows="2"></textarea>
                         </div>
                     </div>
                 </div>
@@ -768,5 +758,5 @@
         </div>
     </div>
 </div>
-
 </html>
+

@@ -262,55 +262,55 @@
                                     $no = 1;
                                     foreach ($tolak as $tempel) {
                                         ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <?php echo $no; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->faktur; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->penolak; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal_tolak; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamtolak; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php if ($tempel->status == 'Ditolak') { ?>
-                                        <h6>
-                                            <span class="badge badge-danger">
-                                                <?php echo $tempel->status; ?>
-                                            </span>
-                                        </h6>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan/' . $tempel->faktur); ?>')" href="#"
-                                            class="btn btn-sm btn-danger">
-                                            Hapus
-                                        </a>
-                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-purple">
-                                            Lihat Alasan
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php
+                                    <tr>
+                                        <td class="text-center">
+                                            <?php echo $no; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->faktur; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->nama_section; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->nama_peminta; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->tanggal; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->jamdibuat; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->penolak; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->tanggal_tolak; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $tempel->jamtolak; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php if ($tempel->status == 'Ditolak') { ?>
+                                            <h6>
+                                                <span class="badge badge-danger">
+                                                    <?php echo $tempel->status; ?>
+                                                </span>
+                                            </h6>
+                                            <?php } ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <a onclick="deleteConfirm('<?php echo site_url('deletepermintaan' . $tempel->faktur); ?>')" href="#"
+                                                class="btn btn-sm btn-danger">
+                                                Hapus
+                                            </a>
+                                            <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
+                                                class="btn btn-sm btn-purple">
+                                                Lihat Alasan
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php
                                         $no++;
                                     }
                                     ?>
@@ -1403,8 +1403,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-tambah-barang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-tambah-barang" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
