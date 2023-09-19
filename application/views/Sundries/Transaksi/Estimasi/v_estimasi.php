@@ -59,34 +59,42 @@
                             $no = 1;
                             foreach ($estimasi as $tempel) {
                                 ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <?php echo $no; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->faktur; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_pembuat; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php if ($tempel->status == 'Diajukan') { ?>
-                                        <h6>
-                                            <span class="badge badge-warning">
-                                                <?php echo $tempel->status; ?>
-                                            </span>
-                                        </h6>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php if ($tempel->status == 'Diajukan') { ?>
-                                        <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
+                        <tr>
+                            <td class="text-center">
+                                <?php echo $no; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php echo $tempel->faktur; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php echo $tempel->nama_pembuat; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php echo $tempel->nama_section; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php echo $tempel->tanggal; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php if ($tempel->status == 'Diajukan') { ?>
+                                <div class="alert alert-danger text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
+                                <?php } ?>
+                                <?php if ($tempel->status == 'Disetujui') { ?>
+                                <div class="alert alert-success text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
+                                <?php } ?>
+                                <?php if ($tempel->status == 'Tolak') { ?>
+                                <div class="alert alert-warning text-center">
+                                    <?php echo $tempel->status; ?>
+                                </div>
+                                <?php } ?>
+                            </td>
+                            <td class="text-center">
+                                <?php if ($tempel->status == 'Diajukan') { ?>
+                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
                                     class="btn btn-sm btn-danger">
                                     Hapus
                                 </a> -->
@@ -478,19 +486,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
-                                <span class="badge badge-warning">
+                                <div class="alert alert-danger text-center">
                                     <?php echo $tempel->status; ?>
-                                </span>
+                                </div>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                <span class="badge badge-primary">
+                                <div class="alert alert-success text-center">
                                     <?php echo $tempel->status; ?>
-                                </span>
+                                </div>
                                 <?php } ?>
-                                <?php if ($tempel->status == 'Ditolak') { ?>
-                                <span class="badge badge-danger">
+                                <?php if ($tempel->status == 'Tolak') { ?>
+                                <div class="alert alert-warning text-center">
                                     <?php echo $tempel->status; ?>
-                                </span>
+                                </div>
                                 <?php } ?>
                             </td>
                             <td class="text-center">
@@ -555,19 +563,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
-                                <span class="badge badge-warning">
+                                <div class="alert alert-danger text-center">
                                     <?php echo $tempel->status; ?>
-                                </span>
+                                </div>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                <span class="badge badge-primary">
+                                <div class="alert alert-success text-center">
                                     <?php echo $tempel->status; ?>
-                                </span>
+                                </div>
                                 <?php } ?>
-                                <?php if ($tempel->status == 'Ditolak') { ?>
-                                <span class="badge badge-danger">
+                                <?php if ($tempel->status == 'Tolak') { ?>
+                                <div class="alert alert-warning text-center">
                                     <?php echo $tempel->status; ?>
-                                </span>
+                                </div>
                                 <?php } ?>
                             </td>
                         </tr>
