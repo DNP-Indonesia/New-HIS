@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class m_konsumsistok extends CI_Model
 {
     protected $table = 'sdr_consumptionstok';
-    protected $primaryKey = 'id_consumption';
+    protected $primaryKey = 'id_consumptionstok';
 
     public function getKonsumsistok()
     {
@@ -12,7 +12,7 @@ class m_konsumsistok extends CI_Model
             ->join('tbl_user','tbl_user.id_user=sdr_consumptionstok.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
             ->where('sdr_consumptionstok.id_user', $this->session->userdata('id_user'))
-            ->order_by('id_consumption', 'DESC')
+            ->order_by('id_consumptionstok', 'DESC')
             ->get()
             ->result();
     }
@@ -31,7 +31,7 @@ class m_konsumsistok extends CI_Model
         return $this->db->from('sdr_consumptionstok')
             ->join('tbl_user','tbl_user.id_user=sdr_consumptionstok.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
-            ->order_by('id_consumption', 'DESC')
+            ->order_by('id_consumptionstok', 'DESC')
             ->get()
             ->result();
     }
@@ -52,7 +52,7 @@ class m_konsumsistok extends CI_Model
             ->join('tbl_user','tbl_user.id_user=sdr_consumptionstok.id_user')
             ->join('his_section','his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_consumption', 'DESC')
+            ->order_by('id_consumptionstok', 'DESC')
             ->get()
             ->result();
     }
@@ -161,7 +161,7 @@ class m_konsumsistok extends CI_Model
             ->join('his_section','his_section.id_section=tbl_user.id_section')
             ->where('status','Request')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_consumption', 'DESC')
+            ->order_by('id_consumptionstok', 'DESC')
             ->get()
             ->result();
     }

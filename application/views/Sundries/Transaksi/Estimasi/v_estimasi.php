@@ -777,7 +777,7 @@
         } else {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('cekkeranjangestimasi'); ?>",
+                url: "<?php echo site_url('addkeranjangestimasi'); ?>",
                 data: {
                     id_barang: id_barang,
                     qty: qty,

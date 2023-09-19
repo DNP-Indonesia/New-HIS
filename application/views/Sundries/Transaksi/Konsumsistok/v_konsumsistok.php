@@ -56,24 +56,24 @@
                                 </div>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                    <span class="badge badge-primary">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-primary">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Ditolak') { ?>
-                                    <span class="badge badge-danger">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-danger">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Diproses') { ?>
-                                    <span class="badge badge-info">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-info">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Selesai') { ?>
-                                    <span class="badge badge-success">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-success">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                             </td>
                             <td class="text-center">
@@ -87,6 +87,9 @@
                                 </a>
                                 <?php } ?>
 
+                                <a href="<?php echo site_url('detailkonsumsi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                    Detail
+                                </a>
                                 <a href="<?= base_url() ?>Sundries/Transaksi/c_consumption/detail/<?php echo $tempel->faktur; ?>"
                                     target="_blank" class="btn btn-sm btn-purple">
                                     Detail
@@ -154,19 +157,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Request') { ?>
-                                    <span class="badge badge-warning">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-warning">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                    <span class="badge badge-primary">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-primary">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Tolak') { ?>
-                                    <span class="badge badge-danger">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-danger">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -225,19 +228,19 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
-                                    <span class="badge badge-warning">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-warning">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
-                                    <span class="badge badge-primary">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-primary">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Tolak') { ?>
-                                    <span class="badge badge-tolak">
-                                        <?php echo $tempel->status; ?>
-                                    </span>
+                                <span class="badge badge-tolak">
+                                    <?php echo $tempel->status; ?>
+                                </span>
                                 <?php } ?>
                             </td>
                         </tr>

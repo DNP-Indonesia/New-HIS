@@ -168,7 +168,7 @@
 
     <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Bagian' || $this->session->userdata('role') == 'sdr_Kepala Bagian') { ?>
 
-    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'permintaan', 'pembelian', 'penerimaan'])) {
+    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
         echo 'active';
     } ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi-stok"
@@ -198,7 +198,7 @@
             <i class="fas fa-fw fa-folder"></i>
             <span>Transaksi Non-Stok</span>
         </a>
-        <div id="collapse-transaksi-non-stok" class="collapse  <?php if (isset($menu) && in_array($menu, ['permintaan'])) {
+        <div id="collapse-transaksi-non-stok" class="collapse  <?php if (isset($menu) && in_array($menu, ['permintaan', 'konsumsi'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
@@ -208,10 +208,10 @@
                 } ?>" href="<?php echo site_url('permintaan'); ?>">
                     Request Sundries
                 </a>
-                <a class="collapse-item <?php if ($menu == 'konsumsistok') {
+                <a class="collapse-item <?php if ($menu == 'konsumsi') {
                     echo 'active';
-                } ?>" href="<?php echo site_url('konsumsistok'); ?>">
-                    Consumption Estimation
+                } ?>" href="<?php echo site_url('konsumsi'); ?>">
+                    Consumption Sundries
                 </a>
             </div>
         </div>
@@ -244,7 +244,7 @@
             <i class="fas fa-fw fa-folder"></i>
             <span>Transaksi Sundries</span>
         </a>
-        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'permintaan', 'pembelian', 'penerimaan'])) {
+        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">

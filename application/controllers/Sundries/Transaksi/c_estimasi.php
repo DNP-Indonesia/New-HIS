@@ -53,7 +53,7 @@ class c_estimasi extends MY_Controller
     public function showKeranjang()
     {
         $id_user = $this->input->post('id_user');
-        $data['keranjang'] = $this->m_estimasi->getKeranjang($id_user)->result();
+        $data['keranjang'] = $this->m_estimasi->getKeranjang($id_user);
         $this->load->view('Sundries/Transaksi/Estimasi/v_keranjang', $data);
     }
 
