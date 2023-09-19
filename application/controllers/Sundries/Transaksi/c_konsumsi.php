@@ -20,9 +20,11 @@ class c_konsumsi extends MY_Controller
         $data['estimasi'] = $this->m_konsumsi->getEstimasi();
         $data['kepalabagian'] = $this->m_konsumsi->forKepalaBagian();
         $data['allkonsumsi'] = $this->m_konsumsi->getKonsumsiAll();
+        $data['estimasidetail'] = $this->m_estimasi->getEstimasiDetail();
 
         $menu = 'konsumsi';
-        $this->render_backend('Sundries/Transaksi/Konsumsi/v_konsumsi', $menu, $data);
+        $this->render_backend('Sundries/transaksi/Konsumsi/v_konsumsi', $menu, $data);
+        
     }
 
     public function barangFaktur()
@@ -102,7 +104,7 @@ class c_konsumsi extends MY_Controller
             'status'=>$status
         );
 
-        $this->m_konsumsi->save($data, $iduser, $faktur, $fakest);
+        $simpan = $this->m_konsumsi->save($data, $iduser, $faktur, $fakest);
         $this->session->set_userdata('sukses', 'Yeay, Data Berhasil Disimpan');
         return redirect('Sundries/Transaksi/c_konsumsi/index');
     }
@@ -125,7 +127,8 @@ class c_konsumsi extends MY_Controller
 
     public function deleteKonsumsi($faktur)
     {
-        $this->m_konsumsi->deleteKonsumsi($faktur);
+        $faktur = $this->uri->segment(4);
+        $hapus = $this->m_konsumsi->deleteKonsumsi($faktur);
     }
 
     public function approveKonsumsi()

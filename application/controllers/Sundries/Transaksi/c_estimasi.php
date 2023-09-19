@@ -19,7 +19,6 @@ class c_estimasi extends MY_Controller
         $data['barcons'] = $this->m_barang->getBarangAll();
         $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
         $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
-        $data['faktur'] = $this->m_estimasi->generateFaktur();
 
         $menu = 'estimasi';
         $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);
@@ -33,8 +32,7 @@ class c_estimasi extends MY_Controller
         $catatan = $this->input->post('catatan');
         
         $cek = $this->m_estimasi->cekKeranjang($id_barang, $id_user)->num_rows();
-        if ($cek > 0) {
-            echo "1";
+        if ($cek === 0) {
             $data = array(
                 'id_barang' => $id_barang,
                 'jumlah' => $qty,
@@ -86,17 +84,19 @@ class c_estimasi extends MY_Controller
         $this->m_estimasi->deleteEstimasi($faktur);
     }
 
-    public function detailEstimasi($id)
+    public function detailEstimasi()
     {
+        $id = $this->uri->segment(4);
         $data['data'] = $this->m_estimasi->getEstimasiById($id);
         $data['detail'] = $this->m_estimasi->getEstimasiDetail($id);
         $this->load->view('Sundries/Transaksi/Estimasi/v_detail', $data);
     }
 
-    public function printEstimasi($id)
+    public function printEstimasi()
     {
+        $id = $this->uri->segment(4);
         $data['data'] = $this->m_estimasi->getIdPdf($id);
-        $data['detail'] = $this->m_detail->getDetailIdPdf($id);
+        $data['detail'] = $this->m_estimasi->getDetailIdPdf($id);
         $this->load->view('Sundries/Transaksi/Estimasi/v_print', $data);
     }
 

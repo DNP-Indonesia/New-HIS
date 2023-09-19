@@ -26,8 +26,9 @@ class c_permintaan extends MY_Controller
         $data['admingudang'] = $this->m_permintaan->forAdminGudang();
         $data['kepalagudang'] = $this->m_permintaan->forKepalaGudang();
 
-        $menu = 'dashboard';
-        $this->render_backend('layout/v_dashboard', $menu, $data);
+        $menu ='dashboard';
+        $this->render_backend('Sundries/sdr_dashboard', $menu, $data);
+        
     }
 
     public function index()
@@ -54,6 +55,8 @@ class c_permintaan extends MY_Controller
 
         $menu = 'permintaan';
         $this->render_backend('Sundries/Transaksi/Permintaan/v_permintaan', $menu, $data);
+
+        
     }
     
     public function detail($id)
@@ -84,9 +87,9 @@ class c_permintaan extends MY_Controller
             'faktur' => $faktur
         );
 
-        $this->m_detail->update($where, $data);
+        $this->m_permintaan->update($where, $data);
         $this->session->set_userdata('update', 'Yeay, Jumlah Atau Catatan Berhasil Diperbarui, Yuk Lihat Di Detail Request...');
-        redirect('Sundries/Transaksi/c_permintaan/detail/' . $faktur);
+        redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
     public function cekKeranjang()
@@ -152,8 +155,7 @@ class c_permintaan extends MY_Controller
             );
 
             $simpan = $this->m_permintaan->save($data, $iduser, $faktur, $stkeranjang, $barangready);
-            // $this->session->set_userdata('sukses', 'Sukses, Request Berhasil Dibuat, Masih Menunggu Persetujuan Kepala Bagian dan Kepala Gudang....');
-            $this->session->set_userdata('sukses', 'Request berhasil dibuat, Menunggu persetujuan Kepala Bagian...');
+            $this->session->set_userdata('sukses', 'Sukses, Request Berhasil Dibuat, Masih Menunggu Persetujuan Kepala Bagian dan Kepala Gudang....');
             redirect('Sundries/Transaksi/c_permintaan/index');
         }
     }
@@ -207,15 +209,13 @@ class c_permintaan extends MY_Controller
             'tanggal_setuju2' => $tanggalsetuju
         );
 
-        // if ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
+        if ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
             $this->m_permintaan->update($where, $data);
             $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui..., Masih Menunggu Persetujuan Kepala Gudang...');
-            return redirect('Sundries/Transaksi/c_permintaan/index');
-        
-        // } elseif ($this->session->userdata('role') == 'sdr_Kepala Gudang') {
-        //     $this->m_permintaan->update($where, $data2);
-        //     $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui...');
-        // }
+        } elseif ($this->session->userdata('role') == 'sdr_Kepala Gudang') {
+            $this->m_permintaan->update($where, $data2);
+            $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui...');
+        }
     }
 
     public function rejectPermintaan()

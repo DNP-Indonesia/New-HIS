@@ -21,9 +21,7 @@ class c_pembelian extends MY_Controller
     public function index()
     {
         $data['pembelian'] = $this->m_pembelian->getPembelian();
-
-        $menu = 'pembelian';
-        $this->render_backend('Sundries/Transaksi/Pembelian/v_pembelian', $menu,  $data);
+        $this->load->view('Sundries/Transaksi/Pembelian/v_pembelian', $data);
     }
 
     public function formPembelian()
@@ -31,9 +29,7 @@ class c_pembelian extends MY_Controller
         $data['permintaanbarang'] = $this->m_pembelian->getPermintaanBarang();
         $data['fakturotomatis'] = $this->m_pembelian->generateFaktur();
         $data['keranjang'] = $this->m_pembelian->getKeranjang();
-
-        $menu = 'formpembelian';
-        $this->render_backend('Sundries/Transaksi/Pembelian/v_form', $menu, $data);
+        $this->load->view('Sundries/Transaksi/Pembelian/v_form', $data);
     }
 
     public function addKeranjang()

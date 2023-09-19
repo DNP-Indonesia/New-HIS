@@ -23,9 +23,7 @@ class C_penerimaan extends MY_Controller
     {
         $data['penerimaan'] = $this->m_penerimaan->getPenerimaan();
         $data['pembelian'] = $this->m_pembelian->getPembelian();
-
-        $menu = 'penerimaan';
-        $this->render_backend('Sundries/Transaksi/Penerimaan/v_penerimaan', $menu, $data);
+        $this->load->view('Sundries/Transaksi/Penerimaan/v_penerimaan', $data);
     }
 
     public function addPenerimaan()
