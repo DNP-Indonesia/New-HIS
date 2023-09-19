@@ -63,7 +63,7 @@ class c_permintaan extends MY_Controller
         $data['data'] = $this->m_permintaan->getPermintaanById($id);
         $data['detail'] = $this->m_detail->getDetail($id);
         $data['tolak'] = $this->m_permintaan->getTolakById($id);
-        $data['barang'] = $this->m_permintaan->getBarangSundries();
+        $data['barang'] = $this->m_barang->getBarangAll();
 
         $this->load->view('Sundries/Transaksi/Permintaan/v_detail', $data);
     }

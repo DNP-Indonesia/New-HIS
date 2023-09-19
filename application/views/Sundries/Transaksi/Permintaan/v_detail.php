@@ -52,6 +52,9 @@
             <div class="card-body row justify-content-around">
                 <div class="col-md-6">
                     <?php foreach ($data as $tempel) { ?>
+                    <label id="faktur" hidden>
+                        <?php echo $tempel->faktur; ?>
+                    </label>
                     <label>Faktur :
                         <?php echo $tempel->faktur; ?>
                     </label><br>
@@ -71,7 +74,7 @@
                         </span>
                         <?php } elseif ($tempel->status == 'Disetujui') { ?>
                         <span class="badge badge-primary">
-                        <?php echo $tempel->status; ?>
+                            Disetujui Kepala Bagian
                         </span>
                         <?php } elseif ($tempel->status == 'Diproses') { ?>
                         <span class="badge badge-info">
@@ -90,22 +93,15 @@
                             <?php echo $tempel->status; ?>
                         </span>
                         <?php } ?>
+
                     </h6>
-                    <?php } ?>
-                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
-                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#modal-tambah<?php echo $tempel->id_request_sundries; ?>">
-                        <span class="text">Tambah Barang</span>
-                    </a>
-                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
-                        data-target="#modal-repeat<?php echo $tempel->id_request_sundries; ?>">
-                        <span class="text">Ajukan Perbaikan</span>
-                    </a>
-                    <?php } ?>
                 </div>
                 <div class="col-md-6">
-                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' OR $this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == 'Ditolak') { ?>
-                    <?php foreach ($tolak as $isi) { ?>
+                    <?php
+                        if ($tempel->status == 'Ditolak' and $this->session->userdata('role') == 'sdr_Admin Bagian' or $this->session->userdata('role') == 'sdr_Kepala Bagian' or $this->session->userdata('role') == 'sdr_Kepala Gudang') {
+                            foreach ($tolak as $isi) {
+                                ?>
+
                     <div class="list-group mb-2">
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
@@ -125,26 +121,31 @@
                             </p>
                         </a>
                     </div>
-                    <?php }?>
-                    <?php } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request") { ?>
-                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#modal-setujui<?php echo $tempel->id_request_sundries; ?>">
-                        Setuju
-                    </a>
-                    <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
-                        data-target="#modal-tolak<?php echo $tempel->id_request_sundries; ?>">
-                        Tolak
-                    </a>
-                    <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == "Disetujui") { ?>
-                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
-                        data-target="#modal-proses<?php echo $tempel->id_request_sundries; ?>">
-                        Proses
-                    </a>
-                    <?php } ?>
+                    <?php
+                            }
+                        }
+                        ?>
                 </div>
             </div>
         </div>
+        <?php if ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request") { ?>
+        <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
+            data-target="#modal-setujui<?php echo $tempel->id_request_sundries; ?>">
+            Setuju
+        </a>
 
+        <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
+            data-target="#modal-tolak<?php echo $tempel->id_request_sundries; ?>">
+            Tolak
+        </a>
+        <?php } ?>
+
+        <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == "Disetujui") { ?>
+        <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
+            data-target="#modal-proses<?php echo $tempel->id_request_sundries; ?>">
+            Proses
+        </a>
+        <?php } ?>
         <div class="card shadow mt-4 mb-4">
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-success">Detail Barang Request</h5>
@@ -162,7 +163,7 @@
                                 <th class="text-center">Ukuran</th>
                                 <th class="text-center">Satuan</th>
                                 <th class="text-center">Catatan</th>
-                                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
+                                <?php if ($tempel->status == 'Ditolak') { ?>
                                 <th class="text-center">Opsi</th>
                                 <?php } ?>
                             </tr>
@@ -198,7 +199,7 @@
                                     <?php echo $tempel->keterangan; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
+                                    <?php if ($tempel->status == 'Ditolak') { ?>
                                     <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal"
                                         data-target="#modal-edit<?php echo $tempel->id_detail_sundries; ?>">
                                         <span class="text">Ubah</span>
@@ -216,9 +217,20 @@
                                 ?>
                         </tbody>
                     </table>
+                    <?php if ($tempel->status == 'Ditolak') { ?>
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
+                        data-target="#modal-tambah<?php echo $tempel->id_request_sundries; ?>">
+                        <span class="text">Tambah Barang</span>
+                    </a>
+                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
+                        data-target="#modal-repeat<?php echo $tempel->id_request_sundries; ?>">
+                        <span class="text">Ajukan Perbaikan</span>
+                    </a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
+        <?php } ?>
     </div>
 
     <!-- Bootstrap core JavaScript-->
@@ -754,5 +766,5 @@
         </div>
     </div>
 </div>
-
 </html>
+
