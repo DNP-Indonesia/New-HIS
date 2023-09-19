@@ -268,9 +268,15 @@ class c_permintaan extends MY_Controller
             'keterangan' => $catatan
         );
 
+<<<<<<< HEAD
+        $this->m_detail->add($data);
+        $this->session->set_userdata('sukses', 'Data barang telah ditambahkan');
+        redirect('Sundries/Transaksi/c_permintaan/detail/' . $faktur);
+=======
         $this->m_permintaan->addBarang($data);
         $this->session->set_userdata('sukses', 'Yeay, Barang Berhasil Ditambahkan...');
         return redirect('Sundries/Transaksi/c_permintaan/index');
+>>>>>>> parent of 5b5077c (estimasi update)
     }
 
     public function permintaanUlang()
