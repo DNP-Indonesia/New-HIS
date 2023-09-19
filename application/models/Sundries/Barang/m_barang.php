@@ -11,7 +11,7 @@ class m_barang extends CI_Model
     	return $this->db->from('sdr_barang')
             ->join('sdr_jenis', 'sdr_jenis.id_jenis=sdr_barang.id_jenis')
             ->join('sdr_kategori', 'sdr_kategori.id_kategori=sdr_jenis.id_kategori')
-            ->order_by('id_barang','DESC')
+            ->order_by('id_barang','ASC')
             ->get()
             ->result();
     }

@@ -77,9 +77,9 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Diajukan') { ?>
-                                <div class="alert alert-danger text-center">
+                                <span class="badge badge-warning">
                                     <?php echo $tempel->status; ?>
-                                </div>
+                                </span>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
                                 <div class="alert alert-success text-center">

@@ -37,16 +37,6 @@ class m_permintaan extends CI_Model
             ->result();
     }
 
-    public function getBarangSundries()
-    {
-        return $this->db->from('sdr_barang')
-        ->join('sdr_jenis', 'sdr_jenis.id_jenis=sdr_barang.id_jenis')
-        ->join('sdr_kategori', 'sdr_kategori.id_kategori=sdr_jenis.id_kategori')
-        ->where('sdr_jenis.id_kategori', '1')
-        ->get()
-        ->result();
-    }
-
     // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui'
     public function getSetuju()
     {
