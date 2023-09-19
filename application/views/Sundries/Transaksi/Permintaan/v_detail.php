@@ -74,7 +74,7 @@
                         </span>
                         <?php } elseif ($tempel->status == 'Disetujui') { ?>
                         <span class="badge badge-primary">
-                            Disetujui Kepala Bagian
+                            <?php echo $tempel->status; ?>
                         </span>
                         <?php } elseif ($tempel->status == 'Diproses') { ?>
                         <span class="badge badge-info">
