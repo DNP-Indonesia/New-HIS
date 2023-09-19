@@ -1,6 +1,6 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <h4>Estimation Making</h4>
+    <h4>Request Consumption</h4>
     <?php
     if ($this->session->userdata('role') == 'sdr_Admin Bagian') {
         ?>
@@ -186,7 +186,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
-                Data Request Consumption
+                Data Estimasi
             </h6>
         </div>
         <div class="card-body">
@@ -205,7 +205,7 @@
                     <tbody>
                         <?php
                             $no = 1;
-                            foreach ($allkonsumsi as $tempel) {
+                            foreach ($allestimasi as $tempel) {
                                 ?>
                         <tr>
                             <td class="text-center">
@@ -215,7 +215,7 @@
                                 <?php echo $tempel->faktur; ?>
                             </td>
                             <td class="text-center">
-                                <?php echo $tempel->nama_peminta; ?>
+                                <?php echo $tempel->nama_pembuat; ?>
                             </td>
                             <td class="text-center">
                                 <?php echo $tempel->nama_section; ?>
@@ -253,6 +253,38 @@
     <?php } ?>
 </div>
 
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Yakin Ingin Keluar Aplikasi ?
+                </h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">Tutup</span>
+                </button>
+            </div>
+            <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
+            <div class="modal-footer">
+                <button class="btn btn-success" type="button" data-dismiss="modal">
+                    Batal
+                </button>
+                <a class="btn btn-warning" href="<?php echo site_url('logout'); ?>">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- SDR ADMIN BAGIAN MODAL -->
 <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -283,7 +315,7 @@
                                 required readonly>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label>Di Request Oleh</label>
+                            <label>DibuatOleh</label>
                             <input type="text" class="form-control" value=" <?php echo $this->session->userdata('nama'); ?>" name="nama"
                                 required readonly>
 
@@ -361,9 +393,9 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Kamu Yakin ?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Yakin ?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
+                    <span aria-hidden="true">Tutup</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -374,32 +406,12 @@
                     Batal
                 </button>
                 <a id="tombolhapus" class="btn btn-danger" href="#">
-                    Hapus
+                    Lanjutkan
                 </a>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- Bootstrap core JavaScript-->
-<script src="<?php echo base_url(); ?>bootstrap/vendor/jquery/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="<?php echo base_url(); ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="<?php echo base_url(); ?>bootstrap/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="<?php echo base_url(); ?>bootstrap/js/demo/datatables-demo.js"></script>
-
-<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
 
 <script>
     loaddatabarang();
@@ -478,7 +490,6 @@
                         $('#id_barang_faktur').val('');
                         $('#jumlah').val('');
                     }
-                    $('#id_barang').html(options);
                 },
                 error: function(xhr, status, error) {
                     console.error(
@@ -488,6 +499,3 @@
         });
     });
 </script>
-</body>
-
-</html>

@@ -72,8 +72,8 @@
                         role="tab" aria-controls="nav-home" aria-selected="true">
                         Permintaan
                     </a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui"
-                        role="tab" aria-controls="nav-profile" aria-selected="false">
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">
                         Persetujuan
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak" role="tab"
@@ -923,11 +923,11 @@
                 <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#disetujui"
                         role="tab" aria-controls="nav-home" aria-selected="true">
-                        Disetujui
+                        Persetujuan
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#diproses"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
-                        Diproses
+                        Pemrosesan
                     </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#selesai"
                         role="tab" aria-controls="nav-contact" aria-selected="false">
@@ -1082,16 +1082,14 @@
                                             data-target="#modal-selesai<?php echo $tempel->id_request_sundries; ?>">
                                             Selesaikan
                                         </a>
-                                    </td>
-                                    <?php } ?>
-                                    <?php if ($this->session->userdata('role') == 'sdr_Kepala Gudang' or $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
-                                    <td class="text-center">
+                                        <?php } ?>
+                                        <?php if ($this->session->userdata('role') == 'sdr_Kepala Gudang' or $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
                                         <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
                                             class="btn btn-sm btn-purple">
                                             Detail
                                         </a>
+                                        <?php } ?>
                                     </td>
-                                    <?php } ?>
                                 </tr>
                                 <?php
                                         $no++;
@@ -1411,7 +1409,6 @@
         </div>
     </div>
 
-
     <?php foreach ($byproses as $tempel) { ?>
     <div class="modal fade" id="modal-selesai<?php echo $tempel->id_request_sundries; ?>" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1446,16 +1443,16 @@
                             <div class="col-md-4 mb-3">
                                 <label>Dibuat Tanggal</label>
                                 <input type="text" class="form-control" name="tanggal" required
-                                value="<?php echo $tempel->tanggal; ?>" readonly>
+                                    value="<?php echo $tempel->tanggal; ?>" readonly>
                                 <input type="text" class="form-control" name="status" required value="Selesai"
-                                hidden>
+                                    hidden>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label>Dibuat Jam</label>
                                 <input type="text" class="form-control" name="tanggal" required
-                                value="<?php echo $tempel->jamdibuat; ?>" readonly>
+                                    value="<?php echo $tempel->jamdibuat; ?>" readonly>
                                 <input type="text" class="form-control" name="status" required value="Selesai"
-                                hidden>
+                                    hidden>
                             </div>
                         </div>
                         <div class="form-row">

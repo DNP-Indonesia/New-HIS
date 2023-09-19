@@ -46,6 +46,8 @@ class c_konsumsi extends MY_Controller
         // Mengirimkan data dalam format JSON
         $this->output->set_output(json_encode($output));
     }
+    
+    
 
     public function addKeranjang()
     {
