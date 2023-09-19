@@ -1,4 +1,3 @@
-@ -1,72 +0,0 @@
 <?php $no = 1;
 foreach ($keranjang as $tempel) { ?>
     <tr>
