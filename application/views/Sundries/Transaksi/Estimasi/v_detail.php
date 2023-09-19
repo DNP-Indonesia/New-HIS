@@ -50,68 +50,80 @@
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-success">Data Estimasi</h5>
             </div>
-            <div class="card-body">
-                <?php foreach ($data as $tempel) { ?>
-                <label>Faktur :
-                    <?php echo $tempel->faktur; ?>
-                </label><br>
-                <label>Direquest Oleh :
-                    <?php echo $tempel->nama_pembuat; ?>
-                </label><br>
-                <label>Untuk Bagian :
-                    <?php echo $tempel->nama_section; ?>
-                </label><br>
-                <label>Dibuat Tanggal :
-                    <?= date('d F Y', strtotime($tempel->tanggal)) ?>
-                </label><br>
-                <h6>
-                    <?php if ($tempel->status == 'Diajukan') { ?>
-                    <span class="badge badge-warning">
-                        <?php echo $tempel->status; ?>
-                    </span>
-                    <?php } elseif ($tempel->status == 'Disetujui') { ?>
-                    <span class="badge badge-primary">
-                        <?php echo $tempel->status; ?>
-                    </span>
-                    <?php } elseif ($tempel->status == 'DiTolak') { ?>
-                    <span class="badge badge-danger">
-                        <?php echo $tempel->status; ?>
-                    </span>
+            <div class="card-body row">
+                <div class="col-md-6">
+                    <?php foreach ($data as $tempel) { ?>
+                    <label>Faktur :
+                        <?php echo $tempel->faktur; ?>
+                    </label><br>
+                    <label>Direquest Oleh :
+                        <?php echo $tempel->nama_pembuat; ?>
+                    </label><br>
+                    <label>Bagian :
+                        <?php echo $tempel->nama_section; ?>
+                    </label><br>
+                    <label>Dibuat Tanggal :
+                        <?= date('d F Y', strtotime($tempel->tanggal)) ?>
+                    </label><br>
+                    <h6>
+                        <?php if ($tempel->status == 'Diajukan') { ?>
+                        <span class="badge badge-warning">
+                            <?php echo $tempel->status; ?>
+                        </span>
+                        <?php } elseif ($tempel->status == 'Disetujui') { ?>
+                        <span class="badge badge-primary">
+                            <?php echo $tempel->status; ?>
+                        </span>
+                        <?php } elseif ($tempel->status == 'DiTolak') { ?>
+                        <span class="badge badge-danger">
+                            <?php echo $tempel->status; ?>
+                        </span>
+                        <?php } ?>
+                    </h6>
                     <?php } ?>
-                </h6>
-                <?php } ?>
-                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
-                <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
-                    data-target="#modal-tambah<?php echo $tempel->id_estimasi; ?>">
-                    <span class="text">Tambah Barang</span>
-                </a>
-                <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
-                    data-target="#modal-repeat<?php echo $tempel->id_estimasi; ?>">
-                    <span class="text">Ajukan Perbaikan</span>
-                </a>
-                <?php } ?>
-            </div>
-            <div class="col-md-6">
-                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' OR $this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == 'Ditolak') { ?>
-                <?php foreach ($tolak as $isi) { ?>
-                <div class="list-group mb-2">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1 font-weight-bold text-danger">
-                                Alasan Penolakan
-                            </h5>
-                            <small class="text-muted text-right">
-                                <?php echo date('d F Y', strtotime($isi->tanggal_tolak)); ?>
-                                -
-                                <?php echo $isi->jamtolak; ?><br>
-                                Ditolak Oleh<br>
-                                <?php echo $isi->nama; ?>
-                            </small>
-                        </div>
-                        <p class="mb-1">
-                            <?php echo $isi->alasan_tolak; ?>
-                        </p>
+                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
+                        data-target="#modal-tambah<?php echo $tempel->id_estimasi; ?>">
+                        <span class="text">Tambah Barang</span>
                     </a>
+                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal"
+                        data-target="#modal-repeat<?php echo $tempel->id_estimasi; ?>">
+                        <span class="text">Ajukan Perbaikan</span>
+                    </a>
+                    <?php } ?>
+
+                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' OR $this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == 'Ditolak') { ?>
+                    <?php foreach ($tolak as $isi) { ?>
+                    <div class="list-group mb-2">
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1 font-weight-bold text-danger">
+                                    Alasan Penolakan
+                                </h5>
+                                <small class="text-muted text-right">
+                                    <?php echo date('d F Y', strtotime($isi->tanggal_tolak)); ?>
+                                    -
+                                    <?php echo $isi->jamtolak; ?><br>
+                                    Ditolak Oleh<br>
+                                    <?php echo $isi->nama; ?>
+                                </small>
+                            </div>
+                            <p class="mb-1">
+                                <?php echo $isi->alasan_tolak; ?>
+                            </p>
+                        </a>
+                    </div>
+                    <?php }?>
+                    <?php } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Diajukan") { ?>
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
+                        data-target="#modal-setujui<?php echo $tempel->id_estimasi; ?>">
+                        Setuju
+                    </a>
+                    <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
+                        data-target="#modal-tolak<?php echo $tempel->id_estimasi; ?>">
+                        Tolak
+                    </a>
+                    <?php } ?>
                 </div>
                 <?php }?>
                 <?php } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request") { ?>
@@ -148,18 +160,35 @@
                             $no = 1;
                             foreach ($detail as $tempel) {
                                 ?>
-                                <tr>
-                                    <td><?php echo $no ?></td>
-                                    <td><?php echo $tempel->barang ?></td>
-                                    <td><?php echo $tempel->jumlah ?></td>
-                                </tr>
-                                <?php
-                                    $no++;
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                            <tr>
+                                <td>
+                                    <?php echo $no; ?>
+                                </td>
+                                <td>
+                                    <?php echo $tempel->barang; ?>
+                                </td>
+                                <td>
+                                    <?php echo $tempel->jumlah; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
+                                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal"
+                                        data-target="#modal-edit<?php echo $tempel->id_detail_estimasi; ?>">
+                                        <span class="text">Ubah</span>
+                                    </a>
+                                    <a onclick="deleteConfirm('<?php echo base_url('Sundries/requestsundriescontroller/barangdelete/' . $tempel->id_detail_estimasi); ?>')" href="#"
+                                        class="btn btn-sm btn-danger">
+                                        Hapus
+                                    </a>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                            <?php
+                                $no++;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>     
@@ -169,8 +198,8 @@
         <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
         <script src="<?php echo base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="<?php echo base_url() ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
         <script src="<?php echo base_url() ?>bootstrap/js/sb-admin-2.min.js"></script>
@@ -182,14 +211,15 @@
         <!-- Page level custom scripts -->
         <script src="<?php echo base_url() ?>bootstrap/js/demo/datatables-demo.js"></script>
 
-        <script type="text/javascript" src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
-        
-        <script>
-            $(document).ready(function (){
-                $('#dataTablee').DataTable();
-            });
-        </script> 
-    </body>
+    <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#dataTablee').DataTable();
+        });
+    </script>
+</body>
+
 </html>
 
 
