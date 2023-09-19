@@ -123,9 +123,7 @@
                         data-target="#modal-tolak<?php echo $tempel->id_estimasi; ?>">
                         Tolak
                     </a>
-                    <?php } ?>
                 </div>
-                <?php }?>
                 <?php } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Request") { ?>
                 <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
                     data-target="#modal-setujui<?php echo $tempel->id_estimasi; ?>">

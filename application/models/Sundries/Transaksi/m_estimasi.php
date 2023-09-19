@@ -67,18 +67,6 @@ class m_estimasi extends CI_Model
             ->result();
     }
 
-    public function forKepalaBagian()
-    {
-        return $this->db
-            ->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
-            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
-            ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_estimasi', 'DESC')
-            ->get()
-            ->result();
-    }
-
     public function cekKeranjang($idbarang, $iduser)
     {
         return $this->db->get_where('sdr_estimasi_keranjang', ['id_barang' => $idbarang, 'id_user' => $iduser]);

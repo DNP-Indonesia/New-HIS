@@ -74,7 +74,7 @@
                         </span>
                         <?php } elseif ($tempel->status == 'Disetujui') { ?>
                         <span class="badge badge-primary">
-                        <?php echo $tempel->status; ?>
+                            <?php echo $tempel->status; ?>
                         </span>
                         <?php } elseif ($tempel->status == 'Diproses') { ?>
                         <span class="badge badge-info">
@@ -236,7 +236,6 @@
                 </div>
             </div>
         </div>
-        <?php } ?>
     </div>
 </body>
 
@@ -593,8 +592,8 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <label>Catatan</label>
-                            <textarea class="form-control" id="catatan" name="keterangan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
-                                rows="2"></textarea>
+                            <textarea class="form-control" id="catatan" name="keterangan"
+                                placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam" rows="2"></textarea>
                         </div>
                     </div>
                 </div>
@@ -769,5 +768,5 @@
         </div>
     </div>
 </div>
-</html>
 
+</html>
