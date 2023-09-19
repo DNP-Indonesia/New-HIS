@@ -51,9 +51,11 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Request') { ?>
-                                <div class="alert alert-danger text-center">
-                                    <?php echo $tempel->status; ?>
-                                </div>
+                                <h6>
+                                    <span class="badge badge-warning">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
+                                </h6>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
                                     <span class="badge badge-primary">
