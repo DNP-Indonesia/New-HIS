@@ -37,8 +37,8 @@ class m_permintaan extends CI_Model
             ->result();
     }
 
-    // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui'
-    public function getSetuju()
+    // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui1'
+    public function getSetuju1()
     {
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
@@ -281,7 +281,7 @@ class m_permintaan extends CI_Model
 
 
     // Fungsi untuk mengambil data barang dari tabel 'sdr_barang'
-    public function getBarangSundries()
+    public function getBarang()
     {
         return $this->db->from('sdr_barang')
             ->join('sdr_jenis', 'sdr_jenis.id_jenis=sdr_barang.id_jenis')

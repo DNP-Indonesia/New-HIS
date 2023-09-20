@@ -109,7 +109,7 @@
         </div>
     </li>
 
-    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'permintaan', 'pembelian', 'penerimaan'])) {
+    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
         echo 'active';
     } ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
@@ -117,7 +117,7 @@
             <i class="fas fa-fw fa-folder"></i>
             <span>Transaksi Sundries</span>
         </a>
-        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'permintaan', 'pembelian', 'penerimaan'])) {
+        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
@@ -132,9 +132,9 @@
                 } ?>" href="<?php echo site_url('estimasi'); ?>">
                     Estimation Making
                 </a>
-                <a class="collapse-item <?php if ($menu == 'konsumsistok') {
+                <a class="collapse-item <?php if ($menu == 'konsumsi') {
                     echo 'active';
-                } ?>" href="<?php echo site_url('konsumsistok'); ?>">
+                } ?>" href="<?php echo site_url('konsumsi'); ?>">
                     Request Consumption
                 </a>
                 <a class="collapse-item <?php if ($menu == 'pembelian') {
@@ -168,37 +168,15 @@
 
     <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Bagian' || $this->session->userdata('role') == 'sdr_Kepala Bagian') { ?>
 
-    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
+    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
         echo 'active';
     } ?>">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi-stok"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Transaksi Stok</span>
+            <span>Transaksi Sundries</span>
         </a>
-        <div id="collapse-transaksi-stok" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok'])) {
-            echo 'show';
-        } ?>" aria-labelledby="headingPages"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item <?php if ($menu == 'estimasi') {
-                    echo 'active';
-                } ?>" href="<?php echo site_url('estimasi'); ?>">
-                    Estimation Making
-                </a>
-                <a class="collapse-item <?php if ($menu == 'konsumsistok') {
-                    echo 'active';
-                } ?>" href="<?php echo site_url('konsumsistok'); ?>">
-                    Consumption Estimation
-                </a>
-            </div>
-        </div>
-        <a class="nav-link collapsed" href="#" data-toggle="collapse"
-            data-target="#collapse-transaksi-non-stok" aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Transaksi Non-Stok</span>
-        </a>
-        <div id="collapse-transaksi-non-stok" class="collapse  <?php if (isset($menu) && in_array($menu, ['permintaan', 'konsumsi'])) {
+        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
@@ -208,10 +186,15 @@
                 } ?>" href="<?php echo site_url('permintaan'); ?>">
                     Request Sundries
                 </a>
+                <a class="collapse-item <?php if ($menu == 'estimasi') {
+                    echo 'active';
+                } ?>" href="<?php echo site_url('estimasi'); ?>">
+                    Estimation Making
+                </a>
                 <a class="collapse-item <?php if ($menu == 'konsumsi') {
                     echo 'active';
                 } ?>" href="<?php echo site_url('konsumsi'); ?>">
-                    Consumption Sundries
+                    Request Consumption
                 </a>
             </div>
         </div>
@@ -236,7 +219,7 @@
 
     <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'sdr_Kepala Gudang') { ?>
 
-    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'permintaan', 'pembelian', 'penerimaan'])) {
+    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
         echo 'active';
     } ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
@@ -244,7 +227,7 @@
             <i class="fas fa-fw fa-folder"></i>
             <span>Transaksi Sundries</span>
         </a>
-        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
+        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
