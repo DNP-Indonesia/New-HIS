@@ -192,6 +192,8 @@ class M_his extends CI_Model{
         
     }
 
+    
+
     function data_divisi(){
         return $this->db->from('his_divisi')
             ->get()

@@ -34,7 +34,7 @@
 
     <style type="text/css">
         /* Tambahkan gaya baru untuk footer */
-        #footer {
+        .footer {
             position: fixed;
             bottom: 0;
             width: 100%;

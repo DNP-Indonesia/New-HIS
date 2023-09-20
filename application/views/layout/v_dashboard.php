@@ -143,7 +143,7 @@
 
 
 <script>
-   const karyawanAkanPensiun = <?= json_encode($karyawanAkanPensiun) ?>; // Perhatikan penggunaan sintaksis PHP di sini.
+const karyawanAkanPensiun = <?= json_encode($karyawanAkanPensiun) ?>; // Perhatikan penggunaan sintaksis PHP di sini.
 
 function showNotification() {
     const notifikasi = document.getElementById('notifikasi');
