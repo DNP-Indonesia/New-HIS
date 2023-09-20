@@ -1,24 +1,60 @@
-
-
-        
-
-            <!-- Main Content -->
-            <div id="content">
-               
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <h4>Consumption Sundries</h4>
-                    <?php
-                    if ($this->session->userdata('role') == 'sdr_Admin Bagian') {
-                        ?>
-                        <!-- DataTales Example -->
-                        <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
-                            Buat Baru
-                        </a>
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="font-weight-bold text-success">
-                                    Data Request Consumption Anda
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <h4>Request Consumption</h4>
+    <?php
+    if ($this->session->userdata('role') == 'sdr_Admin Bagian') {
+        ?>
+    <!-- DataTales Example -->
+    <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
+        Buat Baru
+    </a>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="font-weight-bold text-success">
+                Data Request Consumption Anda
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive-xl">
+                <table class="table table-borderless small" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Faktur</th>
+                            <th class="text-center">Direquest Oleh</th>
+                            <th class="text-center">Untuk Bagian</th>
+                            <th class="text-center">Dibuat Tanggal</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $no = 1;
+                            foreach ($konsumsi as $tempel) {
+                                ?>
+                        <tr>
+                            <td class="text-center">
+                                <?php echo $no; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php echo $tempel->faktur; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php echo $tempel->nama_peminta; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php echo $tempel->nama_section; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php echo $tempel->tanggal; ?>
+                            </td>
+                            <td class="text-center">
+                                <?php if ($tempel->status == 'Request') { ?>
+                                <h6>
+                                    <span class="badge badge-warning">
+                                        <?php echo $tempel->status; ?>
+                                    </span>
                                 </h6>
                                 <?php } ?>
                                 <?php if ($tempel->status == 'Disetujui') { ?>
@@ -161,7 +197,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
-                Data konsumsi
+                Data Estimasi
             </h6>
         </div>
         <div class="card-body">
@@ -746,14 +782,39 @@
                         Lanjutkan
                     </a>
                 </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yakin ?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">Tutup</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Data Yang Dihapus Tidak Akan Bisa Dikembalikan.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                    Batal
+                </button>
+                <a id="tombolhapus" class="btn btn-danger" href="#">
+                    Lanjutkan
+                </a>
             </div>
         </div>
     </div>
 
-
-  
-    <script>
-        loaddatabarang();
+<script>
+    loaddatabarang();
 
 
         $(document).ready(function () {
@@ -797,37 +858,12 @@
                     success: function () {
                         loaddatabarang();
                     }
-                });
-            }
-        });
-    </script>
-    <script>
-        function deleteConfirm(url) {
-            $('#tombolhapus').attr('href', url);
-            $('#modal-hapus').modal();
-        }
-
-        $(document).ready(function () {
-            $('#fakturestimasi').change(function () {
-                var faktur = $(this).val();
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo site_url('barangfaktur') ?>",
-                    data: { faktur: faktur },
-                    dataType: 'JSON',
-                    success: function (response) {
-                        var options = '<option value=" ">--Pilih Barang--</option>';
-                        for (var i = 0; i < response.length; i++) {
-                            options += '<option value="' + response[i].id_barang + '">' + response[i].barang + '</option>';
-                        }
-                        $('#id_barang').html(options);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(error); // Tampilkan pesan error jika permintaan AJAX gagal
-                    }
-                });
+                },
+                error: function(xhr, status, error) {
+                    console.error(
+                        error); // Tampilkan pesan error jika permintaan AJAX gagal
+                }
             });
         });
-
-
-    </script>
+    });
+</script>

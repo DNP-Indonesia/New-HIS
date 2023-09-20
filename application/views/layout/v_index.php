@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="<?php echo base_url('assets/dnp-logo.png') ?>" rel="icon">
+    <link href="<?php echo base_url(); ?>dnp-logo.png" rel="icon">
     <title>DNP - HIS</title>
 
     <!-- Custom fonts for this template-->
@@ -61,6 +61,18 @@
         .btn-purple:hover {
             color: white;
             background-color: #6906cc;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        /* Lebar kolom disesuaikan dengan kontennya */
+        .table-container table th,
+        .table-container table td {
+            white-space: nowrap;
+            /* Hindari pemotongan teks */
         }
     </style>
 
@@ -224,6 +236,60 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Yakin Ingin Keluar Aplikasi ?
+                    </h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="modal-body">Pilih Logout Untuk Keluar Aplikasi</div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="button" data-dismiss="modal">
+                        Nggak Jadi
+                    </button>
+                    <a class="btn btn-warning" href="<?php echo site_url(); ?>/auth/logout">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SDR ADMIN BAGIAN -->
+    <!-- Permintaan -->
+
+    <!-- Estimasi -->
+
+    <!-- Konsumsi -->
+
+    <!-- SDR KEPALA BAGIAN -->
+    <!-- Permintaan -->
+
+    <!-- Estimasi -->
+
+    <!-- Konsumsi -->
+
+    <!-- SDR ADMIN GUDANG -->
+    <!-- Permintaan -->
+
+    <!-- Pembelian -->
+
+    <!-- Penerimaan -->
+    <!-- SDR ADMIN GUDANG -->
+    <!-- Permintaan -->
+
+    <!-- Pembelian -->
+
+    <!-- Penerimaan -->
+
+
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -241,8 +307,19 @@
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url() ?>bootstrap/js/demo/datatables-demo.js"></script>
 
-    <script type="text/javascript" src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
-
+    <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#state").change(function() {
+                // foo is the id of the other select box 
+                if ($(this).val() == "TK0") {
+                    $("#foo").show();
+                } else {
+                    $("#foo").hide();
+                }
+            });
+        });
+    </script>
 
     <script type="text/javascript">
         $(function() {
@@ -267,3 +344,28 @@
 </body>
 
 </html>
+
+<div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yakin ?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">Tutup</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Data Yang Dihapus Tidak Akan Bisa Dikembalikan.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                    Batal
+                </button>
+                <a id="tombolhapus" class="btn btn-danger" href="#">
+                    Lanjutkan
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

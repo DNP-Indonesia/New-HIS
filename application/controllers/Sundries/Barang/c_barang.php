@@ -40,9 +40,10 @@ class c_barang extends MY_Controller
         $data['satuan'] = $this->input->post('satuan');
         $data['id_jenis'] = $this->input->post('jenis');
         $data['stok'] = $this->input->post('stok');
-        $this->m_barang->save($data);
-        $this->session->set_userdata('berhasil', 'Yeay, Barang Baru Berhasil Ditambahin Nich, Silahkan Lanjut Bikin Requestnya....');
-        return redirect('Sundries/requestsundriescontroller/requestsundriespage');
+
+        $this->m_barang->saveBarang($data);
+        $this->session->set_userdata('berhasil', 'Barang Baru Berhasil Ditambahkan, Silahkan Lanjutkan Membuat Requestnya...');
+        return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
     public function barangupdate()

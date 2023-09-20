@@ -19,6 +19,7 @@ class c_estimasi extends MY_Controller
         $data['barcons'] = $this->m_barang->getBarangAll();
         $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
         $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
+        $data['faktur'] = $this->m_estimasi->generateFaktur();
 
         $menu = 'estimasi';
         $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);
@@ -89,6 +90,7 @@ class c_estimasi extends MY_Controller
         $id = $this->uri->segment(4);
         $data['data'] = $this->m_estimasi->getEstimasiById($id);
         $data['detail'] = $this->m_estimasi->getEstimasiDetail($id);
+        $data['tolak'] = $this->m_estimasi->getTolak();
         $this->load->view('Sundries/Transaksi/Estimasi/v_detail', $data);
     }
 

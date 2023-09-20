@@ -41,14 +41,14 @@
         <div class="container-fluid">
             <div class="card shadow mt-4">
                 <div class="card-header py-3">
-                    <h5 class="m-0 font-weight-bold text-success">Data Estimasi Anda</h5>
+                    <h5 class="m-0 font-weight-bold text-success">Data Consumption Anda</h5>
                 </div>
                 <div class="card-body">
                     <?php
                         foreach($data as $tempel){
                     ?>
                     <label>Faktur : <?php echo $tempel->faktur ?></label><br>
-                    <label>Direquest Oleh : <?php echo $tempel->nama_pembuat ?></label><br>
+                    <label>Direquest Oleh : <?php echo $tempel->nama_peminta ?></label><br>
                     <label>Untuk Bagian : <?php echo $tempel->nama_section ?></label><br>
                     <label>Dibuat Tanggal : <?php echo $tempel->tanggal ?></label><br>
                     <?php
@@ -58,7 +58,7 @@
             </div>   
             <div class="card shadow mt-4">
                 <div class="card-header py-3">
-                    <h5 class="m-0 font-weight-bold text-success">Detail Estimasi Anda</h5>
+                    <h5 class="m-0 font-weight-bold text-success">Detail Consumption Anda</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -89,33 +89,7 @@
                     </div>
                 </div>
             </div>
-        </div>     
-
-
-        <!-- Bootstrap core JavaScript-->
-        <script src="<?php echo base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
-        <script src="<?php echo base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="<?php echo base_url() ?>bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-        <!-- Custom scripts for all pages-->
-        <script src="<?php echo base_url() ?>bootstrap/js/sb-admin-2.min.js"></script>
-
-        <!-- Page level plugins -->
-        <script src="<?php echo base_url() ?>bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="<?php echo base_url() ?>bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-        <!-- Page level custom scripts -->
-        <script src="<?php echo base_url() ?>bootstrap/js/demo/datatables-demo.js"></script>
-
-        <script type="text/javascript" src="<?php echo base_url() ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
-        
-        <script>
-            $(document).ready(function (){
-                $('#dataTablee').DataTable();
-            });
-        </script> 
+        </div>        
     </body>
 </html>
 
