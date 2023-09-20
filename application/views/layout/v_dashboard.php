@@ -23,7 +23,7 @@
                     </div>
                 </a>
                 <div class="dropdown-content">
-                    <a href="<?= base_url('Master/page_his/home_personalia') ?>">Personal Data</a>
+                    <a href="<?= base_url('personalia') ?>">Personal Data</a>
                     <a href="#">Medical</a>
                 </div>
             </div>
@@ -162,7 +162,7 @@ function showNotification() {
             }).join('')}</ul>` :
             `<p>Tidak ada karyawan yang akan pensiun dalam 1 bulan ke depan.</p>`}
             <br>
-            <a href="Master/page_his/karyawan_pensiun" class="btn btn-primary btn-sm">Detail</a>
+            <a href="daftar-karyawan-akan-pensiun" class="btn btn-primary btn-sm">Detail</a>
          `;
          
 

@@ -82,7 +82,7 @@
 						
                 	</div>
 
-					<a href="<?php echo base_url('Master/Page_his/home')?>" class="back-link" >
+					<a href="<?php echo base_url('dashboard')?>" class="back-link" >
 			<i class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali
 		</a>
 
