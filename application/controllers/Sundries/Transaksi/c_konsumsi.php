@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class c_konsumsi extends MY_Controller
 {
@@ -20,54 +20,51 @@ class c_konsumsi extends MY_Controller
         $data['estimasi'] = $this->m_konsumsi->getEstimasi();
         $data['kepalabagian'] = $this->m_konsumsi->forKepalaBagian();
         $data['allkonsumsi'] = $this->m_konsumsi->getKonsumsiAll();
-        $data['estimasidetail'] = $this->m_estimasi->getEstimasiDetail();
 
         $menu = 'konsumsi';
-        $this->render_backend('Sundries/transaksi/Konsumsi/v_konsumsi', $menu, $data);
-        
+        $this->render_backend('Sundries/Transaksi/Konsumsi/v_konsumsi', $menu, $data);
     }
 
     public function barangFaktur()
     {
-        $faktur = $this->input->post('faktur');
-        $data = $this->m_konsumsi->getBarangByFaktur($faktur);
-        
-        $output = array(); // Buat array kosong untuk menyimpan opsi dropdown
-        
+        $faktur_estimasi = $this->input->post('faktur');
+        $data = $this->m_konsumsi->getBarangByFaktur($faktur_estimasi);
+
+        $output = []; // Buat array kosong untuk menyimpan opsi dropdown
+
         foreach ($data as $row) {
-            $output[] = array(
+            $output[] = [
                 'id_barang' => $row->id_barang,
                 'barang' => $row->barang,
-                'jumlah' => $row->jumlah
-            );
+                'jumlah' => $row->jumlah,
+            ];
         }
-        
+
         // Set Content-Type sebagai application/json
         $this->output->set_content_type('application/json');
-        
+
         // Mengirimkan data dalam format JSON
         $this->output->set_output(json_encode($output));
     }
-    
 
-    public function addKeranjang()
+    public function cekKeranjang()
     {
         $id_barang = $this->input->post('id_barang');
         $qty = $this->input->post('qty');
         $id_user = $this->input->post('id_user');
         $fakest = $this->input->post('fakest');
 
-        $cekbarang = $this->m_konsumsi->cekKeranjang($id_barang, $id_user)->num_rows();
-        if ($cekbarang > 0){
-            
-        }else{
-            $data = array(
-                'id_barang'=>$id_barang,
-                'jumlah'=>$qty,
-                'id_user'=>$id_user,
-                'fakest'=>$fakest
-            );
-            
+        $cek = $this->m_konsumsi->cekKeranjang($id_barang, $id_user)->num_rows();
+        if ($cek > 0) {
+            echo '1';
+        } else {
+            $data = [
+                'id_barang' => $id_barang,
+                'jumlah' => $qty,
+                'id_user' => $id_user,
+                'fakest' => $fakest,
+            ];
+
             $this->m_konsumsi->saveKeranjang($data);
         }
     }
@@ -96,21 +93,21 @@ class c_konsumsi extends MY_Controller
         $nama = $this->input->post('nama');
         $fakest = $this->input->post('fakest');
 
-        $data = array(
-            'faktur'=>$faktur,
-            'nama_peminta'=>$nama,
-            'id_user'=>$iduser,
-            'tanggal'=>$tanggal,
-            'status'=>$status
-        );
+        $data = [
+            'faktur' => $faktur,
+            'nama_peminta' => $nama,
+            'id_user' => $iduser,
+            'tanggal' => $tanggal,
+            'status' => $status,
+        ];
 
-        $simpan = $this->m_konsumsi->save($data, $iduser, $faktur, $fakest);
+        $this->m_konsumsi->save($data, $iduser, $faktur, $fakest);
         $this->session->set_userdata('sukses', 'Yeay, Data Berhasil Disimpan');
         return redirect('Sundries/Transaksi/c_konsumsi/index');
     }
 
     public function detailKonsumsi()
-    {   
+    {
         $id = $this->uri->segment(4);
         $data['data'] = $this->m_konsumsi->getKonsumsiById($id);
         $data['detail'] = $this->m_konsumsi->getKonsumsiDetail($id);
@@ -127,23 +124,22 @@ class c_konsumsi extends MY_Controller
 
     public function deleteKonsumsi($faktur)
     {
-        $faktur = $this->uri->segment(4);
-        $hapus = $this->m_konsumsi->deleteKonsumsi($faktur);
+        $this->m_konsumsi->deleteKonsumsi($faktur);
     }
 
     public function approveKonsumsi()
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
- 
-        $data = array(
-            'status' => $status
-        );
-     
-        $where = array(
-            'faktur' => $faktur
-        );
-        
+
+        $data = [
+            'status' => $status,
+        ];
+
+        $where = [
+            'faktur' => $faktur,
+        ];
+
         $this->m_konsumsi->update($where, $data);
         $this->session->set_userdata('sukses', 'Yeay, Data Berhasil Disetujui');
         return redirect('Sundries/Transaksi/c_permintaan/dashboard');
@@ -153,15 +149,15 @@ class c_konsumsi extends MY_Controller
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
- 
-        $data = array(
-            'status' => $status
-        );
-     
-        $where = array(
-            'faktur' => $faktur
-        );
-        
+
+        $data = [
+            'status' => $status,
+        ];
+
+        $where = [
+            'faktur' => $faktur,
+        ];
+
         $this->m_konsumsi->update($where, $data);
         $this->session->set_userdata('tolak', 'Yeay, Data Berhasil Ditolak');
         return redirect('Sundries/Transaksi/c_permintaan/dashboard');

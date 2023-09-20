@@ -459,8 +459,7 @@
                 										</button>
                 									</div>
                 									<form
-
-                										action="<?php echo site_url("Master/action_his/do_mutasi_karyawan/" . $u->nik) ?>"
+                										action="<?php echo site_url("action_his/do_mutasi_karyawan/" . $u->nik) ?>"
                 										method="post">
                 										<div class="modal-body">
                 											<div class="form-row">
@@ -639,8 +638,7 @@
                 					<span aria-hidden="true">×</span>
                 				</button>
                 			</div>
-
-                			<form action="<?php echo site_url("Master/action_his/do_tbh_karyawan") ?>" method="post">
+                			<form action="<?php echo site_url("action_his/do_tbh_karyawan") ?>" method="post">
                 				<div class="modal-body">
                 					<div class="form-row">
                 						<div class="col-md-6 mb-3">

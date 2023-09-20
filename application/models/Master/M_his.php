@@ -192,23 +192,6 @@ class M_his extends CI_Model{
         
     }
 
-    function getKaryawanAkanPensiun() {
-        // Ambil tahun sekarang
-        $tahunSekarang = date('Y');
-    
-        // Hitung tahun pensiun
-        $tahunPensiun = $tahunSekarang;
-    
-        // Query untuk mengambil daftar karyawan yang akan pensiun dalam satu bulan ke depan
-        $this->db->select('nama, tgl_lahir');
-        $this->db->from('his_karyawan');
-        $this->db->where('YEAR(tgl_lahir) + 55 =', $tahunPensiun);
-        $this->db->where('keterangan', 'Aktif'); // Menambahkan konstrain untuk keterangan = Aktif
-        $query = $this->db->get();
-    
-        return $query->result(); // Mengembalikan daftar karyawan
-    }
-
     function data_divisi(){
         return $this->db->from('his_divisi')
             ->get()

@@ -15,16 +15,26 @@ class c_estimasi extends MY_Controller
 
     public function index()
     {
+        // Admin Gudang
         $data['estimasi'] = $this->m_estimasi->getEstimasi();
-        $data['barcons'] = $this->m_barang->getBarangAll();
-        $data['kepalabagian'] = $this->m_estimasi->forKepalaBagian();
+        $data['setuju'] = $this->m_estimasi->getSetuju();
+        $data['tolak'] = $this->m_estimasi->getTolak();
+
+        // Kepala Gudang
+        $data['kabagestimasi'] = $this->m_estimasi->forKepalaBagianPermintaan();
+        $data['kabagsetuju'] = $this->m_estimasi->forKepalaBagianSetuju();
+        $data['kabagtolak'] = $this->m_estimasi->forKepalaBagianTolak();
+
+        // Input
+        $data['barcons'] = $this->m_estimasi->getBarang();
         $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
+        $data['faktur'] = $this->m_estimasi->generateFaktur();
 
         $menu = 'estimasi';
         $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);
     }
 
-    public function addKeranjang()
+    public function cekKeranjang()
     {
         $id_barang = $this->input->post('id_barang');
         $qty = $this->input->post('qty');
@@ -32,7 +42,9 @@ class c_estimasi extends MY_Controller
         $catatan = $this->input->post('catatan');
         
         $cek = $this->m_estimasi->cekKeranjang($id_barang, $id_user)->num_rows();
-        if ($cek === 0) {
+        if ($cek > 0) {
+            echo "1";
+        } else {
             $data = array(
                 'id_barang' => $id_barang,
                 'jumlah' => $qty,
@@ -47,7 +59,7 @@ class c_estimasi extends MY_Controller
     public function showKeranjang()
     {
         $id_user = $this->input->post('id_user');
-        $data['keranjang'] = $this->m_estimasi->getKeranjang($id_user)->result();
+        $data['keranjang'] = $this->m_estimasi->getKeranjang($id_user);
         $this->load->view('Sundries/Transaksi/Estimasi/v_keranjang', $data);
     }
 
@@ -84,19 +96,20 @@ class c_estimasi extends MY_Controller
         $this->m_estimasi->deleteEstimasi($faktur);
     }
 
-    public function detailEstimasi()
+    public function detailEstimasi($id)
     {
-        $id = $this->uri->segment(4);
         $data['data'] = $this->m_estimasi->getEstimasiById($id);
         $data['detail'] = $this->m_estimasi->getEstimasiDetail($id);
+        $data['tolak'] = $this->m_estimasi->getTolakById($id);
+        $data['barang'] = $this->m_estimasi->getBarang();
+
         $this->load->view('Sundries/Transaksi/Estimasi/v_detail', $data);
     }
 
-    public function printEstimasi()
+    public function printEstimasi($id)
     {
-        $id = $this->uri->segment(4);
         $data['data'] = $this->m_estimasi->getIdPdf($id);
-        $data['detail'] = $this->m_estimasi->getDetailIdPdf($id);
+        $data['detail'] = $this->m_detail->getDetailIdPdf($id);
         $this->load->view('Sundries/Transaksi/Estimasi/v_print', $data);
     }
 

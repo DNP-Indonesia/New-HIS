@@ -19,53 +19,58 @@ class c_permintaan extends MY_Controller
 
     public function dashboard()
     {
-        $data['diproses'] = $this->m_permintaan->getProses();
-        $data['forapprove'] = $this->m_permintaan->forApprove();
-        $data['estimasi'] = $this->m_estimasi->forApprove();
-        $data['konsumsi'] = $this->m_konsumsi->forApprove();
-        $data['admingudang'] = $this->m_permintaan->forAdminGudang();
-        $data['kepalagudang'] = $this->m_permintaan->forKepalaGudang();
+        // $data['diproses'] = $this->m_permintaan->getProses();
+        // $data['forapprove'] = $this->m_permintaan->forApprove();
+        // $data['estimasi'] = $this->m_estimasi->forApprove();
+        // $data['konsumsi'] = $this->m_konsumsi->forApprove();
+        // $data['admingudang'] = $this->m_permintaan->forAdminGudang();
+        // $data['kepalagudang'] = $this->m_permintaan->forKepalaGudang();
 
-        $menu ='dashboard';
-        $this->render_backend('Sundries/sdr_dashboard', $menu, $data);
-        
+        $menu = 'dashboard';
+        $this->render_backend('layout/v_dashboard', $menu);
     }
 
     public function index()
     {
-        $data['bypermintaan'] = $this->m_permintaan->byPermintaan();
-        $data['bysetuju2'] = $this->m_permintaan->bySetuju2();
-        $data['bytolak'] = $this->m_permintaan->byTolak();
-        $data['byproses'] = $this->m_permintaan->byProses();
-        $data['byselesai'] = $this->m_permintaan->bySelesai();
+        // $data['bypermintaan'] = $this->m_permintaan->byPermintaan();
+        // $data['bytolak'] = $this->m_permintaan->byTolak();
+
+        // Admin Bagian
         $data['permintaan'] = $this->m_permintaan->getPermintaan();
-        $data['setuju1'] = $this->m_permintaan->getSetuju1();
-        $data['setuju2'] = $this->m_permintaan->getSetuju2();
+        $data['setuju'] = $this->m_permintaan->getSetuju();
         $data['tolak'] = $this->m_permintaan->getTolak();
         $data['proses'] = $this->m_permintaan->getProses();
         $data['selesai'] = $this->m_permintaan->getSelesai();
+
+        // Kepala Bagian
         $data['kabagpermintaan'] = $this->m_permintaan->forKepalaBagianPermintaan();
         $data['kabagsetuju'] = $this->m_permintaan->forKepalaBagianSetuju();
         $data['kabagtolak'] = $this->m_permintaan->forKepalaBagianTolak();
         $data['kabagproses'] = $this->m_permintaan->forKepalaBagianProses();
         $data['kabagselesai'] = $this->m_permintaan->forKepalaBagianSelesai();
-        $data['barang'] = $this->m_barang->getBarangAll();
+
+        // Gudang
+        $data['adang'] = $this->m_permintaan->forAdminGudang();
+        $data['kadang'] = $this->m_permintaan->forKepalaGudang();
+        $data['byproses'] = $this->m_permintaan->byProses();
+        $data['byselesai'] = $this->m_permintaan->bySelesai();
+
+        // Input
+        $data['barang'] = $this->m_permintaan->getBarangSundries();
         $data['jenis'] = $this->m_jenis->getJenisById();
         $data['faktur'] = $this->m_permintaan->generateFaktur();
 
         $menu = 'permintaan';
         $this->render_backend('Sundries/Transaksi/Permintaan/v_permintaan', $menu, $data);
-
-        
     }
-    
+
     public function detail($id)
     {
         // Gunakan parameter $id yang diterima langsung dalam fungsi
         $data['data'] = $this->m_permintaan->getPermintaanById($id);
         $data['detail'] = $this->m_detail->getDetail($id);
         $data['tolak'] = $this->m_permintaan->getTolakById($id);
-        $data['barang'] = $this->m_barang->getBarangAll();
+        $data['barang'] = $this->m_permintaan->getBarangSundries();
 
         $this->load->view('Sundries/Transaksi/Permintaan/v_detail', $data);
     }
@@ -77,19 +82,19 @@ class c_permintaan extends MY_Controller
         $faktur = $this->input->post('faktur');
         $catatan = $this->input->post('catatan');
 
-        $data = array(
+        $data = [
             'jumlah' => $jumlah,
-            'keterangan' => $catatan
-        );
+            'keterangan' => $catatan,
+        ];
 
-        $where = array(
+        $where = [
             'id_barang' => $barang,
-            'faktur' => $faktur
-        );
+            'faktur' => $faktur,
+        ];
 
-        $this->m_permintaan->update($where, $data);
-        $this->session->set_userdata('update', 'Yeay, Jumlah Atau Catatan Berhasil Diperbarui, Yuk Lihat Di Detail Request...');
-        redirect('Sundries/Transaksi/c_permintaan/index');
+        $this->m_detail->update($where, $data);
+        $this->session->set_userdata('update', 'Permintaan Anda berhasil diperbarui');
+        redirect('Sundries/Transaksi/c_permintaan/detail/' . $faktur);
     }
 
     public function cekKeranjang()
@@ -101,14 +106,14 @@ class c_permintaan extends MY_Controller
 
         $cek = $this->m_permintaan->cekKeranjang($id_barang, $id_user)->num_rows();
         if ($cek > 0) {
-            echo "1";
+            echo '1';
         } else {
-            $data = array(
+            $data = [
                 'id_barang' => $id_barang,
                 'jumlah' => $qty,
                 'id_user' => $id_user,
-                'keterangan' => $catatan
-            );
+                'keterangan' => $catatan,
+            ];
 
             $this->m_detail_sementara->saveKeranjang($data);
         }
@@ -139,23 +144,24 @@ class c_permintaan extends MY_Controller
         $nama = $this->input->post('nama');
 
         $stkeranjang = $this->input->post('statuskeranjang');
-        $barangready = "tidak";
+        $barangready = 'tidak';
 
         $cek2 = $this->m_permintaan->cekKeranjang2($iduser)->num_rows();
         if ($cek2 == 0) {
-            $this->session->set_userdata('keranjangkosong', 'Hey, Keranjang Masih Kosong, Main Pencet Tombol Request Aja Nich....');
+            $this->session->set_userdata('keranjangkosong', 'Keranjang Anda masih kosong');
         } else {
-            $data = array(
+            $data = [
                 'faktur' => $faktur,
                 'nama_peminta' => $nama,
                 'id_user' => $iduser,
                 'tanggal' => $tanggal,
                 'status' => $status,
-                'jamdibuat' => $jamdibuat
-            );
+                'jamdibuat' => $jamdibuat,
+            ];
 
-            $simpan = $this->m_permintaan->save($data, $iduser, $faktur, $stkeranjang, $barangready);
-            $this->session->set_userdata('sukses', 'Sukses, Request Berhasil Dibuat, Masih Menunggu Persetujuan Kepala Bagian dan Kepala Gudang....');
+            $this->m_permintaan->save($data, $iduser, $faktur, $stkeranjang, $barangready);
+            // $this->session->set_userdata('sukses', 'Sukses, Request Berhasil Dibuat, Masih Menunggu Persetujuan Kepala Bagian dan Kepala Gudang....');
+            $this->session->set_userdata('sukses', 'Permintaan Anda telah dibuat, tunggu persetujuan dari Kepala Bagian');
             redirect('Sundries/Transaksi/c_permintaan/index');
         }
     }
@@ -163,17 +169,9 @@ class c_permintaan extends MY_Controller
     public function deletePermintaan($faktur)
     {
         $this->m_permintaan->delete($faktur);
-        $this->session->set_userdata('hapus', 'Yeay, Request Berhasil Dihapus...');
+        $this->session->set_userdata('hapus', 'Data permintaan Anda telah dihapus');
         redirect('Sundries/Transaksi/c_permintaan/index');
     }
-
-    // public function deletePermintaan($faktur)
-    // {
-    //     $faktur = $this->uri->segment(4);
-    //     $hapus = $this->m_permintaan->delete($faktur);
-    //     $this->session->set_userdata('hapus', 'Yeay, Request Berhasil Dihapus...');
-    //     redirect('Sundries/Transaksi/c_permintaan/index');
-    // }
 
     public function printPermintaan($id)
     {
@@ -186,36 +184,24 @@ class c_permintaan extends MY_Controller
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
-        $status2 = $this->input->post('status2');
         $jamsetuju = $this->input->post('jamsetuju');
         $penyetuju = $this->input->post('penyetuju');
         $tanggalsetuju = $this->input->post('tgl_setuju');
 
-        $where = array(
-            'faktur' => $faktur
-        );
+        $where = [
+            'faktur' => $faktur,
+        ];
 
-        $data = array(
+        $data = [
             'status' => $status,
             'jamsetuju1' => $jamsetuju,
             'penyetuju1' => $penyetuju,
-            'tanggal_setuju1' => $tanggalsetuju
-        );
+            'tanggal_setuju1' => $tanggalsetuju,
+        ];
 
-        $data2 = array(
-            'status' => $status2,
-            'jamsetuju2' => $jamsetuju,
-            'penyetuju2' => $penyetuju,
-            'tanggal_setuju2' => $tanggalsetuju
-        );
-
-        if ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
-            $this->m_permintaan->update($where, $data);
-            $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui..., Masih Menunggu Persetujuan Kepala Gudang...');
-        } elseif ($this->session->userdata('role') == 'sdr_Kepala Gudang') {
-            $this->m_permintaan->update($where, $data2);
-            $this->session->set_userdata('approve', 'Yeay, Request Berhasil Disetujui...');
-        }
+        $this->m_permintaan->update($where, $data);
+        $this->session->set_userdata('approve', 'Permintaan Anda telah disetujui, tunggu pemerosesan dari Admin Gudang');
+        return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
     public function rejectPermintaan()
@@ -226,38 +212,37 @@ class c_permintaan extends MY_Controller
         $tanggaltolak = $this->input->post('tanggaltolak');
         $jamtolak = $this->input->post('jam');
         $iduser = $this->input->post('id_user');
+        $penolak = $this->input->post('penolak');
 
-        $data = array(
-            'status' => $status
-        );
+        $data = [
+            'status' => $status,
+        ];
 
-        $data2 = array(
+        $data2 = [
             'faktur' => $faktur,
             'alasan_tolak' => $alasan,
             'tanggal_tolak' => $tanggaltolak,
             'jamtolak' => $jamtolak,
-            'id_user' => $iduser
-        );
+            'id_user' => $iduser,
+            'penolak' => $penolak,
+        ];
 
-        $where = array(
-            'faktur' => $faktur
-        );
+        $where = [
+            'faktur' => $faktur,
+        ];
 
         $this->m_permintaan->update($where, $data);
         $this->m_permintaan->saveTolak($data2);
-        $this->session->set_userdata('tolak', 'Yahh, Request Ditolak...');
+        $this->session->set_userdata('tolak', 'Permintaan Anda telah ditolak, segera lakukan pembaruan');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
     public function deleteBarang($id)
     {
-        if (!isset($id))
-            show_404();
+        $this->m_detail->delete($id);
+        $this->session->set_flashdata('success', 'Data barang telah dihapus');
+        return;
 
-        if ($this->m_permintaan->delete($id)) {
-            $this->session->set_flashdata('success', 'Berhasil dihapus');
-            redirect(site_url('Sundries/Transaksi/c_permintaan/index'));
-        }
     }
 
     public function addBarang()
@@ -267,16 +252,16 @@ class c_permintaan extends MY_Controller
         $jumlah = $this->input->post('jumlah');
         $catatan = $this->input->post('keterangan');
 
-        $data = array(
+        $data = [
             'faktur' => $faktur,
             'id_barang' => $barang,
             'jumlah' => $jumlah,
-            'keterangan' => $catatan
-        );
+            'keterangan' => $catatan,
+        ];
 
-        $this->m_permintaan->add($data);
-        $this->session->set_userdata('sukses', 'Yeay, Barang Berhasil Ditambahkan...');
-        return redirect('Sundries/Transaksi/c_permintaan/index');
+        $this->m_detail->add($data);
+        $this->session->set_userdata('sukses', 'Data barang telah ditambahkan');
+        redirect('Sundries/Transaksi/c_permintaan/detail/' . $faktur);
     }
 
     public function permintaanUlang()
@@ -286,22 +271,22 @@ class c_permintaan extends MY_Controller
         $tanggal = $this->input->post('tanggal');
         $stkeranjang = $this->input->post('stkeranjang');
 
-        $data = array(
+        $data = [
             'status' => $status,
-            'tanggal' => $tanggal
-        );
+            'tanggal' => $tanggal,
+        ];
 
-        $where = array(
-            'faktur' => $faktur
-        );
+        $where = [
+            'faktur' => $faktur,
+        ];
 
-        $data2 = array(
-            'statuskeranjang' => $stkeranjang
-        );
+        $data2 = [
+            'statuskeranjang' => $stkeranjang,
+        ];
 
         $this->m_permintaan->update($where, $data);
         $this->m_permintaan->updateKeranjang($where, $data2);
-        $this->session->set_userdata('sukses', 'Yeay, Request Berhasil Dikirim Ulang...');
+        $this->session->set_userdata('sukses', 'Permintaan Anda telah dikirim kembali');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
@@ -309,17 +294,23 @@ class c_permintaan extends MY_Controller
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
+        $pemroses = $this->input->post('pemroses');
+        $tanggalproses = $this->input->post('tanggalproses');
+        $jamproses = $this->input->post('jamproses');
 
-        $data = array(
-            'status' => $status
-        );
+        $data = [
+            'status' => $status,
+            'pemroses' => $pemroses,
+            'tanggal_proses' => $tanggalproses,
+            'jamproses' => $jamproses,
+        ];
 
-        $where = array(
-            'faktur' => $faktur
-        );
+        $where = [
+            'faktur' => $faktur,
+        ];
 
         $this->m_permintaan->update($where, $data);
-        $this->session->set_userdata('sukses', 'Yeay, Request Berhasil Diproses...');
+        $this->session->set_userdata('sukses', 'Permintaan Anda telah diproses, tunggu pemberitahuan dari Admin Gudang');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
@@ -327,19 +318,21 @@ class c_permintaan extends MY_Controller
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
-        $jam = $this->input->post('jam');
+        $tanggalselesai = $this->input->post('tanggalselesai');
+        $jamselesai = $this->input->post('jamselesai');
 
-        $data = array(
+        $data = [
             'status' => $status,
-            'waktu' => $jam
-        );
+            'tanggal_selesai' => $tanggalselesai,
+            'jamselesai' => $jamselesai,
+        ];
 
-        $where = array(
-            'faktur' => $faktur
-        );
+        $where = [
+            'faktur' => $faktur,
+        ];
 
         $this->m_permintaan->update($where, $data);
-        $this->session->set_userdata('sukses', 'Yeay, Request Berhasil Diselesaikan...');
+        $this->session->set_userdata('sukses', 'Permintaan Anda telah selesai');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 
@@ -351,19 +344,19 @@ class c_permintaan extends MY_Controller
         $jam = $this->input->post('jam');
         $surjal = $this->input->post('surjal');
 
-        $data = array(
+        $data = [
             'status' => $status,
             'waktu' => $jam,
             'nomorpo' => $po,
-            'suratjalan' => $surjal
-        );
+            'suratjalan' => $surjal,
+        ];
 
-        $where = array(
-            'faktur' => $faktur
-        );
+        $where = [
+            'faktur' => $faktur,
+        ];
 
         $this->m_permintaan->update($where, $data);
-        $this->session->set_userdata('sukses', 'Yeay, Barang Sudah Tiba...');
+        $this->session->set_userdata('sukses', 'Barang yang Anda minta sudah ada');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
 

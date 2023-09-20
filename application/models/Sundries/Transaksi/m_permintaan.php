@@ -5,7 +5,7 @@ class m_permintaan extends CI_Model
 {
     protected $table = "sdr_request_sundries";
     protected $primaryKey = "id_request_sundries";
-    protected $tabletolak = "sdr_tolak_sundries";
+    protected $tabletolak = "sdr_request_sundries_tolak";
     protected $table2 = "sdr_request_sundries_detail";
 
     public function __construct()
@@ -37,27 +37,24 @@ class m_permintaan extends CI_Model
             ->result();
     }
 
-    // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui1'
-    public function getSetuju1()
+    public function getBarangSundries()
     {
-        return $this->db->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Disetujui1')
-            ->order_by($this->primaryKey, 'DESC')
-            ->get()
-            ->result();
+        return $this->db->from('sdr_barang')
+        ->join('sdr_jenis', 'sdr_jenis.id_jenis=sdr_barang.id_jenis')
+        ->join('sdr_kategori', 'sdr_kategori.id_kategori=sdr_jenis.id_kategori')
+        ->where('sdr_jenis.id_kategori', '1')
+        ->get()
+        ->result();
     }
 
-    // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui2'
-    public function getSetuju2()
+    // Mengambil data permintaan berdasarkan id_user dan status 'Disetujui'
+    public function getSetuju()
     {
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Disetujui2')
+            ->where('status', 'Disetujui')
             ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
@@ -116,18 +113,6 @@ class m_permintaan extends CI_Model
             ->result();
     }
 
-    // Fungsi untuk mengambil data permintaan berdasarkan status 'Disetujui2' tanpa memperhitungkan id_user
-    public function bySetuju2()
-    {
-        return $this->db->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by($this->primaryKey, 'DESC')
-            ->where('status', 'Disetujui2')
-            ->get()
-            ->result();
-    }
-
     // Fungsi untuk mengambil data permintaan berdasarkan status 'Ditolak' tanpa memperhitungkan id_user
     public function byTolak()
     {
@@ -170,19 +155,19 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where('status', 'Disetujui2')
+            ->where('status', 'Disetujui')
             ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
 
-    // Fungsi untuk mengambil data permintaan berdasarkan status 'Disetujui1' untuk kepala gudang
+    // Fungsi untuk mengambil data permintaan berdasarkan status 'Disetujui' untuk kepala gudang
     public function forKepalaGudang()
     {
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where('status', 'Disetujui1')
+            ->where('status', 'Disetujui')
             ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
@@ -234,9 +219,11 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Ditolak')
             ->order_by($this->primaryKey, 'DESC')
+            ->group_by($this->tabletolak . '.faktur')
             ->get()
             ->result();
     }
@@ -358,7 +345,7 @@ class m_permintaan extends CI_Model
     // Fungsi untuk menghapus data barang dari keranjang berdasarkan id_barang dan id_user
     public function deleteKeranjang($id_barang, $id_user)
     {
-        $hapus = $this->db->delete('sdr_request_sundries_keranjang', array('id_barang' => $id_barang, 'id_user' => $id_user));
+        $hapus = $this->db->delete('sdr_request_sundries_keranjang', ['id_barang' => $id_barang, 'id_user' => $id_user]);
         if ($hapus) {
             return 1;
         }
@@ -403,9 +390,10 @@ class m_permintaan extends CI_Model
         $lastKode = str_pad($faktur, 4, "0", STR_PAD_LEFT);
         $tahun = date("y");
         $bulan = date("m");
+        $tanggal = date("d");
         $rs = "RS";
 
-        $newfaktur = $rs . "" . $tahun . "" . $bulan . "." . $lastKode;
+        $newfaktur = $rs . "-" . $tanggal . "-" . $bulan . "-" . $tahun . "-" . $lastKode;
 
         return $newfaktur;
     }
