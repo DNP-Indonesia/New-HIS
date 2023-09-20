@@ -459,11 +459,8 @@
                 										</button>
                 									</div>
                 									<form
-<<<<<<< HEAD
+
                 										action="<?php echo site_url("Master/action_his/do_mutasi_karyawan/" . $u->nik) ?>"
-=======
-                										action="<?php echo site_url("action_his/do_mutasi_karyawan/" . $u->nik) ?>"
->>>>>>> parent of 6ffd473 (recycle)
                 										method="post">
                 										<div class="modal-body">
                 											<div class="form-row">
@@ -642,11 +639,8 @@
                 					<span aria-hidden="true">×</span>
                 				</button>
                 			</div>
-<<<<<<< HEAD
+
                 			<form action="<?php echo site_url("Master/action_his/do_tbh_karyawan") ?>" method="post">
-=======
-                			<form action="<?php echo site_url("action_his/do_tbh_karyawan") ?>" method="post">
->>>>>>> parent of 6ffd473 (recycle)
                 				<div class="modal-body">
                 					<div class="form-row">
                 						<div class="col-md-6 mb-3">

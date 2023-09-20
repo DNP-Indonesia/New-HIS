@@ -5,7 +5,7 @@
                 <h2>Data Karyawan</h2>
                 <table class="table">
                     <tbody>
-<<<<<<< HEAD
+
                         <?php foreach ($karyawan as $log):
                             
                             $thn_lahir       = substr($log->tgl_lahir, 0, 4);
@@ -15,10 +15,6 @@
                             $tgl_pensiun = $thn_pensiun . "-" . $bln_lahir . "-" . $t_lahir;
 
                             ?>
-                            
-=======
-                        <?php foreach ($karyawan as $log): ?>
->>>>>>> parent of 6ffd473 (recycle)
                             <tr>
                                 <th scope="row">NIK</th>
                                 <td><?php echo $log->nik ?></td>
@@ -65,11 +61,8 @@
                             </tr>
                             <tr>
                                 <th scope="row">Tanggal Pensiun</th>
-<<<<<<< HEAD
+
                                 <td><?php echo date('d M y', strtotime($tgl_pensiun)) ?></td>
-=======
-                                <td><?php echo date('d M y', strtotime($log->tgl_lahir)) ?></td>
->>>>>>> parent of 6ffd473 (recycle)
                             </tr>
                             <tr>
                                 <th scope="row">Status</th>

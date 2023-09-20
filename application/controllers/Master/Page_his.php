@@ -11,11 +11,7 @@ class Page_his extends MY_Controller
   public function home()
   {
     $menu = 'hom';
-<<<<<<< HEAD
     $data['karyawanAkanPensiun'] = $this->M_his->getKaryawanAkanPensiun();
-=======
-    $data[''] = "";
->>>>>>> parent of 6ffd473 (recycle)
 
     // $data['sidebar'] = $this->load->view('side_medical/admin_medical');
     if (

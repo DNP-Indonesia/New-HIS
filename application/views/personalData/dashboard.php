@@ -124,13 +124,9 @@
         transform: translateY(-5px);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
-<<<<<<< HEAD
+
 
    
 
 </style>
 
-
-=======
-</style>
->>>>>>> parent of 6ffd473 (recycle)
