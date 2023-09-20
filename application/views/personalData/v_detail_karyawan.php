@@ -5,7 +5,13 @@
                 <h2>Data Karyawan</h2>
                 <table class="table">
                     <tbody>
-                        <?php foreach ($karyawan as $log): ?>
+                        <?php foreach ($karyawan as $log):
+                            $thn_lahir       = substr($log->tgl_lahir, 0, 4);
+                            $bln_lahir       = substr($log->tgl_lahir, 5, 2);
+                            $t_lahir         = substr($log->tgl_lahir, 8, 2);
+                            $thn_pensiun = $thn_lahir + 55;
+                            $tgl_pensiun = $thn_pensiun . "-" . $bln_lahir . "-" . $t_lahir;
+                            ?>
                             <tr>
                                 <th scope="row">NIK</th>
                                 <td><?php echo $log->nik ?></td>
@@ -52,7 +58,7 @@
                             </tr>
                             <tr>
                                 <th scope="row">Tanggal Pensiun</th>
-                                <td><?php echo date('d M y', strtotime($log->tgl_lahir)) ?></td>
+                                <td><?php echo date('d M y', strtotime($tgl_pensiun)) ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">Status</th>

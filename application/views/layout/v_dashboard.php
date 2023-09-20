@@ -34,7 +34,6 @@
                 <div class="card text-white  mb-3">
                     <div class="card-body">
                         <h5 class="card-title">General Affair</h5>
-
                     </div>
                 </div>
             </a>
@@ -143,7 +142,7 @@
 
 
 <script>
-   const karyawanAkanPensiun = <?= json_encode($karyawanAkanPensiun) ?>; // Perhatikan penggunaan sintaksis PHP di sini.
+const karyawanAkanPensiun = <?= json_encode($karyawanAkanPensiun) ?>; // Perhatikan penggunaan sintaksis PHP di sini.
 
 function showNotification() {
     const notifikasi = document.getElementById('notifikasi');
@@ -158,7 +157,7 @@ function showNotification() {
                 const tahunPensiun = tanggalLahir.getFullYear() + 55;
                 const tanggalPensiun = new Date(tahunPensiun, tanggalLahir.getMonth(), tanggalLahir.getDate());
                 const formattedTanggalPensiun = tanggalPensiun.toLocaleDateString('id-ID');
-                return `<li>${karyawan.nama} - ${formattedTanggalPensiun} - <a href="<?php echo site_url('Master/Page_his/history_karyawan/') ?>${karyawan.nik}" class="btn btn-primary btn-sm">Detail</a></li>`;
+                return `<li>${karyawan.nama} - ${formattedTanggalPensiun} - <a href="<?php echo site_url("Master/Page_his/history_karyawan/")?>${karyawan.nik}" class="btn btn-primary btn-sm">Detail</a></li>`;
             }).join('')}</ul>` :
             `<p>Tidak ada karyawan yang akan pensiun dalam 1 bulan ke depan.</p>`}
          `;

@@ -200,7 +200,7 @@ class M_his extends CI_Model{
         $tahunPensiun = $tahunSekarang;
     
         // Query untuk mengambil daftar karyawan yang akan pensiun dalam satu bulan ke depan
-        $this->db->select('nama, tgl_lahir');
+        $this->db->select('nama,nik, tgl_lahir');
         $this->db->from('his_karyawan');
         $this->db->where('YEAR(tgl_lahir) + 55 =', $tahunPensiun);
         $this->db->where('keterangan', 'Aktif'); // Menambahkan konstrain untuk keterangan = Aktif
