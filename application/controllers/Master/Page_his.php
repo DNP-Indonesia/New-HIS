@@ -11,7 +11,7 @@ class Page_his extends MY_Controller
   public function home()
   {
     $menu = 'hom';
-    $data[''] = "";
+    $data['karyawanAkanPensiun'] = $this->M_his->getKaryawanAkanPensiun();
 
     // $data['sidebar'] = $this->load->view('side_medical/admin_medical');
     if (
