@@ -40,6 +40,7 @@ class c_permintaan extends MY_Controller
         $data['setuju'] = $this->m_permintaan->getSetuju();
         $data['tolak'] = $this->m_permintaan->getTolak();
         $data['proses'] = $this->m_permintaan->getProses();
+        $data['ready'] = $this->m_permintaan->getReady();
         $data['selesai'] = $this->m_permintaan->getSelesai();
 
         // Kepala Bagian
@@ -142,8 +143,7 @@ class c_permintaan extends MY_Controller
         $status = $this->input->post('status');
         $jamdibuat = $this->input->post('jamdibuat');
         $nama = $this->input->post('nama');
-
-        $statusstok = 'Tidak Ready';
+        $statusstok = $this->input->post('statusstok');
 
         $cek2 = $this->m_permintaan->cekKeranjang2($iduser)->num_rows();
         if ($cek2 == 0) {
@@ -348,7 +348,7 @@ class c_permintaan extends MY_Controller
             'faktur' => $faktur,
         ];
 
-        $this->m_permintaan->update($where, $data);
+        $this->m_permintaan->update2($where, $data);
         $this->session->set_userdata('sukses', 'Barang yang Anda minta sudah ada');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }

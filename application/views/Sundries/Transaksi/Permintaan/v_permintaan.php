@@ -84,6 +84,10 @@
                         aria-controls="nav-contact" aria-selected="false">
                         Pemrosesan
                     </a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ready" role="tab"
+                        aria-controls="nav-contact" aria-selected="false">
+                        Barang Ready
+                    </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#selesai" role="tab"
                         aria-controls="nav-contact" aria-selected="false">
                         Selesai
@@ -321,7 +325,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="diproses" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade" id="diproses" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="table-container table-responsive-xl">
                         <table class="table table-borderless small tbl">
                             <thead>
@@ -400,7 +404,87 @@
                         </table>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade" id="ready" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="table-container table-responsive-xl">
+                        <table class="table table-borderless small tbl">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Faktur</th>
+                                    <th class="text-center">Bagian</th>
+                                    <th class="text-center">Dibuat Oleh</th>
+                                    <!-- <th class="text-center">Dibuat Tanggal</th>
+                                    <th class="text-center">Dibuat Jam</th> -->
+                                    <th class="text-center">Barang</th>
+                                    <th class="text-center">Jumlah</th>
+                                    <th class="text-center">Status Barang</th>
+                                    <th class="text-center">Opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $no = 1;
+                                    foreach ($ready as $tempel) {
+                                        ?>
+                                <tr>
+                                    <td class="text-center">
+                                        <?php echo $no; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->faktur; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_section; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->nama_peminta; ?>
+                                    </td>
+                                    <!-- <td class="text-center">
+                                        <?php echo $tempel->tanggal; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jamdibuat; ?>
+                                    </td> -->
+                                    <td class="text-center">
+                                        <?php
+                                        $id_barang = $tempel->id_barang;
+                                        $barang_data = $this->db->get_where('sdr_barang', ['id_barang' => $id_barang])->row();
+                                        
+                                        if ($barang_data) {
+                                            echo $barang_data->barang;
+                                        } else {
+                                            echo 'Barang Tidak Ditemukan';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo $tempel->jumlah; ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($tempel->statusstok == 'Ready') { ?>
+                                        <h6>
+                                            <span class="badge badge-info">
+                                                <?php echo $tempel->statusstok; ?>
+                                            </span>
+                                        </h6>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
+                                            Cetak PDF
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php
+                                        $no++;
+                                    }
+                                    ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="table-container table-responsive-xl">
                         <table class="table table-borderless small tbl">
                             <thead>
@@ -732,7 +816,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="diproses" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade" id="diproses" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="table-container table-responsive-xl">
                         <table class="table table-borderless small tbl">
                             <thead>
@@ -811,7 +895,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="table-container table-responsive-xl">
                         <table class="table table-borderless small tbl">
                             <thead>
@@ -1237,7 +1321,7 @@
 
                                 <input type="text" class="form-control" value="Request" name="status" hidden>
                                 <input type="text" class="form-control" value="-" name="alasan" hidden>
-                                <input type="text" class="form-control" value="tidak" name="statuskeranjang"
+                                <input type="text" class="form-control" value="Tidak Ready" name="statusstok"
                                     hidden>
                             </div>
                         </div>

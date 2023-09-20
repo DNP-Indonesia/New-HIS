@@ -80,12 +80,15 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->join($this->table2, $this->table2 . '.faktur=' . $this->table . '.faktur')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Diproses')
-            ->order_by($this->primaryKey, 'DESC')
+            ->where($this->table . '.status', 'Diproses')
+            ->where($this->table2 . '.statusstok', 'Ready')
+            ->order_by($this->table2 . '.id_detail_sundries', 'DESC') // Mengurutkan berdasarkan id_detail_sundries
             ->get()
             ->result();
     }
+      
 
     // Mengambil data permintaan berdasarkan id_user dan status 'Diproses'
     public function getProses()
@@ -303,7 +306,7 @@ class m_permintaan extends CI_Model
     }
 
     // Fungsi untuk menyimpan data permintaan
-    public function save($data, $iduser, $faktur, $stkeranjang, $barangready)
+    public function save($data, $iduser, $faktur, $statusstok)
     {
         $simpan = $this->db->insert($this->table, $data);
         if ($simpan) {
@@ -314,8 +317,7 @@ class m_permintaan extends CI_Model
                     'id_barang' => $tempel->id_barang,
                     'jumlah' => $tempel->jumlah,
                     'keterangan' => $tempel->keterangan,
-                    'statuskeranjang' => $stkeranjang,
-                    'barangready' => $barangready
+                    'statusstok' => $statusstok,
                 );
                 $this->db->insert($this->table2, $detail);
             }
@@ -368,6 +370,12 @@ class m_permintaan extends CI_Model
     {
         $this->db->where($where);
         $this->db->update($this->table, $data);
+    }
+
+    public function update2($where, $data)
+    {
+        $this->db->where($where);
+        $this->db->update($this->table2, $data);
     }
 
     // Fungsi untuk menyimpan data tolak

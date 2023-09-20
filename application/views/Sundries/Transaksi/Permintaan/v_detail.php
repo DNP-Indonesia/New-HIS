@@ -115,6 +115,7 @@
                         data-target="#modal-proses<?php echo $tempel->id_request_sundries; ?>">
                         Proses
                     </a>
+                    
                     <?php } ?>
                 </div>
                 <div class="col-md-6">
@@ -162,7 +163,8 @@
                                 <th class="text-center">Ukuran</th>
                                 <th class="text-center">Satuan</th>
                                 <th class="text-center">Catatan</th>
-                                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
+                                <th class="text-center">Status Barang</th>
+                                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak' or $this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == 'Diproses') { ?>
                                 <th class="text-center">Opsi</th>
                                 <?php } ?>
                             </tr>
@@ -198,18 +200,27 @@
                                     <?php echo $tempel->keterangan; ?>
                                 </td>
                                 <td class="text-center">
+                                    <?php echo $tempel->statusstok; ?>
+                                </td>
+                                <td class="text-center">
                                     <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
                                     <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal"
                                         data-target="#modal-edit<?php echo $tempel->id_detail_sundries; ?>">
                                         <span class="text">Ubah</span>
                                     </a>
+                                    <a href="<?php echo site_url('deletebarangpermintaan/' . $tempel->id_detail_sundries); ?>" class="btn btn-sm btn-danger">
+                                        Hapus
+                                    </a>
+                                    <?php } ?>
+                                    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == 'Diproses' && $tempel->statusstok == 'Belum Ready') { ?>
+                                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
+                                        data-target="#modal-ready<?php echo $tempel->id_detail_sundries; ?>">
+                                        <span class="text">Ready</span>
+                                    </a>
                                     <!-- <a onclick="deleteConfirm('<?php echo base_url('Sundries/requestsundriescontroller/barangdelete/' . $tempel->id_detail_sundries); ?>')" href="#"
                                         class="btn btn-sm btn-danger">
                                         Hapus
                                     </a> -->
-                                    <a href="<?php echo site_url('deletebarangpermintaan/' . $tempel->id_detail_sundries); ?>" class="btn btn-sm btn-danger">
-                                        Hapus
-                                    </a>
                                     <?php } ?>
                                 </td>
                             </tr>
@@ -715,6 +726,65 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <input type="text" class="form-control" name="status" value="Diproses" required
+                                hidden>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Lanjut</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<?php foreach ($data as $tempel) { ?>
+<div class="modal fade" id="modal-ready<?php echo $tempel->id_request_sundries; ?>" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Barang Ready</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form action="<?php echo site_url('permintaansiap'); ?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Faktur</label>
+                            <input type="text" class="form-control" name="faktur" required
+                                value="<?php echo $tempel->faktur; ?>" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Bagian</label>
+                            <input type="text" class="form-control" name="bagian" required
+                                value="<?php echo $tempel->nama_section; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Oleh</label>
+                            <input type="text" class="form-control" name="nama" required
+                                value="<?php echo $tempel->nama_peminta; ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Tanggal</label>
+                            <input type="text" class="form-control" name="tanggal" required
+                                value="<?php echo $tempel->tanggal; ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Jam</label>
+                            <input type="text" class="form-control" name="tanggal" required
+                                value="<?php echo $tempel->jamdibuat; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <input type="text" class="form-control" name="statusstok" value="Ready" required
                                 hidden>
                         </div>
                     </div>
