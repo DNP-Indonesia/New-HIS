@@ -6,10 +6,7 @@
         </h1>
         <p class="lead text-gray-800 mb-5">HRCA Information System</p>
         <p class="text-gray-500 mb-0">Selamat datang, Salam Sehat!</p>
-<<<<<<< HEAD
         <div class="notifikasi" id="notifikasi"></div>
-=======
->>>>>>> parent of 6ffd473 (recycle)
     </div>
 </div>
 <br>
@@ -118,7 +115,6 @@
     .dropdown-content a:hover {
         background-color: #f1f1f1;
     }
-<<<<<<< HEAD
 
     .notifikasi {
     position: fixed;
@@ -183,6 +179,3 @@ if (karyawanAkanPensiun.length > 0) {
 }
 
 </script>
-=======
-</style>
->>>>>>> parent of 6ffd473 (recycle)

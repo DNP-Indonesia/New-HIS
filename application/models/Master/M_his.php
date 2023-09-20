@@ -192,7 +192,6 @@ class M_his extends CI_Model{
         
     }
 
-<<<<<<< HEAD
     function getKaryawanAkanPensiun() {
         // Ambil tahun sekarang
         $tahunSekarang = date('Y');
@@ -210,8 +209,6 @@ class M_his extends CI_Model{
         return $query->result(); // Mengembalikan daftar karyawan
     }
 
-=======
->>>>>>> parent of 6ffd473 (recycle)
     function data_divisi(){
         return $this->db->from('his_divisi')
             ->get()
