@@ -171,7 +171,7 @@
                                         class="btn btn-sm btn-danger">
                                         Hapus
                                     </a> -->
-                                    <a href="<?php echo site_url('deletebarangpermintaan/' . $tempel->id_detail_sundries); ?>" class="btn btn-sm btn-danger">
+                                    <a href="<?php echo site_url('deletebarangestimasi/' . $tempel->id_detail_sundries); ?>" class="btn btn-sm btn-danger">
                                         Hapus
                                     </a>
                                     <?php } ?>
@@ -246,12 +246,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Persetujuan Permintaan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Persetujuan Estimasi</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">x</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('approvepermintaan'); ?>" method="POST">
+            <form action="<?php echo site_url('approveestimasi'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
@@ -312,12 +312,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Penolakan Permintaan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Penolakan Estimasi</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">x</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('rejectpermintaan'); ?>" method="POST">
+            <form action="<?php echo site_url('rejectestimasi'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
@@ -389,12 +389,12 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Pembaruan Permintaan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pembaruan Estimasi</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">x</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('updatepermintaan/'); ?>" method="POST">
+            <form action="<?php echo site_url('updateestimasi/'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
@@ -442,7 +442,7 @@
                     <span aria-hidden="true">x</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('addbarangpermintaan'); ?>" method="POST">
+            <form action="<?php echo site_url('addbarangestimasi'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
@@ -502,12 +502,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Pengajuan Ulang Permintaan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pengajuan Ulang Estimasi</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">x</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('permintaanulang'); ?>" method="POST">
+            <form action="<?php echo site_url('estimasiulang'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">

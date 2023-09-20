@@ -41,7 +41,7 @@
         <div class="container-fluid">
             <div class="card shadow mt-4">
                 <div class="card-header py-3">
-                    <h5 class="m-0 font-weight-bold text-success">Data Consumption Estimation Anda</h5>
+                    <h5 class="m-0 font-weight-bold text-success">Data Consumption Anda</h5>
                 </div>
                 <div class="card-body">
                     <?php
@@ -58,7 +58,7 @@
             </div>   
             <div class="card shadow mt-4">
                 <div class="card-header py-3">
-                    <h5 class="m-0 font-weight-bold text-success">Detail Consumption Estimation Anda</h5>
+                    <h5 class="m-0 font-weight-bold text-success">Detail Consumption Anda</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

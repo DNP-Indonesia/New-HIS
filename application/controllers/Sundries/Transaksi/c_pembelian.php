@@ -28,6 +28,7 @@ class c_pembelian extends MY_Controller
 
     public function formPembelian()
     {
+        // $data['barang'] = $this->m_pembelian->getBarangBelumSiap();
         $data['permintaanbarang'] = $this->m_pembelian->getPermintaanBarang();
         $data['fakturotomatis'] = $this->m_pembelian->generateFaktur();
         $data['keranjang'] = $this->m_pembelian->getKeranjang();

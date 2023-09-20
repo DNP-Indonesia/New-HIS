@@ -143,8 +143,7 @@ class c_permintaan extends MY_Controller
         $jamdibuat = $this->input->post('jamdibuat');
         $nama = $this->input->post('nama');
 
-        $stkeranjang = $this->input->post('statuskeranjang');
-        $barangready = 'tidak';
+        $statusstok = 'Tidak Ready';
 
         $cek2 = $this->m_permintaan->cekKeranjang2($iduser)->num_rows();
         if ($cek2 == 0) {
@@ -159,7 +158,7 @@ class c_permintaan extends MY_Controller
                 'jamdibuat' => $jamdibuat,
             ];
 
-            $this->m_permintaan->save($data, $iduser, $faktur, $stkeranjang, $barangready);
+            $this->m_permintaan->save($data, $iduser, $faktur, $statusstok);
             // $this->session->set_userdata('sukses', 'Sukses, Request Berhasil Dibuat, Masih Menunggu Persetujuan Kepala Bagian dan Kepala Gudang....');
             $this->session->set_userdata('sukses', 'Permintaan Anda telah dibuat, tunggu persetujuan dari Kepala Bagian');
             redirect('Sundries/Transaksi/c_permintaan/index');
@@ -339,16 +338,10 @@ class c_permintaan extends MY_Controller
     public function permintaanSiap()
     {
         $faktur = $this->input->post('faktur');
-        $status = $this->input->post('status');
-        $po = $this->input->post('po');
-        $jam = $this->input->post('jam');
-        $surjal = $this->input->post('surjal');
+        $statusstok = $this->input->post('statusstok');
 
         $data = [
-            'status' => $status,
-            'waktu' => $jam,
-            'nomorpo' => $po,
-            'suratjalan' => $surjal,
+            'statusstok' => $statusstok,
         ];
 
         $where = [

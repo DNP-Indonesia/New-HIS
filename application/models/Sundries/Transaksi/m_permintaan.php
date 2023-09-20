@@ -75,6 +75,18 @@ class m_permintaan extends CI_Model
             ->result();
     }
 
+    public function getReady()
+    {
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
+            ->where('status', 'Diproses')
+            ->order_by($this->primaryKey, 'DESC')
+            ->get()
+            ->result();
+    }
+
     // Mengambil data permintaan berdasarkan id_user dan status 'Diproses'
     public function getProses()
     {

@@ -255,6 +255,12 @@ class m_estimasi extends CI_Model
         $this->db->update($this->table, $data);
     }
 
+    public function saveTolak($data)
+    {
+        $this->db->insert($this->tabletolak, $data);
+    }
+
+
     // Fungsi untuk meng-generate nomor faktur berdasarkan data terakhir dalam database
     public function generateFaktur()
     {

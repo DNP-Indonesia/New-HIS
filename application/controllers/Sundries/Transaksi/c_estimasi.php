@@ -19,6 +19,9 @@ class c_estimasi extends MY_Controller
         $data['estimasi'] = $this->m_estimasi->getEstimasi();
         $data['setuju'] = $this->m_estimasi->getSetuju();
         $data['tolak'] = $this->m_estimasi->getTolak();
+        // $data['proses'] = $this->m_estimasi->getProses();
+        // $data['ready'] = $this->m_estimasi->getReady();
+        // $data['selesai'] = $this->m_estimasi->getSelesai();
 
         // Kepala Gudang
         $data['kabagestimasi'] = $this->m_estimasi->forKepalaBagianPermintaan();
@@ -128,25 +131,40 @@ class c_estimasi extends MY_Controller
 
         $this->m_estimasi->update($where, $data);
         $this->session->set_userdata('setuju', 'Estimasi berhasil disetujui');
-        redirect('Sundries/Transaksi/c_permintaan/dasboard');
+        redirect('Sundries/Transaksi/c_estimasi/index');
     }
 
     public function rejectEstimasi()
     {
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
+        $alasan = $this->input->post('alasan');
+        $tanggaltolak = $this->input->post('tanggaltolak');
+        $jamtolak = $this->input->post('jam');
+        $iduser = $this->input->post('id_user');
+        $penolak = $this->input->post('penolak');
  
         $data = array(
             'status' => $status
         );
+
+        $data2 = [
+            'faktur' => $faktur,
+            'alasan_tolak' => $alasan,
+            'tanggal_tolak' => $tanggaltolak,
+            'jamtolak' => $jamtolak,
+            'id_user' => $iduser,
+            'penolak' => $penolak,
+        ];
      
         $where = array(
             'faktur' => $faktur
         );
 
         $this->m_estimasi->update($where, $data);
+        $this->m_estimasi->saveTolak($data2);
         $this->session->set_userdata('tolak', 'Estimasi berhasil ditolak');
-        redirect('Sundries/Transaksi/c_permintaan/dasboard');
+        redirect('Sundries/Transaksi/c_estimasi/index');
     }
 }
 ?>

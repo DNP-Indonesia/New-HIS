@@ -168,15 +168,37 @@
 
     <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Bagian' || $this->session->userdata('role') == 'sdr_Kepala Bagian') { ?>
 
-    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
+    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
         echo 'active';
     } ?>">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi-stok"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Transaksi Sundries</span>
+            <span>Transaksi Stok</span>
         </a>
-        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
+        <div id="collapse-transaksi-stok" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok'])) {
+            echo 'show';
+        } ?>" aria-labelledby="headingPages"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item <?php if ($menu == 'estimasi') {
+                    echo 'active';
+                } ?>" href="<?php echo site_url('estimasi'); ?>">
+                    Estimation Making
+                </a>
+                <a class="collapse-item <?php if ($menu == 'konsumsistok') {
+                    echo 'active';
+                } ?>" href="<?php echo site_url('konsumsistok'); ?>">
+                    Consumption Estimation
+                </a>
+            </div>
+        </div>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse"
+            data-target="#collapse-transaksi-non-stok" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Transaksi Non-Stok</span>
+        </a>
+        <div id="collapse-transaksi-non-stok" class="collapse  <?php if (isset($menu) && in_array($menu, ['permintaan', 'konsumsi'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
@@ -186,40 +208,35 @@
                 } ?>" href="<?php echo site_url('permintaan'); ?>">
                     Request Sundries
                 </a>
-                <a class="collapse-item <?php if ($menu == 'estimasi') {
-                    echo 'active';
-                } ?>" href="<?php echo site_url('estimasi'); ?>">
-                    Estimation Making
-                </a>
                 <a class="collapse-item <?php if ($menu == 'konsumsi') {
                     echo 'active';
                 } ?>" href="<?php echo site_url('konsumsi'); ?>">
-                    Request Consumption
+                    Consumption Sundries
                 </a>
             </div>
         </div>
     </li>
 
-    <!-- <//?php if ($this->session->userdata('role') == 'sdr_Kepala Bagian') { ?>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-laporan"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Laporan</span>
-        </a>
-        <div id="collapse-laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Laporan Sundries</a>
-                <a class="collapse-item" href="#">Laporan Consumption</a>
-                <a class="collapse-item" href="#">Laporan Purchase</a>
-            </div>
+    <!-- </?php if ($this->session->userdata('role') == 'sdr_Kepala Bagian') { ?>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-laporan"
+        aria-expanded="true" aria-controls="collapsePages">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Laporan</span>
+    </a>
+    <div id="collapse-laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="#">Laporan Sundries</a>
+            <a class="collapse-item" href="#">Laporan Consumption</a>
+            <a class="collapse-item" href="#">Laporan Purchase</a>
         </div>
-    </li>
-    <//?php } ?> -->
+    </div>
+</li>
+</?php } ?> -->
 
     <?php } elseif ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'sdr_Kepala Gudang') { ?>
 
-    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
+    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'permintaan', 'pembelian', 'penerimaan'])) {
         echo 'active';
     } ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
@@ -227,7 +244,7 @@
             <i class="fas fa-fw fa-folder"></i>
             <span>Transaksi Sundries</span>
         </a>
-        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
+        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsistok', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
@@ -254,16 +271,16 @@
     <?php } ?>
 
     <?php if($this->session->userdata('role') == 'admin_medical' OR substr($this->session->userdata('role'),0,-2) == 'medical'){?>
-        <!-- ============================== ADMIN MEDICAL & USER MEDICAL ============================== -->
-        <?php $this->load->view('medical/side_medical/admin_medical');  ?>
-        <!-- ============================== \ADMIN MEDICAL & USER MEDICAL ============================== -->
-        <?php } ?>
+    <!-- ============================== ADMIN MEDICAL & USER MEDICAL ============================== -->
+    <?php $this->load->view('medical/side_medical/admin_medical'); ?>
+    <!-- ============================== \ADMIN MEDICAL & USER MEDICAL ============================== -->
+    <?php } ?>
 
-        <?php if(substr($this->session->userdata('role'),0,-2) == 'tk'){?>
-        <!-- ============================== TRAINING KAIZEN ============================== -->
-        <?php $this->load->view('tk/side_tk/tk');  ?>
-        <!-- ============================== \TRAINING KAIZEN ============================== -->
-        <?php } ?>
+    <?php if(substr($this->session->userdata('role'),0,-2) == 'tk'){?>
+    <!-- ============================== TRAINING KAIZEN ============================== -->
+    <?php $this->load->view('tk/side_tk/tk'); ?>
+    <!-- ============================== \TRAINING KAIZEN ============================== -->
+    <?php } ?>
 
     <!-- End Nav Item - Sidebar -->
 

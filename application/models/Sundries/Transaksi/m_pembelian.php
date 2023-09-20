@@ -11,7 +11,8 @@ class m_pembelian extends CI_Model
 
     public function getPembelian()
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user = ' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->order_by($this->primaryKey, 'DESC')
@@ -21,26 +22,48 @@ class m_pembelian extends CI_Model
 
     public function getPermintaanBarang()
     {
-        return $this->db->from('sdr_request_sundries_detail')
+        return $this->db
+            ->from('sdr_request_sundries_detail')
             ->join('sdr_request_sundries', 'sdr_request_sundries.faktur=sdr_request_sundries_detail.faktur')
             ->join('sdr_barang', 'sdr_barang.id_barang=sdr_request_sundries_detail.id_barang')
-            ->where('sdr_request_sundries.status', 'Disetujui2')
-            ->where('sdr_request_sundries_detail.statuskeranjang', 'tidak')
+            ->where('sdr_request_sundries.status', 'Disetujui')
+            ->where('sdr_request_sundries_detail.statuskeranjang', 'Tidak')
             ->get()
             ->result();
     }
 
     public function getPembelianById($id)
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->from($this->table)
             ->where($this->table . '.faktur', $id)
             ->get()
             ->result();
     }
 
+    public function getBarangBelumSiap()
+    {
+        $query1 = $this->db
+            ->select('sdr_estimasi_detail.*, "sdr_estimasi_detail" AS source_table')
+            ->from('sdr_estimasi_detail')
+            ->where('status', 'Belum Siap')
+            ->get_compiled_select();
+
+        $query2 = $this->db
+            ->select('sdr_request_sundries_detail.*, "sdr_request_sundries_detail" AS source_table')
+            ->from('sdr_request_sundries_detail')
+            ->where('status', 'Belum Siap')
+            ->get_compiled_select();
+
+        $union_query = "($query1) UNION ALL ($query2)";
+
+        return $this->db->query($union_query)->result();
+    }
+
     public function getIdPdf($id)
     {
-        $query = $this->db->from($this->table)
+        $query = $this->db
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user = ' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->where($this->table . '.faktur', $id)
@@ -66,7 +89,8 @@ class m_pembelian extends CI_Model
 
     public function forApprove()
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user = ' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->where($this->table . '.status', 'Request')
@@ -92,22 +116,23 @@ class m_pembelian extends CI_Model
 
     public function cekKerangjang($faktur)
     {
-        return $this->db->get_where($this->table2, array('faktur' => $faktur));
+        return $this->db->get_where($this->table2, ['faktur' => $faktur]);
     }
 
     public function cekKeranjang2($idbarang)
     {
-        return $this->db->get_where($this->table2, array('id_barang' => $idbarang));
+        return $this->db->get_where($this->table2, ['id_barang' => $idbarang]);
     }
 
     public function cekKeranjang3($faktur, $idbarang)
     {
-        return $this->db->get_where($this->table2, array('faktur' => $faktur, 'id_barang' => $idbarang));
+        return $this->db->get_where($this->table2, ['faktur' => $faktur, 'id_barang' => $idbarang]);
     }
 
     public function getJmlBarang($idbarang)
     {
-        return $this->db->from($this->table2)
+        return $this->db
+            ->from($this->table2)
             ->where('id_barang', $idbarang)
             ->get()
             ->result();
@@ -137,7 +162,7 @@ class m_pembelian extends CI_Model
 
     public function deleteKeranjang($id_barang)
     {
-        $hapus = $this->db->delete($this->table2, array('id_barang' => $id_barang));
+        $hapus = $this->db->delete($this->table2, ['id_barang' => $id_barang]);
         if ($hapus) {
             return 1;
         }
@@ -149,39 +174,39 @@ class m_pembelian extends CI_Model
         if ($simpan) {
             $carikeranjang = $this->db->get($this->table2);
             foreach ($carikeranjang->result() as $tempel) {
-                $detail = array(
+                $detail = [
                     'faktur' => $faktur,
                     'id_barang' => $tempel->id_barang,
                     'jumlah' => $tempel->jumlah,
                     'keterangan' => $tempel->keterangan,
-                    'faktursundries' => $tempel->faktursundries
-                );
+                    'faktursundries' => $tempel->faktursundries,
+                ];
                 $this->db->insert($this->tabledetail, $detail);
             }
-            $this->db->delete($this->table2, array('id_user' => $iduser));
+            $this->db->delete($this->table2, ['id_user' => $iduser]);
         }
     }
 
     public function generateFaktur()
     {
         $this->db->select('RIGHT(faktur, 4) as faktur', false);
-        $this->db->order_by("faktur", "DESC");
+        $this->db->order_by('faktur', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get($this->table);
 
-        if ($query->num_rows() <> 0) {
+        if ($query->num_rows() != 0) {
             $data = $query->row();
             $faktur = intval($data->faktur) + 1;
         } else {
             $faktur = 1;
         }
 
-        $lastKode = str_pad($faktur, 4, "0", STR_PAD_LEFT);
-        $tahun = date("y");
-        $bulan = date("m");
-        $rs = "PS";
+        $lastKode = str_pad($faktur, 4, '0', STR_PAD_LEFT);
+        $tahun = date('y');
+        $bulan = date('m');
+        $rs = 'PS';
 
-        $newfaktur = $rs . "" . $tahun . "" . $bulan . "." . $lastKode;
+        $newfaktur = $rs . '' . $tahun . '' . $bulan . '.' . $lastKode;
 
         return $newfaktur;
     }

@@ -58,10 +58,20 @@
                                             <a href="<?php echo site_url(''); ?>" class="btn btn-sm btn-purple"
                                                 data-toggle="modal" data-target="#modal-barang">Pilih Barang</a>
                                         </div>
+                                        <!-- <div class="col-md-4 mb-3">
+                                            <label>Pilih Barang</label><br>
+                                            <select class="form-control yoi" id="id_barang">
+                                                <option value="" disabled selected>Pilih Estimasi</option>
+                                                <?php foreach ($barang as $tempel) { ?>
+                                                <option value="<?php echo $tempel->id_barang; ?>">
+                                                    <?php echo $tempel->faktur; ?>
+                                                </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div> -->
                                         <div class="col-md-4 mb-3">
                                             <label>Barang</label>
                                             <input type="text" class="form-control" id="barang" readonly>
-
                                             <input type="text" id="id_barang" name="id_barang" readonly hidden>
                                             <input type="text" id="faktur" name="faktur" readonly hidden>
                                             <input type="text" id="stkeranjang" name="stkeranjang" value="ya"
