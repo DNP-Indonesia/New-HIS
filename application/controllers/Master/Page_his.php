@@ -72,6 +72,15 @@ class Page_his extends MY_Controller
     }
   }
 
+  public function karyawan_pensiun()
+  {
+    $menu = $this->uri->segment(2);
+
+    $data['karyawan'] = $this->M_his->getKaryawanAkanPensiun();
+    $this->render_backend('personalData/v_karyawan_pensiun', $menu, $data);
+  
+  }
+
   public function karyawan_out()
   {
     $menu = $this->uri->segment(2);

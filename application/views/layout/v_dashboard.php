@@ -157,10 +157,14 @@ function showNotification() {
                 const tahunPensiun = tanggalLahir.getFullYear() + 55;
                 const tanggalPensiun = new Date(tahunPensiun, tanggalLahir.getMonth(), tanggalLahir.getDate());
                 const formattedTanggalPensiun = tanggalPensiun.toLocaleDateString('id-ID');
-                return `<li>${karyawan.nama} - ${formattedTanggalPensiun} - <a href="<?php echo site_url("Master/Page_his/history_karyawan/")?>${karyawan.nik}" class="btn btn-primary btn-sm">Detail</a></li>`;
+                return `<li>${karyawan.nama} - ${formattedTanggalPensiun} </li>`;
+                
             }).join('')}</ul>` :
             `<p>Tidak ada karyawan yang akan pensiun dalam 1 bulan ke depan.</p>`}
+            <br>
+            <a href="Master/page_his/karyawan_pensiun" class="btn btn-primary btn-sm">Detail</a>
          `;
+         
 
         // Tampilkan notifikasi dengan mengubah gaya elemen
         notifikasi.style.display = 'block';
