@@ -125,27 +125,27 @@
                 <a class="collapse-item <?php if ($menu == 'permintaan') {
                     echo 'active';
                 } ?>" href="<?php echo site_url('permintaan'); ?>">
-                    Request Sundries
+                    Request Sundries <!-- 1 admin gudang & admin gudang -->
                 </a>
                 <a class="collapse-item <?php if ($menu == 'estimasi') {
                     echo 'active';
                 } ?>" href="<?php echo site_url('estimasi'); ?>">
-                    Estimation Making
+                    Estimation Making <!-- admin bagian -->
                 </a>
                 <a class="collapse-item <?php if ($menu == 'konsumsi') {
                     echo 'active';
                 } ?>" href="<?php echo site_url('konsumsi'); ?>">
-                    Request Consumption
+                    Request Consumption <!-- admin bagian -->
                 </a>
                 <a class="collapse-item <?php if ($menu == 'pembelian') {
                     echo 'active';
                 } ?>" href="<?php echo site_url('pembelian'); ?>">
-                    Request Purchase
+                    Request Purchase <!-- admin gudang -->
                 </a>
                 <a class="collapse-item <?php if ($menu == 'penerimaan') {
                     echo 'active';
                 } ?>" href="<?php echo site_url('penerimaan'); ?>">
-                    Goods Receipt
+                    Goods Receipt <!-- admin gudang -->
                 </a>
             </div>
         </div>
