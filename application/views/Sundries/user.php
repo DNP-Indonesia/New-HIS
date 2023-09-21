@@ -97,7 +97,7 @@
 <span aria-hidden="true">×</span>
 </button>
 </div>
-<form action="<?= site_url(). '/action_his/do_tbh_user'; ?>" method="post">
+<form action="<?= site_url(). 'Master/action_his/do_tbh_user'; ?>" method="post">
 <div class="modal-body">
     <div class="form-row">
         
@@ -171,7 +171,7 @@
 <span aria-hidden="true">×</span>
 </button>
 </div>
-<form action="<?= site_url(). '/action_his/do_edit_user'; ?>" method="post">
+<form action="<?= site_url(). 'Master/action_his/do_edit_user'; ?>" method="post">
 <input type="text" name="id_user" value="<?= $u->id_user ?>" hidden>
 
 <div class="modal-body">

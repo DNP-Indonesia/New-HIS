@@ -104,7 +104,7 @@
                                                                 <span aria-hidden="true">×</span>
                                                             </button>
                                                         </div>
-                                                        <form action="<?php echo site_url() . 'action_his/do_out_karyawan'; ?>" method="post">
+                                                        <form action="<?php echo site_url() . 'Master/action_his/do_out_karyawan'; ?>" method="post">
                                                             <input type="text" name="nik" value="<?= $u->nik ?>" hidden>
                                                             <div class="modal-body">
                                                                 <div class="form-row">

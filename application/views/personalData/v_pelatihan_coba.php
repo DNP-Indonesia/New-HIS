@@ -175,7 +175,7 @@
                 										</button>
                 									</div>
                 									<form
-                										action="<?php echo site_url() . 'action_his/angkat_karyawan'; ?>"
+                										action="<?php echo site_url() . 'Master/action_his/angkat_karyawan'; ?>"
                 										method="post">
                 										<input type="text" name="nik_training"
                 											value="<?= $u->nik_training ?>" hidden>
@@ -222,7 +222,7 @@
                 										</button>
                 									</div>
                 									<form
-                										action="<?php echo site_url() . 'action_his/do_out_karyawan_temp'; ?>"
+                										action="<?php echo site_url() . 'Master/action_his/do_out_karyawan_temp'; ?>"
                 										method="post">
                 										<input type="text" name="nik_training"
                 											value="<?= $u->nik_training ?>" hidden>
@@ -278,7 +278,7 @@
                 										</button>
                 									</div>
                 									<form
-                										action="<?php echo site_url("action_his/do_edit_karyawan_temp/" . $u->nik_training) ?>"
+                										action="<?php echo site_url("Master/action_his/do_edit_karyawan_temp/" . $u->nik_training) ?>"
                 										method="post">
                 										<div class="modal-body">
                 											<div class="form-row">
@@ -521,7 +521,7 @@
                 					<span aria-hidden="true">×</span>
                 				</button>
                 			</div>
-                			<form action="<?php echo site_url("action_his/do_tbh_karyawan_temp") ?>" method="post">
+                			<form action="<?php echo site_url("Master/action_his/do_tbh_karyawan_temp") ?>" method="post">
                 				<div class="modal-body">
                 					<div class="form-row">
                 						<div class="col-md-6 mb-3">
