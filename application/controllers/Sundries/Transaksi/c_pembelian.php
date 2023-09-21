@@ -42,7 +42,9 @@ class c_pembelian extends MY_Controller
 
     public function addKeranjang()
     {
-        $id_barang = 
+        $id_barang = $this->input->post('id_barang');
+        $qty = $this->input->post('jumlah');
+        $catatan = $this->input->post('catatan');
     }
 
     public function add_Keranjang()

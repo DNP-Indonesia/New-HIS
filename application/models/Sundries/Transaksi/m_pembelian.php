@@ -31,43 +31,79 @@ class m_pembelian extends CI_Model
             ->result();
     }
 
-    public function getBarang()
-    {
-        $this->db->select('sdr_request_sundries_detail.id_barang, SUM(sdr_request_sundries_detail.jumlah) as request');
-        $this->db->from('sdr_request_sundries_detail');
-        $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_request_sundries_detail.id_barang');
-        $this->db->group_by('sdr_request_sundries_detail.id_barang');
-        $query1 = $this->db->get();
-    
-        $this->db->select('sdr_estimasi_detail.id_barang, SUM(sdr_estimasi_detail.jumlah) as estimasi');
-        $this->db->from('sdr_estimasi_detail');
-        $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_estimasi_detail.id_barang');
-        $this->db->group_by('sdr_estimasi_detail.id_barang');
-        $query2 = $this->db->get();
-    
-        // Menggabungkan hasil query
-        $combinedData = array();
-    
-        foreach ($query1->result() as $row) {
+public function getBarang()
+{
+    $this->db->select('
+        sdr_request_sundries_detail.id_barang,
+        SUM(sdr_request_sundries_detail.jumlah) as sundries,
+        sdr_barang.id_barang,
+        sdr_barang.barang,
+        sdr_barang.brand,
+        sdr_barang.type,
+        sdr_barang.ukuran,
+        sdr_barang.satuan,
+        sdr_barang.stok
+    ');
+    $this->db->from('sdr_request_sundries_detail');
+    $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_request_sundries_detail.id_barang');
+    $this->db->group_by('sdr_request_sundries_detail.id_barang');
+    $query1 = $this->db->get();
+
+    $this->db->select('
+        sdr_estimasi_detail.id_barang,
+        SUM(sdr_estimasi_detail.jumlah) as estimasi,
+        sdr_barang.id_barang,
+        sdr_barang.barang,
+        sdr_barang.brand,
+        sdr_barang.type,
+        sdr_barang.ukuran,
+        sdr_barang.satuan,
+        sdr_barang.stok
+    ');
+    $this->db->from('sdr_estimasi_detail');
+    $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_estimasi_detail.id_barang');
+    $this->db->group_by('sdr_estimasi_detail.id_barang');
+    $query2 = $this->db->get();
+
+    // Menggabungkan hasil query
+    $combinedData = array();
+
+    foreach ($query1->result() as $row) {
+        $combinedData[$row->id_barang] = array(
+            'sundries' => $row->sundries,
+            'estimasi' => 0,
+            'id_barang' => $row->id_barang,
+            'barang' => $row->barang,
+            'brand' => $row->brand,
+            'type' => $row->type,
+            'ukuran' => $row->ukuran,
+            'satuan' => $row->satuan,
+            'stok' => $row->stok
+        );
+    }
+
+    foreach ($query2->result() as $row) {
+        if (isset($combinedData[$row->id_barang])) {
+            $combinedData[$row->id_barang]['estimasi'] = $row->estimasi;
+        } else {
             $combinedData[$row->id_barang] = array(
-                'request' => $row->request,
-                'estimasi' => 0
+                'sundries' => 0,
+                'estimasi' => $row->estimasi,
+                'id_barang' => $row->id_barang,
+                'barang' => $row->barang,
+                'brand' => $row->brand,
+                'type' => $row->type,
+                'ukuran' => $row->ukuran,
+                'satuan' => $row->satuan,
+                'stok' => $row->stok
             );
         }
-    
-        foreach ($query2->result() as $row) {
-            if (isset($combinedData[$row->id_barang])) {
-                $combinedData[$row->id_barang]['estimasi'] = $row->estimasi;
-            } else {
-                $combinedData[$row->id_barang] = array(
-                    'request' => 0,
-                    'estimasi' => $row->estimasi
-                );
-            }
-        }
-    
-        return $combinedData;
     }
+
+    return $combinedData;
+}
+
+    
     
 
     public function getPembelianById($id)
