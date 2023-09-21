@@ -5,6 +5,9 @@ foreach ($keranjang as $tempel) { ?>
         <?php echo $no; ?>
     </td>
     <td class="text-center">
+        <?php echo $faktur; ?>
+    </td>
+    <td class="text-center">
         <?php echo $tempel->barang; ?>
     </td>
     <td class="text-center">

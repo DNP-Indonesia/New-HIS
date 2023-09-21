@@ -84,12 +84,12 @@
                                                 class="btn btn-sm btn-danger">
                                                 Hapus
                                              </a> -->
-                                <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                <a href="<?php echo site_url('deletekonsumsi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
                                 <?php } ?>
 
-                                <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                <a href="<?php echo site_url('detailkonsumsi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
                                     Detail
                                 </a>
 
@@ -338,7 +338,7 @@
                                 required readonly>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label>DibuatOleh</label>
+                            <label>Dibuat Oleh</label>
                             <input type="text" class="form-control" value=" <?php echo $this->session->userdata('nama'); ?>" name="nama"
                                 required readonly>
 
@@ -351,7 +351,7 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label>Faktur Sundries</label>
-                            <select class="form-control yoi" id="faris">
+                            <select class="form-control yoi" id="sundries">
                                 <option value="" disabled selected>Pilih Sundries</option>
                                 <?php foreach ($permintaan as $tempel) { ?>
                                 <option value="<?php echo $tempel->id_detail_sundries; ?>">
@@ -363,13 +363,14 @@
                         <div class="col-md-4 mb-3">
                             <label>Barang sesuai Faktur Sundries</label>
                             <input type="text" class="form-control" id="id_barang"
-                                placeholder="Pilih Faktur Sundries" readonly required>
+                            placeholder="Pilih Faktur Sundries" readonly required>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Jumlah sesuai Faktur Sundries</label>
                             <input type="text" class="form-control" id="jumlah"
-                                placeholder="Pilih Faktur Sundries" readonly required>
+                            placeholder="Pilih Faktur Sundries" readonly required>
                         </div>
+                        <input type="text" class="form-control" id="faris" name="faris" hidden>
                     </div>
                     <div class="form-row mb-3">
                         <div class="col-md-12">
@@ -386,6 +387,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">No</th>
+                                                <th class="text-center">Faktur</th>
                                                 <th class="text-center">Barang</th>
                                                 <th class="text-center">Jumlah</th>
                                                 <th class="text-center">Opsi</th>
@@ -458,7 +460,7 @@
         var id_barang = $('#id_barang').val();
         var qty = $('#jumlah').val();
         var id_user = $('#id_user').val();
-        var faris = $('#faktursundries').val();
+        var faris = $('#faktur').val();
 
         if (id_barang == 0) {
             Swal.fire("Faktur Sundries Belum Dipilih !", "Pilih Faktur Sundries...", "warning");
@@ -494,7 +496,7 @@
     });
 
     $(document).ready(function() {
-        $('#faris').change(function() {
+        $('#sundries').change(function() {
             var id_detail_sundries = $(this).val(); // Mengambil id_detail_sundries dari dropdown
             console.log(id_detail_sundries); // Cek id_detail_sundries di konsol
             $.ajax({
@@ -508,17 +510,19 @@
                     console.log(response); // Cek respons dari server di konsol
                     if (response.length > 0) {
                         // Set nilai input barang dan input jumlah sesuai dengan respons JSON
+                        $('#faris').val(response[0].faris);
                         $('#id_barang').val(response[0].barang);
                         $('#jumlah').val(response[0].jumlah);
                     } else {
                         // Jika tidak ada barang yang ditemukan, kosongkan nilai input barang dan input jumlah
+                        $('#faris').val('');
                         $('#id_barang').val('');
                         $('#jumlah').val('');
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error(
-                    error); // Tampilkan pesan error jika permintaan AJAX gagal
+                        error); // Tampilkan pesan error jika permintaan AJAX gagal
                 }
             });
         });

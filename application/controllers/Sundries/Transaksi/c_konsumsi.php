@@ -36,6 +36,7 @@ class c_konsumsi extends MY_Controller
 
         foreach ($data as $row) {
             $output[] = [
+                'faris' => $row->faktur,
                 'id_barang' => $row->id_barang,
                 'barang' => $row->barang,
                 'jumlah' => $row->jumlah,
@@ -56,9 +57,6 @@ class c_konsumsi extends MY_Controller
         $id_user = $this->input->post('id_user');
         $faris = $this->input->post('faris');
     
-        // Tambahkan var_dump untuk memeriksa nilai variabel sebelum digunakan
-        var_dump($id_barang, $qty, $id_user, $faris);
-    
         $cek = $this->m_konsumsi->cekKeranjang($id_barang, $id_user)->num_rows();
         if ($cek > 0) {
             echo '1';
@@ -67,11 +65,8 @@ class c_konsumsi extends MY_Controller
                 'id_barang' => $id_barang,
                 'jumlah' => $qty,
                 'id_user' => $id_user,
-                'faris' => $faris,
+                'faktur' => $faris,
             ];
-    
-            // Tambahkan var_dump untuk memeriksa nilai data sebelum disimpan
-            var_dump($data);
     
             $this->m_konsumsi->saveKeranjang($data);
         }

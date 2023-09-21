@@ -7,18 +7,6 @@ class m_estimasi extends CI_Model
     protected $primaryKey = 'id_estimasi';
     protected $tabletolak = "sdr_estimasi_tolak";
 
-    // public function getEstimasi()
-    // {
-    //     return $this->db
-    //         ->from($this->table)
-    //         ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
-    //         ->join('his_section', 'his_section.id_section = tbl_user.id_section')
-    //         ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
-    //         ->order_by('id_estimasi', 'DESC')
-    //         ->get()
-    //         ->result();
-    // }
-
     public function getEstimasi()
     {
         return $this->db->from($this->table)
