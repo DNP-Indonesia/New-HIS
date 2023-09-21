@@ -276,34 +276,6 @@
         </div>
     </div>
 
-    <!-- SDR ADMIN BAGIAN -->
-    <!-- Permintaan -->
-
-    <!-- Estimasi -->
-
-    <!-- Konsumsi -->
-
-    <!-- SDR KEPALA BAGIAN -->
-    <!-- Permintaan -->
-
-    <!-- Estimasi -->
-
-    <!-- Konsumsi -->
-
-    <!-- SDR ADMIN GUDANG -->
-    <!-- Permintaan -->
-
-    <!-- Pembelian -->
-
-    <!-- Penerimaan -->
-    <!-- SDR ADMIN GUDANG -->
-    <!-- Permintaan -->
-
-    <!-- Pembelian -->
-
-    <!-- Penerimaan -->
-
-
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url(); ?>bootstrap/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -323,6 +295,7 @@
     <script src="<?php echo base_url(); ?>bootstrap/js/demo/datatables-demo.js"></script>
 
     <script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/datepicker/js/bootstrap-datepicker.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             $("#state").change(function() {

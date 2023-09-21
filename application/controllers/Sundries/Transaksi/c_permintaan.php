@@ -40,7 +40,6 @@ class c_permintaan extends MY_Controller
         $data['setuju'] = $this->m_permintaan->getSetuju();
         $data['tolak'] = $this->m_permintaan->getTolak();
         $data['proses'] = $this->m_permintaan->getProses();
-        $data['ready'] = $this->m_permintaan->getReady();
         $data['selesai'] = $this->m_permintaan->getSelesai();
 
         // Kepala Bagian
@@ -59,7 +58,6 @@ class c_permintaan extends MY_Controller
         // Input
         $data['barang'] = $this->m_permintaan->getBarangSundries();
         $data['jenis'] = $this->m_jenis->getJenisById();
-        $data['faktur'] = $this->m_permintaan->generateFaktur();
 
         $menu = 'permintaan';
         $this->render_backend('Sundries/Transaksi/Permintaan/v_permintaan', $menu, $data);

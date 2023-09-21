@@ -18,12 +18,12 @@ class m_konsumsistok extends CI_Model
             ->result();
     }
 
-    public function getBarangByFaktur($faktur)
+    public function getBarangById($id_detail_estimasi)
     {
         return $this->db
             ->from('sdr_estimasi_detail')
             ->join('sdr_barang', 'sdr_estimasi_detail.id_barang=sdr_barang.id_barang')
-            ->where('faktur', $faktur)
+            ->where('id_detail_estimasi', $id_detail_estimasi)
             ->get()
             ->result();
     }
@@ -42,10 +42,13 @@ class m_konsumsistok extends CI_Model
     public function getEstimasi()
     {
         return $this->db
-            ->from('sdr_estimasi')
+            ->select('*')
+            ->from('sdr_estimasi_detail')
+            ->join('sdr_estimasi', 'sdr_estimasi.faktur = sdr_estimasi_detail.faktur')
             ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
-            ->where('status', ' ')
-            ->order_by('id_estimasi', 'DESC')
+            // ->where('status', 'Diproses')
+            // ->where('statusstok', 'Ready')
+            ->order_by('id_detail_estimasi', 'DESC')
             ->get()
             ->result();
     }

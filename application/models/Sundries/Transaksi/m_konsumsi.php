@@ -18,12 +18,12 @@ class m_konsumsi extends CI_Model
             ->result();
     }
 
-    public function getBarangByFaktur($faktur)
+    public function getBarangById($id_detail_sundries)
     {
         return $this->db
-            ->from('sdr_estimasi_detail')
-            ->join('sdr_barang', 'sdr_estimasi_detail.id_barang=sdr_barang.id_barang')
-            ->where('faktur', $faktur)
+            ->from('sdr_request_sundries_detail')
+            ->join('sdr_barang', 'sdr_request_sundries_detail.id_barang=sdr_barang.id_barang')
+            ->where('id_detail_sundries', $id_detail_sundries)
             ->get()
             ->result();
     }
@@ -39,13 +39,16 @@ class m_konsumsi extends CI_Model
             ->result();
     }
 
-    public function getEstimasi()
+    public function getPermintaan()
     {
         return $this->db
-            ->from('sdr_estimasi')
-            ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Disetujui')
-            ->order_by('id_estimasi', 'DESC')
+            ->select('*')
+            ->from('sdr_request_sundries_detail')
+            ->join('sdr_request_sundries', 'sdr_request_sundries.faktur = sdr_request_sundries_detail.faktur')
+            ->where('sdr_request_sundries.id_user', $this->session->userdata('id_user'))
+            ->where('status', 'Diproses')
+            ->where('statusstok', 'Ready')
+            ->order_by('id_detail_sundries', 'DESC')
             ->get()
             ->result();
     }
@@ -80,12 +83,6 @@ class m_konsumsi extends CI_Model
             ->where('sdr_consumption_keranjang.id_user', $id_user)
             ->get()
             ->result();
-
-        // $this->db->select('sdr_consumption_keranjang. id_barang, barang, jumlah, id_user');
-        // $this->db->from('sdr_consumption_keranjang');
-        // $this->db->join('sdr_barang', 'sdr_barang.id_barang=sdr_consumption_keranjang.id_barang');
-        // $this->db->where('id_user', $id_user);
-        // return $this->db->get();
     }
 
     public function deleteKeranjang($id_barang, $id_user)
@@ -96,7 +93,7 @@ class m_konsumsi extends CI_Model
         }
     }
 
-    public function save($data, $iduser, $faktur, $fakest)
+    public function save($data, $iduser, $faktur, $faris)
     {
         $simpan = $this->db->insert('sdr_consumption', $data);
         if ($simpan) {
@@ -106,10 +103,10 @@ class m_konsumsi extends CI_Model
                     'faktur' => $faktur,
                     'id_barang' => $tempel->id_barang,
                     'jumlah' => $tempel->jumlah,
-                    'fakest' => $tempel->fakest,
+                    'faris' => $tempel->faris,
                 ];
 
-                $cekstok = $this->db->get_where('sdr_estimasi_detail', ['faktur' => $fakest, 'id_barang' => $tempel->id_barang]);
+                $cekstok = $this->db->get_where('sdr_request_sundries_detail', ['faktur' => $faris, 'id_barang' => $tempel->id_barang]);
                 foreach ($cekstok->result() as $cs) {
                     if ($cs->jumlah < $tempel->jumlah) {
                         $this->db->delete('sdr_consumption', ['faktur' => $faktur]);

@@ -80,20 +80,20 @@
                             </td>
                             <td class="text-center">
                                 <?php if ($tempel->status == 'Request') { ?>
-                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deletekonsumsi/' . $tempel->faktur); ?>')" href="#"
+                                <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
                                                 class="btn btn-sm btn-danger">
                                                 Hapus
                                              </a> -->
-                                <a href="<?php echo site_url('deletekonsumsi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                <a href="<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
                                 <?php } ?>
 
-                                <a href="<?php echo site_url('detailkonsumsi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
                                     Detail
                                 </a>
 
-                                <a href="<?php echo site_url('printkonsumsi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
                                     Cetak PDF
                                 </a>
                             </td>
@@ -197,7 +197,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
-                Data konsumsi
+                Data Sundries
             </h6>
         </div>
         <div class="card-body">
@@ -350,25 +350,25 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
-                            <label>Faktur Estimasi</label>
-                            <select class="form-control yoi" id="fakest">
-                                <option value="" disabled selected>Pilih Estimasi</option>
-                                <?php foreach ($estimasi as $tempel) { ?>
-                                <option value="<?php echo $tempel->faktur; ?>">
+                            <label>Faktur Sundries</label>
+                            <select class="form-control yoi" id="faris">
+                                <option value="" disabled selected>Pilih Sundries</option>
+                                <?php foreach ($permintaan as $tempel) { ?>
+                                <option value="<?php echo $tempel->id_detail_sundries; ?>">
                                     <?php echo $tempel->faktur; ?>
                                 </option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label>Barang sesuai Faktur Estimasi</label>
+                            <label>Barang sesuai Faktur Sundries</label>
                             <input type="text" class="form-control" id="id_barang"
-                                placeholder="Pilih Faktur Estimasi" readonly required>
+                                placeholder="Pilih Faktur Sundries" readonly required>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label>Jumlah sesuai Faktur Estimasi</label>
+                            <label>Jumlah sesuai Faktur Sundries</label>
                             <input type="text" class="form-control" id="jumlah"
-                                placeholder="Pilih Faktur Estimasi" readonly required>
+                                placeholder="Pilih Faktur Sundries" readonly required>
                         </div>
                     </div>
                     <div class="form-row mb-3">
@@ -458,10 +458,10 @@
         var id_barang = $('#id_barang').val();
         var qty = $('#jumlah').val();
         var id_user = $('#id_user').val();
-        var fakest = $('#fakturestimasi').val();
+        var faris = $('#faktursundries').val();
 
         if (id_barang == 0) {
-            Swal.fire("Faktur Estimasi Belum Dipilih !", "Pilih Faktur Estimasi...", "warning");
+            Swal.fire("Faktur Sundries Belum Dipilih !", "Pilih Faktur Sundries...", "warning");
         } else {
             $.ajax({
                 type: 'POST',
@@ -470,7 +470,7 @@
                     id_barang: id_barang,
                     qty: qty,
                     id_user: id_user,
-                    fakest: fakest
+                    faris: faris
                 },
                 cache: false,
                 success: function() {
@@ -494,16 +494,18 @@
     });
 
     $(document).ready(function() {
-        $('#fakest').change(function() {
-            var faktur = $(this).val();
+        $('#faris').change(function() {
+            var id_detail_sundries = $(this).val(); // Mengambil id_detail_sundries dari dropdown
+            console.log(id_detail_sundries); // Cek id_detail_sundries di konsol
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url('barangfaktur'); ?>",
+                url: "<?php echo site_url('barangdetailsundries'); ?>", // Ganti dengan URL yang sesuai untuk controller yang akan mengambil barang berdasarkan id_detail_sundries
                 data: {
-                    faktur: faktur
+                    id_detail_sundries: id_detail_sundries // Kirim id_detail_sundries ke controller
                 },
                 dataType: 'JSON',
                 success: function(response) {
+                    console.log(response); // Cek respons dari server di konsol
                     if (response.length > 0) {
                         // Set nilai input barang dan input jumlah sesuai dengan respons JSON
                         $('#id_barang').val(response[0].barang);
@@ -516,7 +518,7 @@
                 },
                 error: function(xhr, status, error) {
                     console.error(
-                        error); // Tampilkan pesan error jika permintaan AJAX gagal
+                    error); // Tampilkan pesan error jika permintaan AJAX gagal
                 }
             });
         });

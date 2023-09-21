@@ -17,20 +17,22 @@ class c_konsumsi extends MY_Controller
     public function index()
     {
         $data['konsumsi'] = $this->m_konsumsi->getKonsumsi();
-        $data['estimasi'] = $this->m_konsumsi->getEstimasi();
+        $data['permintaan'] = $this->m_konsumsi->getPermintaan();
         $data['kepalabagian'] = $this->m_konsumsi->forKepalaBagian();
         $data['allkonsumsi'] = $this->m_konsumsi->getKonsumsiAll();
+
+        var_dump($data['permintaan']);
 
         $menu = 'konsumsi';
         $this->render_backend('Sundries/Transaksi/Konsumsi/v_konsumsi', $menu, $data);
     }
 
-    public function barangFaktur()
+    public function barangDetailSundries()
     {
-        $faktur_estimasi = $this->input->post('faktur');
-        $data = $this->m_konsumsi->getBarangByFaktur($faktur_estimasi);
+        $id_detail_sundries = $this->input->post('id_detail_sundries'); // Mengambil id_detail_sundries dari permintaan POST
+        $data = $this->m_konsumsi->getBarangById($id_detail_sundries); // Memanggil model untuk mencari barang berdasarkan id_detail_sundries
 
-        $output = []; // Buat array kosong untuk menyimpan opsi dropdown
+        $output = []; // Buat array kosong untuk menyimpan data barang
 
         foreach ($data as $row) {
             $output[] = [
@@ -52,8 +54,11 @@ class c_konsumsi extends MY_Controller
         $id_barang = $this->input->post('id_barang');
         $qty = $this->input->post('qty');
         $id_user = $this->input->post('id_user');
-        $fakest = $this->input->post('fakest');
-
+        $faris = $this->input->post('faris');
+    
+        // Tambahkan var_dump untuk memeriksa nilai variabel sebelum digunakan
+        var_dump($id_barang, $qty, $id_user, $faris);
+    
         $cek = $this->m_konsumsi->cekKeranjang($id_barang, $id_user)->num_rows();
         if ($cek > 0) {
             echo '1';
@@ -62,12 +67,16 @@ class c_konsumsi extends MY_Controller
                 'id_barang' => $id_barang,
                 'jumlah' => $qty,
                 'id_user' => $id_user,
-                'fakest' => $fakest,
+                'faris' => $faris,
             ];
-
+    
+            // Tambahkan var_dump untuk memeriksa nilai data sebelum disimpan
+            var_dump($data);
+    
             $this->m_konsumsi->saveKeranjang($data);
         }
     }
+    
 
     public function showKeranjang()
     {
@@ -91,7 +100,7 @@ class c_konsumsi extends MY_Controller
         $iduser = $this->input->post('id_user');
         $status = $this->input->post('status');
         $nama = $this->input->post('nama');
-        $fakest = $this->input->post('fakest');
+        $faris = $this->input->post('faris');
 
         $data = [
             'faktur' => $faktur,
@@ -101,7 +110,7 @@ class c_konsumsi extends MY_Controller
             'status' => $status,
         ];
 
-        $this->m_konsumsi->save($data, $iduser, $faktur, $fakest);
+        $this->m_konsumsi->save($data, $iduser, $faktur, $faris);
         $this->session->set_userdata('sukses', 'Yeay, Data Berhasil Disimpan');
         return redirect('Sundries/Transaksi/c_konsumsi/index');
     }

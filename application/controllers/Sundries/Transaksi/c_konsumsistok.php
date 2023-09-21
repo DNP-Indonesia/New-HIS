@@ -21,16 +21,18 @@ class c_konsumsistok extends MY_Controller
         $data['kepalabagian'] = $this->m_konsumsistok->forKepalaBagian();
         $data['allkonsumsistok'] = $this->m_konsumsistok->getKonsumsistokAll();
 
+        var_dump($data['estimasi']);
+
         $menu = 'konsumsistok';
         $this->render_backend('Sundries/Transaksi/Konsumsistok/v_konsumsistok', $menu, $data);
     }
 
-    public function barangFaktur()
+    public function barangDetailEstimasi()
     {
-        $faktur_estimasi = $this->input->post('faktur');
-        $data = $this->m_konsumsistok->getBarangByFaktur($faktur_estimasi);
+        $id_detail_estimasi = $this->input->post('id_detail_estimasi'); // Mengambil id_detail_estimasi dari permintaan POST
+        $data = $this->m_konsumsistok->getBarangById($id_detail_estimasi); // Memanggil model untuk mencari barang berdasarkan id_detail_estimasi
 
-        $output = []; // Buat array kosong untuk menyimpan opsi dropdown
+        $output = []; // Buat array kosong untuk menyimpan data barang
 
         foreach ($data as $row) {
             $output[] = [

@@ -114,7 +114,7 @@ $route['rejectestimasi'] = 'Sundries/Transaksi/c_estimasi/rejectEstimasi';
 
 // Konsumsi
 $route['konsumsi'] = 'Sundries/Transaksi/c_konsumsi/index';
-$route['barangfaktur'] = 'Sundries/Transaksi/c_konsumsi/barangFaktur';
+$route['barangdetailsundries'] = 'Sundries/Transaksi/c_konsumsi/barangDetailSundries';
 $route['cekkeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/cekKeranjang';
 $route['showkeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/showKeranjang';
 $route['deletekeranjangkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/deleteKeranjang';
@@ -127,7 +127,7 @@ $route['rejectkonsumsi'] = 'Sundries/Transaksi/c_konsumsi/rejectKonsumsi';
 
 // Konsumsistok
 $route['konsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/index';
-$route['barangfaktur'] = 'Sundries/Transaksi/c_konsumsistok/barangFaktur';
+$route['barangdetailestimasi'] = 'Sundries/Transaksi/c_konsumsistok/barangDetailEstimasi';
 $route['cekkeranjangkonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/cekKeranjang';
 $route['showkeranjangkonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/showKeranjang';
 $route['deletekeranjangkonsumsistok'] = 'Sundries/Transaksi/c_konsumsistok/deleteKeranjang';

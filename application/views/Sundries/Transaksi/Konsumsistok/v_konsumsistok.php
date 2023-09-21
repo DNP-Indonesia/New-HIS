@@ -349,12 +349,12 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label>Faktur Estimasi</label>
-                            <select class="form-control yoi" id="fakest">
-                                <option value="" disabled selected>Pilih Estimasi</option>
+                    <div class="col-md-4 mb-3">
+                            <label>Faktur Sundries</label>
+                            <select class="form-control yoi" id="faris">
+                                <option value="" disabled selected>Pilih Sundries</option>
                                 <?php foreach ($estimasi as $tempel) { ?>
-                                <option value="<?php echo $tempel->faktur; ?>">
+                                <option value="<?php echo $tempel->id_detail_estimasi; ?>">
                                     <?php echo $tempel->faktur; ?>
                                 </option>
                                 <?php } ?>
@@ -494,16 +494,18 @@
     });
 
     $(document).ready(function() {
-        $('#fakest').change(function() {
-            var faktur = $(this).val();
+        $('#faris').change(function() {
+            var id_detail_estimasi = $(this).val(); // Mengambil id_detail_estimasi dari dropdown
+            console.log(id_detail_estimasi); // Cek id_detail_estimasi di konsol
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url('barangfaktur'); ?>",
+                url: "<?php echo site_url('barangdetailestimasi'); ?>", // Ganti dengan URL yang sesuai untuk controller yang akan mengambil barang berdasarkan id_detail_estimasi
                 data: {
-                    faktur: faktur
+                    id_detail_estimasi: id_detail_estimasi // Kirim id_detail_estimasi ke controller
                 },
                 dataType: 'JSON',
                 success: function(response) {
+                    console.log(response); // Cek respons dari server di konsol
                     if (response.length > 0) {
                         // Set nilai input barang dan input jumlah sesuai dengan respons JSON
                         $('#id_barang').val(response[0].barang);
@@ -516,7 +518,7 @@
                 },
                 error: function(xhr, status, error) {
                     console.error(
-                        error); // Tampilkan pesan error jika permintaan AJAX gagal
+                    error); // Tampilkan pesan error jika permintaan AJAX gagal
                 }
             });
         });

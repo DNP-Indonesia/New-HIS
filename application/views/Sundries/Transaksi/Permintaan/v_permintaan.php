@@ -84,10 +84,6 @@
                         aria-controls="nav-contact" aria-selected="false">
                         Pemrosesan
                     </a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ready" role="tab"
-                        aria-controls="nav-contact" aria-selected="false">
-                        Barang Ready
-                    </a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#selesai" role="tab"
                         aria-controls="nav-contact" aria-selected="false">
                         Selesai
@@ -340,6 +336,9 @@
                                     <th class="text-center">Diproses Tanggal</th>
                                     <th class="text-center">Diproses Jam</th>
                                     <th class="text-center">Status</th>
+                                    <th class="text-center">Barang</th>
+                                    <th class="text-center">Jumlah</th>
+                                    <th class="text-center">Status Barang</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
                             </thead>
@@ -386,66 +385,6 @@
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-success">
-                                            Cetak PDF
-                                        </a>
-                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
-                                            class="btn btn-sm btn-purple">
-                                            Detail
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php
-                                        $no++;
-                                    }
-                                    ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="ready" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    <div class="table-container table-responsive-xl">
-                        <table class="table table-borderless small tbl">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">Faktur</th>
-                                    <th class="text-center">Bagian</th>
-                                    <th class="text-center">Dibuat Oleh</th>
-                                    <!-- <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th> -->
-                                    <th class="text-center">Barang</th>
-                                    <th class="text-center">Jumlah</th>
-                                    <th class="text-center">Status Barang</th>
-                                    <th class="text-center">Opsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $no = 1;
-                                    foreach ($ready as $tempel) {
-                                        ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <?php echo $no; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->faktur; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_section; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <!-- <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
-                                    </td> -->
-                                    <td class="text-center">
                                         <?php
                                         $id_barang = $tempel->id_barang;
                                         $barang_data = $this->db->get_where('sdr_barang', ['id_barang' => $id_barang])->row();
@@ -463,7 +402,13 @@
                                     <td class="text-center">
                                         <?php if ($tempel->statusstok == 'Ready') { ?>
                                         <h6>
-                                            <span class="badge badge-info">
+                                            <span class="badge badge-success">
+                                                <?php echo $tempel->statusstok; ?>
+                                            </span>
+                                        </h6>
+                                        <?php } elseif ($tempel->statusstok == 'Tidak Ready') { ?>
+                                        <h6>
+                                            <span class="badge badge-danger">
                                                 <?php echo $tempel->statusstok; ?>
                                             </span>
                                         </h6>
@@ -473,6 +418,10 @@
                                         <a href="<?php echo site_url('printpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
                                             class="btn btn-sm btn-success">
                                             Cetak PDF
+                                        </a>
+                                        <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
+                                            class="btn btn-sm btn-purple">
+                                            Detail
                                         </a>
                                     </td>
                                 </tr>
@@ -979,8 +928,8 @@
     </div>
     <?php } ?>
     <?php
-    if ($this->session->userdata('role') == 'sdr_Admin Gudang' or $this->session->userdata('role') == 'sdr_Kepala Gudang') {?>
-    <?php if ($this ->session->userdata('role') == 'sdr_Admin Gudang') { ?>
+    if ($this->session->userdata('role') == 'sdr_Admin Gudang' or $this->session->userdata('role') == 'sdr_Kepala Gudang') { ?>
+    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
     <a href="#" class="btn btn-sm btn-info mb-3" data-toggle="modal" data-target="#modal-tambah-barang">
         Tambah Barang
     </a>
@@ -1287,7 +1236,7 @@
                         <span aria-hidden="true">Tutup</span>
                     </button>
                 </div>
-                <form action="<?php echo site_url('addpermintaan'); ?>" method="POST">
+                <form id="form-permintaan" action="<?php echo site_url('addpermintaan'); ?>" method="POST">
                     <div class="modal-body">
                         <?php if (validation_errors()) { ?>
                         <div class="alert alert-danger">
@@ -1297,8 +1246,8 @@
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
                                 <label>Faktur</label>
-                                <input type="text" class="form-control" value="<?= $faktur ?>" name="faktur"
-                                    required readonly>
+                                <input type="text" class="form-control" value="RS-<?= date('d-m-Y-H-i-s') ?>"
+                                    name="faktur" required readonly>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label>Tanggal</label>
@@ -1408,8 +1357,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                        <button id="buat" class="btn btn-success btn-sm" type="button">Buat</button>
                     </div>
                 </form>
             </div>
@@ -1427,18 +1375,21 @@
                     </button>
                 </div>
                 <form action="<?php echo site_url('addbarangother'); ?>" method="POST">
+                <!-- <form id="form-permintaan" action="<?php echo site_url('addbarangother'); ?>" method="POST"> -->
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label>Jenis</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="jenis" required>
-                                    <option value="--Pilih Kategori--" selected>--Pilih Jenis--</option>
+                                    <!-- <option value="--Pilih Kategori--" selected>--Pilih Jenis--</option> -->
+                                    <option value="" disabled selected>Pilih Barang</option>
                                     <?php
                                     $div = $this->m_jenis->getJenisAll();
                                     foreach ($div as $d) { ?>
                                     ?>
                                     <option value="<?php echo $d->id_jenis; ?>">
-                                        <?php echo $d->jenis; ?> -> <?php echo $d->kategori; ?>
+                                        <?php echo $d->jenis; ?> ->
+                                        <?php echo $d->kategori; ?>
                                     </option>
                                     <?php
                                     }
@@ -1563,6 +1514,27 @@
 </div>
 
 <script>
+    // Ketika tombol "Buat" dalam modal diklik
+    $("#buat").click(function() {
+        // Cek apakah keranjang sudah terisi
+        if (isCartEmpty()) {
+            Swal.fire("Keranjang Masih Kosong", "Tambahkan barang ke keranjang terlebih dahulu.", "warning");
+        } else {
+            // Jika keranjang sudah terisi, kirim permintaan dengan mengirimkan formulir
+            $("#form-permintaan").submit();
+        }
+    });
+
+    // Fungsi untuk memeriksa apakah keranjang kosong
+    function isCartEmpty() {
+        // Gantilah ini dengan logika yang sesuai untuk memeriksa keranjang
+        // Misalnya, periksa apakah elemen keranjang memiliki item atau tidak
+        var keranjang = $("#isikeranjang");
+        return keranjang.children().length === 0;
+    }
+</script>
+
+<script>
     $(document).ready(function() {
         $('.tbl').DataTable();
     });
@@ -1581,6 +1553,7 @@
             }
         });
     }
+
 
     $("#keranjang").click(function() {
         var id_barang = $('#id_barang').val();
@@ -1639,3 +1612,5 @@
         });
     });
 </script>
+
+
