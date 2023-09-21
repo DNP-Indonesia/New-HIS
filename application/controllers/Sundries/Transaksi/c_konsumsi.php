@@ -21,8 +21,6 @@ class c_konsumsi extends MY_Controller
         $data['kepalabagian'] = $this->m_konsumsi->forKepalaBagian();
         $data['allkonsumsi'] = $this->m_konsumsi->getKonsumsiAll();
 
-        var_dump($data['permintaan']);
-
         $menu = 'konsumsi';
         $this->render_backend('Sundries/Transaksi/Konsumsi/v_konsumsi', $menu, $data);
     }
@@ -50,44 +48,6 @@ class c_konsumsi extends MY_Controller
         $this->output->set_output(json_encode($output));
     }
 
-    public function cekKeranjang()
-    {
-        $id_barang = $this->input->post('id_barang');
-        $qty = $this->input->post('qty');
-        $id_user = $this->input->post('id_user');
-        $faris = $this->input->post('faris');
-    
-        $cek = $this->m_konsumsi->cekKeranjang($id_barang, $id_user)->num_rows();
-        if ($cek > 0) {
-            echo '1';
-        } else {
-            $data = [
-                'id_barang' => $id_barang,
-                'jumlah' => $qty,
-                'id_user' => $id_user,
-                'faktur' => $faris,
-            ];
-    
-            $this->m_konsumsi->saveKeranjang($data);
-        }
-    }
-    
-
-    public function showKeranjang()
-    {
-        $id_user = $this->input->post('id_user');
-        $data['keranjang'] = $this->m_konsumsi->getKeranjang($id_user)->result();
-        $this->load->view('Sundries/Transaksi/Konsumsi/v_keranjang', $data);
-    }
-
-    public function deleteKeranjang()
-    {
-        $id_user = $this->input->post('iduser');
-        $id_barang = $this->input->post('idbarang');
-        $hapus = $this->m_konsumsi->deleteKeranjang($id_user, $id_barang);
-        echo $hapus;
-    }
-
     public function addKonsumsi()
     {
         $faktur = $this->input->post('faktur');
@@ -96,6 +56,8 @@ class c_konsumsi extends MY_Controller
         $status = $this->input->post('status');
         $nama = $this->input->post('nama');
         $faris = $this->input->post('faris');
+        $id_barang = $this->input->post('id_barang');
+        $qty = $this->input->post('qty');
 
         $data = [
             'faktur' => $faktur,
@@ -103,6 +65,9 @@ class c_konsumsi extends MY_Controller
             'id_user' => $iduser,
             'tanggal' => $tanggal,
             'status' => $status,
+            'faris' => $faris,
+            'id_barang' => $id_barang,
+            'jumlah' => $qty
         ];
 
         $this->m_konsumsi->save($data, $iduser, $faktur, $faris);

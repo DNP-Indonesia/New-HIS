@@ -30,14 +30,22 @@ class c_pembelian extends MY_Controller
     {
         // $data['barang'] = $this->m_pembelian->getBarangBelumSiap();
         $data['permintaanbarang'] = $this->m_pembelian->getPermintaanBarang();
+        $data['barang'] = $this->m_pembelian->getBarang();
         $data['fakturotomatis'] = $this->m_pembelian->generateFaktur();
         $data['keranjang'] = $this->m_pembelian->getKeranjang();
+
+        var_dump($data['barang']);
 
         $menu = 'formpembelian';
         $this->render_backend('Sundries/Transaksi/Pembelian/v_form', $menu, $data);
     }
 
     public function addKeranjang()
+    {
+        $id_barang = 
+    }
+
+    public function add_Keranjang()
     {
         $idbarang = $this->input->post('id_barang');
         $qty = $this->input->post('jumlah');

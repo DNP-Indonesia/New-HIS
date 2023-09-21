@@ -27,10 +27,48 @@ class m_pembelian extends CI_Model
             ->join('sdr_request_sundries', 'sdr_request_sundries.faktur=sdr_request_sundries_detail.faktur')
             ->join('sdr_barang', 'sdr_barang.id_barang=sdr_request_sundries_detail.id_barang')
             ->where('sdr_request_sundries.status', 'Disetujui')
-            ->where('sdr_request_sundries_detail.statuskeranjang', 'Tidak')
             ->get()
             ->result();
     }
+
+    public function getBarang()
+    {
+        $this->db->select('sdr_request_sundries_detail.id_barang, SUM(sdr_request_sundries_detail.jumlah) as request');
+        $this->db->from('sdr_request_sundries_detail');
+        $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_request_sundries_detail.id_barang');
+        $this->db->group_by('sdr_request_sundries_detail.id_barang');
+        $query1 = $this->db->get();
+    
+        $this->db->select('sdr_estimasi_detail.id_barang, SUM(sdr_estimasi_detail.jumlah) as estimasi');
+        $this->db->from('sdr_estimasi_detail');
+        $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_estimasi_detail.id_barang');
+        $this->db->group_by('sdr_estimasi_detail.id_barang');
+        $query2 = $this->db->get();
+    
+        // Menggabungkan hasil query
+        $combinedData = array();
+    
+        foreach ($query1->result() as $row) {
+            $combinedData[$row->id_barang] = array(
+                'request' => $row->request,
+                'estimasi' => 0
+            );
+        }
+    
+        foreach ($query2->result() as $row) {
+            if (isset($combinedData[$row->id_barang])) {
+                $combinedData[$row->id_barang]['estimasi'] = $row->estimasi;
+            } else {
+                $combinedData[$row->id_barang] = array(
+                    'request' => 0,
+                    'estimasi' => $row->estimasi
+                );
+            }
+        }
+    
+        return $combinedData;
+    }
+    
 
     public function getPembelianById($id)
     {
@@ -104,7 +142,7 @@ class m_pembelian extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($this->tabledetail);
-        $this->db->join('sdr_request_sundries', 'sdr_request_sundries.faktur = ' . $this->tabledetail . '.faktursundries');
+        $this->db->join('sdr_request_sundries', 'sdr_request_sundries.faktur = ' . $this->tabledetail . '.faeris');
         $this->db->join($this->table, $this->table . '.faktur = ' . $this->tabledetail . '.faktur');
         $this->db->join('sdr_barang', 'sdr_barang.id_barang = ' . $this->tabledetail . '.id_barang');
         $this->db->join('tbl_user', 'tbl_user.id_user = sdr_request_sundries.id_user');

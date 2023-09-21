@@ -65,69 +65,15 @@ class m_konsumsi extends CI_Model
             ->result();
     }
 
-    public function cekKeranjang($idbarang, $iduser)
+    public function save($data)
     {
-        return $this->db->get_where('sdr_consumption_keranjang', ['id_barang' => $idbarang, 'id_user' => $iduser]);
-    }
-
-    public function saveKeranjang($data)
-    {
-        $this->db->insert('sdr_consumption_keranjang', $data);
-    }
-
-    public function getKeranjang($id_user)
-    {
-        return $this->db
-            ->from('sdr_consumption_keranjang')
-            ->join('sdr_barang', 'sdr_barang.id_barang=sdr_consumption_keranjang.id_barang')
-            ->where('sdr_consumption_keranjang.id_user', $id_user)
-            ->get()
-            ->result();
-    }
-
-    public function deleteKeranjang($id_barang, $id_user)
-    {
-        $hapus = $this->db->delete('sdr_consumption_keranjang', ['id_barang' => $id_barang, 'id_user' => $id_user]);
-        if ($hapus) {
-            return 1;
-        }
-    }
-
-    public function save($data, $iduser, $faktur, $faris)
-    {
-        $simpan = $this->db->insert('sdr_consumption', $data);
-        if ($simpan) {
-            $carikeranjang = $this->db->get_where('sdr_consumption_keranjang', ['id_user' => $iduser]);
-            foreach ($carikeranjang->result() as $tempel) {
-                $detail = [
-                    'faktur' => $faktur,
-                    'id_barang' => $tempel->id_barang,
-                    'jumlah' => $tempel->jumlah,
-                    'faris' => $tempel->faris,
-                ];
-
-                $cekstok = $this->db->get_where('sdr_request_sundries_detail', ['faktur' => $faris, 'id_barang' => $tempel->id_barang]);
-                foreach ($cekstok->result() as $cs) {
-                    if ($cs->jumlah < $tempel->jumlah) {
-                        $this->db->delete('sdr_consumption', ['faktur' => $faktur]);
-                    } else {
-                        $this->db->insert('sdr_consumption_detail', $detail);
-                    }
-                }
-            }
-            $this->db->delete('sdr_consumption_keranjang', ['id_user' => $iduser]);
-        }
-    }
+        $this->db->insert('sdr_consumption', $data);
+    }    
 
     public function deleteKonsumsi($faktur)
     {
-        $hapus = $this->db->delete('sdr_consumption', ['faktur' => $faktur]);
-        if ($hapus) {
-            $hapusdetail = $this->db->delete('sdr_consumption_detail', ['faktur' => $faktur]);
-            if ($hapusdetail) {
-                redirect('Sundries/Transaksi/c_konsumsi/index');
-            }
-        }
+        $this->db->delete('sdr_consumption', ['faktur' => $faktur]);
+        redirect('Sundries/Transaksi/c_konsumsi/index');
     }
 
     public function getKonsumsiById($id)

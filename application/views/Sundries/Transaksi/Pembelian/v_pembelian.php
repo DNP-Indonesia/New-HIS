@@ -14,7 +14,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
-                Data Buat Baru
+                Buat Baru
             </h6>
         </div>
         <div class="table-responsive-xl">

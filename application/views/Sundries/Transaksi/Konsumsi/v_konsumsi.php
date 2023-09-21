@@ -8,6 +8,29 @@
     <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
         Buat Baru
     </a>
+
+    <?php if ($this->session->userdata('berhasil')) { ?>
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <?php echo $this->session->userdata('berhasil'); ?>
+        <?php echo $this->session->set_userdata('berhasil', null); ?>
+    </div>
+    <?php } ?>
+    <?php if ($this->session->userdata('sukses')) { ?>
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <?php echo $this->session->userdata('sukses'); ?>
+        <?php echo $this->session->set_userdata('sukses', null); ?>
+    </div>
+    <?php } ?>
+    <?php if ($this->session->userdata('hapus')) { ?>
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <?php echo $this->session->userdata('hapus'); ?>
+        <?php echo $this->session->set_userdata('hapus', null); ?>
+    </div>
+    <?php } ?>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
@@ -362,44 +385,16 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Barang sesuai Faktur Sundries</label>
-                            <input type="text" class="form-control" id="id_barang"
+                            <input type="text" class="form-control" id="barang" name="barang"
                             placeholder="Pilih Faktur Sundries" readonly required>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Jumlah sesuai Faktur Sundries</label>
-                            <input type="text" class="form-control" id="jumlah"
+                            <input type="text" class="form-control" id="jumlah" name="qty"
                             placeholder="Pilih Faktur Sundries" readonly required>
                         </div>
+                        <input type="text" class="form-control" id="id_barang" name="id_barang" hidden>
                         <input type="text" class="form-control" id="faris" name="faris" hidden>
-                    </div>
-                    <div class="form-row mb-3">
-                        <div class="col-md-12">
-                            <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukkan Ke
-                                Keranjang</a>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <label>Keranjang</label>
-                            <div class="card shadow">
-                                <div class="table-responsive">
-                                    <table class="table table-borderless small">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">No</th>
-                                                <th class="text-center">Faktur</th>
-                                                <th class="text-center">Barang</th>
-                                                <th class="text-center">Jumlah</th>
-                                                <th class="text-center">Opsi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="isikeranjang">
-                                            <!-- Table rows for keranjang items here -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -460,7 +455,7 @@
         var id_barang = $('#id_barang').val();
         var qty = $('#jumlah').val();
         var id_user = $('#id_user').val();
-        var faris = $('#faktur').val();
+        var faris = $('#faris').val();
 
         if (id_barang == 0) {
             Swal.fire("Faktur Sundries Belum Dipilih !", "Pilih Faktur Sundries...", "warning");
@@ -511,12 +506,14 @@
                     if (response.length > 0) {
                         // Set nilai input barang dan input jumlah sesuai dengan respons JSON
                         $('#faris').val(response[0].faris);
-                        $('#id_barang').val(response[0].barang);
+                        $('#id_barang').val(response[0].id_barang);
+                        $('#barang').val(response[0].barang);
                         $('#jumlah').val(response[0].jumlah);
                     } else {
                         // Jika tidak ada barang yang ditemukan, kosongkan nilai input barang dan input jumlah
                         $('#faris').val('');
                         $('#id_barang').val('');
+                        $('#barang').val('');
                         $('#jumlah').val('');
                     }
                 },
