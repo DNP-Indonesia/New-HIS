@@ -150,7 +150,7 @@
                 											<span aria-hidden="true">×</span>
                 										</button>
                 									</div>
-                									<form action="<?php echo site_url("action_his/do_edit_karyawan/" . $log->nik) ?>" method="post">
+                									<form action="<?php echo site_url("Master/action_his/do_edit_karyawan/" . $log->nik) ?>" method="post">
                 										<div class="modal-body">
                 											<div class="form-row">
                 												<div class="col-md-6 mb-3">
