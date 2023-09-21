@@ -1,8 +1,6 @@
 <div class="container-fluid">
     <h5>Form Purchasing</h5>
-    <?php
-                            if ($this->session->userdata('role')=='sdr_Admin Gudang') {
-                        ?>
+    <?php if ($this->session->userdata('role')=='sdr_Admin Gudang') { ?>
     <?php if ($this->session->userdata('hapus')) { ?>
     <div class="alert alert-danger">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -46,10 +44,12 @@
             <div class="card-body">
                 <div class="form-row">
                     <div class="col-md-3 mb-3 text-center">
-                        <label>___________________________</label>
+                        <label>____________________________________________</label>
+                        <br>
                         <a href="#" class="btn btn-sm btn-purple" data-toggle="modal"
                             data-target="#modal-barang">Pilih Barang</a>
-                        <label>___________________________</label>
+                        <br>
+                        <label>____________________________________________</label>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Barang</label>
@@ -67,10 +67,12 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-3 mb-3 text-center">
-                        <label>___________________________</label>
+                        <label>____________________________________________</label>
+                        <br>
                         <button type="submit" class="btn btn-sm btn-info">Tambahkan Ke
                             Keranjang</button>
-                        <label>___________________________</label>
+                        <br>
+                        <label>____________________________________________</label>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Type</label>
@@ -84,6 +86,7 @@
                         <label>Satuan</label>
                         <input type="text" class="form-control" id="satuan" readonly>
                     </div>
+                    <input type="text" id="id_user" name="id_user" value=" <?php echo $this->session->userdata('id_user'); ?>" hidden>
                 </div>
             </div>
             <div class="card-footer">
@@ -95,28 +98,27 @@
                                     <table class="table table-borderless small">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Barang</th>
-                                                <th>Brand</th>
-                                                <th>Type</th>
-                                                <th>Ukuran</th>
-                                                <th>Satuan</th>
-                                                <th>Jumlah</th>
-                                                <th>Opsi</th>
+                                                <th class="text-center">No</th>
+                                                <th class="text-center">Barang</th>
+                                                <th class="text-center">Brand</th>
+                                                <th class="text-center">Type</th>
+                                                <th class="text-center">Ukuran</th>
+                                                <th class="text-center">Satuan</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1; foreach($keranjang as $tempel) { ?>
                                             <tr>
-                                                <td><?php echo $no; ?></td>
-                                                <td><?php echo $tempel->id_barang; ?></td>
-                                                <td><?php echo $tempel->barang; ?></td>
-                                                <td><?php echo $tempel->brand; ?></td>
-                                                <td><?php echo $tempel->type; ?></td>
-                                                <td><?php echo $tempel->ukuran; ?></td>
-                                                <td><?php echo $tempel->satuan; ?></td>
-                                                <td><?php echo $tempel->jumlah; ?></td>
-                                                <td>
+                                                <td class="text-center"><?php echo $no; ?></td>
+                                                <td class="text-center"><?php echo $tempel->barang; ?></td>
+                                                <td class="text-center"><?php echo $tempel->brand; ?></td>
+                                                <td class="text-center"><?php echo $tempel->type; ?></td>
+                                                <td class="text-center"><?php echo $tempel->ukuran; ?></td>
+                                                <td class="text-center"><?php echo $tempel->satuan; ?></td>
+                                                <td class="text-center"><?php echo $tempel->jumlah; ?></td>
+                                                <td class="text-center">
                                                     <a href="#" class="btn btn-sm btn-danger"
                                                         onclick="deleteConfirm('<?php echo site_url('deletekeranjangpembelian' . $tempel->id_barang); ?>')">
                                                         Hapus Dari Keranjang
@@ -131,6 +133,46 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </form>
+
+    <form action="<?= site_url('addpembelian') ?>" method="POST">
+        <div class="card shadow mb-3">
+            <div class="card-header">
+                <h5>Form Request Purchase</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col-md-3 mb-3">
+                        <label>Faktur</label>
+                        <input type="text" class="form-control" value="PCH-<?= date('d-m-Y-H-i-s') ?>"
+                            name="faktur" required readonly>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Tanggal</label>
+                        <input type="text" class="form-control" value="<?= date('Y-m-d') ?>" name="tanggal"
+                            required readonly>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Jam</label>
+                        <input type="text" class="form-control" value="<?php date_default_timezone_set('Asia/Jakarta');
+                        echo date('H:i:s'); ?>" name="jam"
+                            required readonly>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Dibuat Oleh</label>
+                        <input type="text" class="form-control" name="nama" required
+                            value="<?php echo $this->session->userdata('nama'); ?>" readonly>
+
+                        <input type="text" id="id_user" name="id_user" value=" <?php echo $this->session->userdata('id_user'); ?>" hidden>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success btn-sm">
+                    Buat
+                </button>
             </div>
         </div>
     </form>
@@ -156,27 +198,27 @@
                                     <table class="table table-borderless small">
                                         <thead>
                                             <tr>
-                                                <th>Faktur</th>
-                                                <th>Barang</th>
-                                                <th>Brand</th>
-                                                <th>Type</th>
-                                                <th>Ukuran</th>
-                                                <th>Satuan</th>
-                                                <th>Jumlah</th>
-                                                <th>Opsi</th>
+                                                <th class="text-center">Faktur</th>
+                                                <th class="text-center">Barang</th>
+                                                <th class="text-center">Brand</th>
+                                                <th class="text-center">Type</th>
+                                                <th class="text-center">Ukuran</th>
+                                                <th class="text-center">Satuan</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <!-- Di dalam v_form.php -->
                                             <?php foreach ($barang as $tempel) { ?>
                                             <tr>
-                                                <td><?php echo $tempel['id_barang']; ?></td>
-                                                <td><?php echo $tempel['barang']; ?></td>
-                                                <td><?php echo $tempel['brand']; ?></td>
-                                                <td><?php echo $tempel['type']; ?></td>
-                                                <td><?php echo $tempel['ukuran']; ?></td>
-                                                <td><?php echo $tempel['satuan']; ?></td>
-                                                <td>
+                                                <td class="text-center"><?php echo $tempel['id_barang']; ?></td>
+                                                <td class="text-center"><?php echo $tempel['barang']; ?></td>
+                                                <td class="text-center"><?php echo $tempel['brand']; ?></td>
+                                                <td class="text-center"><?php echo $tempel['type']; ?></td>
+                                                <td class="text-center"><?php echo $tempel['ukuran']; ?></td>
+                                                <td class="text-center"><?php echo $tempel['satuan']; ?></td>
+                                                <td class="text-center">
                                                     <?php
                                                     if ($tempel['estimasi'] == 0) {
                                                         echo $tempel['sundries'];
@@ -186,7 +228,7 @@
                                                     ?>
                                                 </td>
 
-                                                <td>
+                                                <td class="text-center">
                                                     <a href="#" class="btn btn-sm btn-success pilih-barang"
                                                         data-id-barang="<?php echo $tempel['id_barang']; ?>"
                                                         data-barang="<?php echo $tempel['barang']; ?>"
@@ -214,3 +256,49 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // Tangani klik tombol "Pilih"
+        $(".pilih-barang").click(function() {
+            var idBarang = $(this).data("id-barang");
+            var barang = $(this).data("barang");
+            var brand = $(this).data("brand");
+            var type = $(this).data("type");
+            var ukuran = $(this).data("ukuran");
+            var satuan = $(this).data("satuan");
+            var sundries = $(this).data("sundries"); // Ambil nilai sundries
+            var estimasi = $(this).data("estimasi"); // Ambil nilai estimasi
+            console.log("Nilai Sundries:", sundries);
+            console.log("Nilai Estimasi:", estimasi);
+
+            if (sundries === 0) {
+                jumlah = estimasi;
+            } else {
+                jumlah = sundries;
+            }
+
+            // Isi nilai input pada modal dengan data yang dipilih
+            $("#id_barang").val(idBarang);
+            $("#barang").val(barang);
+            $("#brand").val(brand);
+            $("#type").val(type);
+            $("#ukuran").val(ukuran);
+            $("#satuan").val(satuan);
+            $("#jumlah").val(jumlah);
+        });
+
+
+        // Tangani klik tombol "Tambahkan ke Keranjang" di dalam modal
+        $("#tambah-ke-keranjang").click(function() {
+            // Ambil data yang dipilih dari modal dan tambahkan ke keranjang sesuai kebutuhan
+            var idBarang = $("#id_barang").val();
+            var faktur = $("#faktur").val();
+            // Tambahkan data ke keranjang
+            // ...
+
+            // Tutup modal
+            $("#modal-barang").modal("hide");
+        });
+    });
+</script>

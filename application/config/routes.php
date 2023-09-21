@@ -111,6 +111,8 @@ $route['detailestimasi/(:any)'] = 'Sundries/Transaksi/c_estimasi/detailEstimasi/
 $route['printestimasi'] = 'Sundries/Transaksi/c_estimasi/printEstimasi';
 $route['approveestimasi'] = 'Sundries/Transaksi/c_estimasi/approveEstimasi';
 $route['rejectestimasi'] = 'Sundries/Transaksi/c_estimasi/rejectEstimasi';
+$route['detailbarangestimasi'] = 'Sundries/Transaksi/c_estimasi/detailBarang';
+$route['stokestimasi'] = 'Sundries/Transaksi/c_estimasi/kurangiStok';
 
 // Konsumsi
 $route['konsumsi'] = 'Sundries/Transaksi/c_konsumsi/index';
@@ -168,7 +170,7 @@ $route['approvepermintaan'] = 'Sundries/Transaksi/c_permintaan/approvePermintaan
 $route['rejectpermintaan'] = 'Sundries/Transaksi/c_permintaan/rejectPermintaan';
 $route['addbarangpermintaan'] = 'Sundries/Transaksi/c_permintaan/addBarang';
 $route['deletebarangpermintaan/(:any)'] = 'Sundries/Transaksi/c_permintaan/deleteBarang/$1';
-$route['detailbarang'] = 'Sundries/Transaksi/c_permintaan/detailBarang';
+$route['detailbarangsundries'] = 'Sundries/Transaksi/c_permintaan/detailBarang';
 $route['permintaanulang'] = 'Sundries/Transaksi/c_permintaan/permintaanUlang';
 $route['permintaanproses'] = 'Sundries/Transaksi/c_permintaan/permintaanProses';
 $route['permintaanselesai'] = 'Sundries/Transaksi/c_permintaan/permintaanSelesai';

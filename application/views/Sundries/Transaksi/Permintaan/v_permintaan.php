@@ -1199,319 +1199,316 @@
         </div>
     </div>
     <?php } ?>
+</div>
 
-    <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Yakin ?</h5>
-                    <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Tutup</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Data Yang Dihapus Tidak Akan Bisa Dikembalikan.
-                </div>
-                <div class="modal-footer">
-                    <button class="btn-sm btn btn-success" type="button" data-dismiss="modal">
-                        Batal
-                    </button>
-                    <a id="tombolhapus" class="btn-sm btn btn-danger" href="#">
-                        Hapus
-                    </a>
-                </div>
+
+<div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yakin ?</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">Tutup</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Data Yang Dihapus Tidak Akan Bisa Dikembalikan.
+            </div>
+            <div class="modal-footer">
+                <button class="btn-sm btn btn-success" type="button" data-dismiss="modal">
+                    Batal
+                </button>
+                <a id="tombolhapus" class="btn-sm btn btn-danger" href="#">
+                    Hapus
+                </a>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- SDR ADMIN BAGIAN MODAL -->
-    <div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Request Sundries</h5>
-                    <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Tutup</span>
-                    </button>
-                </div>
-                <form id="form-permintaan" action="<?php echo site_url('addpermintaan'); ?>" method="POST">
-                    <div class="modal-body">
-                        <?php if (validation_errors()) { ?>
-                        <div class="alert alert-danger">
-                            <?php echo validation_errors(); ?>
+<!-- SDR ADMIN BAGIAN MODAL -->
+<div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Request Sundries</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">Tutup</span>
+                </button>
+            </div>
+            <form id="form-permintaan" action="<?php echo site_url('addpermintaan'); ?>" method="POST">
+                <div class="modal-body">
+                    <?php if (validation_errors()) { ?>
+                    <div class="alert alert-danger">
+                        <?php echo validation_errors(); ?>
+                    </div>
+                    <?php } ?>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label>Faktur</label>
+                            <input type="text" class="form-control" value="RS-<?= date('d-m-Y-H-i-s') ?>"
+                                name="faktur" required readonly>
                         </div>
-                        <?php } ?>
-                        <div class="form-row">
-                            <div class="col-md-3 mb-3">
-                                <label>Faktur</label>
-                                <input type="text" class="form-control" value="RS-<?= date('d-m-Y-H-i-s') ?>"
-                                    name="faktur" required readonly>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label>Tanggal</label>
-                                <input type="text" class="form-control" value="<?= date('Y-m-d') ?>"
-                                    name="tanggal" required readonly>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label>Jam</label>
-                                <input type="text" class="form-control" value="<?php date_default_timezone_set('Asia/Jakarta');
-                                echo date('H:i:s'); ?>"
-                                    name="jamdibuat" required readonly>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label>Dibuat Oleh</label>
-                                <input type="text" class="form-control" name="nama" required
-                                    value="<?php echo $this->session->userdata('nama'); ?>" readonly>
+                        <div class="col-md-3 mb-3">
+                            <label>Tanggal</label>
+                            <input type="text" class="form-control" value="<?= date('Y-m-d') ?>" name="tanggal"
+                                required readonly>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Jam</label>
+                            <input type="text" class="form-control" value="<?= date('H:i:s') ?>" name="jamdibuat"
+                                required readonly>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Dibuat Oleh</label>
+                            <input type="text" class="form-control" name="nama" required
+                                value="<?php echo $this->session->userdata('nama'); ?>" readonly>
 
-                                <input type="text" id="id_user" name="id_user" value=" <?php echo $this->session->userdata('id_user'); ?>"
-                                    hidden>
+                            <input type="text" id="id_user" name="id_user" value=" <?php echo $this->session->userdata('id_user'); ?>"
+                                hidden>
 
-                                <input type="text" class="form-control" value="Request" name="status" hidden>
-                                <input type="text" class="form-control" value="-" name="alasan" hidden>
-                                <input type="text" class="form-control" value="Tidak Ready" name="statusstok"
-                                    hidden>
-                            </div>
+                            <input type="text" class="form-control" value="Request" name="status" hidden>
+                            <input type="text" class="form-control" value="-" name="alasan" hidden>
+                            <input type="text" class="form-control" value="Tidak Ready" name="statusstok" hidden>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label>Barang</label>
-                                <select class="form-control yoi" id="id_barang">
-                                    <option value="" disabled selected>Pilih Barang</option>
-                                    <?php foreach ($barang as $tempel) { ?>
-                                    <option value="<?php echo $tempel->id_barang; ?>">
-                                        <?php echo $tempel->barang; ?>
-                                    </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label>Jumlah</label>
-                                <input type="number" class="form-control" id="jumlah" required>
-                            </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Barang</label>
+                            <select class="form-control yoi" id="id_barang">
+                                <option value="" disabled selected>Pilih Barang</option>
+                                <?php foreach ($barang as $tempel) { ?>
+                                <option value="<?php echo $tempel->id_barang; ?>">
+                                    <?php echo $tempel->barang; ?>
+                                </option>
+                                <?php } ?>
+                            </select>
                         </div>
-                        <div class="col-md-12 mb-3 text-center">
-                            <label class="text-danger font-weight-bold" style="font-size: 14px;">
-                                Jika barang yang Anda inginkan tidak ada,
-                                silahkan hubungi Gudang untuk menambahkan barang
-                            </label>
+                        <div class="col-md-6 mb-3">
+                            <label>Jumlah</label>
+                            <input type="number" class="form-control" id="jumlah" required>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-3 mb-3">
-                                <label>Brand</label>
-                                <input type="text" class="form-control" id="brand" readonly>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label>Type</label>
-                                <input type="text" class="form-control" id="type" readonly>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label>Ukuran</label>
-                                <input type="text" class="form-control" id="ukuran" readonly>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label>Satuan</label>
-                                <input type="text" class="form-control" id="satuan" readonly>
-                            </div>
+                    </div>
+                    <div class="col-md-12 mb-3 text-center">
+                        <label class="text-danger font-weight-bold" style="font-size: 14px;">
+                            Jika barang yang Anda inginkan tidak ada,
+                            silahkan hubungi Gudang untuk menambahkan barang
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label>Brand</label>
+                            <input type="text" class="form-control" id="brand" readonly>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-12 mb-3">
-                                <label>Catatan</label>
-                                <textarea class="form-control" id="catatan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
-                                    rows="2"></textarea>
-                            </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Type</label>
+                            <input type="text" class="form-control" id="type" readonly>
                         </div>
-                        <div class="form-row mb-3">
-                            <div class="col-md-12">
-                                <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukkan Ke
-                                    Keranjang</a>
-                            </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Ukuran</label>
+                            <input type="text" class="form-control" id="ukuran" readonly>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-12 mb-3">
-                                <label>Keranjang</label>
-                                <div class="card shadow">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless small">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">No</th>
-                                                    <th class="text-center">Barang</th>
-                                                    <th class="text-center">Brand</th>
-                                                    <th class="text-center">Type</th>
-                                                    <th class="text-center">Ukuran</th>
-                                                    <th class="text-center">Satuan</th>
-                                                    <th class="text-center">Jumlah</th>
-                                                    <th class="text-center">Catatan</th>
-                                                    <th class="text-center">Opsi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="isikeranjang">
+                        <div class="col-md-3 mb-3">
+                            <label>Satuan</label>
+                            <input type="text" class="form-control" id="satuan" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Catatan</label>
+                            <textarea class="form-control" id="catatan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
+                                rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukkan Ke
+                                Keranjang</a>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Keranjang</label>
+                            <div class="card shadow">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless small">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">No</th>
+                                                <th class="text-center">Barang</th>
+                                                <th class="text-center">Brand</th>
+                                                <th class="text-center">Type</th>
+                                                <th class="text-center">Ukuran</th>
+                                                <th class="text-center">Satuan</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Catatan</th>
+                                                <th class="text-center">Opsi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="isikeranjang">
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button id="buat" class="btn btn-success btn-sm" type="button">Buat</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="buat" class="btn btn-success btn-sm" type="button">Buat</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <div class="modal fade" id="modal-tambah-barang" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Barang</h5>
-                    <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Tutup</span>
-                    </button>
-                </div>
-                <form action="<?php echo site_url('addbarangother'); ?>" method="POST">
+<div class="modal fade" id="modal-tambah-barang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Barang</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">Tutup</span>
+                </button>
+            </div>
+            <form action="<?php echo site_url('addbarangother'); ?>" method="POST">
                 <!-- <form id="form-permintaan" action="<?php echo site_url('addbarangother'); ?>" method="POST"> -->
-                    <div class="modal-body">
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label>Jenis</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="jenis" required>
-                                    <!-- <option value="--Pilih Kategori--" selected>--Pilih Jenis--</option> -->
-                                    <option value="" disabled selected>Pilih Barang</option>
-                                    <?php
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Jenis</label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="jenis" required>
+                                <!-- <option value="--Pilih Kategori--" selected>--Pilih Jenis--</option> -->
+                                <option value="" disabled selected>Pilih Barang</option>
+                                <?php
                                     $div = $this->m_jenis->getJenisAll();
                                     foreach ($div as $d) { ?>
-                                    ?>
-                                    <option value="<?php echo $d->id_jenis; ?>">
-                                        <?php echo $d->jenis; ?> ->
-                                        <?php echo $d->kategori; ?>
-                                    </option>
-                                    <?php
+                                ?>
+                                <option value="<?php echo $d->id_jenis; ?>">
+                                    <?php echo $d->jenis; ?> ->
+                                    <?php echo $d->kategori; ?>
+                                </option>
+                                <?php
                                     }
                                     ?>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label>Nama Barang</label>
-                                <input type="text" class="form-control" name="barang" required
-                                    placeholder="Inputkan Nama Barang...">
-                            </div>
+                            </select>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label>Brand</label>
-                                <input type="text" class="form-control" name="brand" required
-                                    placeholder="Inputkan Brand...">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label>Type</label>
-                                <input type="text" class="form-control" name="type" required
-                                    placeholder="Inputkan Type...">
-                            </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Nama Barang</label>
+                            <input type="text" class="form-control" name="barang" required
+                                placeholder="Inputkan Nama Barang...">
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label>Ukuran</label>
-                                <input type="text" class="form-control" name="ukuran" required
-                                    placeholder="Inputkan Ukuran...">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label>Satuan</label>
-                                <input type="text" class="form-control" name="satuan" required
-                                    placeholder="Inputkan Satuan...">
-                            </div>
-                            <input type="text" class="form-control" name="stok" value="0" required
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Brand</label>
+                            <input type="text" class="form-control" name="brand" required
+                                placeholder="Inputkan Brand...">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Type</label>
+                            <input type="text" class="form-control" name="type" required
+                                placeholder="Inputkan Type...">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Ukuran</label>
+                            <input type="text" class="form-control" name="ukuran" required
+                                placeholder="Inputkan Ukuran...">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Satuan</label>
+                            <input type="text" class="form-control" name="satuan" required
+                                placeholder="Inputkan Satuan...">
+                        </div>
+                        <input type="text" class="form-control" name="stok" value="0" required hidden>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php foreach ($byproses as $tempel) { ?>
+<div class="modal fade" id="modal-selesai<?php echo $tempel->id_request_sundries; ?>" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yakin Mau Menyelesaikan Request Sundries Ini ?</h5>
+                <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">Tutup</span>
+                </button>
+            </div>
+            <form action="<?php echo site_url('permintaanselesai'); ?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Faktur</label>
+                            <input type="text" class="form-control" name="faktur" required
+                                value="<?php echo $tempel->faktur; ?>" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Bagian</label>
+                            <input type="text" class="form-control" name="bagian" required
+                                value="<?php echo $tempel->nama_section; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Oleh</label>
+                            <input type="text" class="form-control" name="nama" required
+                                value="<?php echo $tempel->nama_peminta; ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Tanggal</label>
+                            <input type="text" class="form-control" name="tanggal" required
+                                value="<?php echo $tempel->tanggal; ?>" readonly>
+                            <input type="text" class="form-control" name="status" required value="Selesai"
+                                hidden>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Dibuat Jam</label>
+                            <input type="text" class="form-control" name="tanggal" required
+                                value="<?php echo $tempel->jamdibuat; ?>" readonly>
+                            <input type="text" class="form-control" name="status" required value="Selesai"
                                 hidden>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Selesai Tanggal</label>
+                            <input type="text" class="form-control" value="<?= date('Y-m-d') ?>"
+                                name="tanggalselesai" required readonly>
+                            <input type="text" class="form-control" name="status" required value="Selesai"
+                                hidden>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Selesai Jam</label>
+                            <input type="text" class="form-control" value="" name="jamselesai" required
+                                readonly>
+                            <input type="text" class="form-control" name="status" required value="Selesai"
+                                hidden>
+                        </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <?php foreach ($byproses as $tempel) { ?>
-    <div class="modal fade" id="modal-selesai<?php echo $tempel->id_request_sundries; ?>" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Yakin Mau Menyelesaikan Request Sundries Ini ?</h5>
-                    <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Tutup</span>
-                    </button>
                 </div>
-                <form action="<?php echo site_url('permintaanselesai'); ?>" method="POST">
-                    <div class="modal-body">
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label>Faktur</label>
-                                <input type="text" class="form-control" name="faktur" required
-                                    value="<?php echo $tempel->faktur; ?>" readonly>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label>Bagian</label>
-                                <input type="text" class="form-control" name="bagian" required
-                                    value="<?php echo $tempel->nama_section; ?>" readonly>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label>Dibuat Oleh</label>
-                                <input type="text" class="form-control" name="nama" required
-                                    value="<?php echo $tempel->nama_peminta; ?>" readonly>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label>Dibuat Tanggal</label>
-                                <input type="text" class="form-control" name="tanggal" required
-                                    value="<?php echo $tempel->tanggal; ?>" readonly>
-                                <input type="text" class="form-control" name="status" required value="Selesai"
-                                    hidden>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label>Dibuat Jam</label>
-                                <input type="text" class="form-control" name="tanggal" required
-                                    value="<?php echo $tempel->jamdibuat; ?>" readonly>
-                                <input type="text" class="form-control" name="status" required value="Selesai"
-                                    hidden>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label>Selesai Tanggal</label>
-                                <input type="text" class="form-control" value="<?= date('Y-m-d') ?>"
-                                    name="tanggalselesai" required readonly>
-                                <input type="text" class="form-control" name="status" required value="Selesai"
-                                    hidden>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label>Selesai Jam</label>
-                                <input type="text" class="form-control" value="<?php date_default_timezone_set('Asia/Jakarta');
-                                echo date('H:i:s'); ?>"
-                                    name="jamselesai" required readonly>
-                                <input type="text" class="form-control" name="status" required value="Selesai"
-                                    hidden>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success btn-sm">Selesaikan</button>
-                    </div>
-                </form>
-            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success btn-sm">Selesaikan</button>
+                </div>
+            </form>
         </div>
     </div>
-    <?php } ?>
 </div>
+<?php } ?>
 
 <script>
     // Ketika tombol "Buat" dalam modal diklik
@@ -1599,7 +1596,7 @@
             var id_barang = $(this).val();
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('detailbarang'); ?>",
+                url: "<?php echo site_url('detailbarangsundries'); ?>",
                 data: 'id_barang=' + id_barang,
                 dataType: 'JSON',
                 success: function(data) {
@@ -1612,5 +1609,3 @@
         });
     });
 </script>
-
-

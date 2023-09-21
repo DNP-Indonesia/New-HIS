@@ -34,7 +34,7 @@ class c_pembelian extends MY_Controller
         $data['fakturotomatis'] = $this->m_pembelian->generateFaktur();
         $data['keranjang'] = $this->m_pembelian->getKeranjang();
 
-        var_dump($data['barang']);
+        // var_dump($data['barang']);
 
         $menu = 'formpembelian';
         $this->render_backend('Sundries/Transaksi/Pembelian/v_form', $menu, $data);
@@ -44,7 +44,19 @@ class c_pembelian extends MY_Controller
     {
         $id_barang = $this->input->post('id_barang');
         $qty = $this->input->post('jumlah');
-        $catatan = $this->input->post('catatan');
+        // $catatan = $this->input->post('catatan');
+        $id_user = $this->input->post('id_user');
+
+        $data = array(
+            'id_barang' => $id_barang,
+            'jumlah' => $qty,
+            // 'keterangan' => $catatan,
+            'id_user' => $id_user
+        );
+
+        $this->m_pembelian->saveKeranjang($data);
+
+        return redirect('Sundries/Transaksi/C_pembelian/formPembelian');
     }
 
     public function add_Keranjang()

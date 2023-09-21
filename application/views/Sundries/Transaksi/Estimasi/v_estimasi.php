@@ -8,6 +8,7 @@
     <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
         Buat Baru
     </a>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
@@ -177,7 +178,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -249,7 +251,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -321,7 +324,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -393,7 +397,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -465,7 +470,8 @@
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -498,18 +504,19 @@
                         role="tab" aria-controls="nav-home" aria-selected="true">
                         Pengajuan
                     </a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui" role="tab"
-                        aria-controls="nav-profile" aria-selected="false">
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#disetujui"
+                        role="tab" aria-controls="nav-profile" aria-selected="false">
                         Persetujuan
                     </a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak" role="tab"
-                        aria-controls="nav-contact" aria-selected="false">
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#ditolak"
+                        role="tab" aria-controls="nav-contact" aria-selected="false">
                         Penolakan
                     </a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabcontent">
-                <div class="tab-pane fade show active" id="diajukan" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade show active" id="diajukan" role="tabpanel"
+                    aria-labelledby="nav-home-tab">
                     <div class="table-container table-responsive-xl">
                         <table class="table table-borderless small tbl">
                             <thead>
@@ -564,11 +571,13 @@
                                         </a>
                                         <?php } ?>
 
-                                        <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                        <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank"
+                                            class="btn btn-sm btn-purple">
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -636,11 +645,13 @@
                                         </a>
                                         <?php } ?>
 
-                                        <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                        <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank"
+                                            class="btn btn-sm btn-purple">
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -708,11 +719,13 @@
                                         </a>
                                         <?php } ?>
 
-                                        <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                        <a href="<?php echo site_url('detailestimasi/' . $tempel->faktur); ?>" target="_blank"
+                                            class="btn btn-sm btn-purple">
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank"
+                                            class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -840,12 +853,12 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Estimation Making</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Request Sundries</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">Tutup</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('addestimasi'); ?>" method="POST">
+            <form id="form-permintaan" action="<?php echo site_url('addestimasi'); ?>" method="POST">
                 <div class="modal-body">
                     <?php if (validation_errors()) { ?>
                     <div class="alert alert-danger">
@@ -853,23 +866,30 @@
                     </div>
                     <?php } ?>
                     <div class="form-row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <label>Faktur</label>
                             <input type="text" class="form-control" value="EM-<?= date('d-m-Y-H-i-s') ?>"
                                 name="faktur" required readonly>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <label>Tanggal</label>
                             <input type="text" class="form-control" value="<?= date('Y-m-d') ?>" name="tanggal"
                                 required readonly>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
+                            <label>Jam</label>
+                            <input type="text" class="form-control" value="<?= date('H:i:s') ?>" name="jamdibuat"
+                                required readonly>
+                        </div>
+                        <div class="col-md-3 mb-3">
                             <label>Dibuat Oleh</label>
                             <input type="text" class="form-control" value=" <?php echo $this->session->userdata('nama'); ?>" name="nama"
                                 required readonly>
 
                             <input type="text" id="id_user" name="id_user" value=" <?php echo $this->session->userdata('id_user'); ?>"
                                 hidden>
+
+                            <input type="text" class="form-control" value="Tidak Ready" name="statusstok" hidden>
 
                             <input type="text" class="form-control" value="Diajukan" name="status" hidden>
                         </div>
@@ -892,11 +912,28 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label>Brand</label>
+                            <input type="text" class="form-control" id="brand" readonly>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Type</label>
+                            <input type="text" class="form-control" id="type" readonly>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Ukuran</label>
+                            <input type="text" class="form-control" id="ukuran" readonly>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Satuan</label>
+                            <input type="text" class="form-control" id="satuan" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <label>Catatan</label>
                             <textarea class="form-control" id="catatan" placeholder="Misal, Joyko Erasable Gel Pen | GP-321 Warna Hitam"
-                                rows="3"></textarea>
-
+                                rows="2"></textarea>
                         </div>
                     </div>
                     <div class="form-row mb-3">
@@ -915,6 +952,10 @@
                                             <tr>
                                                 <th class="text-center">No</th>
                                                 <th class="text-center">Barang</th>
+                                                <th class="text-center">Brand</th>
+                                                <th class="text-center">Type</th>
+                                                <th class="text-center">Ukuran</th>
+                                                <th class="text-center">Satuan</th>
                                                 <th class="text-center">Jumlah</th>
                                                 <th class="text-center">Catatan</th>
                                                 <th class="text-center">Opsi</th>
@@ -930,8 +971,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Buat</button>
+                    <button id="buat" class="btn btn-success btn-sm" type="button">Buat</button>
                 </div>
             </form>
         </div>
@@ -962,6 +1002,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Ketika tombol "Buat" dalam modal diklik
+    $("#buat").click(function() {
+        // Cek apakah keranjang sudah terisi
+        if (isCartEmpty()) {
+            Swal.fire("Keranjang Masih Kosong", "Tambahkan barang ke keranjang terlebih dahulu.", "warning");
+        } else {
+            // Jika keranjang sudah terisi, kirim permintaan dengan mengirimkan formulir
+            $("#form-permintaan").submit();
+        }
+    });
+
+    // Fungsi untuk memeriksa apakah keranjang kosong
+    function isCartEmpty() {
+        // Gantilah ini dengan logika yang sesuai untuk memeriksa keranjang
+        // Misalnya, periksa apakah elemen keranjang memiliki item atau tidak
+        var keranjang = $("#isikeranjang");
+        return keranjang.children().length === 0;
+    }
+</script>
 
 <script>
     $(document).ready(function() {
@@ -1019,6 +1080,24 @@
     $(document).ready(function() {
         $('.yoi').select2({
             theme: 'bootstrap4',
+        });
+    });
+
+    $(document).ready(function() {
+        $('#id_barang').change(function() {
+            var id_barang = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo site_url('detailbarangestimasi'); ?>",
+                data: 'id_barang=' + id_barang,
+                dataType: 'JSON',
+                success: function(data) {
+                    $("#brand").val(data.brand);
+                    $("#type").val(data.type);
+                    $("#ukuran").val(data.ukuran);
+                    $("#satuan").val(data.satuan);
+                }
+            });
         });
     });
 </script>

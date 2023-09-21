@@ -114,7 +114,7 @@ class c_permintaan extends MY_Controller
                 'keterangan' => $catatan,
             ];
 
-            $this->m_detail_sementara->saveKeranjang($data);
+            $this->m_permintaan->saveKeranjang($data);
         }
     }
 

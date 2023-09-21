@@ -333,6 +333,11 @@ class m_permintaan extends CI_Model
         return $this->db->get_where('sdr_request_sundries_keranjang', array('id_user'=>$iduser));
     }
 
+    public function saveKeranjang($data)
+    {
+        $this->db->insert('sdr_request_sundries_keranjang', $data);
+    }   
+
     // Fungsi untuk mengambil data keranjang berdasarkan id_user
     public function selectKeranjang($id_user)
     {

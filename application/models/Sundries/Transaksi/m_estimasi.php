@@ -5,11 +5,12 @@ class m_estimasi extends CI_Model
 {
     protected $table = 'sdr_estimasi';
     protected $primaryKey = 'id_estimasi';
-    protected $tabletolak = "sdr_estimasi_tolak";
+    protected $tabletolak = 'sdr_estimasi_tolak';
 
     public function getEstimasi()
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
@@ -43,7 +44,8 @@ class m_estimasi extends CI_Model
 
     public function getSetuju()
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
@@ -55,7 +57,8 @@ class m_estimasi extends CI_Model
 
     public function getTolak()
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
@@ -69,7 +72,8 @@ class m_estimasi extends CI_Model
 
     public function forKepalaBagianPermintaan()
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
@@ -82,7 +86,8 @@ class m_estimasi extends CI_Model
     // Fungsi untuk mengambil data permintaan berdasarkan status 'Disetujui' dan id_bagian untuk kepala bagian
     public function forKepalaBagianSetuju()
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
@@ -95,7 +100,8 @@ class m_estimasi extends CI_Model
     // Fungsi untuk mengambil data permintaan berdasarkan status 'Ditolak' dan id_bagian untuk kepala bagian
     public function forKepalaBagianTolak()
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
@@ -107,9 +113,21 @@ class m_estimasi extends CI_Model
             ->result();
     }
 
+    // Di model m_estimasi
+    public function getByFaktur($faktur)
+    {
+        $this->db->where('faktur', $faktur);
+        return $this->db->get('sdr_estimasi_detail')->row();
+    }
+
     public function cekKeranjang($idbarang, $iduser)
     {
         return $this->db->get_where('sdr_estimasi_keranjang', ['id_barang' => $idbarang, 'id_user' => $iduser]);
+    }
+
+    public function cekKeranjang2($iduser)
+    {
+        return $this->db->get_where('sdr_estimasi_keranjang', ['id_user' => $iduser]);
     }
 
     public function saveKeranjang($data)
@@ -137,7 +155,8 @@ class m_estimasi extends CI_Model
 
     public function getTolakById($id)
     {
-        return $this->db->from($this->tabletolak)
+        return $this->db
+            ->from($this->tabletolak)
             ->join($this->table, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
             ->join('tbl_user', 'tbl_user.id_user=' . $this->tabletolak . '.id_user')
             ->where($this->tabletolak . '.faktur', $id)
@@ -146,7 +165,7 @@ class m_estimasi extends CI_Model
             ->result();
     }
 
-    public function save($data, $iduser, $faktur)
+    public function save($data, $iduser, $faktur, $statusstok)
     {
         $simpan = $this->db->insert($this->table, $data);
         if ($simpan) {
@@ -156,6 +175,7 @@ class m_estimasi extends CI_Model
                     'faktur' => $faktur,
                     'id_barang' => $tempel->id_barang,
                     'jumlah' => $tempel->jumlah,
+                    'statusstok' => $statusstok,
                 ];
                 $this->db->insert('sdr_estimasi_detail', $detail);
             }
@@ -178,8 +198,10 @@ class m_estimasi extends CI_Model
     {
         return $this->db
             ->from('sdr_estimasi')
-            ->join('tbl_user', 'tbl_user.id_user=sdr_estimasi.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->join('sdr_estimasi_detail', 'sdr_estimasi_detail.faktur = sdr_estimasi.faktur')
+            ->join('sdr_barang', 'sdr_barang.id_barang = sdr_estimasi_detail.id_barang')
+            ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->where('sdr_estimasi.faktur', $id)
             ->get()
             ->result();
@@ -237,6 +259,57 @@ class m_estimasi extends CI_Model
             ->result();
     }
 
+    public function updateData($id_detail_estimasi)
+    {
+        // Ambil jumlah dan statusstok dari sdr_estimasi_detail berdasarkan id_detail_estimasi
+        $this->db->select('jumlah, statusstok');
+        $this->db->from('sdr_estimasi_detail');
+        $this->db->where('id_detail_estimasi', $id_detail_estimasi);
+        $query = $this->db->get();
+        $row = $query->row();
+
+        if ($row) {
+            $jumlah = $row->jumlah;
+            $statusstok = $row->statusstok;
+
+            // Ambil stok dari sdr_barang
+            $this->db->select('stok');
+            $this->db->from('sdr_barang');
+            $this->db->where('id_barang', $id_detail_estimasi); // Menggunakan id_detail_estimasi sebagai id_barang
+            $query = $this->db->get();
+            $row = $query->row();
+
+            if ($row) {
+                $stok = $row->stok;
+
+                // Memeriksa apakah stok cukup
+                if ($stok >= $jumlah) {
+                    // Mengurangkan jumlah dari stok
+                    $stok -= $jumlah;
+
+                    // Mengatur status stok menjadi 'Ready' di sdr_estimasi_detail
+                    $data_detail = [
+                        'statusstok' => 'Ready',
+                    ];
+                    $this->db->where('id_detail_estimasi', $id_detail_estimasi);
+                    $this->db->update('sdr_estimasi_detail', $data_detail);
+
+                    // Memperbarui stok di sdr_barang
+                    $data_barang = [
+                        'stok' => $stok,
+                    ];
+                    $this->db->where('id_barang', $id_detail_estimasi);
+                    $this->db->update('sdr_barang', $data_barang);
+
+                    // Menyimpan riwayat perubahan stok atau melakukan tindakan lain yang diperlukan
+
+                    return true; // Berhasil memperbarui data
+                }
+            }
+        }
+        return false; // Stok tidak cukup atau data tidak ditemukan
+    }
+
     public function update($where, $data)
     {
         $this->db->where($where);
@@ -247,7 +320,6 @@ class m_estimasi extends CI_Model
     {
         $this->db->insert($this->tabletolak, $data);
     }
-
 
     // Fungsi untuk meng-generate nomor faktur berdasarkan data terakhir dalam database
     public function generateFaktur()

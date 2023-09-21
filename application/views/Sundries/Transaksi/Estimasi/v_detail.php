@@ -138,10 +138,17 @@
                     <table class="table table-borderless small">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Barang</th>
-                                <th>Jumlah Barang</th>
-                                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
+                            <th class="text-center">No</th>
+                                <th class="text-center">Barang</th>
+                                <th class="text-center">Jumlah Barang</th>
+                                <th class="text-center">Brand</th>
+                                <th class="text-center">Type</th>
+                                <th class="text-center">Ukuran</th>
+                                <th class="text-center">Satuan</th>
+                                <th class="text-center">Catatan</th>
+                                <th class="text-center">tok</th>
+                                <th class="text-center">Status Barang</th>
+                                <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak' or $this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == 'Diproses') { ?>
                                 <th class="text-center">Opsi</th>
                                 <?php } ?>
                             </tr>
@@ -160,6 +167,27 @@
                                 </td>
                                 <td class="text-center">
                                     <?php echo $tempel->jumlah; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $tempel->brand; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $tempel->type; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $tempel->ukuran; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $tempel->satuan; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $tempel->keterangan; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $tempel->stok; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $tempel->statusstok; ?>
                                 </td>
                                 <td class="text-center">
                                     <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' && $tempel->status == 'Ditolak') { ?>
