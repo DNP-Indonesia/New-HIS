@@ -157,7 +157,7 @@ function showNotification() {
                 const tahunPensiun = tanggalLahir.getFullYear() + 55;
                 const tanggalPensiun = new Date(tahunPensiun, tanggalLahir.getMonth(), tanggalLahir.getDate());
                 const formattedTanggalPensiun = tanggalPensiun.toLocaleDateString('id-ID');
-                return `<li>${karyawan.nama} - ${formattedTanggalPensiun} </li>`;
+                return `<li>${karyawan.nama} - ${formattedTanggalPensiun}</li>`;
                 
             }).join('')}</ul>` :
             `<p>Tidak ada karyawan yang akan pensiun dalam 1 bulan ke depan.</p>`}
