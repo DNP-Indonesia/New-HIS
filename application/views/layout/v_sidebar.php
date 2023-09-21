@@ -39,7 +39,7 @@
             <i class="fas fa-fw fa-folder"></i>
             <span>Personal Data</span>
         </a> -->
-        <div id="collapsePages_personal" class="collapse <?php if (isset($menu) && in_array($menu, ['karyawan', 'departemen', 'divisi', 'section', 'shift', 'golongan', 'jabatan', 'karyawan_out', 'karyawan_temp', 'karyawan_out_temp', 'mutasi'])) {
+        <!-- <div id="collapsePages_personal" class="collapse <?php if (isset($menu) && in_array($menu, ['karyawan', 'departemen', 'divisi', 'section', 'shift', 'golongan', 'jabatan', 'karyawan_out', 'karyawan_temp', 'karyawan_out_temp', 'mutasi'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
@@ -80,13 +80,13 @@
                     echo 'active';
                 } ?>" href="<?php echo site_url('page_his/golongan'); ?>">Daftar Golongan</a>
             </div>
-        </div>
+        </div> -->
     </li>
 
     <li class="nav-item <?php if (isset($menu) && in_array($menu, ['kategori', 'jenis', 'barang'])) {
         echo 'active';
     } ?>">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-master"
+        <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-master"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
             <span>Master Sundries</span>
@@ -106,17 +106,17 @@
                     echo 'active';
                 } ?>" href="<?php echo site_url('barang'); ?>">Barang</a>
             </div>
-        </div>
+        </div> -->
     </li>
 
     <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
         echo 'active';
     } ?>">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
+        <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
             <span>Transaksi Sundries</span>
-        </a>
+        </a> -->
         <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
