@@ -64,6 +64,7 @@ $route['data-user'] = 'Master/Page_his/user';
 
 
 // Personal Data
+
 $route['personalia'] = 'Master/page_his/home_personalia';
 $route['data-karyawan'] = 'Master/Page_his/karyawan';
 $route['data-karyawan-keluar'] = 'Master/Page_his/karyawan_out';
@@ -76,6 +77,7 @@ $route['daftar-shift'] = 'Master/Page_his/shift';
 $route['daftar-jabatan'] = 'Master/Page_his/jabatan';
 $route['daftar-golongan'] = 'Master/Page_his/golongan';
 $route['daftar-karyawan-akan-pensiun'] = 'Master/Page_his/karyawan_pensiun';
+$route['persiapan-pensiun'] ='Master/Page_his/persiapan_pensiun';
 
 
 # -------------------------- SUNDRIES -------------------------- #
