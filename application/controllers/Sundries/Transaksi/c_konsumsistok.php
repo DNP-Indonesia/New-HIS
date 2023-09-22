@@ -21,7 +21,7 @@ class c_konsumsistok extends MY_Controller
         $data['kepalabagian'] = $this->m_konsumsistok->forKepalaBagian();
         $data['allkonsumsistok'] = $this->m_konsumsistok->getKonsumsistokAll();
 
-        var_dump($data['estimasi']);
+        // var_dump($data['estimasi']);
 
         $menu = 'konsumsistok';
         $this->render_backend('Sundries/Transaksi/Konsumsistok/v_konsumsistok', $menu, $data);
