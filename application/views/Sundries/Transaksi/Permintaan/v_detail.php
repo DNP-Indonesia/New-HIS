@@ -115,7 +115,7 @@
                         data-target="#modal-proses<?php echo $tempel->id_request_sundries; ?>">
                         Proses
                     </a>
-                    
+
                     <?php } ?>
                 </div>
                 <div class="col-md-6">
@@ -740,8 +740,8 @@
 </div>
 <?php } ?>
 
-<?php foreach ($data as $tempel) { ?>
-<div class="modal fade" id="modal-ready<?php echo $tempel->id_request_sundries; ?>" tabindex="-1" role="dialog"
+<?php foreach ($detail as $tempel) { ?>
+<div class="modal fade" id="modal-ready<?php echo $tempel->id_detail_sundries; ?>" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -786,6 +786,8 @@
                         <div class="col-md-12 mb-3">
                             <input type="text" class="form-control" name="statusstok" value="Ready" required
                                 hidden>
+                            <input type="text" class="form-control" name="id_detail_sundries"
+                                value="<?php echo $tempel->id_detail_sundries; ?>" required hidden>
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,6 @@
+<?php
+date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/Jakarta
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <h4>Request Consumption</h4>
