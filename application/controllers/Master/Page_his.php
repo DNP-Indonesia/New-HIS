@@ -201,7 +201,6 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 
   function shift()
@@ -214,7 +213,6 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 
   function jabatan()
@@ -227,7 +225,6 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 
   function golongan()
