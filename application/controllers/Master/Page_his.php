@@ -76,6 +76,7 @@ class Page_his extends MY_Controller
   {
     $menu = $this->uri->segment(2);
 
+    $data['pensiun']  = $this->M_his->getStatusPensiun();
     $data['karyawan'] = $this->M_his->getKaryawanAkanPensiun();
     $this->render_backend('personalData/v_karyawan_pensiun', $menu, $data);
   
