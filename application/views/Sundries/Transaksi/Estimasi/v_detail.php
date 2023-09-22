@@ -90,8 +90,7 @@
                         <span class="text">Ajukan Perbaikan</span>
                     </a>
                     <?php } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian' && $tempel->status == "Diajukan") { ?>
-                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#modal-setujui<?php echo $tempel->id_estimasi; ?>">
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal">
                         Setuju
                     </a>
                     <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"

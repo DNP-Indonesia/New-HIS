@@ -113,6 +113,7 @@ class c_konsumsistok extends MY_Controller
         $id = $this->uri->segment(4);
         $data['data'] = $this->m_konsumsistok->getKonsumsistokById($id);
         $data['detail'] = $this->m_konsumsistok->getKonsumsistokDetail($id);
+        
         $this->load->view('Sundries/Transaksi/Konsumsistok/v_detail', $data);
     }
 

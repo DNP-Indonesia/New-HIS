@@ -58,6 +58,7 @@ class m_estimasi extends CI_Model
     public function getTolak()
     {
         return $this->db
+            ->select(['tabletolak.faktur', 'tabletolak.alasan_tolak', 'tabletolak.tanggal_tolak', 'tabletolak.jamtolak', 'tabletolak.id_user', 'tabletolak.penolak'])
             ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
@@ -101,7 +102,8 @@ class m_estimasi extends CI_Model
     public function forKepalaBagianTolak()
     {
         return $this->db
-            ->from($this->table)
+            ->select(['tabletolak.faktur', 'tabletolak.alasan_tolak', 'tabletolak.tanggal_tolak', 'tabletolak.jamtolak', 'tabletolak.id_user', 'tabletolak.penolak'])
+            ->select(['tabletolak.faktur', 'tabletolak.alasan_tolak', 'tabletolak.tanggal_tolak', 'tabletolak.jamtolak', 'tabletolak.id_user', 'tabletolak.penolak'])
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')

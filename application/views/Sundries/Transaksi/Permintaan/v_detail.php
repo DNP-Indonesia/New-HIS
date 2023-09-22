@@ -212,7 +212,7 @@
                                         Hapus
                                     </a>
                                     <?php } ?>
-                                    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == 'Diproses' && $tempel->statusstok == 'Belum Ready') { ?>
+                                    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == 'Diproses' && $tempel->statusstok == 'Tidak Ready') { ?>
                                     <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
                                         data-target="#modal-ready<?php echo $tempel->id_detail_sundries; ?>">
                                         <span class="text">Ready</span>
