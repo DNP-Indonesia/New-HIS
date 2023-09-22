@@ -35,14 +35,15 @@ class M_his extends CI_Model{
         ->result();
     }
 
+
     function data_role_fromUser(){
-        return $this->db->from('tbl_user')
+        return $this->db->select('role')
+        ->from('tbl_user')
         ->group_by('role')
         ->get()
         ->result();
     }
 
-    
 
 	function data_karyawan(){
         return $this->db->from('his_karyawan')
