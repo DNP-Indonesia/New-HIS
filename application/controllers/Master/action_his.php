@@ -598,6 +598,43 @@ class Action_his extends MY_Controller{
 
 	}
 
+	function do_persiapan_pensiun($nik_awal){
+
+		$karyawan = $this->M_his->data_karyawan_bynik($nik_awal);
+
+		$bunga = $this->input->post('bunga');
+		$kue = $this->input->post('kue');
+		$piagam = $this->input->post('piagam');
+
+		if ($bunga === null) {
+			$bunga = 'belum siap';
+		}
+		if ($kue === null) {
+			$kue = 'belum siap';
+		}
+		if ($piagam === null) {
+			$piagam = 'belum siap';
+		}
+
+
+		$data = array(
+			'spysiid' => $karyawan[0]->spysiid,
+			'bunga' => $bunga,
+			'kue'	=> $kue,
+			'piagam'	=> $piagam,
+		);
+
+		$this->M_his->input_any($data, 'his_pensiun');
+
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Data berhasil diubah');
+            }
+
+			redirect(site_url("Master/Page_his/karyawan_pensiun"));
+
+
+	}
+
 	function do_edit_departemen(){
 
 		$nama_dep       	= $_POST['nama_dep'];
