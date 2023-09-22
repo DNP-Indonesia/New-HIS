@@ -64,7 +64,7 @@
                 						<td><?php echo $tgl_pensiun; ?></td>
                                         <td>Belum Siap</td>
                                         <td><p class="dropdown-item">
-                											<a href="<?php echo site_url("Master/Page_his/history_karyawan/" . $log->nik) ?>" class="btn btn-primary btn-icon-split btn-sm">
+                											<a href="<?php echo site_url("Master/Page_his/persiapan_pensiun/" . $log->nik) ?>" class="btn btn-primary btn-icon-split btn-sm">
                 												<span class="icon text-white-50">
                 													<i class="fas fa-edit"></i>
                 												</span>
