@@ -1,41 +1,41 @@
 <div class="container-fluid">
     <h5>Form Purchasing</h5>
-    <?php if ($this->session->userdata('role')=='sdr_Admin Gudang') { ?>
+    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
     <?php if ($this->session->userdata('hapus')) { ?>
     <div class="alert alert-danger">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <?php echo $this->session->userdata('hapus'); ?>
         <?php echo $this->session->set_userdata('hapus', null); ?>
     </div>
-    <?php }?>
+    <?php } ?>
     <?php if ($this->session->userdata('sukses')) { ?>
     <div class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <?php echo $this->session->userdata('sukses'); ?>
         <?php echo $this->session->set_userdata('sukses', null); ?>
     </div>
-    <?php }?>
+    <?php } ?>
     <?php if ($this->session->userdata('addbarang')) { ?>
     <div class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <?php echo $this->session->userdata('addbarang'); ?>
         <?php echo $this->session->set_userdata('addbarang', null); ?>
     </div>
-    <?php }?>
+    <?php } ?>
     <?php if ($this->session->userdata('requlang')) { ?>
     <div class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <?php echo $this->session->userdata('requlang'); ?>
         <?php echo $this->session->set_userdata('requlang', null); ?>
     </div>
-    <?php }?>
+    <?php } ?>
     <?php if ($this->session->userdata('update')) { ?>
     <div class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <?php echo $this->session->userdata('update'); ?>
         <?php echo $this->session->set_userdata('update', null); ?>
     </div>
-    <?php }?>
+    <?php } ?>
     <form action="<?= site_url('addkeranjangpembelian') ?>" method="POST">
         <div class="card shadow mb-3">
             <div class="card-header">
@@ -44,12 +44,11 @@
             <div class="card-body">
                 <div class="form-row">
                     <div class="col-md-3 mb-3 text-center">
-                        <label>____________________________________________</label>
                         <br>
                         <a href="#" class="btn btn-sm btn-purple" data-toggle="modal"
-                            data-target="#modal-barang">Pilih Barang</a>
+                            data-target="#modal-barang">Pilih
+                            Barang</a>
                         <br>
-                        <label>____________________________________________</label>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Barang</label>
@@ -67,12 +66,10 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-3 mb-3 text-center">
-                        <label>____________________________________________</label>
                         <br>
                         <button type="submit" class="btn btn-sm btn-info">Tambahkan Ke
                             Keranjang</button>
                         <br>
-                        <label>____________________________________________</label>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Type</label>
@@ -109,15 +106,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $no = 1; foreach($keranjang as $tempel) { ?>
+                                            <?php $no = 1;
+                                                foreach ($keranjang as $tempel) { ?>
                                             <tr>
-                                                <td class="text-center"><?php echo $no; ?></td>
-                                                <td class="text-center"><?php echo $tempel->barang; ?></td>
-                                                <td class="text-center"><?php echo $tempel->brand; ?></td>
-                                                <td class="text-center"><?php echo $tempel->type; ?></td>
-                                                <td class="text-center"><?php echo $tempel->ukuran; ?></td>
-                                                <td class="text-center"><?php echo $tempel->satuan; ?></td>
-                                                <td class="text-center"><?php echo $tempel->jumlah; ?></td>
+                                                <td class="text-center">
+                                                    <?php echo $no; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel->barang; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel->brand; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel->type; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel->ukuran; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel->satuan; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel->jumlah; ?>
+                                                </td>
                                                 <td class="text-center">
                                                     <a href="#" class="btn btn-sm btn-danger"
                                                         onclick="deleteConfirm('<?php echo site_url('deletekeranjangpembelian' . $tempel->id_barang); ?>')">
@@ -125,7 +137,8 @@
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <?php $no++; } ?>
+                                            <?php $no++;
+                                                } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -198,7 +211,8 @@
                                     <table class="table table-borderless small">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">Faktur</th>
+                                                <th class="text-center">No</th>
+                                                <!-- <th class="text-center">ID Barang</th> -->
                                                 <th class="text-center">Barang</th>
                                                 <th class="text-center">Brand</th>
                                                 <th class="text-center">Type</th>
@@ -210,14 +224,29 @@
                                         </thead>
                                         <tbody>
                                             <!-- Di dalam v_form.php -->
-                                            <?php foreach ($barang as $tempel) { ?>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($barang as $tempel) { ?>
                                             <tr>
-                                                <td class="text-center"><?php echo $tempel['id_barang']; ?></td>
-                                                <td class="text-center"><?php echo $tempel['barang']; ?></td>
-                                                <td class="text-center"><?php echo $tempel['brand']; ?></td>
-                                                <td class="text-center"><?php echo $tempel['type']; ?></td>
-                                                <td class="text-center"><?php echo $tempel['ukuran']; ?></td>
-                                                <td class="text-center"><?php echo $tempel['satuan']; ?></td>
+                                                <td class="text-center">
+                                                    <?php echo $no; ?>
+                                                </td>
+                                                <!-- <td class="text-center"><?php echo $tempel['id_barang']; ?></td> -->
+                                                <td class="text-center">
+                                                    <?php echo $tempel['barang']; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel['brand']; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel['type']; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel['ukuran']; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $tempel['satuan']; ?>
+                                                </td>
                                                 <td class="text-center">
                                                     <?php
                                                     if ($tempel['estimasi'] == 0) {

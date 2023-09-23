@@ -335,7 +335,7 @@ class c_permintaan extends MY_Controller
 
     public function permintaanSiap()
     {
-        $faktur = $this->input->post('faktur');
+        $id_detail_sundries = $this->input->post('id_detail_sundries');
         $statusstok = $this->input->post('statusstok');
 
         $data = [
@@ -343,12 +343,12 @@ class c_permintaan extends MY_Controller
         ];
 
         $where = [
-            'faktur' => $faktur,
+            'id_detail_sundries' => $id_detail_sundries,
         ];
 
         $this->m_permintaan->update2($where, $data);
         $this->session->set_userdata('sukses', 'Barang yang Anda minta sudah ada');
-        return redirect('Sundries/Transaksi/c_permintaan/index');
+        return redirect('Sundries/Transaksi/c_permintaan/detail/' . $this->input->post('faktur'));
     }
 
     public function detailBarang()

@@ -49,20 +49,24 @@
 											<!-- Tambahkan kolom-kolom lain yang diperlukan -->
 										</tr>
 									</thead>
-                					<?php foreach ($karyawan as $log) { 
+                					<?php foreach ($karyawan as $log):
                                      $thn_lahir       = substr($log->tgl_lahir, 0, 4);
                                      $bln_lahir       = substr($log->tgl_lahir, 5, 2);
                                      $t_lahir         = substr($log->tgl_lahir, 8, 2);
                                      $thn_pensiun = $thn_lahir + 55;
-                                     $tgl_pensiun = $thn_pensiun . "-" . $bln_lahir . "-" . $t_lahir;    
+                                     $tgl_pensiun = $thn_pensiun . "-" . $bln_lahir . "-" . $t_lahir;
                                     ?>
+
+									<?php foreach ($pensiun as $pen):?>	
 
 									<tbody>
                 					<tr>
 										<td><?php echo $log->nama; ?></td>
                 						<td><?php echo $log->nik; ?></td>
                 						<td><?php echo $tgl_pensiun; ?></td>
-                                        <td>Belum Siap</td>
+										
+                                        <td><?php echo $pen; ?></td>
+										
                                         <td><p class="dropdown-item">
                 											<a href="<?php echo site_url("Master/Page_his/persiapan_pensiun/" . $log->nik) ?>" class="btn btn-primary btn-icon-split btn-sm">
                 												<span class="icon text-white-50">
@@ -74,7 +78,9 @@
                 						<!-- Tambahkan kolom-kolom lain yang diperlukan -->
                 					</tr>
 									</tbody>
-                					<?php } ?>
+                					
+									<?php endforeach; ?>
+									<?php endforeach; ?>
                 				</table>
                 				<div style='margin-top: 10px;' id='pagination'></div>
                 			</div>

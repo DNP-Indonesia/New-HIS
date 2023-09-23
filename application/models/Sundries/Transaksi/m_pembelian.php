@@ -43,10 +43,11 @@ class m_pembelian extends CI_Model
         sdr_barang.ukuran,
         sdr_barang.satuan,
         sdr_barang.stok
-    ');
+        ');
         $this->db->from('sdr_request_sundries_detail');
         $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_request_sundries_detail.id_barang');
         $this->db->group_by('sdr_request_sundries_detail.id_barang');
+        $this->db->where('sdr_request_sundries_detail.statusstok', 'Tidak Ready');
         $query1 = $this->db->get();
 
         $this->db->select('
@@ -63,6 +64,7 @@ class m_pembelian extends CI_Model
         $this->db->from('sdr_estimasi_detail');
         $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_estimasi_detail.id_barang');
         $this->db->group_by('sdr_estimasi_detail.id_barang');
+        $this->db->where('sdr_estimasi_detail.statusstok', 'Tidak Ready');
         $query2 = $this->db->get();
 
         // Menggabungkan hasil query

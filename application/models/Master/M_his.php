@@ -210,6 +210,32 @@ class M_his extends CI_Model{
         return $query->result(); // Mengembalikan daftar karyawan
     }
 
+    function getStatusPensiun(){
+        $this->db->select('spysiid, bunga, kue, piagam');
+        $query = $this->db->get('his_pensiun');
+        
+    
+        $result = array(); // Array untuk menyimpan hasil status
+    
+        if ($query->num_rows() > 0) {
+            $data = $query->result();
+    
+            foreach ($data as $row) {
+                $status = 'siap'; // Default status siap
+    
+                // Periksa kriteria untuk mengubah status menjadi 'belum siap'
+                if ($row->bunga !== 'siap' || $row->kue !== 'siap' || $row->piagam !== 'siap') {
+                    $status = 'belum siap';
+                }
+    
+                // Tambahkan status ke dalam array dengan key berdasarkan spysiid
+                $result[$row->spysiid] = $status;
+            }
+        }
+    
+        return $result;
+    }
+        
     function data_divisi(){
         return $this->db->from('his_divisi')
             ->get()
