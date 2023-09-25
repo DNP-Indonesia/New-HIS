@@ -193,6 +193,49 @@ class M_his extends CI_Model{
         
     }
 
+    function getKaryawanAkanPensiun() {
+        // Ambil tahun sekarang
+        $tahunSekarang = date('Y');
+    
+        // Hitung tahun pensiun
+        $tahunPensiun = $tahunSekarang;
+    
+        // Query untuk mengambil daftar karyawan yang akan pensiun dalam satu bulan setengah ke depan
+        $this->db->select('nama,nik, tgl_lahir');
+        $this->db->from('his_karyawan');
+        $this->db->where('YEAR(tgl_lahir) + 55 =', $tahunPensiun);
+        $this->db->where('keterangan', 'Aktif'); // Menambahkan konstrain untuk keterangan = Aktif
+        $query = $this->db->get();
+    
+        return $query->result(); // Mengembalikan daftar karyawan
+    }
+
+    function getStatusPensiun(){
+        $this->db->select('spysiid, bunga, kue, piagam');
+        $query = $this->db->get('his_pensiun');
+        
+    
+        $result = array(); // Array untuk menyimpan hasil status
+    
+        if ($query->num_rows() > 0) {
+            $data = $query->result();
+    
+            foreach ($data as $row) {
+                $status = 'siap'; // Default status siap
+    
+                // Periksa kriteria untuk mengubah status menjadi 'belum siap'
+                if ($row->bunga !== 'siap' || $row->kue !== 'siap' || $row->piagam !== 'siap') {
+                    $status = 'belum siap';
+                }
+    
+                // Tambahkan status ke dalam array dengan key berdasarkan spysiid
+                $result[$row->spysiid] = $status;
+            }
+        }
+    
+        return $result;
+    }
+        
     function data_divisi(){
         return $this->db->from('his_divisi')
             ->get()
