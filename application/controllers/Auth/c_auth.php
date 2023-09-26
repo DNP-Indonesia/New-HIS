@@ -17,6 +17,24 @@ class c_auth extends MY_Controller
     $this->render_login('auth/v_login'); // Load view login.php
   }
 
+  public function home()
+  {
+    $menu = 'event';
+    $data[''] = "";
+
+    if ($this->session->userdata('role') == 'sdr_Admin Bagian') {
+      redirect(('Auth/c_role/dashboard'));
+    } elseif ($this->session->userdata('role') == 'sdr_Admin Gudang') {
+      redirect(('Sundries/Auth/c_role/dashboard'));
+    } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
+      redirect(('Sundries/Auth/c_role/dashboard'));
+    } elseif ($this->session->userdata('role') == 'sdr_Kepala Gudang') {
+      redirect(('Sundries/Auth/c_role/dashboard'));
+    } else {
+      $this->reder_backend('layout/dashboard', $menu, $data);
+    }
+  }
+
   public function login()
   { // Fungsi login
     $username = $this->input->post('username'); // Ambil isi dari inputan username pada form login
@@ -56,21 +74,64 @@ class c_auth extends MY_Controller
     redirect('auth'); // Redirect ke halaman login
   }
 
-  public function home()
+  public function changePassword()
   {
-    $menu = 'event';
-    $data[''] = "";
-
-    if ($this->session->userdata('role') == 'sdr_Admin Bagian') {
-      redirect(('Auth/c_role/dashboard'));
-    } elseif ($this->session->userdata('role') == 'sdr_Admin Gudang') {
-      redirect(('Sundries/Auth/c_role/dashboard'));
-    } elseif ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
-      redirect(('Sundries/Auth/c_role/dashboard'));
-    } elseif ($this->session->userdata('role') == 'sdr_Kepala Gudang') {
-      redirect(('Sundries/Auth/c_role/dashboard'));
-    } else {
-      $this->reder_backend('layout/dashboard', $menu, $data);
+    // Pastikan hanya pengguna yang sudah masuk yang dapat mengakses halaman ini
+    if (!$this->session->userdata('authenticated_teamdev')) {
+      redirect('auth'); // Redirect ke halaman login jika belum masuk
     }
+    // Pastikan hanya pengguna yang sudah masuk yang dapat mengakses halaman ini
+    if (!$this->session->userdata('authenticated_teamdev')) {
+      redirect('auth'); // Redirect ke halaman login jika belum masuk
+    }
+
+    // Atur data yang diperlukan
+    $data['title'] = 'Change Password';
+
+    // Tentukan menu yang aktif (jika diperlukan)
+    $menu = 'change-password';
+
+    // Panggil render_backend() untuk menampilkan view
+    $this->render_backend('auth/v_change_password', $menu, $data);
+  }
+
+  public function updatePassword()
+  {
+    // Pastikan hanya pengguna yang sudah masuk yang dapat mengakses halaman ini
+    if (!$this->session->userdata('authenticated_teamdev')) {
+      redirect('auth'); // Redirect ke halaman login jika belum masuk
+    }
+
+    // Ambil data dari formulir
+    $currentPassword = md5($this->input->post('current_password'));
+    $newPassword = md5($this->input->post('new_password'));
+    $confirmPassword = md5($this->input->post('confirm_password'));
+
+    // Periksa kecocokan password saat ini dengan yang ada di database
+    $username = $this->session->userdata('username');
+    $user = $this->m_auth->get($username);
+
+    // Tambahkan pengecekan apakah password baru dan konfirmasi password sama dengan password saat ini
+    if ($currentPassword == $user->password) {
+      // Password saat ini sesuai, periksa kecocokan password baru dengan konfirmasi
+      if ($newPassword == $confirmPassword) {
+        // Password baru cocok dengan konfirmasi, simpan password baru ke database
+        $this->m_auth->updatePassword($username, $newPassword);
+        $this->session->set_flashdata('success', 'Password berhasil diubah.');
+      } else {
+        $this->session->set_flashdata('error', 'Password baru dan konfirmasi password tidak cocok.');
+      }
+    } else {
+      $this->session->set_flashdata('error', 'Password saat ini salah.');
+    }
+
+    // Atur data yang diperlukan
+    $data['title'] = 'Change Password';
+
+    // Tentukan menu yang aktif (jika diperlukan)
+    $menu = 'change-password';
+
+    // Panggil render_backend() untuk menampilkan view dengan data yang sudah disiapkan
+    $this->render_backend('auth/v_change_password', $menu, $data);
   }
 }
