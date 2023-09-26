@@ -239,7 +239,6 @@ class c_permintaan extends MY_Controller
         $this->m_detail->delete($id);
         $this->session->set_flashdata('success', 'Data barang telah dihapus');
         return;
-
     }
 
     public function addBarang()
@@ -266,7 +265,6 @@ class c_permintaan extends MY_Controller
         $faktur = $this->input->post('faktur');
         $status = $this->input->post('status');
         $tanggal = $this->input->post('tanggal');
-        $stkeranjang = $this->input->post('stkeranjang');
 
         $data = [
             'status' => $status,
@@ -277,12 +275,8 @@ class c_permintaan extends MY_Controller
             'faktur' => $faktur,
         ];
 
-        $data2 = [
-            'statuskeranjang' => $stkeranjang,
-        ];
-
         $this->m_permintaan->update($where, $data);
-        $this->m_permintaan->updateKeranjang($where, $data2);
+        $this->m_permintaan->updateKeranjang($where);
         $this->session->set_userdata('sukses', 'Permintaan Anda telah dikirim kembali');
         return redirect('Sundries/Transaksi/c_permintaan/index');
     }
@@ -335,21 +329,86 @@ class c_permintaan extends MY_Controller
 
     public function permintaanSiap()
     {
-        $id_detail_sundries = $this->input->post('id_detail_sundries');
+        $faktur = $this->input->post('faktur');
+        $jumlah = $this->input->post('jumlah');
         $statusstok = $this->input->post('statusstok');
+        $id_barang = $this->input->post('id_barang');
+        $stok = $this->input->post('stok');
+
+        // Tentukan apakah barang harus dibeli atau tidak
+        if ($stok <= $jumlah) {
+
+            $data = [
+                'jumlah' => $stok,
+                'statusstok' => 'Ready',
+            ];
+
+            $where = [
+                'faktur' => $faktur,
+            ];
+
+            $this->m_detail->update($where, $data);
+
+            // Pembuatan id_detail_sundries baru hanya terjadi jika stok habis dan ada sisa permintaan
+            if ($jumlah > 0) {
+
+            // Buat data untuk id_detail_sundries baru
+            $data = [
+                'faktur' => $faktur,
+                'id_barang' => $id_barang,
+                'jumlah' => $jumlah,
+                'statusstok' => 'Tidak Ready',
+            ];
+
+            // Masukkan data ke tabel detail_sundries
+            $this->m_permintaan->save2($data);
+            }
+            
+        } elseif ($jumlah == 0) {
+            $statusstok = 'Ready';
+
+            $data = [
+                'statusstok' => $statusstok,
+            ];
+
+            $where = [
+                'faktur' => $faktur,
+            ];
+
+            $this->m_detail->update($where, $data);
+        }
 
         $data = [
-            'statusstok' => $statusstok,
+            'stok' => 0,
         ];
 
         $where = [
-            'id_detail_sundries' => $id_detail_sundries,
+            'id_barang' => $id_barang,
         ];
 
-        $this->m_permintaan->update2($where, $data);
-        $this->session->set_userdata('sukses', 'Barang yang Anda minta sudah ada');
-        return redirect('Sundries/Transaksi/c_permintaan/detail/' . $this->input->post('faktur'));
+        $this->m_barang->updateBarang($where, $data);
+        
+        // $this->session->set_userdata('sukses', 'Barang yang Anda minta sudah ada');
+        redirect('Sundries/Transaksi/c_permintaan/detail/' . $faktur);
     }
+
+    // public function permintaanSiap()
+    // {
+    //     $id_detail_sundries = $this->input->post('id_detail_sundries');
+    //     $statusstok = $this->input->post('statusstok');
+
+    //     $data = [
+    //         'statusstok' => $statusstok,
+    //     ];
+
+    //     $where = [
+    //         'id_detail_sundries' => $id_detail_sundries,
+    //     ];
+
+    //     $this->m_permintaan->update2($where, $data);
+    //     $this->session->set_userdata('sukses', 'Barang yang Anda minta sudah ada');
+    //     return redirect('Sundries/Transaksi/c_permintaan/detail/' . $this->input->post('faktur'));
+    // }
 
     public function detailBarang()
     {

@@ -740,13 +740,19 @@
 </div>
 <?php } ?>
 
-<?php foreach ($detail as $tempel) { ?>
+<?php foreach ($detail as $tempel) { 
+        // Hitung nilai sisa_jumlah
+        $sisa_jumlah = $tempel->jumlah - $tempel->stok;
+    
+        // Atur nilai $tempel->jumlah menjadi $sisa_jumlah
+        $tempel->jumlah = $sisa_jumlah;
+?>
 <div class="modal fade" id="modal-ready<?php echo $tempel->id_detail_sundries; ?>" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Barang Ready</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pembaruan Permintaan</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">x</span>
                 </button>
@@ -756,38 +762,50 @@
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label>Faktur</label>
-                            <input type="text" class="form-control" name="faktur" required
-                                value="<?php echo $tempel->faktur; ?>" readonly>
+                            <input class="form-control" type="text" name="faktur" value="<?php echo $tempel->faktur; ?>"
+                                readonly>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Bagian</label>
-                            <input type="text" class="form-control" name="bagian" required
-                                value="<?php echo $tempel->nama_section; ?>" readonly>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label>Dibuat Oleh</label>
-                            <input type="text" class="form-control" name="nama" required
-                                value="<?php echo $tempel->nama_peminta; ?>" readonly>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label>Dibuat Tanggal</label>
-                            <input type="text" class="form-control" name="tanggal" required
-                                value="<?php echo $tempel->tanggal; ?>" readonly>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label>Dibuat Jam</label>
-                            <input type="text" class="form-control" name="tanggal" required
-                                value="<?php echo $tempel->jamdibuat; ?>" readonly>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <input type="text" class="form-control" name="statusstok" value="Ready" required
+                            <label>Barang</label>
+                            <input class="form-control" type="text" name="barang" value="<?php echo $tempel->id_barang; ?>"
                                 hidden>
-                            <input type="text" class="form-control" name="id_detail_sundries"
-                                value="<?php echo $tempel->id_detail_sundries; ?>" required hidden>
+                            <input class="form-control" type="text" value="<?php echo $tempel->barang; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Brand</label>
+                            <input type="text" class="form-control" value="<?php echo $tempel->brand; ?>" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Type</label>
+                            <input type="text" class="form-control" value="<?php echo $tempel->type; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label>Ukuran</label>
+                            <input type="text" class="form-control" value="<?php echo $tempel->ukuran; ?>" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Satuan</label>
+                            <input type="text" class="form-control" value="<?php echo $tempel->satuan; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Sisa Jumlah</label>
+                            <input type="text" class="form-control" name="jumlah" required
+                                value="<?php echo $tempel->jumlah; ?>" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Jumlah Stok</label>
+                            <input type="number" class="form-control" name="stok" required
+                                value="<?php echo $tempel->stok; ?>" readonly>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <input type="text" class="form-control" name="id_barang"
+                                value="<?php echo $tempel->id_barang; ?>" required hidden>
                         </div>
                     </div>
                 </div>
