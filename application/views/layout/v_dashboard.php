@@ -1,3 +1,5 @@
+<br>
+<br>
 <div class="container-fluid">
     <!-- 404 Error Text -->
     <div class="text-center">
@@ -76,11 +78,11 @@
                     </div>
                 </a>
                 <div class="dropdown-content">
-                    <a href="<?= base_url('permintaan') ?>">Request Sundries</a>
-                    <a href="<?= base_url('estimasi') ?>">Estimasi Making</a>
-                    <a href="<?= base_url('konsumsi') ?>">Request Consumption</a>
-                    <a href="<?= base_url('pembelian') ?>">Request Purchase</a>
-                    <a href="<?= base_url('penerimaan') ?>">Goods Receipt</a>
+                    <a href="<?php echo site_url('permintaan') ?>">Request Sundries</a>
+                    <a href="<?php echo site_url('estimasi') ?>">Estimasi Making</a>
+                    <a href="<?php echo site_url('konsumsi') ?>">Request Consumption</a>
+                    <a href="<?php echo site_url('pembelian') ?>">Request Purchase</a>
+                    <a href="<?php echo site_url('penerimaan') ?>">Goods Receipt</a>
                 </div>
             </div>
         </div>

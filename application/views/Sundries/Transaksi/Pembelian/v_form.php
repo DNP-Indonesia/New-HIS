@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <h5>Form Purchasing</h5>
-    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
+    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'super_user') { ?>
     <?php if ($this->session->userdata('hapus')) { ?>
     <div class="alert alert-danger">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
