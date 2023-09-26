@@ -55,17 +55,18 @@ class m_estimasi extends CI_Model
             ->result();
     }
 
-    public function getTolak()
+   public function getTolak()
     {
         return $this->db
+            ->select([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
             ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Ditolak')
-            ->order_by($this->primaryKey, 'DESC')
-            ->group_by($this->tabletolak . '.faktur')
+            // ->order_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'], 'ASC')
+            ->group_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
             ->get()
             ->result();
     }
@@ -101,14 +102,15 @@ class m_estimasi extends CI_Model
     public function forKepalaBagianTolak()
     {
         return $this->db
+            ->select([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
             ->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
+            ->join('tbl_user', 'tbl_user.id_user = ' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+            ->join($this->tabletolak, $this->tabletolak . '.faktur = ' . $this->table . '.faktur')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Ditolak')
-            ->order_by($this->primaryKey, 'DESC')
-            ->group_by($this->tabletolak . '.faktur')
+            // ->order_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'], 'ASC')
+            ->group_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
             ->get()
             ->result();
     }

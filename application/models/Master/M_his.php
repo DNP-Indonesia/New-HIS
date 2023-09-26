@@ -36,7 +36,8 @@ class M_his extends CI_Model{
     }
 
     function data_role_fromUser(){
-        return $this->db->from('tbl_user')
+        return $this->db->select('role')
+        ->from('tbl_user')
         ->group_by('role')
         ->get()
         ->result();
@@ -199,7 +200,7 @@ class M_his extends CI_Model{
         // Hitung tahun pensiun
         $tahunPensiun = $tahunSekarang;
     
-        // Query untuk mengambil daftar karyawan yang akan pensiun dalam satu bulan ke depan
+        // Query untuk mengambil daftar karyawan yang akan pensiun dalam satu bulan setengah ke depan
         $this->db->select('nama,nik, tgl_lahir');
         $this->db->from('his_karyawan');
         $this->db->where('YEAR(tgl_lahir) + 55 =', $tahunPensiun);

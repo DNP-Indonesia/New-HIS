@@ -6,13 +6,7 @@
         </h1>
         <p class="lead text-gray-800 mb-5">HRCA Information System</p>
         <p class="text-gray-500 mb-0">Selamat datang, Salam Sehat!</p>
-        <?php
-            // Buat kondisi PHP di sini
-            if ($karyawanAkanPensiun) {
-                echo '<div class="notifikasi" id="notifikasi">';
-            }
-        ?>
-        
+        <!-- <div class="notifikasi" id="notifikasi"></div> -->
     </div>
 </div>
 <br>
@@ -29,7 +23,7 @@
                     </div>
                 </a>
                 <div class="dropdown-content">
-                    <a href="<?= base_url('personalia') ?>">Personal Data</a>
+                    <a href="<?= base_url('Master/page_his/home_personalia') ?>">Personal Data</a>
                     <a href="#">Medical</a>
                 </div>
             </div>

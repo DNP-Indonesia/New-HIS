@@ -22,7 +22,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Request')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -68,40 +68,55 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
 
     // Mengambil data permintaan berdasarkan id_user dan status 'Ditolak'
-    public function getTolak()
+     public function getTolak()
     {
-        return $this->db->from($this->table)
+        return $this->db
+            ->select([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
+            ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Ditolak')
-            ->order_by($this->primaryKey, 'ASC')
-            ->group_by($this->tabletolak . '.faktur')
+            // ->order_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'], 'ASC')
+            ->group_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
             ->get()
             ->result();
     }
 
-    // Mengambil data permintaan berdasarkan id_user dan status 'Diproses'
-    public function getProses()
+    public function getReady()
     {
-        return $this->db->from($this->table2) // Ubah dari $this->table menjadi $this->table2
-            ->join('sdr_request_sundries', 'sdr_request_sundries.faktur=' . $this->table2 . '.faktur')
-            ->join('tbl_user', 'tbl_user.id_user=sdr_request_sundries.id_user')
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where('sdr_request_sundries.id_user', $this->session->userdata('id_user'))
-            ->where('sdr_request_sundries.status', 'Diproses')
-            ->order_by($this->table2 . '.id_detail_sundries', 'ASC')
+            ->join($this->table2, $this->table2 . '.faktur=' . $this->table . '.faktur')
+            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
+            ->where($this->table . '.status', 'Diproses')
+            ->where($this->table2 . '.statusstok', 'Ready')
+            ->order_by($this->table2 . '.id_detail_sundries', 'DESC') // Mengurutkan berdasarkan id_detail_sundries
             ->get()
             ->result();
     }
-    
+      
+
+    // Mengambil data permintaan berdasarkan id_user dan status 'Diproses'
+    public function getProses()
+    {
+        return $this->db->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->where($this->table . '.id_user', $this->session->userdata('id_user'))
+            ->where('status', 'Diproses')
+            ->order_by($this->primaryKey, 'DESC')
+            ->get()
+            ->result();
+    }
 
     // Mengambil data permintaan berdasarkan id_user dan status 'Selesai'
     public function getSelesai()
@@ -111,7 +126,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Selesai')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -122,7 +137,7 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->where('status', 'Request')
             ->get()
             ->result();
@@ -134,7 +149,7 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->where('status', 'Ditolak')
             ->get()
             ->result();
@@ -146,7 +161,7 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->where('status', 'Diproses')
             ->get()
             ->result();
@@ -158,7 +173,7 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->where('status', 'Selesai')
             ->get()
             ->result();
@@ -171,7 +186,7 @@ class m_permintaan extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -183,7 +198,7 @@ class m_permintaan extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -196,7 +211,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('status', 'Request')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -209,7 +224,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Request')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -223,7 +238,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -231,14 +246,16 @@ class m_permintaan extends CI_Model
     // Fungsi untuk mengambil data permintaan berdasarkan status 'Ditolak' dan id_bagian untuk kepala bagian
     public function forKepalaBagianTolak()
     {
-        return $this->db->from($this->table)
-            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
-            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
+        return $this->db
+            ->select([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
+            ->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user = ' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+            ->join($this->tabletolak, $this->tabletolak . '.faktur = ' . $this->table . '.faktur')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Ditolak')
-            ->order_by($this->primaryKey, 'ASC')
-            ->group_by($this->tabletolak . '.faktur')
+            // ->order_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'], 'ASC')
+            ->group_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
             ->get()
             ->result();
     }
@@ -251,7 +268,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Diproses')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -264,7 +281,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Selesai')
-            ->order_by($this->primaryKey, 'ASC')
+            ->order_by($this->primaryKey, 'DESC')
             ->get()
             ->result();
     }
@@ -300,7 +317,7 @@ class m_permintaan extends CI_Model
             ->join($this->table, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
             ->join('tbl_user', 'tbl_user.id_user=' . $this->tabletolak . '.id_user')
             ->where($this->tabletolak . '.faktur', $id)
-            ->order_by($this->tabletolak . '.id_tolak', 'ASC')
+            ->order_by($this->tabletolak . '.id_tolak', 'DESC')
             ->get()
             ->result();
     }
@@ -351,11 +368,6 @@ class m_permintaan extends CI_Model
         return $this->db->get_where('sdr_request_sundries_keranjang', array('id_user'=>$iduser));
     }
 
-    public function saveKeranjang($data)
-    {
-        $this->db->insert('sdr_request_sundries_keranjang', $data);
-    }   
-
     // Fungsi untuk mengambil data keranjang berdasarkan id_user
     public function selectKeranjang($id_user)
     {
@@ -405,6 +417,33 @@ class m_permintaan extends CI_Model
     {
         $this->db->where($where);
         $this->db->update($this->table2, $data);
+    }
+
+    // Fungsi untuk meng-generate nomor faktur berdasarkan data terakhir dalam database
+    public function generateFaktur()
+    {
+        $this->db->select('RIGHT(faktur,4) as faktur', false);
+        $this->db->order_by("faktur", "DESC");
+        $this->db->limit(1);
+        $query = $this->db->get('sdr_request_sundries');
+
+
+        if ($query->num_rows() <> 0) {
+            $data = $query->row();
+            $faktur = intval($data->faktur) + 1;
+        } else {
+            $faktur = 1;
+        }
+
+        $lastKode = str_pad($faktur, 4, "0", STR_PAD_LEFT);
+        $tahun = date("y");
+        $bulan = date("m");
+        $tanggal = date("d");
+        $rs = "RS";
+
+        $newfaktur = $rs . "-" . $tanggal . "-" . $bulan . "-" . $tahun . "-" . $lastKode;
+
+        return $newfaktur;
     }
 }
 ?>
