@@ -105,30 +105,30 @@
                 						<tr class="table-info">
                 							<th>Nama</th>
                 							<th>NIK</th>
+											<th>Tanggal Pensiun</th>
                 							<th>Status Persiapan</th>
                 						</tr>
                 					</thead>
                 					<?php foreach ($pensiun as $log):
-                                     
+                                     $thn_lahir       = substr($log->tgl_lahir, 0, 4);
+                                     $bln_lahir       = substr($log->tgl_lahir, 5, 2);
+                                     $t_lahir         = substr($log->tgl_lahir, 8, 2);
+                                     $thn_pensiun = $thn_lahir + 55;
+                                     $tgl_pensiun = $thn_pensiun . "-" . $bln_lahir . "-" . $t_lahir;
                                     ?>
-
-                					
-
                 					<tbody>
                 						<tr>
                 							<td><?php echo $log->nama; ?></td>
                 							<td><?php echo $log->nik; ?></td>
+											<td><?php echo $tgl_pensiun; ?></td>
                 							<td><?php echo $log->status; ?></td>
                 						</tr>
                 					</tbody>
-
-                					
                 					<?php endforeach; ?>
                 				</table>
                 				<div style='margin-top: 10px;' id='pagination'></div>
                 			</div>
                 		</div>
-
                 	</div>
 
                 	<a href="<?php echo base_url('dashboard')?>" class="back-link">
