@@ -599,6 +599,7 @@ class Action_his extends MY_Controller{
 	function do_persiapan_pensiun($nik_awal){
 
 		$karyawan = $this->M_his->data_karyawan_bynik($nik_awal);
+		
 
 		$bunga = $this->input->post('bunga');
 		$kue = $this->input->post('kue');

@@ -231,6 +231,13 @@ class M_his extends CI_Model{
         return $results;
     }
 
+    function getPensiun($spysiid){
+        return $this->db->from('his_pensiun')
+        ->where('his_pensiun.spysiid', $spysiid)
+        ->get()
+        ->result();
+    }
+
     function getStatusPensiun(){
         $this->db->select('hp.*, hk.nama,hk.nik,hk.tgl_lahir'); // Pilih semua kolom dari his_pensiun dan kolom nama dari his_karyawan
         $this->db->from('his_pensiun hp');
