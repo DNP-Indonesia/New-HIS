@@ -44,8 +44,8 @@
                 							<th>Nama</th>
                 							<th>NIK</th>
                 							<th>Tanggal Pensiun</th>
-											<th>Status</th>
-                							
+                							<th>Status</th>
+
                 							<th>Aksi</th>
                 							<!-- Tambahkan kolom-kolom lain yang diperlukan -->
                 						</tr>
@@ -62,9 +62,9 @@
                 							<td><?php echo $log->nama; ?></td>
                 							<td><?php echo $log->nik; ?></td>
                 							<td><?php echo $tgl_pensiun; ?></td>
-											<td><?php echo $log->status;?></td>
+                							<td><?php echo $log->status;?></td>
 
-                					
+
 
                 							<td>
                 								<p class="dropdown-item">
@@ -81,7 +81,7 @@
                 						</tr>
                 					</tbody>
 
-                					
+
                 					<?php endforeach; ?>
                 				</table>
                 				<div style='margin-top: 10px;' id='pagination'></div>
@@ -90,11 +90,11 @@
 
                 	</div>
 
-					<br>
-					<br>
-					<br>
+                	<br>
+                	<br>
+                	<br>
 
-					<h2>Status Persiapan</h2>
+                	<h2>Status Persiapan</h2>
 
                 	<br>
                 	<div class="card shadow mb-4">
@@ -105,8 +105,9 @@
                 						<tr class="table-info">
                 							<th>Nama</th>
                 							<th>NIK</th>
-											<th>Tanggal Pensiun</th>
+                							<th>Tanggal Pensiun</th>
                 							<th>Status Persiapan</th>
+                							<th>Aksi</th>
                 						</tr>
                 					</thead>
                 					<?php foreach ($pensiun as $log):
@@ -120,9 +121,70 @@
                 						<tr>
                 							<td><?php echo $log->nama; ?></td>
                 							<td><?php echo $log->nik; ?></td>
-											<td><?php echo $tgl_pensiun; ?></td>
+                							<td><?php echo $tgl_pensiun; ?></td>
                 							<td><?php echo $log->status; ?></td>
+                							<td>
+											<p class="dropdown-item">
+                											<a href=""
+                												class="btn btn-primary btn-icon-split btn-sm accordion-toggle"
+                												data-toggle="modal"
+                												data-target="#ModalOut<?php echo $log->nik ?>">
+                												<span class="icon text-white-50">
+                													<i class="fas fa-edit"></i>
+                												</span>
+                												<span class="text">Detail</span>
+                											</a>
+                										</p>
+                							</td>
                 						</tr>
+										<div class="modal fade" id="ModalOut<?php echo $log->nik ?>" tabindex="-1"
+											role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h3 class="modal-title" id="exampleModalLabel">Status Persiapan Karyawan Pensiun</h3>
+														<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<div class="row">
+															<div class="col-md-4"><strong>Nama:</strong></div>
+															<div class="col-md-8"><?php echo $log->nama ?></div>
+														</div>
+														<div class="row">
+															<div class="col-md-4"><strong>NIK:</strong></div>
+															<div class="col-md-8"><?php echo $log->nik ?></div>
+														</div>
+														<hr>
+														<p><strong>Status Persiapan:</strong></p>
+														<ul class="list-unstyled">
+															<li>
+																<div class="row">
+																	<div class="col-md-4"><strong>Bunga:</strong></div>
+																	<div class="col-md-8"><?php echo $log->bunga ?></div>
+																</div>
+															</li>
+															<li>
+																<div class="row">
+																	<div class="col-md-4"><strong>Kue:</strong></div>
+																	<div class="col-md-8"><?php echo $log->kue ?></div>
+																</div>
+															</li>
+															<li>
+																<div class="row">
+																	<div class="col-md-4"><strong>Piagam:</strong></div>
+																	<div class="col-md-8"><?php echo $log->piagam ?></div>
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+
                 					</tbody>
                 					<?php endforeach; ?>
                 				</table>
@@ -139,23 +201,25 @@
                 	<br>
                 	<br>
 
-                	<style scoped>
-                		.back-link {
-                			text-decoration: none;
-                			color: #fff;
-                			background-color: #1cc88a;
-                			padding: 1rem;
-                			border-radius: 8px;
-                			transition: color 0.3s, background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-                		}
+                	<!-- Modal detail -->
+                	
+                		<style scoped>
+                			.back-link {
+                				text-decoration: none;
+                				color: #fff;
+                				background-color: #1cc88a;
+                				padding: 1rem;
+                				border-radius: 8px;
+                				transition: color 0.3s, background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+                			}
 
-                		.back-link:hover {
-                			color: #fff;
-                			background-color: #1cc88a;
-                			/* Ubah latar belakang menjadi hijau */
-                			text-decoration: none;
-                			transform: translateY(-5px);
-                			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-                		}
+                			.back-link:hover {
+                				color: #fff;
+                				background-color: #1cc88a;
+                				/* Ubah latar belakang menjadi hijau */
+                				text-decoration: none;
+                				transform: translateY(-5px);
+                				box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                			}
 
-                	</style>
+                		</style>
