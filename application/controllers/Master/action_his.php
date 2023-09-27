@@ -9,8 +9,6 @@ class Action_his extends MY_Controller{
 		$this->load->helper('url');
 		$this->load->library('Pdf');
 	    $this->load->model('Master/M_his');
-
-	    
 	}
 
 
@@ -618,20 +616,31 @@ class Action_his extends MY_Controller{
 
 
 		$data = array(
-			'spysiid' => $karyawan[0]->spysiid,
-			'bunga' => $bunga,
-			'kue'	=> $kue,
+			'spysiid'   => $karyawan[0]->spysiid,
+			'bunga' 	=> $bunga,
+			'kue'		=> $kue,
 			'piagam'	=> $piagam,
 		);
 
-		$this->M_his->input_any($data, 'his_pensiun');
+		$data_baru = array(
+			'bunga'		=> $bunga,
+			'kue'		=> $kue,
+			'piagam'	=> $piagam,
+		);
 
-            if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', 'Data berhasil diubah');
-            }
+		$where = array( 'spysiid' => $karyawan[0]->spysiid);
 
+		$existingSpysiid = $this->M_his->get_by_condition('his_pensiun', array('spysiid' => $karyawan[0]->spysiid));
+		if ($existingSpysiid) {
+			$this->M_his->update_any($where, $data_baru, 'his_pensiun');
 			redirect(site_url("Master/Page_his/karyawan_pensiun"));
+		}
+		else{
+			$this->M_his->input_any($data, 'his_pensiun');
+			redirect(site_url("Master/Page_his/karyawan_pensiun"));
+		}
 
+			
 
 	}
 

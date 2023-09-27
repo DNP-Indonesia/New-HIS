@@ -44,7 +44,8 @@
                 							<th>Nama</th>
                 							<th>NIK</th>
                 							<th>Tanggal Pensiun</th>
-                							<th>Status</th>
+											<th>Status</th>
+                							
                 							<th>Aksi</th>
                 							<!-- Tambahkan kolom-kolom lain yang diperlukan -->
                 						</tr>
@@ -56,16 +57,14 @@
                                      $thn_pensiun = $thn_lahir + 55;
                                      $tgl_pensiun = $thn_pensiun . "-" . $bln_lahir . "-" . $t_lahir;
                                     ?>
-
-                					<?php foreach ($pensiun as $pen):?>
-
                 					<tbody>
                 						<tr>
                 							<td><?php echo $log->nama; ?></td>
                 							<td><?php echo $log->nik; ?></td>
                 							<td><?php echo $tgl_pensiun; ?></td>
+											<td><?php echo $log->status;?></td>
 
-                							<td><?php echo $pen; ?></td>
+                					
 
                 							<td>
                 								<p class="dropdown-item">
@@ -82,7 +81,48 @@
                 						</tr>
                 					</tbody>
 
+                					
                 					<?php endforeach; ?>
+                				</table>
+                				<div style='margin-top: 10px;' id='pagination'></div>
+                			</div>
+                		</div>
+
+                	</div>
+
+					<br>
+					<br>
+					<br>
+
+					<h2>Status Persiapan</h2>
+
+                	<br>
+                	<div class="card shadow mb-4">
+                		<div class="card-body">
+                			<div class="table-responsive">
+                				<table class="table table-bordered" id='dataTable' width="100%" cellspacing="0">
+                					<thead>
+                						<tr class="table-info">
+                							<th>Nama</th>
+                							<th>NIK</th>
+                							<th>Status Persiapan</th>
+                						</tr>
+                					</thead>
+                					<?php foreach ($pensiun as $log):
+                                     
+                                    ?>
+
+                					
+
+                					<tbody>
+                						<tr>
+                							<td><?php echo $log->nama; ?></td>
+                							<td><?php echo $log->nik; ?></td>
+                							<td><?php echo $log->status; ?></td>
+                						</tr>
+                					</tbody>
+
+                					
                 					<?php endforeach; ?>
                 				</table>
                 				<div style='margin-top: 10px;' id='pagination'></div>
