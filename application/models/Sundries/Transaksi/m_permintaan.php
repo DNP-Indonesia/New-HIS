@@ -7,6 +7,7 @@ class m_permintaan extends CI_Model
     protected $primaryKey = "id_request_sundries";
     protected $tabletolak = "sdr_request_sundries_tolak";
     protected $table2 = "sdr_request_sundries_detail";
+    protected $table3 = "sdr_barang";
 
     public function __construct()
     {
@@ -36,6 +37,18 @@ class m_permintaan extends CI_Model
             ->get()
             ->result();
     }
+
+    public function newIdDetail($id_barang, $jumlah, $statusstok) {
+        $data = array(
+            'id_barang' => $id_barang,
+            'jumlah' => $jumlah,
+            'statusstok' => $statusstok
+        );
+    
+        $this->db->insert('nama_tabel_anda', $data);
+        return $this->db->insert_id(); // Mengembalikan ID dari entri yang baru saja dibuat
+    }
+    
 
     public function getBarangSundries()
     {
@@ -329,6 +342,11 @@ class m_permintaan extends CI_Model
         }
     }
 
+    public function save2($data)
+    {
+        $this->db->insert($this->table2, $data);
+    }
+
     // Fungsi untuk menghapus data permintaan berdasarkan faktur
     public function delete($faktur)
     {
@@ -380,6 +398,12 @@ class m_permintaan extends CI_Model
     {
         $this->db->where($where);
         $this->db->update($this->table2, $data);
+    }
+
+    public function update3($where, $data)
+    {
+        $this->db->where($where);
+        $this->db->update($this->table3, $data);
     }
 
     // Fungsi untuk menyimpan data tolak

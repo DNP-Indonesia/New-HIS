@@ -140,8 +140,9 @@
                 												<span class="text">Mutasi Karyawan</span>
                 											</a>
                 										</p>
-														<p class="dropdown-item">
-                											<a href="<?php echo site_url("Master/Page_his/history_karyawan/" . $u->nik) ?>" class="btn btn-primary btn-icon-split btn-sm">
+                										<p class="dropdown-item">
+                											<a href="<?php echo site_url("Master/Page_his/history_karyawan/" . $u->nik) ?>"
+                												class="btn btn-primary btn-icon-split btn-sm">
                 												<span class="icon text-white-50">
                 													<i class="fas fa-edit"></i>
                 												</span>
@@ -228,7 +229,9 @@
                 											<span aria-hidden="true">×</span>
                 										</button>
                 									</div>
-                									<form action="<?php echo site_url("Master/action_his/do_edit_karyawan/" . $u->nik) ?>" method="post">
+                									<form
+                										action="<?php echo site_url("Master/action_his/do_edit_karyawan/" . $u->nik) ?>"
+                										method="post">
                 										<div class="modal-body">
                 											<div class="form-row">
                 												<div class="col-md-6 mb-3">
@@ -617,13 +620,16 @@
                 				<div style='margin-top: 10px;' id='pagination'></div>
                 			</div>
                 		</div>
-						
+
                 	</div>
-					<a href="<?php echo base_url('Master/Page_his/home_personalia')?>" class="back-link" >
-			<i class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali
-		</a>
-		<br>
-		<br>
+                	<a href="<?php echo base_url('Master/Page_his/home_personalia')?>" class="back-link">
+                		<i class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali
+                	</a>
+                	<br>
+                	<br>
+                	<br>
+                	<br>
+                	<br>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -787,21 +793,23 @@
                 	</div>
                 </div>
 
-<style scoped>
-	.back-link{
-        text-decoration: none;
-        color: #fff;
-        background-color: #1cc88a;
-        padding: 1rem;
-        border-radius: 8px;
-        transition: color 0.3s, background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
+                <style scoped>
+                	.back-link {
+                		text-decoration: none;
+                		color: #fff;
+                		background-color: #1cc88a;
+                		padding: 1rem;
+                		border-radius: 8px;
+                		transition: color 0.3s, background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+                	}
 
-    .back-link:hover{
-        color: #fff;
-        background-color: #1cc88a; /* Ubah latar belakang menjadi hijau */
-        text-decoration: none;
-        transform: translateY(-5px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-</style>
+                	.back-link:hover {
+                		color: #fff;
+                		background-color: #1cc88a;
+                		/* Ubah latar belakang menjadi hijau */
+                		text-decoration: none;
+                		transform: translateY(-5px);
+                		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                	}
+
+                </style>

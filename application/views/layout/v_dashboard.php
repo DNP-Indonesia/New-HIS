@@ -1,3 +1,5 @@
+<br>
+<br>
 <div class="container-fluid">
     <!-- 404 Error Text -->
     <div class="text-center">
@@ -6,7 +8,9 @@
         </h1>
         <p class="lead text-gray-800 mb-5">HRCA Information System</p>
         <p class="text-gray-500 mb-0">Selamat datang, Salam Sehat!</p>
-        <!-- <div class="notifikasi" id="notifikasi"></div> -->
+        <?php if ($karyawanAkanPensiun != NULL) : ?>
+        <div class="notifikasi" id="notifikasi"></div>
+        <?php endif; ?>
     </div>
 </div>
 <br>
@@ -43,12 +47,48 @@
                 <div class="card text-white  mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Training Kaizen</h5>
-
                     </div>
                 </div>
             </a>
         </div>
-
+        <?php if ($this->session->userdata('role') == 'super_user') : ?>
+        <div class="col-sm-4">
+            <div class="dropdown" style="height: 100%; width: 100%;">
+                <a href="#" style="text-decoration: none;">
+                    <div class="card text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Master Sundries</h5>
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown-content">
+                    <a href="<?= base_url('kategori') ?>">Kategori</a>
+                    <a href="<?= base_url('jenis') ?>">Jenis</a>
+                    <a href="<?= base_url('barang') ?>">Barang</a>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php if ($this->session->userdata('role') == 'super_user') : ?>
+        <div class="col-sm-4">
+            <div class="dropdown" style="height: 100%; width: 100%;">
+                <a href="#" style="text-decoration: none;">
+                    <div class="card text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Transaksi Sundires</h5>
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown-content">
+                    <a href="<?php echo site_url('permintaan') ?>">Request Sundries</a>
+                    <a href="<?php echo site_url('estimasi') ?>">Estimasi Making</a>
+                    <a href="<?php echo site_url('konsumsi') ?>">Request Consumption</a>
+                    <a href="<?php echo site_url('pembelian') ?>">Request Purchase</a>
+                    <a href="<?php echo site_url('penerimaan') ?>">Goods Receipt</a>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -116,39 +156,42 @@
     }
 
     .notifikasi {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #1cc88a;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    opacity: 0; /* Awalnya diatur menjadi 0 */
-    display: block;
-    animation: fadeIn 0.5s ease-in-out forwards; /* Gunakan animasi fadeIn */
-}
-
-@keyframes fadeIn {
-    from {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #1cc88a;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
         opacity: 0;
+        /* Awalnya diatur menjadi 0 */
+        display: block;
+        animation: fadeIn 0.5s ease-in-out forwards;
+        /* Gunakan animasi fadeIn */
     }
-    to {
-        opacity: 1;
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
-}
 </style>
 
 
 <script>
-const karyawanAkanPensiun = <?= json_encode($karyawanAkanPensiun) ?>; // Perhatikan penggunaan sintaksis PHP di sini.
+    const karyawanAkanPensiun = <?= json_encode($karyawanAkanPensiun) ?>; // Perhatikan penggunaan sintaksis PHP di sini.
 
-function showNotification() {
-    const notifikasi = document.getElementById('notifikasi');
-    if (notifikasi) {
-        // Ubah konten notifikasi sesuai kebutuhan Anda
-        notifikasi.innerHTML = `
+    function showNotification() {
+        const notifikasi = document.getElementById('notifikasi');
+        if (notifikasi) {
+            // Ubah konten notifikasi sesuai kebutuhan Anda
+            notifikasi.innerHTML = `
         <h5>Pemberitahuan Karyawan Akan Pensiun</h5>
         <br>
         ${karyawanAkanPensiun.length > 0 ? 
@@ -164,21 +207,20 @@ function showNotification() {
             <br>
             <a href="daftar-karyawan-akan-pensiun" class="btn btn-primary btn-sm">Detail</a>
          `;
-         
 
-        // Tampilkan notifikasi dengan mengubah gaya elemen
-        notifikasi.style.display = 'block';
 
-        // Sembunyikan notifikasi setelah 5 detik
-        setTimeout(() => {
-            notifikasi.style.display = 'none';
-        }, 15000);
+            // Tampilkan notifikasi dengan mengubah gaya elemen
+            notifikasi.style.display = 'block';
+
+            // Sembunyikan notifikasi setelah 5 detik
+            setTimeout(() => {
+                notifikasi.style.display = 'none';
+            }, 15000);
+        }
     }
-}
 
-// Panggil fungsi showNotification saat data karyawan tersedia
-if (karyawanAkanPensiun.length > 0) {
-    showNotification();
-}
-
+    // Panggil fungsi showNotification saat data karyawan tersedia
+    if (karyawanAkanPensiun.length > 0) {
+        showNotification();
+    }
 </script>

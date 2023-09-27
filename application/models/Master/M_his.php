@@ -204,10 +204,23 @@ class M_his extends CI_Model{
         $this->db->select('hk.nama, hk.nik, hk.tgl_lahir, hp.bunga, hp.kue, hp.piagam'); // Pilih semua kolom yang Anda butuhkan
         $this->db->from('his_karyawan hk');
         $this->db->join('his_pensiun hp', 'hk.spysiid = hp.spysiid', 'LEFT'); // LEFT JOIN berdasarkan spysiid
+
         // $this->db->where('YEAR(hk.tgl_lahir) + 55 =', $tahunPensiun);
         $this->db->where('DATE_ADD(hk.tgl_lahir, INTERVAL 55 YEAR) <=', $tanggalPensiun);
         $this->db->where('hk.keterangan', 'Aktif'); // Menambahkan konstrain untuk keterangan = Aktif
-    
+        $this->db->where('DATE_ADD(hk.tgl_lahir, INTERVAL 55 YEAR) <=', $tanggalPensiun);
+        $this->db->where('hk.keterangan', 'Aktif'); // Menambahkan konstrain untuk keterangan = Aktif
+
+        // Tambahkan kondisi untuk mengecek jika spysiid belum ada di his_pensiun
+        $this->db->group_start();
+        $this->db->or_where('hp.spysiid IS NULL');
+        $this->db->or_where('hp.spysiid', '');
+        $this->db->or_where('hp.bunga !=', 'siap');
+        $this->db->or_where('hp.kue !=', 'siap');
+        $this->db->or_where('hp.piagam !=', 'siap');
+        $this->db->group_end();
+
+
         $query = $this->db->get();
         $results = $query->result();
     
@@ -222,6 +235,14 @@ class M_his extends CI_Model{
     
         return $results;
     }
+
+    function getPensiun($spysiid){
+        return $this->db->from('his_pensiun')
+        ->where('his_pensiun.spysiid', $spysiid)
+        ->get()
+        ->result();
+    }
+
 
     function getStatusPensiun(){
         $this->db->select('hp.*, hk.nama,hk.nik,hk.tgl_lahir'); // Pilih semua kolom dari his_pensiun dan kolom nama dari his_karyawan

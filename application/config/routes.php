@@ -55,16 +55,16 @@ $route['Sundries/Barang'] = 'Sundries/Barang/c_barang/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// c_atuh
+// c_auth
 $route['auth'] = 'auth/c_auth';
 $route['home'] = 'auth/c_auth/home';
 $route['logout'] = 'auth/c_auth/logout';
 $route['dashboard'] = 'Master/Page_his/home';
 $route['data-user'] = 'Master/Page_his/user';
-
+$route['change-password'] = 'auth/c_auth/changePassword';
+$route['update-password'] = 'auth/c_auth/updatePassword';
 
 // Personal Data
-
 $route['personalia'] = 'Master/page_his/home_personalia';
 $route['data-karyawan'] = 'Master/Page_his/karyawan';
 $route['data-karyawan-keluar'] = 'Master/Page_his/karyawan_out';
