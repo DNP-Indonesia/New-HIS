@@ -4,8 +4,9 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <h4>Request Sundries</h4>
+    <?php if ($this->session->userdata('role') == 'super_user') { ?><h6>Admin Bagian</h6> <?php } ?>
     <?php
-    if ($this->session->userdata('role') == 'sdr_Admin Bagian') {
+    if ($this->session->userdata('role') == 'sdr_Admin Bagian' || $this->session->userdata('role') == 'super_user') {
         ?>
     <!-- DataTales Example -->
     <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
@@ -491,9 +492,13 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
         </div>
     </div>
     <?php } ?>
+
+    <?php if ($this->session->userdata('role') == 'super_user') { ?><h6>Kepala Bagian</h6> <?php } ?>
+
     <?php
-    if ($this->session->userdata('role') == 'sdr_Kepala Bagian') {
+    if ($this->session->userdata('role') == 'sdr_Kepala Bagian' || $this->session->userdata('role') == 'super_user') {
         ?>
+        
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-success">
@@ -878,9 +883,12 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
         </div>
     </div>
     <?php } ?>
+
+    <?php if ($this->session->userdata('role') == 'super_user') { ?><h6>Admin Gudang</h6> <?php } ?>
+
     <?php
-    if ($this->session->userdata('role') == 'sdr_Admin Gudang' or $this->session->userdata('role') == 'sdr_Kepala Gudang') { ?>
-    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
+    if ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'sdr_Kepala Gudang' || $this->session->userdata('role') == 'super_user') { ?>
+    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'super_user') { ?>
     <a href="#" class="btn btn-sm btn-info mb-3" data-toggle="modal" data-target="#modal-tambah-barang">
         Tambah Barang
     </a>
@@ -1033,7 +1041,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                         </h6>
                                         <?php } ?>
                                     </td>
-                                    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
+                                    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'super_user') { ?>
                                     <td class="text-center">
                                         <a href="#" class="btn btn-sm btn-success" data-toggle="modal"
                                             data-target="#modal-selesai<?php echo $tempel->id_request_sundries; ?>">
@@ -1130,6 +1138,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
     </div>
     <?php } ?>
 </div>
+<br>
 
 
 <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

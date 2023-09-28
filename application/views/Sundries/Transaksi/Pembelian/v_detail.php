@@ -43,7 +43,7 @@
                 <a href="<?php echo site_url('pembelian') ?>" class="btn btn-sm btn-purple mt-4 mb-4">
                     Kembali Ke Halaman Request Purchase
                 </a>
-                <?php if ($this->session->userdata('role')== 'sdr_Kepala Gudang') {?>
+                <?php if ($this->session->userdata('role')== 'sdr_Kepala Gudang' || $this->session->userdata('role') == 'super_user') {?>
                     <a href="<?php echo site_url() ?>" class="btn btn-sm btn-purple mt-4 mb-4">
                         Kembali Ke Halaman Dashboard
                     </a>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="card-body row justify-content-around">
                     <div class="col-md-12">
-                         <?php foreach($data as $tempel){?>
+                        <?php foreach($data as $tempel){?>
                         <label id="faktur" hidden><?php echo $tempel->faktur ?></label>
                         <label>Faktur : <?php echo $tempel->faktur ?></label><br>
                         <label>Direquest Oleh : <?php echo $tempel->nama_peminta ?></label><br>
@@ -103,7 +103,7 @@
                                     <td><?php echo $tempel->jumlah ?></td>
                                     <td><?php echo $tempel->keterangan ?></td>
                                     <td>
-                                        <?php if ($this->session->userdata('role')=='sdr_Admin Gudang'){?>
+                                        <?php if ($this->session->userdata('role')=='sdr_Admin Gudang' || $this->session->userdata('role') == 'super_user'){?>
                                             <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-terima<?php echo $tempel->id_purchase_detail ?>">
                                                 Terima Barang  
                                             </a> 

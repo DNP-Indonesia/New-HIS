@@ -87,6 +87,7 @@ class Page_his extends MY_Controller
     $menu = $this->uri->segment(2);
 
     $data['karyawan'] = $this->M_his->data_karyawan_bynik($nik);
+    $data['pensiun']  = $this->M_his->getPensiun($nik);
     $this->render_backend('personalData/v_persiapan_pensiun', $menu, $data);
   
   }

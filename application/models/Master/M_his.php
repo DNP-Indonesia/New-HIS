@@ -195,47 +195,75 @@ class M_his extends CI_Model{
 
     function getKaryawanAkanPensiun() {
         // Ambil tahun sekarang
-        $tahunSekarang = date('Y');
+        $tanggalSekarang = date('Y-m-d');
     
         // Hitung tahun pensiun
-        $tahunPensiun = $tahunSekarang;
-    
-        // Query untuk mengambil daftar karyawan yang akan pensiun dalam satu bulan setengah ke depan
-        $this->db->select('nama,nik, tgl_lahir');
-        $this->db->from('his_karyawan');
-        $this->db->where('YEAR(tgl_lahir) + 55 =', $tahunPensiun);
-        $this->db->where('keterangan', 'Aktif'); // Menambahkan konstrain untuk keterangan = Aktif
-        $query = $this->db->get();
-    
-        return $query->result(); // Mengembalikan daftar karyawan
-    }
+        $tanggalPensiun = date('Y-m-d', strtotime('+1.5 months', strtotime($tanggalSekarang)));
 
-    function getStatusPensiun(){
-        $this->db->select('spysiid, bunga, kue, piagam');
-        $query = $this->db->get('his_pensiun');
-        
     
-        $result = array(); // Array untuk menyimpan hasil status
+        $this->db->select('hk.nama, hk.nik, hk.tgl_lahir, hp.bunga, hp.kue, hp.piagam'); // Pilih semua kolom yang Anda butuhkan
+        $this->db->from('his_karyawan hk');
+        $this->db->join('his_pensiun hp', 'hk.spysiid = hp.spysiid', 'LEFT'); // LEFT JOIN berdasarkan spysiid
+
+        // $this->db->where('YEAR(hk.tgl_lahir) + 55 =', $tahunPensiun);
+        $this->db->where('DATE_ADD(hk.tgl_lahir, INTERVAL 55 YEAR) <=', $tanggalPensiun);
+        $this->db->where('hk.keterangan', 'Aktif'); // Menambahkan konstrain untuk keterangan = Aktif
+        $this->db->where('DATE_ADD(hk.tgl_lahir, INTERVAL 55 YEAR) <=', $tanggalPensiun);
+        $this->db->where('hk.keterangan', 'Aktif'); // Menambahkan konstrain untuk keterangan = Aktif
+
+        // Tambahkan kondisi untuk mengecek jika spysiid belum ada di his_pensiun
+        $this->db->group_start();
+        $this->db->or_where('hp.spysiid IS NULL');
+        $this->db->or_where('hp.spysiid', '');
+        $this->db->or_where('hp.bunga !=', 'siap');
+        $this->db->or_where('hp.kue !=', 'siap');
+        $this->db->or_where('hp.piagam !=', 'siap');
+        $this->db->group_end();
+
+
+        $query = $this->db->get();
+        $results = $query->result();
     
-        if ($query->num_rows() > 0) {
-            $data = $query->result();
-    
-            foreach ($data as $row) {
-                $status = 'siap'; // Default status siap
-    
-                // Periksa kriteria untuk mengubah status menjadi 'belum siap'
-                if ($row->bunga !== 'siap' || $row->kue !== 'siap' || $row->piagam !== 'siap') {
-                    $status = 'belum siap';
-                }
-    
-                // Tambahkan status ke dalam array dengan key berdasarkan spysiid
-                $result[$row->spysiid] = $status;
+        // Loop melalui hasil untuk mengatur status 'belum siap' jika diperlukan
+        foreach ($results as $result) {
+            if ($result->bunga != 'siap' || $result->kue != 'siap' || $result->piagam != 'siap') {
+                $result->status = 'belum siap';
+            } else {
+                $result->status = 'siap';
             }
         }
     
-        return $result;
+        return $results;
     }
-        
+
+    function getPensiun($spysiid){
+        return $this->db->from('his_pensiun')
+        ->where('his_pensiun.spysiid', $spysiid)
+        ->get()
+        ->result();
+    }
+
+
+    function getStatusPensiun(){
+        $this->db->select('hp.*, hk.nama,hk.nik,hk.tgl_lahir'); // Pilih semua kolom dari his_pensiun dan kolom nama dari his_karyawan
+        $this->db->from('his_pensiun hp');
+        $this->db->join('his_karyawan hk', 'hp.spysiid = hk.spysiid', 'INNER'); // INNER JOIN berdasarkan spysiid
+    
+        $query = $this->db->get();
+        $results = $query->result();
+    
+        // Loop melalui hasil untuk mengatur status 'belum siap' jika diperlukan
+        foreach ($results as $result) {
+            if ($result->bunga != 'siap' || $result->kue != 'siap' || $result->piagam != 'siap') {
+                $result->status = 'belum siap';
+            } else {
+                $result->status = 'siap';
+            }
+        }
+    
+        return $results;
+    }
+
     function data_divisi(){
         return $this->db->from('his_divisi')
             ->get()

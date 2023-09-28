@@ -175,17 +175,19 @@ class m_pembelian extends CI_Model
 
     public function getDetailPembelian($id)
     {
-        $this->db->select('*');
-        $this->db->from($this->tabledetail);
-        $this->db->join('sdr_request_sundries', 'sdr_request_sundries.faktur = ' . $this->tabledetail . '.faeris');
-        $this->db->join($this->table, $this->table . '.faktur = ' . $this->tabledetail . '.faktur');
-        $this->db->join('sdr_barang', 'sdr_barang.id_barang = ' . $this->tabledetail . '.id_barang');
-        $this->db->join('tbl_user', 'tbl_user.id_user = sdr_request_sundries.id_user');
-        $this->db->join('his_section', 'his_section.id_section = tbl_user.id_section');
-        $this->db->where($this->tabledetail . '.faktur', $id);
-        $query = $this->db->get();
-        return $query->result();
+        return $this->db
+            ->select('*')
+            ->from($this->tabledetail)
+            ->join('sdr_request_sundries', 'sdr_request_sundries.faktur = ' . $this->tabledetail . '.faktur', 'left') // Ganti left join jika diperlukan
+            ->join($this->table, $this->table . '.faktur = ' . $this->tabledetail . '.faktur')
+            ->join('sdr_barang', 'sdr_barang.id_barang = ' . $this->tabledetail . '.id_barang')
+            ->join('tbl_user', 'tbl_user.id_user = sdr_request_sundries.id_user')
+            ->join('his_section', 'his_section.id_section = tbl_user.id_section')
+            ->where($this->tabledetail . '.faktur', $id)
+            ->get()
+            ->result();
     }
+    
 
     public function cekKerangjang($faktur)
     {
@@ -284,4 +286,3 @@ class m_pembelian extends CI_Model
         return $newfaktur;
     }
 }
-?>
