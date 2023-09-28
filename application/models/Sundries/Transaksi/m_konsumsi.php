@@ -18,12 +18,13 @@ class m_konsumsi extends CI_Model
             ->result();
     }
 
-    public function getBarangById($id_detail_sundries)
+    public function getBarangById($id)
     {
         return $this->db
-            ->from('sdr_request_sundries_detail')
-            ->join('sdr_barang', 'sdr_request_sundries_detail.id_barang=sdr_barang.id_barang')
-            ->where('id_detail_sundries', $id_detail_sundries)
+            ->from($this->table)
+            ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+            ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->where($this->table . 'faktur', $id)
             ->get()
             ->result();
     }
@@ -84,7 +85,6 @@ class m_konsumsi extends CI_Model
     
         return $combinedData;
     }
-    
 
     public function forKepalaBagian()
     {
@@ -98,9 +98,24 @@ class m_konsumsi extends CI_Model
             ->result();
     }
 
-    public function save($data)
+    public function save($data, $iduser, $faktur)
     {
-        $this->db->insert('sdr_consumption', $data);
+        // $this->db->insert('sdr_consumption', $data);
+        $simpan = $this->db->insert('sdr_consumption', $data);
+        if ($simpan) {
+            $carikeranjang = $this->db->get('sdr_consumption_keranjang');
+            foreach ($carikeranjang->result() as $tempel) {
+                $detail = [
+                    'faktur' => $faktur,
+                    'id_barang' => $tempel->id_barang,
+                    'jumlah' => $tempel->jumlah,
+                    // 'keterangan' => $tempel->keterangan,
+
+                ];
+                $this->db->insert('sdr_consumption_detail', $detail);
+            }
+            $this->db->delete('sdr_consumption_keranjang', ['id_user' => $iduser]);
+        }
     }    
 
     public function deleteKonsumsi($faktur)
@@ -120,7 +135,7 @@ class m_konsumsi extends CI_Model
             ->result();
     }
 
-    public function getKonsumsiDetail($id)
+    public function getKonsumsiDetail($id_consumption)
     {
         return $this->db
             ->from('sdr_consumption_detail')
@@ -128,7 +143,7 @@ class m_konsumsi extends CI_Model
             ->join('sdr_barang', 'sdr_barang.id_barang=sdr_consumption_detail.id_barang')
             ->join('tbl_user', 'tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->where('sdr_consumption_detail.faktur', $id)
+            ->where('sdr_consumption_detail.faktur', $id_consumption)
             ->get()
             ->result();
     }
@@ -188,13 +203,19 @@ class m_konsumsi extends CI_Model
             ->result();
     }
 
+    public function updateKeranjang($where, $data)
+    {
+        $this->db->where($where);
+        $this->db->update('sdr_consumption_keranjang', $data);
+    }
+
     public function getKeranjang()
     {
         $this->db->select('*');
         $this->db->select_sum('jumlah');
         $this->db->from('sdr_consumption_keranjang');
         $this->db->join('sdr_barang', 'sdr_barang.id_barang=sdr_consumption_keranjang.id_barang');
-        $this->group_by('sdr_consumption_keranjang.id_barang');
+        $this->db->group_by('sdr_consumption_keranjang.id_barang');
         $query = $this->db->get();
         return $query->result();
     }
