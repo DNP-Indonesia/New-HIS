@@ -19,22 +19,12 @@ class c_permintaan extends MY_Controller
 
     public function dashboard()
     {
-        // $data['diproses'] = $this->m_permintaan->getProses();
-        // $data['forapprove'] = $this->m_permintaan->forApprove();
-        // $data['estimasi'] = $this->m_estimasi->forApprove();
-        // $data['konsumsi'] = $this->m_konsumsi->forApprove();
-        // $data['admingudang'] = $this->m_permintaan->forAdminGudang();
-        // $data['kepalagudang'] = $this->m_permintaan->forKepalaGudang();
-
         $menu = 'dashboard';
         $this->render_backend('layout/v_dashboard', $menu);
     }
 
     public function index()
     {
-        // $data['bypermintaan'] = $this->m_permintaan->byPermintaan();
-        // $data['bytolak'] = $this->m_permintaan->byTolak();
-
         // Admin Bagian
         $data['permintaan'] = $this->m_permintaan->getPermintaan();
         $data['setuju'] = $this->m_permintaan->getSetuju();
@@ -125,12 +115,9 @@ class c_permintaan extends MY_Controller
         $this->load->view('Sundries/Transaksi/Permintaan/v_keranjang', $data);
     }
 
-    public function deleteKeranjang()
+    public function deleteKeranjang($id_keranjang_sundries)
     {
-        $id_user = $this->input->post('iduser');
-        $id_barang = $this->input->post('idbarang');
-        $hapus = $this->m_permintaan->deleteKeranjang($id_user, $id_barang);
-        echo $hapus;
+        $this->m_permintaan->deleteKeranjang($id_keranjang_sundries);
     }
 
     public function addPermintaan()

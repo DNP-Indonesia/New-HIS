@@ -132,10 +132,15 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <a href="#" class="btn btn-sm btn-danger"
-                                                        onclick="deleteConfirm('<?php echo site_url('deletekeranjangpembelian' . $tempel->id_barang); ?>')">
+                                                        onclick="deleteConfirm('<?php echo site_url('deletekeranjangpembelian/' . $tempel->id_keranjang_purchase); ?>')">
                                                         Hapus Dari Keranjang
                                                     </a>
                                                 </td>
+                                                <!-- <td class="text-center">
+                                                    <a href="<?php echo site_url('deletekeranjangpembelian/' . $tempel->id_keranjang_purchase); ?>" class="btn btn-sm btn-danger">
+                                                        Hapus Dari Keranjang
+                                                    </a>
+                                                </td> -->
                                             </tr>
                                             <?php $no++;
                                                 } ?>
@@ -287,6 +292,11 @@
 </div>
 
 <script>
+    function deleteConfirm(url) {
+        $('#tombolhapus').attr('href', url);
+        $('#modal-hapus').modal();
+    }
+
     $(document).ready(function() {
         // Tangani klik tombol "Pilih"
         $(".pilih-barang").click(function() {

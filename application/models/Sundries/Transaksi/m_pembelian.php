@@ -235,9 +235,19 @@ class m_pembelian extends CI_Model
         return $query->result();
     }
 
-    public function deleteKeranjang($id_barang)
+    public function getKeranjangByIdBarang($id_barang, $id_user)
     {
-        $hapus = $this->db->delete($this->table2, ['id_barang' => $id_barang]);
+        $this->db->where('id_barang', $id_barang);
+        $this->db->where('id_user', $id_user);
+        $query = $this->db->get('sdr_purchase_keranjang'); // Gantilah "nama_tabel_keranjang" dengan nama tabel keranjang Anda
+
+        // Mengembalikan hasil query
+        return $query->row();
+    }
+
+    public function deleteKeranjang($id_keranjang_purchase)
+    {
+        $hapus = $this->db->delete($this->table2, ['id_keranjang_purchase' => $id_keranjang_purchase]);
         if ($hapus) {
             return 1;
         }

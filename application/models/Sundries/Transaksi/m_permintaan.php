@@ -324,26 +324,6 @@ class m_permintaan extends CI_Model
             ->result();
     }
 
-    // Fungsi untuk menyimpan data permintaan
-    public function save($data, $iduser, $faktur, $statusstok)
-    {
-        $simpan = $this->db->insert($this->table, $data);
-        if ($simpan) {
-            $carikeranjang = $this->db->get_where('sdr_request_sundries_keranjang', array('id_user' => $iduser));
-            foreach ($carikeranjang->result() as $tempel) {
-                $detail = array(
-                    'faktur' => $faktur,
-                    'id_barang' => $tempel->id_barang,
-                    'jumlah' => $tempel->jumlah,
-                    'keterangan' => $tempel->keterangan,
-                    'statusstok' => $statusstok,
-                );
-                $this->db->insert($this->table2, $detail);
-            }
-            $this->db->delete('sdr_request_sundries_keranjang', array('id_user' => $iduser));
-        }
-    }
-
     public function save2($data)
     {
         $this->db->insert($this->table2, $data);
@@ -356,6 +336,12 @@ class m_permintaan extends CI_Model
         if ($hapus) {
             $hapusdetail = $this->db->delete($this->table2, array('faktur' => $faktur));
         }
+    }
+
+    
+    public function saveKeranjang($data)
+    {
+        $this->db->insert('sdr_request_sundries_keranjang', $data);
     }
 
     // Fungsi untuk mengecek apakah item barang sudah ada di keranjang berdasarkan id_barang dan id_user
@@ -381,9 +367,9 @@ class m_permintaan extends CI_Model
     }
 
     // Fungsi untuk menghapus data barang dari keranjang berdasarkan id_barang dan id_user
-    public function deleteKeranjang($id_barang, $id_user)
+    public function deleteKeranjang($id_keranjang_sundries)
     {
-        $hapus = $this->db->delete('sdr_request_sundries_keranjang', ['id_barang' => $id_barang, 'id_user' => $id_user]);
+        $hapus = $this->db->delete('sdr_request_sundries_keranjang', ['id_keranjang_sundries' => $id_keranjang_sundries]);
         if ($hapus) {
             return 1;
         }

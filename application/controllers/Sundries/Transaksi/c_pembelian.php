@@ -44,20 +44,33 @@ class c_pembelian extends MY_Controller
     {
         $id_barang = $this->input->post('id_barang');
         $qty = $this->input->post('jumlah');
-        // $catatan = $this->input->post('catatan');
         $id_user = $this->input->post('id_user');
-
-        $data = array(
-            'id_barang' => $id_barang,
-            'jumlah' => $qty,
-            // 'keterangan' => $catatan,
-            'id_user' => $id_user
-        );
-
-        $this->m_pembelian->saveKeranjang($data);
-
+    
+        // Cek apakah item dengan id_barang yang sama sudah ada dalam keranjang
+        $keranjang = $this->m_pembelian->getKeranjangByIdBarang($id_barang, $id_user);
+    
+        if (empty($keranjang)) {
+            // Item dengan id_barang yang sama belum ada dalam keranjang, tambahkan
+            $data = array(
+                'id_barang' => $id_barang,
+                'jumlah' => $qty,
+                'id_user' => $id_user
+            );
+    
+            $this->m_pembelian->saveKeranjang($data);
+        } else {
+            // Item dengan id_barang yang sama sudah ada dalam keranjang, lakukan tindakan yang sesuai
+            // Contoh: Update jumlah item yang ada di keranjang
+            $existing_qty = $keranjang->jumlah;
+            $new_qty = $existing_qty + $qty;
+    
+            // Update jumlah item dalam keranjang
+            $this->m_pembelian->updateKeranjang($id_barang, $id_user, $new_qty);
+        }
+    
         return redirect('Sundries/Transaksi/C_pembelian/formPembelian');
     }
+    
 
     public function add_Keranjang()
     {
@@ -97,23 +110,10 @@ class c_pembelian extends MY_Controller
         $this->load->view('Sundries/Transaksi/Pembelian/v_keranjang', $data);
     }
 
-    public function deleteKeranjang()
+    public function deleteKeranjang($id_keranjang_purchase)
     {
-        $id_barang = $this->uri->segment(5);
-        $stkeranjang = $this->uri->segment(4);
+        $this->m_pembelian->deleteKeranjang($id_keranjang_purchase);
 
-        $data = array(
-            'statuskeranjang' => $stkeranjang
-        );
-
-        $where = array(
-            'id_barang' => $id_barang
-        );
-
-        $ubah = $this->m_pembelian->updateKeranjang($where, $data);
-        $hapus = $this->m_pembelian->deleteKeranjang($id_barang);
-        echo $ubah;
-        echo $hapus;
         return redirect('Sundries/Transaksi/C_pembelian/formPembelian');
     }
 
