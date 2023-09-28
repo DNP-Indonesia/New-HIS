@@ -158,10 +158,53 @@ class m_konsumsi extends CI_Model
             ->result();
     }
 
+    public function saveKeranjang($data)
+    {
+        $this->db->insert('sdr_consumption_keranjang', $data);
+    }
+
     public function update($where, $data)
     {
         $this->db->where($where);
         $this->db->update($this->table, $data);
+    }
+
+    public function cekKeranjang($idbarang, $iduser)
+    {
+        return $this->db->get_where('sdr_consumption_keranjang', array('id_barang'=>$idbarang, 'id_user'=>$iduser));
+    }
+
+    public function cekKeranjang2($iduser)
+    {
+        return $this->db->get_where('sdr_consumption_keranjang', array('id_user'=>$iduser));
+    }
+
+    public function selectKeranjang($id_user)
+    {
+        return $this->db->from('sdr_consumption_keranjang')
+            ->join('sdr_barang', 'sdr_barang.id_barang=sdr_consumption_keranjang.id_barang')
+            ->where('sdr_consumption_keranjang.id_user', $id_user)
+            ->get()
+            ->result();
+    }
+
+    public function getKeranjang()
+    {
+        $this->db->select('*');
+        $this->db->select_sum('jumlah');
+        $this->db->from('sdr_consumption_keranjang');
+        $this->db->join('sdr_barang', 'sdr_barang.id_barang=sdr_consumption_keranjang.id_barang');
+        $this->group_by('sdr_consumption_keranjang.id_barang');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function deleteKeranjang($id_keranjang_consumption)
+    {
+        $hapus = $this->db->delete('sdr_consumption_keranjang', ['id_keranjang_consumption' => $id_keranjang_consumption]);
+        if ($hapus) {
+            return 1;
+        }
     }
 }
 ?>

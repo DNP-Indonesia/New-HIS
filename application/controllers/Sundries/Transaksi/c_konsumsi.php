@@ -17,7 +17,7 @@ class c_konsumsi extends MY_Controller
     public function index()
     {
         $data['konsumsi'] = $this->m_konsumsi->getKonsumsi();
-        $data['permintaan'] = $this->m_konsumsi->getPermintaan();
+        $data['permintaan'] = $this->m_konsumsi->getPermintaan1();
         $data['kepalabagian'] = $this->m_konsumsi->forKepalaBagian();
         $data['allkonsumsi'] = $this->m_konsumsi->getKonsumsiAll();
 
@@ -130,6 +130,40 @@ class c_konsumsi extends MY_Controller
         $this->m_konsumsi->update($where, $data);
         $this->session->set_userdata('tolak', 'Yeay, Data Berhasil Ditolak');
         return redirect('Sundries/Transaksi/c_permintaan/dashboard');
+    }
+
+    public function cekKeranjang()
+    {
+        $faris = $this->input->post('faris');
+        $id_barang = $this->input->post('id_barang');
+        $qty = $this->input->post('qty');
+        $id_user = $this->input->post('id_user');
+
+        $cek = $this->m_konsumsi->cekKeranjang($id_barang, $id_user)->num_rows();
+        if ($cek > 0) {
+            $this->session->set_userdata('keranjang', 'Barang sudah ada di keranjang');
+        } else {
+            $data = [
+                'faris' => $faris,
+                'id_barang' => $id_barang,
+                'jumlah' => $qty,
+                'id_user' => $id_user,
+            ];
+
+            $this->m_konsumsi->saveKeranjang($data);
+        }
+    }
+
+    public function showKeranjang()
+    {
+        $id_user = $this->input->post('id_user');
+        $data['keranjang'] = $this->m_konsumsi->getKeranjang($id_user);
+        $this->load->view('Sundries/Transaksi/Konsumsi/v_keranjang', $data);
+    }
+
+    public function deleteKeranjang($id_keranjang_consumption)
+    {
+        $this->m_konsumsi->deleteKeranjang($id_keranjang_consumption);
     }
 }
 ?>

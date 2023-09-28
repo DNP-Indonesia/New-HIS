@@ -36,6 +36,13 @@
         <?php echo $this->session->set_userdata('update', null); ?>
     </div>
     <?php } ?>
+    <?php if ($this->session->userdata('keranjang')) { ?>
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <?php echo $this->session->userdata('keranjang'); ?>
+        <?php echo $this->session->set_userdata('keranjang', null); ?>
+    </div>
+    <?php } ?>
     <form action="<?= site_url('addkeranjangpembelian') ?>" method="POST">
         <div class="card shadow mb-3">
             <div class="card-header">
@@ -325,19 +332,6 @@
             $("#ukuran").val(ukuran);
             $("#satuan").val(satuan);
             $("#jumlah").val(jumlah);
-        });
-
-
-        // Tangani klik tombol "Tambahkan ke Keranjang" di dalam modal
-        $("#tambah-ke-keranjang").click(function() {
-            // Ambil data yang dipilih dari modal dan tambahkan ke keranjang sesuai kebutuhan
-            var idBarang = $("#id_barang").val();
-            var faktur = $("#faktur").val();
-            // Tambahkan data ke keranjang
-            // ...
-
-            // Tutup modal
-            $("#modal-barang").modal("hide");
         });
     });
 </script>

@@ -310,6 +310,35 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                         <input type="text" class="form-control" id="id_barang" name="id_barang" hidden>
                         <input type="text" class="form-control" id="faris" name="faris" hidden>
                     </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-sm btn-info" id="keranjang">Masukkan Ke
+                                Keranjang</a>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label>Keranjang</label>
+                            <div class="card shadow">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless small">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">No</th>
+                                                <th class="text-center">Faktur</th>
+                                                <th class="text-center">Barang</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Opsi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="isikeranjang">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning" type="button" data-dismiss="modal">Batal</button>

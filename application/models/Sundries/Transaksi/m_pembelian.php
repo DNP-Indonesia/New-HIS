@@ -45,9 +45,11 @@ class m_pembelian extends CI_Model
         sdr_barang.stok
         ');
         $this->db->from('sdr_request_sundries_detail');
+        $this->db->join('sdr_request_sundries', 'sdr_request_sundries.faktur = sdr_request_sundries_detail.faktur');
         $this->db->join('sdr_barang', 'sdr_barang.id_barang = sdr_request_sundries_detail.id_barang');
         $this->db->group_by('sdr_request_sundries_detail.id_barang');
         $this->db->where('sdr_request_sundries_detail.statusstok', 'Tidak Ready');
+        $this->db->where('sdr_request_sundries.status', 'Diproses');
         $query1 = $this->db->get();
 
         $this->db->select('
@@ -189,14 +191,14 @@ class m_pembelian extends CI_Model
     }
     
 
-    public function cekKerangjang($faktur)
+    public function cekKeranjang2($faktur)
     {
         return $this->db->get_where($this->table2, ['faktur' => $faktur]);
     }
 
-    public function cekKeranjang2($idbarang)
+    public function cekKeranjang($idbarang, $iduser)
     {
-        return $this->db->get_where($this->table2, ['id_barang' => $idbarang]);
+        return $this->db->get_where('sdr_purchase_keranjang', array('id_barang'=>$idbarang, 'id_user'=>$iduser));
     }
 
     public function cekKeranjang3($faktur, $idbarang)
@@ -224,7 +226,16 @@ class m_pembelian extends CI_Model
         $this->db->update($this->table3, $data);
     }
 
-    public function getKeranjang()
+    public function getKeranjang($id_user)
+    {
+        return $this->db->from('sdr_purchase_keranjang')
+            ->join('sdr_barang', 'sdr_barang.id_barang=sdr_purchase_keranjang.id_barang')
+            ->where('sdr_purchase_keranjang.id_user', $id_user)
+            ->get()
+            ->result();
+    }
+
+    public function getKeranjang1()
     {
         $this->db->select('*');
         $this->db->select_sum('jumlah');
@@ -235,19 +246,9 @@ class m_pembelian extends CI_Model
         return $query->result();
     }
 
-    public function getKeranjangByIdBarang($id_barang, $id_user)
+    public function deleteKeranjang($id_barang)
     {
-        $this->db->where('id_barang', $id_barang);
-        $this->db->where('id_user', $id_user);
-        $query = $this->db->get('sdr_purchase_keranjang'); // Gantilah "nama_tabel_keranjang" dengan nama tabel keranjang Anda
-
-        // Mengembalikan hasil query
-        return $query->row();
-    }
-
-    public function deleteKeranjang($id_keranjang_purchase)
-    {
-        $hapus = $this->db->delete($this->table2, ['id_keranjang_purchase' => $id_keranjang_purchase]);
+        $hapus = $this->db->delete($this->table2, ['id_barang' => $id_barang]);
         if ($hapus) {
             return 1;
         }
@@ -294,5 +295,19 @@ class m_pembelian extends CI_Model
         $newfaktur = $rs . '' . $tahun . '' . $bulan . '.' . $lastKode;
 
         return $newfaktur;
+    }
+
+    public function idbarang($id_barang) {
+        // Gantilah 'keranjang' dengan nama tabel yang sesuai dalam database Anda
+        $this->db->select('id_barang');
+        $this->db->where('id_barang', $id_barang);
+        $query = $this->db->get('sdr_purchase_keranjang'); 
+
+        // Jika ada baris yang ditemukan, maka id_barang sudah ada dalam keranjang
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

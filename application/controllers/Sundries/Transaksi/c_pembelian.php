@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class c_pembelian extends MY_Controller
 {
@@ -23,16 +23,18 @@ class c_pembelian extends MY_Controller
         $data['pembelian'] = $this->m_pembelian->getPembelian();
 
         $menu = 'pembelian';
-        $this->render_backend('Sundries/Transaksi/Pembelian/v_pembelian', $menu,  $data);
+        $this->render_backend('Sundries/Transaksi/Pembelian/v_pembelian', $menu, $data);
     }
 
     public function formPembelian()
     {
+        $id_user = $this->session->userdata('id_user');
+
         // $data['barang'] = $this->m_pembelian->getBarangBelumSiap();
         $data['permintaanbarang'] = $this->m_pembelian->getPermintaanBarang();
         $data['barang'] = $this->m_pembelian->getBarang();
         $data['fakturotomatis'] = $this->m_pembelian->generateFaktur();
-        $data['keranjang'] = $this->m_pembelian->getKeranjang();
+        $data['keranjang'] = $this->m_pembelian->getKeranjang($id_user);
 
         // var_dump($data['barang']);
 
@@ -44,33 +46,25 @@ class c_pembelian extends MY_Controller
     {
         $id_barang = $this->input->post('id_barang');
         $qty = $this->input->post('jumlah');
+        // $catatan = $this->input->post('catatan');
         $id_user = $this->input->post('id_user');
-    
-        // Cek apakah item dengan id_barang yang sama sudah ada dalam keranjang
-        $keranjang = $this->m_pembelian->getKeranjangByIdBarang($id_barang, $id_user);
-    
-        if (empty($keranjang)) {
-            // Item dengan id_barang yang sama belum ada dalam keranjang, tambahkan
-            $data = array(
+
+        $cek = $this->m_pembelian->cekKeranjang($id_barang, $id_user)->num_rows();
+        if ($cek > 0) {
+            $this->session->set_userdata('keranjang', 'Barang sudah ada di keranjang');
+        } else {
+            $data = [
                 'id_barang' => $id_barang,
                 'jumlah' => $qty,
-                'id_user' => $id_user
-            );
-    
+                // 'keterangan' => $catatan,
+                'id_user' => $id_user,
+            ];
+
             $this->m_pembelian->saveKeranjang($data);
-        } else {
-            // Item dengan id_barang yang sama sudah ada dalam keranjang, lakukan tindakan yang sesuai
-            // Contoh: Update jumlah item yang ada di keranjang
-            $existing_qty = $keranjang->jumlah;
-            $new_qty = $existing_qty + $qty;
-    
-            // Update jumlah item dalam keranjang
-            $this->m_pembelian->updateKeranjang($id_barang, $id_user, $new_qty);
         }
-    
-        return redirect('Sundries/Transaksi/C_pembelian/formPembelian');
+
+        return redirect('Sundries/Transaksi/c_pembelian/formPembelian');
     }
-    
 
     public function add_Keranjang()
     {
@@ -80,24 +74,24 @@ class c_pembelian extends MY_Controller
         $catatan = $this->input->post('catatan');
         $stkeranjang = $this->input->post('stkeranjang');
         $iduser = $this->input->post('id_user');
-    
-        $data = array(
+
+        $data = [
             'id_barang' => $idbarang,
             'jumlah' => $qty,
             'faktursundries' => $faktur,
             'keterangan' => $catatan,
-            'id_user' => $iduser
-        );
+            'id_user' => $iduser,
+        ];
 
-        $ubahkeranjang = array(
-            'statuskeranjang' => $stkeranjang
-        );
+        $ubahkeranjang = [
+            'statuskeranjang' => $stkeranjang,
+        ];
 
-        $where = array(
+        $where = [
             'id_barang' => $idbarang,
-            'faktur' => $faktur
-        );
-            
+            'faktur' => $faktur,
+        ];
+
         $this->m_pembelian->saveKeranjang($data);
         $this->m_pembelian->updateKeranjang($where, $ubahkeranjang);
 
@@ -124,14 +118,14 @@ class c_pembelian extends MY_Controller
         $iduser = $this->input->post('id_user');
         $nama = $this->input->post('nama');
         $jamdibuat = $this->input->post('jam');
-        
-        $data = array(
+
+        $data = [
             'faktur' => $faktur,
             'nama_peminta' => $nama,
             'id_user' => $iduser,
             'tanggal' => $tanggal,
-            'jamdibuat' => $jamdibuat
-        );
+            'jamdibuat' => $jamdibuat,
+        ];
 
         $this->m_pembelian->save($data, $iduser, $faktur); // Tambahkan $iduser dan $faktur sebagai parameter
         $this->session->set_userdata('sukses', 'Berhasil, Request Pembelian telah dibuat');

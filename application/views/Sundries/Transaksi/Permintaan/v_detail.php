@@ -166,8 +166,7 @@
                                 <th class="text-center">Status Barang</th>
                                 <?php if ($this->session->userdata('role') == 'sdr_Admin Bagian' || $this->session->userdata('role') == 'super_user' 
                                     && $tempel->status == 'Ditolak' 
-                                    or $this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'super_user'
-                                    && $tempel->status == 'Diproses') { ?>
+                                    or $this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == 'Diproses' || $this->session->userdata('role') == 'super_user' && $tempel->status == 'Diproses' && $tempel->statusstok == 'Tidak Ready') { ?>
                                 <th class="text-center">Opsi</th>
                                 <?php } ?>
                             </tr>
@@ -215,15 +214,11 @@
                                         Hapus
                                     </a>
                                     <?php } ?>
-                                    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'super_user' && $tempel->status == 'Diproses' && $tempel->statusstok == 'Tidak Ready') { ?>
+                                    <?php if ($this->session->userdata('role') == 'sdr_Admin Gudang' && $tempel->status == 'Diproses' || $this->session->userdata('role') == 'super_user' && $tempel->status == 'Diproses' && $tempel->statusstok == 'Tidak Ready') { ?>
                                     <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
                                         data-target="#modal-ready<?php echo $tempel->id_detail_sundries; ?>">
                                         <span class="text">Ready</span>
                                     </a>
-                                    <!-- <a onclick="deleteConfirm('<?php echo base_url('Sundries/requestsundriescontroller/barangdelete/' . $tempel->id_detail_sundries); ?>')" href="#"
-                                        class="btn btn-sm btn-danger">
-                                        Hapus
-                                    </a> -->
                                     <?php } ?>
                                 </td>
                             </tr>

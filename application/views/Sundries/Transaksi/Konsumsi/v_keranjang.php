@@ -14,8 +14,8 @@ foreach ($keranjang as $tempel) { ?>
         <?php echo $tempel->jumlah; ?>
     </td>
     <td class="text-center">
-        <a href="#" class="btn btn-sm btn-danger hapuskeranjang" data-idbarang="<?php echo $tempel->id_barang; ?>"
-            data-iduser="<?php echo $tempel->id_user; ?>">Hapus Dari Keranjang</a>
+    <a href="#" class="btn btn-sm btn-danger hapuskeranjang" data-idkeranjang="<?php echo $tempel->id_keranjang_consumption; ?>"
+            data-iduser="<?php echo $tempel->id_user; ?>">Hapus</a>
     </td>
 </tr>
 <?php $no++;
@@ -40,14 +40,14 @@ foreach ($keranjang as $tempel) { ?>
         }
 
         $(".hapuskeranjang").click(function() {
-            var idbarang = $(this).attr("data-idbarang");
+            var idkeranjang = $(this).attr("data-idkeranjang");
             var iduser = $(this).attr("data-iduser");
 
             $.ajax({
-                type: 'POST',
-                url: "<?php echo site_url('deletekeranjangkonsumsi'); ?>",
+                type: 'GET',
+                url: "<?php echo site_url('deletekeranjangkonsumsi/' . $tempel->id_keranjang_consumption); ?>",
                 data: {
-                    idbarang: idbarang,
+                    idkeranjang: idkeranjang,
                     iduser: iduser
                 },
                 cache: false,

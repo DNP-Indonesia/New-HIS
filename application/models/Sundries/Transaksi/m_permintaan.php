@@ -22,7 +22,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Request')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -68,7 +68,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -76,19 +76,33 @@ class m_permintaan extends CI_Model
     // Mengambil data permintaan berdasarkan id_user dan status 'Ditolak'
      public function getTolak()
     {
-        return $this->db
-            ->select([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
-            ->from($this->table)
+        return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Ditolak')
-            // ->order_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'], 'ASC')
-            ->group_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
+            ->order_by($this->primaryKey, 'ASC')
+            ->group_by($this->tabletolak . '.faktur')
             ->get()
             ->result();
     }
+    
+    //  public function getTolak()
+    // {
+    //     return $this->db
+    //         ->select([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
+    //         ->from($this->table)
+    //         ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
+    //         ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+    //         ->join($this->tabletolak, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
+    //         ->where($this->table . '.id_user', $this->session->userdata('id_user'))
+    //         ->where('status', 'Ditolak')
+    //         // ->order_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'], 'ASC')
+    //         ->group_by([$this->tabletolak . '.faktur', $this->tabletolak . '.alasan_tolak', $this->tabletolak . '.tanggal_tolak', $this->tabletolak . '.jamtolak', $this->tabletolak . '.id_user', $this->tabletolak . '.penolak'])
+    //         ->get()
+    //         ->result();
+    // }
 
     public function getReady()
     {
@@ -98,8 +112,8 @@ class m_permintaan extends CI_Model
             ->join($this->table2, $this->table2 . '.faktur=' . $this->table . '.faktur')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where($this->table . '.status', 'Diproses')
-            ->where($this->table2 . '.statusstok', 'Ready')
-            ->order_by($this->table2 . '.id_detail_sundries', 'DESC') // Mengurutkan berdasarkan id_detail_sundries
+            // ->where($this->table2 . '.statusstok', 'Ready')
+            ->order_by($this->table2 . '.id_detail_sundries', 'ASC') // Mengurutkan berdasarkan id_detail_sundries
             ->get()
             ->result();
     }
@@ -115,7 +129,7 @@ class m_permintaan extends CI_Model
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where($this->table . '.status', 'Diproses')
             ->where($this->table2 . '.statusstok', 'Ready')
-            ->order_by($this->table2 . '.id_detail_sundries', 'DESC') // Mengurutkan berdasarkan id_detail_sundries
+            ->order_by($this->table2 . '.id_detail_sundries', 'ASC') // Mengurutkan berdasarkan id_detail_sundries
             ->get()
             ->result();
     }
@@ -128,7 +142,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Selesai')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -139,7 +153,7 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->where('status', 'Request')
             ->get()
             ->result();
@@ -151,7 +165,7 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->where('status', 'Ditolak')
             ->get()
             ->result();
@@ -163,7 +177,7 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->where('status', 'Diproses')
             ->get()
             ->result();
@@ -175,7 +189,7 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->where('status', 'Selesai')
             ->get()
             ->result();
@@ -188,7 +202,7 @@ class m_permintaan extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -200,7 +214,7 @@ class m_permintaan extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -213,7 +227,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('status', 'Request')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -226,7 +240,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Request')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -240,7 +254,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -270,7 +284,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Diproses')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -283,7 +297,7 @@ class m_permintaan extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Selesai')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -319,9 +333,28 @@ class m_permintaan extends CI_Model
             ->join($this->table, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
             ->join('tbl_user', 'tbl_user.id_user=' . $this->tabletolak . '.id_user')
             ->where($this->tabletolak . '.faktur', $id)
-            ->order_by($this->tabletolak . '.id_tolak', 'DESC')
+            ->order_by($this->tabletolak . '.id_tolak', 'ASC')
             ->get()
             ->result();
+    }
+
+    public function save($data, $iduser, $faktur, $statusstok)
+    {
+        $simpan = $this->db->insert($this->table, $data);
+        if ($simpan) {
+            $carikeranjang = $this->db->get_where('sdr_request_sundries_keranjang', array('id_user' => $iduser));
+            foreach ($carikeranjang->result() as $tempel) {
+                $detail = array(
+                    'faktur' => $faktur,
+                    'id_barang' => $tempel->id_barang,
+                    'jumlah' => $tempel->jumlah,
+                    'keterangan' => $tempel->keterangan,
+                    'statusstok' => $statusstok,
+                );
+                $this->db->insert($this->table2, $detail);
+            }
+            $this->db->delete('sdr_request_sundries_keranjang', array('id_user' => $iduser));
+        }
     }
 
     public function save2($data)
@@ -338,7 +371,6 @@ class m_permintaan extends CI_Model
         }
     }
 
-    
     public function saveKeranjang($data)
     {
         $this->db->insert('sdr_request_sundries_keranjang', $data);
@@ -411,7 +443,7 @@ class m_permintaan extends CI_Model
     public function generateFaktur()
     {
         $this->db->select('RIGHT(faktur,4) as faktur', false);
-        $this->db->order_by("faktur", "DESC");
+        $this->db->order_by("faktur", "ASC");
         $this->db->limit(1);
         $query = $this->db->get('sdr_request_sundries');
 
