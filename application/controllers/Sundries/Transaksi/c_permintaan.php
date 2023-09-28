@@ -336,7 +336,7 @@ class c_permintaan extends MY_Controller
         $stok = $this->input->post('stok');
 
         // Tentukan apakah barang harus dibeli atau tidak
-        if ($stok <= $jumlah) {
+        if ($stok != 0 && $stok < $jumlah) {
 
             $data = [
                 'jumlah' => $stok,
@@ -366,9 +366,11 @@ class c_permintaan extends MY_Controller
             
         } elseif ($jumlah == 0) {
             $statusstok = 'Ready';
+            $status = 'Belum Diambil';
 
             $data = [
                 'statusstok' => $statusstok,
+                'status' => $status,
             ];
 
             $where = [

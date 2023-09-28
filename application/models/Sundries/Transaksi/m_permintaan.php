@@ -111,9 +111,11 @@ class m_permintaan extends CI_Model
         return $this->db->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user=' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
+            ->join($this->table2, $this->table2 . '.faktur=' . $this->table . '.faktur')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
-            ->where('status', 'Diproses')
-            ->order_by($this->primaryKey, 'DESC')
+            ->where($this->table . '.status', 'Diproses')
+            ->where($this->table2 . '.statusstok', 'Ready')
+            ->order_by($this->table2 . '.id_detail_sundries', 'DESC') // Mengurutkan berdasarkan id_detail_sundries
             ->get()
             ->result();
     }

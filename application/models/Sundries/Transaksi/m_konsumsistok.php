@@ -13,7 +13,7 @@ class m_konsumsistok extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=sdr_consumptionstok.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('sdr_consumptionstok.id_user', $this->session->userdata('id_user'))
-            ->order_by('id_consumptionstok', 'DESC')
+            ->order_by('id_consumptionstok', 'ASC')
             ->get()
             ->result();
     }
@@ -34,7 +34,7 @@ class m_konsumsistok extends CI_Model
             ->from('sdr_consumptionstok')
             ->join('tbl_user', 'tbl_user.id_user=sdr_consumptionstok.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by('id_consumptionstok', 'DESC')
+            ->order_by('id_consumptionstok', 'ASC')
             ->get()
             ->result();
     }
@@ -48,7 +48,7 @@ class m_konsumsistok extends CI_Model
             ->where('sdr_estimasi.id_user', $this->session->userdata('id_user'))
             // ->where('status', 'Diproses')
             // ->where('statusstok', 'Ready')
-            ->order_by('id_detail_estimasi', 'DESC')
+            ->order_by('id_detail_estimasi', 'ASC')
             ->get()
             ->result();
     }
@@ -60,7 +60,7 @@ class m_konsumsistok extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=sdr_consumptionstok.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_consumptionstok', 'DESC')
+            ->order_by('id_consumptionstok', 'ASC')
             ->get()
             ->result();
     }
@@ -180,7 +180,7 @@ class m_konsumsistok extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('status', 'Request')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_consumptionstok', 'DESC')
+            ->order_by('id_consumptionstok', 'ASC')
             ->get()
             ->result();
     }

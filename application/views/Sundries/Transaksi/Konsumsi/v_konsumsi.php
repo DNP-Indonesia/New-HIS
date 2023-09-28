@@ -380,7 +380,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                             <select class="form-control yoi" id="sundries">
                                 <option value="" disabled selected>Pilih Sundries</option>
                                 <?php foreach ($permintaan as $tempel) { ?>
-                                <option value="<?php echo $tempel->id_detail_sundries; ?>">
+                                <option value="<?php echo $tempel->faktur; ?>">
                                     <?php echo $tempel->faktur; ?>
                                 </option>
                                 <?php } ?>

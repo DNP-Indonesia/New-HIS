@@ -13,7 +13,7 @@ class m_konsumsi extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('sdr_consumption.id_user', $this->session->userdata('id_user'))
-            ->order_by('id_consumption', 'DESC')
+            ->order_by('id_consumption', 'ASC')
             ->get()
             ->result();
     }
@@ -34,12 +34,12 @@ class m_konsumsi extends CI_Model
             ->from('sdr_consumption')
             ->join('tbl_user', 'tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
-            ->order_by('id_consumption', 'DESC')
+            ->order_by('id_consumption', 'ASC')
             ->get()
             ->result();
     }
 
-    public function getPermintaan()
+    public function getPermintaan1()
     {
         return $this->db
             ->select('*')
@@ -48,10 +48,43 @@ class m_konsumsi extends CI_Model
             ->where('sdr_request_sundries.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Diproses')
             ->where('statusstok', 'Ready')
-            ->order_by('id_detail_sundries', 'DESC')
+            ->order_by('id_detail_sundries', 'ASC')
             ->get()
             ->result();
     }
+
+    public function getPermintaan()
+    {
+        $this->db->select('
+            sdr_request_sundries_detail.id_barang,
+            SUM(sdr_request_sundries_detail.jumlah) as jumlah
+        ');
+        $this->db->from('sdr_request_sundries_detail');
+        $this->db->join('sdr_request_sundries', 'sdr_request_sundries.faktur = sdr_request_sundries_detail.faktur');
+        $this->db->where('sdr_request_sundries.id_user', $this->session->userdata('id_user'));
+        $this->db->where('status', 'Diproses');
+        $this->db->where('statusstok', 'Ready');
+        $this->db->group_by('sdr_request_sundries_detail.id_barang');
+        $query = $this->db->get();
+    
+        $combinedData = [];
+    
+        foreach ($query->result() as $row) {
+            $id_barang = $row->id_barang;
+            $jumlah = $row->jumlah;
+    
+            // Jika id_barang sudah ada dalam $combinedData, tambahkan jumlahnya
+            if (isset($combinedData[$id_barang])) {
+                $combinedData[$id_barang] += $jumlah;
+            } else {
+                // Jika id_barang belum ada, buat entri baru
+                $combinedData[$id_barang] = $jumlah;
+            }
+        }
+    
+        return $combinedData;
+    }
+    
 
     public function forKepalaBagian()
     {
@@ -60,7 +93,7 @@ class m_konsumsi extends CI_Model
             ->join('tbl_user', 'tbl_user.id_user=sdr_consumption.id_user')
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_consumption', 'DESC')
+            ->order_by('id_consumption', 'ASC')
             ->get()
             ->result();
     }
@@ -120,7 +153,7 @@ class m_konsumsi extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('status', 'Request')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_consumption', 'DESC')
+            ->order_by('id_consumption', 'ASC')
             ->get()
             ->result();
     }

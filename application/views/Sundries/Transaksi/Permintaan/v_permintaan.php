@@ -172,8 +172,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Faktur</th>
                                     <th class="text-center">Bagian</th>
                                     <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Disetujui Oleh</th>
                                     <th class="text-center">Disetujui Tanggal</th>
                                     <th class="text-center">Disetujui Jam</th>
@@ -198,12 +196,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->penyetuju1; ?>
@@ -251,8 +243,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Faktur</th>
                                     <th class="text-center">Bagian</th>
                                     <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Ditolak Oleh</th>
                                     <th class="text-center">Ditolak Tanggal</th>
                                     <th class="text-center">Ditolak Jam</th>
@@ -277,12 +267,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->penolak; ?>
@@ -333,8 +317,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Faktur</th>
                                     <th class="text-center">Bagian</th>
                                     <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Diproses Oleh</th>
                                     <th class="text-center">Diproses Tanggal</th>
                                     <th class="text-center">Diproses Jam</th>
@@ -362,12 +344,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->pemroses; ?>
@@ -448,7 +424,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Selesai Tanggal</th>
-                                    <th class="text-center">Selesai Jam</th>
+                                    <th class="text-center">Selesai jam</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Opsi</th>
                                 </tr>
@@ -623,8 +599,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Faktur</th>
                                     <th class="text-center">Bagian</th>
                                     <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Disetujui Oleh</th>
                                     <th class="text-center">Disetujui Tanggal</th>
                                     <th class="text-center">Disetujui Jam</th>
@@ -649,12 +623,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->penyetuju1; ?>
@@ -702,8 +670,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Faktur</th>
                                     <th class="text-center">Bagian</th>
                                     <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Ditolak Oleh</th>
                                     <th class="text-center">Ditolak Tanggal</th>
                                     <th class="text-center">Ditolak Jam</th>
@@ -728,12 +694,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->penolak; ?>
@@ -777,8 +737,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Faktur</th>
                                     <th class="text-center">Bagian</th>
                                     <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Diproses Oleh</th>
                                     <th class="text-center">Diproses Tanggal</th>
                                     <th class="text-center">Diproses Jam</th>
@@ -803,12 +761,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->pemroses; ?>
@@ -857,8 +809,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Bagian</th>
                                     <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat jam</th>
-                                    <th class="text-center">Selesai Oleh</th>
+                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Selesai Tanggal</th>
                                     <th class="text-center">Selesai jam</th>
                                     <th class="text-center">Status</th>
@@ -888,9 +839,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal_selesai; ?>
@@ -971,8 +919,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Faktur</th>
                                     <th class="text-center">Bagian</th>
                                     <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Disetujui Oleh</th>
                                     <th class="text-center">Disetujui Tanggal</th>
                                     <th class="text-center">Disetujui Jam</th>
@@ -997,12 +943,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->nama_peminta; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->penyetuju1; ?>
@@ -1043,15 +983,13 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                 </div>
                 <div class="tab-pane fade" id="diproses" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="table-container table-responsive-xl">
-                        <table class="table table-borderless small tbl">
+                    <table class="table table-borderless small tbl">
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Faktur</th>
                                     <th class="text-center">Bagian</th>
                                     <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Dibuat Tanggal</th>
-                                    <th class="text-center">Dibuat Jam</th>
                                     <th class="text-center">Diproses Oleh</th>
                                     <th class="text-center">Diproses Tanggal</th>
                                     <th class="text-center">Diproses Jam</th>
@@ -1078,12 +1016,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                         <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php echo $tempel->tanggal; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo $tempel->jamdibuat; ?>
-                                    </td>
-                                    <td class="text-center">
                                         <?php echo $tempel->pemroses; ?>
                                     </td>
                                     <td class="text-center">
@@ -1108,12 +1040,10 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                             Selesaikan
                                         </a>
                                         <?php } ?>
-                                        <?php if ($this->session->userdata('role') == 'sdr_Kepala Gudang' or $this->session->userdata('role') == 'sdr_Admin Gudang') { ?>
                                         <a href="<?php echo site_url('detailpermintaan/'); ?><?php echo $tempel->faktur; ?>" target="_blank"
                                             class="btn btn-sm btn-purple">
                                             Detail
                                         </a>
-                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <?php
@@ -1135,7 +1065,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     <th class="text-center">Dibuat Oleh</th>
                                     <th class="text-center">Dibuat Tanggal</th>
                                     <th class="text-center">Dibuat Jam</th>
-                                    <th class="text-center">Selesai Oleh</th>
                                     <th class="text-center">Selesai Tanggal</th>
                                     <th class="text-center">Selesai Jam</th>
                                     <th class="text-center">Status</th>
@@ -1165,8 +1094,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->jamdibuat; ?>
-                                    <td class="text-center">
-                                        <?php echo $tempel->nama_peminta; ?>
                                     </td>
                                     <td class="text-center">
                                         <?php echo $tempel->tanggal_selesai; ?>
@@ -1505,7 +1432,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success btn-sm">Selesaikan</button>
+                    <button type="submit" class="btn btn-success btn-sm">Selesai</button>
                 </div>
             </form>
         </div>

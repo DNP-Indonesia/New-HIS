@@ -15,7 +15,7 @@ class m_pembelian extends CI_Model
             ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user = ' . $this->table . '.id_user')
             ->join('his_section', 'his_section.id_section = tbl_user.id_section')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -168,7 +168,7 @@ class m_pembelian extends CI_Model
             ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->where($this->table . '.status', 'Request')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -263,7 +263,7 @@ class m_pembelian extends CI_Model
     public function generateFaktur()
     {
         $this->db->select('RIGHT(faktur, 4) as faktur', false);
-        $this->db->order_by('faktur', 'DESC');
+        $this->db->order_by('faktur', 'ASC');
         $this->db->limit(1);
         $query = $this->db->get($this->table);
 

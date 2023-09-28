@@ -15,7 +15,7 @@ class m_estimasi extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Diajukan')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -26,7 +26,7 @@ class m_estimasi extends CI_Model
             ->from($this->table)
             ->join('tbl_user', 'tbl_user.id_user = sdr_estimasi.id_user')
             ->join('his_section', 'his_section.id_section = tbl_user.id_section')
-            ->order_by('id_estimasi', 'DESC')
+            ->order_by('id_estimasi', 'ASC')
             ->get()
             ->result();
     }
@@ -50,7 +50,7 @@ class m_estimasi extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where($this->table . '.id_user', $this->session->userdata('id_user'))
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -79,7 +79,7 @@ class m_estimasi extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Diajukan')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -93,7 +93,7 @@ class m_estimasi extends CI_Model
             ->join('his_section', 'his_section.id_section=tbl_user.id_section')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
             ->where('status', 'Disetujui')
-            ->order_by($this->primaryKey, 'DESC')
+            ->order_by($this->primaryKey, 'ASC')
             ->get()
             ->result();
     }
@@ -162,7 +162,7 @@ class m_estimasi extends CI_Model
             ->join($this->table, $this->tabletolak . '.faktur=' . $this->table . '.faktur')
             ->join('tbl_user', 'tbl_user.id_user=' . $this->tabletolak . '.id_user')
             ->where($this->tabletolak . '.faktur', $id)
-            ->order_by($this->tabletolak . '.id_tolak', 'DESC')
+            ->order_by($this->tabletolak . '.id_tolak', 'ASC')
             ->get()
             ->result();
     }
@@ -256,7 +256,7 @@ class m_estimasi extends CI_Model
             ->join('his_section', 'his_section.id_section = tbl_user.id_section')
             ->where('status', 'Diajukan')
             ->where('tbl_user.id_section', $this->session->userdata('section'))
-            ->order_by('id_estimasi', 'DESC')
+            ->order_by('id_estimasi', 'ASC')
             ->get()
             ->result();
     }
@@ -327,7 +327,7 @@ class m_estimasi extends CI_Model
     public function generateFaktur()
     {
         $this->db->select('RIGHT(faktur,4) as faktur', false);
-        $this->db->order_by('faktur', 'DESC');
+        $this->db->order_by('faktur', 'ASC');
         $this->db->limit(1);
         $query = $this->db->get('sdr_request_sundries');
 
