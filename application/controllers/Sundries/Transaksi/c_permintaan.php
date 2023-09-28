@@ -23,6 +23,8 @@ class c_permintaan extends MY_Controller
         $this->render_backend('layout/v_dashboard', $menu);
     }
 
+    
+
     public function index()
     {
         // Admin Bagian
@@ -44,14 +46,131 @@ class c_permintaan extends MY_Controller
         $data['kadang'] = $this->m_permintaan->forKepalaGudang();
         $data['byproses'] = $this->m_permintaan->byProses();
         $data['byselesai'] = $this->m_permintaan->bySelesai();
-
+        
         // Input
         $data['barang'] = $this->m_permintaan->getBarangSundries();
         $data['jenis'] = $this->m_jenis->getJenisById();
-
+        
         $menu = 'permintaan';
         $this->render_backend('Sundries/Transaksi/Permintaan/v_permintaan', $menu, $data);
     }
+    
+    public function adminBagian() {
+        // Admin Bagian
+        $data['permintaan'] = $this->m_permintaan->getPermintaan();
+        $data['setuju'] = $this->m_permintaan->getSetuju();
+        $data['tolak'] = $this->m_permintaan->getTolak();
+        $data['proses'] = $this->m_permintaan->getProses();
+        $data['selesai'] = $this->m_permintaan->getSelesai();
+        
+        // Kepala Bagian
+        $data['kabagpermintaan'] = $this->m_permintaan->forKepalaBagianPermintaan();
+        $data['kabagsetuju'] = $this->m_permintaan->forKepalaBagianSetuju();
+        $data['kabagtolak'] = $this->m_permintaan->forKepalaBagianTolak();
+        $data['kabagproses'] = $this->m_permintaan->forKepalaBagianProses();
+        $data['kabagselesai'] = $this->m_permintaan->forKepalaBagianSelesai();
+    
+        // Gudang
+        $data['adang'] = $this->m_permintaan->forAdminGudang();
+        $data['kadang'] = $this->m_permintaan->forKepalaGudang();
+        $data['byproses'] = $this->m_permintaan->byProses();
+        $data['byselesai'] = $this->m_permintaan->bySelesai();
+        
+        // Input
+        $data['barang'] = $this->m_permintaan->getBarangSundries();
+        $data['jenis'] = $this->m_jenis->getJenisById();
+        
+        $menu = 'permintaan';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Permintaan/v_permintaan_admin_bagian', $menu, $data);
+    }
+
+    public function adminGudang() {
+        // Admin Bagian
+        $data['permintaan'] = $this->m_permintaan->getPermintaan();
+        $data['setuju'] = $this->m_permintaan->getSetuju();
+        $data['tolak'] = $this->m_permintaan->getTolak();
+        $data['proses'] = $this->m_permintaan->getProses();
+        $data['selesai'] = $this->m_permintaan->getSelesai();
+        
+        // Kepala Bagian
+        $data['kabagpermintaan'] = $this->m_permintaan->forKepalaBagianPermintaan();
+        $data['kabagsetuju'] = $this->m_permintaan->forKepalaBagianSetuju();
+        $data['kabagtolak'] = $this->m_permintaan->forKepalaBagianTolak();
+        $data['kabagproses'] = $this->m_permintaan->forKepalaBagianProses();
+        $data['kabagselesai'] = $this->m_permintaan->forKepalaBagianSelesai();
+    
+        // Gudang
+        $data['adang'] = $this->m_permintaan->forAdminGudang();
+        $data['kadang'] = $this->m_permintaan->forKepalaGudang();
+        $data['byproses'] = $this->m_permintaan->byProses();
+        $data['byselesai'] = $this->m_permintaan->bySelesai();
+        
+        // Input
+        $data['barang'] = $this->m_permintaan->getBarangSundries();
+        $data['jenis'] = $this->m_jenis->getJenisById();
+        
+        $menu = 'permintaan';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Permintaan/v_permintaan_admin_gudang', $menu, $data);
+    }
+
+    public function kepalaBagian() {
+        // Admin Bagian
+        $data['permintaan'] = $this->m_permintaan->getPermintaan();
+        $data['setuju'] = $this->m_permintaan->getSetuju();
+        $data['tolak'] = $this->m_permintaan->getTolak();
+        $data['proses'] = $this->m_permintaan->getProses();
+        $data['selesai'] = $this->m_permintaan->getSelesai();
+        
+        // Kepala Bagian
+        $data['kabagpermintaan'] = $this->m_permintaan->forKepalaBagianPermintaan();
+        $data['kabagsetuju'] = $this->m_permintaan->forKepalaBagianSetuju();
+        $data['kabagtolak'] = $this->m_permintaan->forKepalaBagianTolak();
+        $data['kabagproses'] = $this->m_permintaan->forKepalaBagianProses();
+        $data['kabagselesai'] = $this->m_permintaan->forKepalaBagianSelesai();
+    
+        // Gudang
+        $data['adang'] = $this->m_permintaan->forAdminGudang();
+        $data['kadang'] = $this->m_permintaan->forKepalaGudang();
+        $data['byproses'] = $this->m_permintaan->byProses();
+        $data['byselesai'] = $this->m_permintaan->bySelesai();
+        
+        // Input
+        $data['barang'] = $this->m_permintaan->getBarangSundries();
+        $data['jenis'] = $this->m_jenis->getJenisById();
+        
+        $menu = 'permintaan';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Permintaan/v_permintaan_kepala_bagian', $menu, $data);
+    }
+
+    public function kepalaGudang() {
+        // Admin Bagian
+        $data['permintaan'] = $this->m_permintaan->getPermintaan();
+        $data['setuju'] = $this->m_permintaan->getSetuju();
+        $data['tolak'] = $this->m_permintaan->getTolak();
+        $data['proses'] = $this->m_permintaan->getProses();
+        $data['selesai'] = $this->m_permintaan->getSelesai();
+        
+        // Kepala Bagian
+        $data['kabagpermintaan'] = $this->m_permintaan->forKepalaBagianPermintaan();
+        $data['kabagsetuju'] = $this->m_permintaan->forKepalaBagianSetuju();
+        $data['kabagtolak'] = $this->m_permintaan->forKepalaBagianTolak();
+        $data['kabagproses'] = $this->m_permintaan->forKepalaBagianProses();
+        $data['kabagselesai'] = $this->m_permintaan->forKepalaBagianSelesai();
+    
+        // Gudang
+        $data['adang'] = $this->m_permintaan->forAdminGudang();
+        $data['kadang'] = $this->m_permintaan->forKepalaGudang();
+        $data['byproses'] = $this->m_permintaan->byProses();
+        $data['byselesai'] = $this->m_permintaan->bySelesai();
+        
+        // Input
+        $data['barang'] = $this->m_permintaan->getBarangSundries();
+        $data['jenis'] = $this->m_jenis->getJenisById();
+        
+        $menu = 'permintaan';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Permintaan/v_permintaan_kepala_bagian', $menu, $data);
+    }
+    
 
     public function detail($id)
     {

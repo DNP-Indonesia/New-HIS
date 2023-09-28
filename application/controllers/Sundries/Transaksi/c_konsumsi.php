@@ -25,6 +25,27 @@ class c_konsumsi extends MY_Controller
         $this->render_backend('Sundries/Transaksi/Konsumsi/v_konsumsi', $menu, $data);
     }
 
+    public function adminBagian()
+    {
+        $data['konsumsi'] = $this->m_konsumsi->getKonsumsi();
+        $data['permintaan'] = $this->m_konsumsi->getPermintaan1();
+        $data['kepalabagian'] = $this->m_konsumsi->forKepalaBagian();
+        $data['allkonsumsi'] = $this->m_konsumsi->getKonsumsiAll();
+
+        $menu = 'konsumsi';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Konsumsi/v_konsumsi_admin_bagian', $menu, $data);
+    }
+    public function kepalaBagian()
+    {
+        $data['konsumsi'] = $this->m_konsumsi->getKonsumsi();
+        $data['permintaan'] = $this->m_konsumsi->getPermintaan1();
+        $data['kepalabagian'] = $this->m_konsumsi->forKepalaBagian();
+        $data['allkonsumsi'] = $this->m_konsumsi->getKonsumsiAll();
+
+        $menu = 'konsumsi';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Konsumsi/v_konsumsi_kepala_bagian', $menu, $data);
+    }
+
     public function barangDetailSundries()
     {
         $id_detail_sundries = $this->input->post('id_detail_sundries'); // Mengambil id_detail_sundries dari permintaan POST

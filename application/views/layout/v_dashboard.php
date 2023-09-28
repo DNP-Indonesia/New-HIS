@@ -9,7 +9,7 @@
         <p class="lead text-gray-800 mb-5">HRCA Information System</p>
         <p class="text-gray-500 mb-0">Selamat datang, Salam Sehat!</p>
         <?php if ($karyawanAkanPensiun != NULL) : ?>
-        <div class="notifikasi" id="notifikasi"></div>
+            <div class="notifikasi" id="notifikasi"></div>
         <?php endif; ?>
     </div>
 </div>
@@ -18,76 +18,87 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <div class="dropdown" style="height: 100%; width: 100%;">
-                <a href="#" style="text-decoration: none;">
-                    <div class="card text-white">
-                        <div class="card-body">
-                            <h5 class="card-title">Personalia</h5>
+            <div class="mb-3">
+                <div class="dropdown" style="height: 100%; width: 100%;">
+                    <a href="#" style="text-decoration: none;">
+                        <div class="card text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Personalia</h5>
+                            </div>
                         </div>
+                    </a>
+                    <div class="dropdown-content" style="width: 100%;">
+                        <a href="<?= base_url('Master/page_his/home_personalia') ?>">Personal Data</a>
+                        <a href="#">Medical</a>
                     </div>
-                </a>
-                <div class="dropdown-content">
-                    <a href="<?= base_url('Master/page_his/home_personalia') ?>">Personal Data</a>
-                    <a href="#">Medical</a>
                 </div>
             </div>
         </div>
         <!-- Tambahkan button-menu lain di sini -->
         <div class="col-sm-4">
-            <a href="<?= base_url('Master/Page_his/karyawan_out') ?>" style="text-decoration: none;">
-                <div class="card text-white  mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">General Affair</h5>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-4">
-            <a href="<?= base_url('Master/Page_his/karyawan_temp') ?>" style="text-decoration: none;">
-                <div class="card text-white  mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Training Kaizen</h5>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <?php if ($this->session->userdata('role') == 'super_user') : ?>
-        <div class="col-sm-4">
-            <div class="dropdown" style="height: 100%; width: 100%;">
-                <a href="#" style="text-decoration: none;">
+            <div class="mb-3">
+                <a href="<?= base_url('Master/Page_his/karyawan_out') ?>" style="text-decoration: none;">
                     <div class="card text-white">
                         <div class="card-body">
-                            <h5 class="card-title">Master Sundries</h5>
+                            <h5 class="card-title">General Affair</h5>
                         </div>
                     </div>
                 </a>
-                <div class="dropdown-content">
-                    <a href="<?= base_url('kategori') ?>">Kategori</a>
-                    <a href="<?= base_url('jenis') ?>">Jenis</a>
-                    <a href="<?= base_url('barang') ?>">Barang</a>
-                </div>
             </div>
         </div>
+        <div class="col-sm-4">
+            <div class="mb-3">
+                <a href="<?= base_url('Master/Page_his/karyawan_temp') ?>" style="text-decoration: none;">
+                    <div class="card text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Training Kaizen</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <?php if ($this->session->userdata('role') == 'super_user') : ?>
+            <div class="col-sm-4">
+                <div class="mb-3">
+                    <div class="dropdown" style="height: 100%; width: 100%;">
+                        <a href="#" style="text-decoration: none;">
+                            <div class="card text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">Master Sundries</h5>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-content" style="width: 100%;">
+                            <a href="<?= base_url('kategori') ?>">Kategori</a>
+                            <a href="<?= base_url('jenis') ?>">Jenis</a>
+                            <a href="<?= base_url('barang') ?>">Barang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php endif; ?>
         <?php if ($this->session->userdata('role') == 'super_user') : ?>
-        <div class="col-sm-4">
-            <div class="dropdown" style="height: 100%; width: 100%;">
-                <a href="#" style="text-decoration: none;">
-                    <div class="card text-white">
-                        <div class="card-body">
-                            <h5 class="card-title">Transaksi Sundires</h5>
+            <div class="col-sm-4">
+                <div class="mb-3">
+                    <div class="dropdown" style="height: 100%; width: 100%;">
+                        <a href="dashboard-transaksi-sundries" style="text-decoration: none;">
+                            <div class="card text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">Transaksi Sundires</h5>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-content" style="width: 100%;">
+                            <a href="<?php echo site_url('dashboard-request-sundries') ?>">Request Sundries</a>
+                            <a href="<?php echo site_url('dashboard-request-purchase') ?>">Request Purchase</a>
+                            <a href="<?php echo site_url('dashboard-consumption-sundries') ?>">Consumption Sundries</a>
+                            <a href="<?php echo site_url('dashboard-consumption-estimation') ?>">Consumption Estimation</a>
+                            <a href="<?php echo site_url('dashboard-estimation-making') ?>">Estimation Making</a>
+                            <a href="<?php echo site_url('dashboard-goods-receipt') ?>">Goods Receipt</a>
                         </div>
                     </div>
-                </a>
-                <div class="dropdown-content">
-                    <a href="<?php echo site_url('permintaan') ?>">Request Sundries</a>
-                    <a href="<?php echo site_url('estimasi') ?>">Estimasi Making</a>
-                    <a href="<?php echo site_url('konsumsi') ?>">Request Consumption</a>
-                    <a href="<?php echo site_url('pembelian') ?>">Request Purchase</a>
-                    <a href="<?php echo site_url('penerimaan') ?>">Goods Receipt</a>
                 </div>
             </div>
-        </div>
         <?php endif; ?>
     </div>
 </div>

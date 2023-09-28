@@ -26,6 +26,90 @@ class Page_his extends MY_Controller
     }
   }
 
+  public function dashboardTransaksiSundires()
+  {
+    $menu = 'transaksi';
+    $data[''] = "";
+
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('Sundries/Transaksi/Dashboard/v_transaksi_dashboard', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+  }
+
+  public function dashboardPermintaan()
+  {
+    $menu = 'dashboard-permintaan';
+    $data[''] = "";
+
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('Sundries/Transaksi/Dashboard/Permintaan/v_permintaan_dashboard', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+  }
+
+  public function dashboardEstimasi()
+  {
+    $menu = 'dashboard-estimasi';
+    $data[''] = "";
+
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('Sundries/Transaksi/Dashboard/Estimasi/v_estimasi_dashboard', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+  }
+
+  public function dashboardKonsumsi()
+  {
+    $menu = 'dashboard-konsumsi';
+    $data[''] = "";
+
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('Sundries/Transaksi/Dashboard/Konsumsi/v_konsumsi_dashboard', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+  }
+
+  public function dashboardPembelian()
+  {
+    $menu = 'dashboard-pembelian';
+    $data[''] = "";
+
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('Sundries/Transaksi/Dashboard/Pembelian/v_pembelian_dashboard', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+  }
+
+  public function dashboardPenerimaan()
+  {
+    $menu = 'dashboard-penerimaan';
+    $data[''] = "";
+
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('Sundries/Transaksi/Dashboard/Penerimaan/v_penerimaan_dashboard', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+  }
+
+  public function dashboardKonsumsiStok()
+  {
+    $menu = 'dashboard-konsumsi-stok';
+    $data[''] = "";
+
+    if ($this->session->userdata('role') == 'super_user') {
+      $this->render_backend('Sundries/Transaksi/Dashboard/Konsumsistok/v_konsumsistok_dashboard', $menu, $data);
+    } else {
+      $this->render_backend('auth/v_error', $menu, $data);
+    }
+  }
+
   public function home_personalia()
   {
     $data[''] = "";
@@ -58,7 +142,7 @@ class Page_his extends MY_Controller
     }
   }
 
-  
+
   public function karyawan()
   {
     $menu = $this->uri->segment(2);
@@ -79,7 +163,6 @@ class Page_his extends MY_Controller
     $data['pensiun']  = $this->M_his->getStatusPensiun();
     $data['karyawan'] = $this->M_his->getKaryawanAkanPensiun();
     $this->render_backend('personalData/v_karyawan_pensiun', $menu, $data);
-  
   }
 
   public function persiapan_pensiun($nik)
@@ -89,7 +172,6 @@ class Page_his extends MY_Controller
     $data['karyawan'] = $this->M_his->data_karyawan_bynik($nik);
     $data['pensiun']  = $this->M_his->getPensiun($nik);
     $this->render_backend('personalData/v_persiapan_pensiun', $menu, $data);
-  
   }
 
   public function karyawan_out()
@@ -103,7 +185,6 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 
   public function karyawan_temp()
@@ -117,7 +198,6 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 
   public function karyawan_out_temp()
@@ -131,7 +211,6 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 
   public function karyawan_mutasi()
@@ -146,7 +225,6 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 
   public function history_karyawan($nik)
@@ -157,12 +235,10 @@ class Page_his extends MY_Controller
     $data['karyawan'] = $this->M_his->data_karyawan_bynik($nik);
 
     if ($this->session->userdata('role') == 'super_user') {
-      $this->render_backend('personalData/v_detail_karyawan', $menu,$data);
+      $this->render_backend('personalData/v_detail_karyawan', $menu, $data);
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-
-    
   }
 
   function divisi()
@@ -175,7 +251,6 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 
   function departemen()
@@ -189,7 +264,6 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 
   function section()
@@ -238,6 +312,5 @@ class Page_his extends MY_Controller
     } else {
       $this->render_backend('auth/v_error', $menu, $data);
     }
-    
   }
 }

@@ -37,6 +37,48 @@ class c_estimasi extends MY_Controller
         $this->render_backend('Sundries/Transaksi/Estimasi/v_estimasi', $menu, $data);
     }
 
+    public function adminBagian()
+    {
+        // Admin Gudang
+        $data['estimasi'] = $this->m_estimasi->getEstimasi();
+        $data['setuju'] = $this->m_estimasi->getSetuju();
+        $data['tolak'] = $this->m_estimasi->getTolak();
+
+        // Kepala Bagian
+        $data['kabagestimasi'] = $this->m_estimasi->forKepalaBagianPermintaan();
+        $data['kabagsetuju'] = $this->m_estimasi->forKepalaBagianSetuju();
+        $data['kabagtolak'] = $this->m_estimasi->forKepalaBagianTolak();
+
+        // Input
+        $data['barcons'] = $this->m_estimasi->getBarang();
+        $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
+        $data['faktur'] = $this->m_estimasi->generateFaktur();
+
+        $menu = 'estimasi';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Estimasi/v_estimasi_admin_bagian', $menu, $data);
+    }
+
+    public function kepalaBagian()
+    {
+        // Admin Gudang
+        $data['estimasi'] = $this->m_estimasi->getEstimasi();
+        $data['setuju'] = $this->m_estimasi->getSetuju();
+        $data['tolak'] = $this->m_estimasi->getTolak();
+
+        // Kepala Bagian
+        $data['kabagestimasi'] = $this->m_estimasi->forKepalaBagianPermintaan();
+        $data['kabagsetuju'] = $this->m_estimasi->forKepalaBagianSetuju();
+        $data['kabagtolak'] = $this->m_estimasi->forKepalaBagianTolak();
+
+        // Input
+        $data['barcons'] = $this->m_estimasi->getBarang();
+        $data['allestimasi'] = $this->m_estimasi->getEstimasiAll();
+        $data['faktur'] = $this->m_estimasi->generateFaktur();
+
+        $menu = 'estimasi';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Estimasi/v_estimasi_kepala_gudang', $menu, $data);
+    }
+
     public function kurangiStok()
     {
         $id_estimasi = $this->input->post('id_estimasi');

@@ -26,6 +26,22 @@ class c_pembelian extends MY_Controller
         $this->render_backend('Sundries/Transaksi/Pembelian/v_pembelian', $menu, $data);
     }
 
+    public function adminGudang()
+    {
+        $data['pembelian'] = $this->m_pembelian->getPembelian();
+
+        $menu = 'pembelian';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Pembelian/v_pembelian_admin_gudang', $menu, $data);
+    }
+
+    public function kepalaGudang()
+    {
+        $data['pembelian'] = $this->m_pembelian->getPembelian();
+
+        $menu = 'pembelian';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Pembelian/v_pembelian_kepala_gudang', $menu, $data);
+    }
+
     public function formPembelian()
     {
         $id_user = $this->session->userdata('id_user');

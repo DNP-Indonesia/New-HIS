@@ -28,6 +28,23 @@ class C_penerimaan extends MY_Controller
         $this->render_backend('Sundries/Transaksi/Penerimaan/v_penerimaan', $menu, $data);
     }
 
+    public function adminGudang()
+    {
+        $data['penerimaan'] = $this->m_penerimaan->getPenerimaan();
+        $data['pembelian'] = $this->m_pembelian->getPembelian();
+
+        $menu = 'penerimaan';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Penerimaan/v_penerimaan_admin_gudang', $menu, $data);
+    }
+    public function kepalaGudang()
+    {
+        $data['penerimaan'] = $this->m_penerimaan->getPenerimaan();
+        $data['pembelian'] = $this->m_pembelian->getPembelian();
+
+        $menu = 'penerimaan';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Penerimaan/v_penerimaan_kepala_gudang', $menu, $data);
+    }
+
     public function addPenerimaan()
     {
         $suratjalan = $this->input->post('suratjalan');

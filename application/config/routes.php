@@ -81,7 +81,48 @@ $route['persiapan-pensiun'] ='Master/Page_his/persiapan_pensiun';
 
 
 # -------------------------- SUNDRIES -------------------------- #
-// User
+#------------#
+# Super User #
+#------------#
+
+// Transaksi Sundries
+$route['dashboard-transaksi-sundries'] = 'Master/Page_his/dashboardTransaksiSundires';
+
+// Permintaan
+$route['dashboard-request-sundries'] = 'Master/Page_his/dashboardPermintaan';
+$route['admin-bagian-request-sundries'] = 'Sundries/Transaksi/c_permintaan/adminBagian';
+$route['admin-gudang-request-sundries'] = 'Sundries/Transaksi/c_permintaan/adminGudang';
+$route['kepala-bagian-request-sundries'] = 'Sundries/Transaksi/c_permintaan/kepalaBagian';
+$route['kepala-gudang-request-sundries'] = 'Sundries/Transaksi/c_permintaan/kepalaGudang';
+
+// Pembelian
+$route['dashboard-request-purchase'] = 'Master/Page_his/dashboardPembelian';
+$route['admin-gudang-request-purchase'] = 'Sundries/Transaksi/c_pembelian/adminGudang';
+$route['kepala-gudang-request-purchase'] = 'Sundries/Transaksi/c_pembelian/kepalaGudang';
+
+// Konsumsi
+$route['dashboard-consumption-sundries'] = 'Master/Page_his/dashboardKonsumsi';
+$route['admin-bagian-consumption-sundries'] = 'Sundries/Transaksi/c_konsumsi/adminBagian';
+$route['kepala-bagian-consumption-sundries'] = 'Sundries/Transaksi/c_konsumsi/kepalaBagian';
+
+// Konsumsi Stok
+$route['dashboard-consumption-estimation'] = 'Master/Page_his/dashboardKonsumsiStok';
+$route['admin-bagian-consumption-estimation'] = 'Sundries/Transaksi/c_konsumsistok/adminBagian';
+$route['kepala-bagian-consumption-estimation'] = 'Sundries/Transaksi/c_konsumsistok/kepalaBagian';
+
+// Estimasi
+$route['dashboard-estimation-making'] = 'Master/Page_his/dashboardEstimasi';
+$route['admin-bagian-estimation-making'] = 'Sundries/Transaksi/c_estimasi/adminBagian';
+$route['kepala-bagian-estimation-making'] = 'Sundries/Transaksi/c_estimasi/kepalaBagian';
+
+// Penerimaan
+$route['dashboard-goods-receipt'] = 'Master/Page_his/dashboardPenerimaan';
+$route['admin-gudang-goods-receipt'] = 'Sundries/Transaksi/c_penerimaan/adminGudang';
+$route['kepala_gudang-goods-receipt'] = 'Sundries/Transaksi/c_penerimaan/kepalaGudang';
+
+#------#
+# User #
+#------#
 
 // Barang
 $route['barang'] = 'Sundries/Barang/c_barang/page';

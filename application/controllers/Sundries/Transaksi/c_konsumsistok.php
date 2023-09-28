@@ -27,6 +27,32 @@ class c_konsumsistok extends MY_Controller
         $this->render_backend('Sundries/Transaksi/Konsumsistok/v_konsumsistok', $menu, $data);
     }
 
+    public function adminBagian()
+    {
+        $data['konsumsistok'] = $this->m_konsumsistok->getKonsumsistok();
+        $data['estimasi'] = $this->m_konsumsistok->getEstimasi();
+        $data['kepalabagian'] = $this->m_konsumsistok->forKepalaBagian();
+        $data['allkonsumsistok'] = $this->m_konsumsistok->getKonsumsistokAll();
+
+        // var_dump($data['estimasi']);
+
+        $menu = 'konsumsistok';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Konsumsi/v_konsumsi_admin_bagian', $menu, $data);
+    }
+
+    public function kepalaBagian()
+    {
+        $data['konsumsistok'] = $this->m_konsumsistok->getKonsumsistok();
+        $data['estimasi'] = $this->m_konsumsistok->getEstimasi();
+        $data['kepalabagian'] = $this->m_konsumsistok->forKepalaBagian();
+        $data['allkonsumsistok'] = $this->m_konsumsistok->getKonsumsistokAll();
+
+        // var_dump($data['estimasi']);
+
+        $menu = 'konsumsistok';
+        $this->render_backend('Sundries/Transaksi/Dashboard/Konsumsistok/v_konsumsistok_kepala_bagian', $menu, $data);
+    }
+
     public function barangDetailEstimasi()
     {
         $id_detail_estimasi = $this->input->post('id_detail_estimasi'); // Mengambil id_detail_estimasi dari permintaan POST

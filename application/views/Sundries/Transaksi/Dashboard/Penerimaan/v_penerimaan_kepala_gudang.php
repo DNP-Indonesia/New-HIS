@@ -1,7 +1,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <h4>Goods Receipt</h4>
-    <?php if ($this->session->userdata('role') == 'super_user') { ?><h6>Admin Gudang</h6> <?php } ?>
+    <?php if ($this->session->userdata('role') == 'super_user') { ?><h6>Kepala Gudang</h6> <?php } ?>
     <?php
     if ($this->session->userdata('role') == 'sdr_Admin Gudang' || $this->session->userdata('role') == 'sdr_Kepala Gudang' || $this->session->userdata('role') == 'super_user') {
     ?>
