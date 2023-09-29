@@ -26,6 +26,9 @@
                         <td><a href="<?= base_url('Master/Page_his/karyawan_out') ?>" class="menu-link">Daftar Karyawan Keluar</a></td>
                     </tr>
                     <tr>
+                        <td><a href="<?= base_url('Master/Page_his/karyawan_pensiun') ?>" class="menu-link">Daftar Karyawan Akan Pensiun</a></td>
+                    </tr>
+                    <tr>
                         <td><a href="<?= base_url('Master/Page_his/karyawan_temp') ?>" class="menu-link">Karyawan Training dan Percobaan</a></td>
                     </tr>
                     <tr>
