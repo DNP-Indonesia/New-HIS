@@ -3,7 +3,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <h4>Consumption Estimation</h4>
+    <h4>Request Consumption</h4>
     <?php if ($this->session->userdata('role') == 'super_user') { ?><h6>Admin Bagian</h6> <?php } ?>
     <?php
     if ($this->session->userdata('role') == 'sdr_Admin Bagian' || $this->session->userdata('role') == 'super_user') {
@@ -12,10 +12,33 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
         <a href="#" class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#modal-tambah">
             Buat Baru
         </a>
+
+        <?php if ($this->session->userdata('berhasil')) { ?>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <?php echo $this->session->userdata('berhasil'); ?>
+                <?php echo $this->session->set_userdata('berhasil', null); ?>
+            </div>
+        <?php } ?>
+        <?php if ($this->session->userdata('sukses')) { ?>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <?php echo $this->session->userdata('sukses'); ?>
+                <?php echo $this->session->set_userdata('sukses', null); ?>
+            </div>
+        <?php } ?>
+        <?php if ($this->session->userdata('hapus')) { ?>
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <?php echo $this->session->userdata('hapus'); ?>
+                <?php echo $this->session->set_userdata('hapus', null); ?>
+            </div>
+        <?php } ?>
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="font-weight-bold text-success">
-                    Data Consumption Estimation Anda
+                    Data Request Consumption Anda
                 </h6>
             </div>
             <div class="card-body">
@@ -35,7 +58,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                         <tbody>
                             <?php
                             $no = 1;
-                            foreach ($konsumsistok as $tempel) {
+                            foreach ($konsumsi as $tempel) {
                             ?>
                                 <tr>
                                     <td class="text-center">
@@ -84,20 +107,20 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                     </td>
                                     <td class="text-center">
                                         <?php if ($tempel->status == 'Request') { ?>
-                                            <!-- <a onclick="deleteConfirm('<?php echo site_url('deletekonsumsistok/' . $tempel->faktur); ?>')" href="#"
+                                            <!-- <a onclick="deleteConfirm('<?php echo site_url('deleteestimasi/' . $tempel->faktur); ?>')" href="#"
                                                 class="btn btn-sm btn-danger">
                                                 Hapus
                                             </a> -->
-                                            <a href="<?php echo site_url('deletekonsumsistok/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
+                                            <a href="<?php echo site_url('deletekonsumsi/' . $tempel->faktur); ?>" class="btn btn-sm btn-danger">
                                                 Hapus
                                             </a>
                                         <?php } ?>
 
-                                        <a href="<?php echo site_url('detailkonsumsistok/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
+                                        <a href="<?php echo site_url('detailkonsumsi/' . $tempel->faktur); ?>" target="_blank" class="btn btn-sm btn-purple">
                                             Detail
                                         </a>
 
-                                        <a href="<?php echo site_url('printkonsumsistok'); ?>" target="_blank" class="btn btn-sm btn-success">
+                                        <a href="<?php echo site_url('printestimasi'); ?>" target="_blank" class="btn btn-sm btn-success">
                                             Cetak PDF
                                         </a>
                                     </td>
@@ -114,7 +137,6 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
     <?php } ?>
 </div>
 <br>
-
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
@@ -151,12 +173,12 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Consumption Estimation</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Request Consumption</h5>
                 <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">Tutup</span>
                 </button>
             </div>
-            <form action="<?php echo site_url('addkonsumsistok'); ?>" method="POST">
+            <form action="<?php echo site_url('addkonsumsi'); ?>" method="POST">
                 <div class="modal-body">
                     <?php if (validation_errors()) { ?>
                         <div class="alert alert-danger">
@@ -173,7 +195,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                             <input type="text" class="form-control" value="<?= date('Y-m-d') ?>" name="tanggal" required readonly>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label>DibuatOleh</label>
+                            <label>Dibuat Oleh</label>
                             <input type="text" class="form-control" value=" <?php echo $this->session->userdata('nama'); ?>" name="nama" required readonly>
 
                             <input type="text" id="id_user" name="id_user" value=" <?php echo $this->session->userdata('id_user'); ?>" hidden>
@@ -184,23 +206,25 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label>Faktur Sundries</label>
-                            <select class="form-control yoi" id="faris">
+                            <select class="form-control yoi" id="sundries">
                                 <option value="" disabled selected>Pilih Sundries</option>
-                                <?php foreach ($estimasi as $tempel) { ?>
-                                    <option value="<?php echo $tempel->id_detail_estimasi; ?>">
+                                <?php foreach ($permintaan as $tempel) { ?>
+                                    <option value="<?php echo $tempel->id_detail_sundries; ?>">
                                         <?php echo $tempel->faktur; ?>
                                     </option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label>Barang sesuai Faktur Estimasi</label>
-                            <input type="text" class="form-control" id="id_barang" placeholder="Pilih Faktur Estimasi" readonly required>
+                            <label>Barang sesuai Faktur Sundries</label>
+                            <input type="text" class="form-control" id="barang" name="barang" placeholder="Pilih Faktur Sundries" readonly required>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label>Jumlah sesuai Faktur Estimasi</label>
-                            <input type="text" class="form-control" id="jumlah" placeholder="Pilih Faktur Estimasi" readonly required>
+                            <label>Jumlah sesuai Faktur Sundries</label>
+                            <input type="text" class="form-control" id="jumlah" name="qty" placeholder="Pilih Faktur Sundries" readonly required>
                         </div>
+                        <input type="text" class="form-control" id="id_barang" name="id_barang" hidden>
+                        <input type="text" class="form-control" id="faris" name="faris" hidden>
                     </div>
                     <div class="form-row mb-3">
                         <div class="col-md-12">
@@ -217,13 +241,14 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
                                         <thead>
                                             <tr>
                                                 <th class="text-center">No</th>
+                                                <th class="text-center">Faktur</th>
                                                 <th class="text-center">Barang</th>
                                                 <th class="text-center">Jumlah</th>
                                                 <th class="text-center">Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody id="isikeranjang">
-                                            <!-- Table rows for keranjang items here -->
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -273,7 +298,7 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
         var id_user = $('#id_user').val();
         $.ajax({
             type: 'POST',
-            url: "<?php echo site_url('showkeranjangkonsumsistok'); ?>",
+            url: "<?php echo site_url('showkeranjangkonsumsi'); ?>",
             data: {
                 id_user: id_user
             },
@@ -288,19 +313,19 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
         var id_barang = $('#id_barang').val();
         var qty = $('#jumlah').val();
         var id_user = $('#id_user').val();
-        var fakest = $('#fakturestimasi').val();
+        var faris = $('#faris').val();
 
         if (id_barang == 0) {
-            Swal.fire("Faktur Estimasi Belum Dipilih !", "Pilih Faktur Estimasi...", "warning");
+            Swal.fire("Faktur Sundries Belum Dipilih !", "Pilih Faktur Sundries...", "warning");
         } else {
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url('cekkeranjangkonsumsistok'); ?>",
+                url: "<?php echo site_url('cekkeranjangkonsumsi'); ?>",
                 data: {
                     id_barang: id_barang,
                     qty: qty,
                     id_user: id_user,
-                    fakest: fakest
+                    faris: faris
                 },
                 cache: false,
                 success: function() {
@@ -324,25 +349,29 @@ date_default_timezone_set('Asia/Jakarta'); // Mengatur zona waktu menjadi Asia/J
     });
 
     $(document).ready(function() {
-        $('#faris').change(function() {
-            var id_detail_estimasi = $(this).val(); // Mengambil id_detail_estimasi dari dropdown
-            console.log(id_detail_estimasi); // Cek id_detail_estimasi di konsol
+        $('#sundries').change(function() {
+            var id_detail_sundries = $(this).val(); // Mengambil id_detail_sundries dari dropdown
+            console.log(id_detail_sundries); // Cek id_detail_sundries di konsol
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url('barangdetailestimasi'); ?>", // Ganti dengan URL yang sesuai untuk controller yang akan mengambil barang berdasarkan id_detail_estimasi
+                url: "<?php echo site_url('barangdetailsundries'); ?>", // Ganti dengan URL yang sesuai untuk controller yang akan mengambil barang berdasarkan id_detail_sundries
                 data: {
-                    id_detail_estimasi: id_detail_estimasi // Kirim id_detail_estimasi ke controller
+                    id_detail_sundries: id_detail_sundries // Kirim id_detail_sundries ke controller
                 },
                 dataType: 'JSON',
                 success: function(response) {
                     console.log(response); // Cek respons dari server di konsol
                     if (response.length > 0) {
                         // Set nilai input barang dan input jumlah sesuai dengan respons JSON
-                        $('#id_barang').val(response[0].barang);
+                        $('#faris').val(response[0].faris);
+                        $('#id_barang').val(response[0].id_barang);
+                        $('#barang').val(response[0].barang);
                         $('#jumlah').val(response[0].jumlah);
                     } else {
                         // Jika tidak ada barang yang ditemukan, kosongkan nilai input barang dan input jumlah
+                        $('#faris').val('');
                         $('#id_barang').val('');
+                        $('#barang').val('');
                         $('#jumlah').val('');
                     }
                 },
