@@ -109,47 +109,54 @@
         </div> -->
     </li>
 
-    <li class="nav-item <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
+    <!-- ## Penting ## -->
+    <!-- hapus '//' di '<//?php' kalau mau di hidupkan lagi  -->
+    <!-- <li class="nav-item <//?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan', 'konsumsistok'])) {
         echo 'active';
     } ?>">
-        <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-transaksi"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
             <span>Transaksi Sundries</span>
-        </a> -->
-        <div id="collapse-transaksi" class="collapse  <?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan'])) {
+        </a>
+        <div id="collapse-transaksi" class="collapse  <//?php if (isset($menu) && in_array($menu, ['estimasi', 'konsumsi', 'permintaan', 'pembelian', 'penerimaan', 'konsumsistok'])) {
             echo 'show';
         } ?>" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item <?php if ($menu == 'permintaan') {
+                <a class="collapse-item <//?php if ($menu == 'permintaan') {
                     echo 'active';
-                } ?>" href="<?php echo site_url('permintaan'); ?>">
-                    Request Sundries <!-- 1 admin gudang & admin gudang -->
+                } ?>" href="<//?php echo site_url('permintaan'); ?>">
+                    Request Sundries
                 </a>
-                <a class="collapse-item <?php if ($menu == 'estimasi') {
+                <a class="collapse-item <//?php if ($menu == 'estimasi') {
                     echo 'active';
-                } ?>" href="<?php echo site_url('estimasi'); ?>">
-                    Estimation Making <!-- admin bagian -->
+                } ?>" href="<//?php echo site_url('estimasi'); ?>">
+                    Estimation Making 
                 </a>
-                <a class="collapse-item <?php if ($menu == 'konsumsi') {
+                <a class="collapse-item <//?php if ($menu == 'konsumsi') {
                     echo 'active';
-                } ?>" href="<?php echo site_url('konsumsi'); ?>">
-                    Request Consumption <!-- admin bagian -->
+                } ?>" href="<//?php echo site_url('konsumsi'); ?>">
+                    Request Consumption 
                 </a>
-                <a class="collapse-item <?php if ($menu == 'pembelian') {
+                <a class="collapse-item <//?php if ($menu == 'pembelian') {
                     echo 'active';
-                } ?>" href="<?php echo site_url('pembelian'); ?>">
-                    Request Purchase <!-- admin gudang -->
+                } ?>" href="<//?php echo site_url('pembelian'); ?>">
+                    Request Purchase
                 </a>
-                <a class="collapse-item <?php if ($menu == 'penerimaan') {
+                <a class="collapse-item <//?php if ($menu == 'penerimaan') {
                     echo 'active';
-                } ?>" href="<?php echo site_url('penerimaan'); ?>">
-                    Goods Receipt <!-- admin gudang -->
+                } ?>" href="<//?php echo site_url('penerimaan'); ?>">
+                    Goods Receipt 
+                </a>
+                <a class="collapse-item <//?php if ($menu == 'konsumsistok') {
+                    echo 'active';
+                } ?>" href="<¸?php echo site_url('konsumsistok'); ?>">
+                    Goods Receipt 
                 </a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-laporan"
